@@ -28,13 +28,11 @@ export default function Home() {
         <div style={styles.heroContent}>
           <div style={styles.eyebrow}>BRISTOL CITY IN LONDON</div>
 
-          <h1 style={styles.heroTitle}>
-            One club.
-            <br />
-            One city.
-            <br />
-            <span style={styles.redText}>London based.</span>
-          </h1>
+          <img
+            src="/374fadec-093f-4e7e-9f54-01c06a034caa.jpeg"
+            alt="Bristol City London Supporters FC badge"
+            style={styles.heroBadge}
+          />
 
           <p style={styles.heroText}>
             The home of Bristol City London Supporters FC. Fixtures, results,
@@ -61,7 +59,11 @@ export default function Home() {
             <div style={styles.versus}>VS</div>
 
             <div style={styles.team}>
-              <div style={styles.cityBadge}>BC</div>
+              <img
+                src="/374fadec-093f-4e7e-9f54-01c06a034caa.jpeg"
+                alt="Bristol City"
+                style={styles.fixtureBadge}
+              />
               <strong>Bristol City</strong>
               <span style={styles.homeAway}>AWAY</span>
             </div>
@@ -112,14 +114,25 @@ export default function Home() {
       </section>
 
       <footer style={styles.footer}>
-        <div>
-          <strong>Bristol City London Supporters FC</strong>
-          <div style={styles.footerSmall}>
-            London-based Bristol City supporters football club.
+        <div style={styles.footerTop}>
+          <div>
+            <strong>Bristol City London Supporters FC</strong>
+            <div style={styles.footerSmall}>
+              London-based Bristol City supporters football club.
+            </div>
           </div>
-        </div>
 
-        <div style={styles.footerSmall}>© 2026 BCFC London</div>
+          <div style={styles.sponsorBlock}>
+            <div style={styles.sponsorLabel}>PROUDLY SPONSORED BY</div>
+            <img
+              src="/IMG_1146.jpeg"
+              alt="DUZZ Sports"
+              style={styles.sponsorLogo}
+            />
+          </div>
+
+          <div style={styles.footerSmall}>© 2026 BCFC London</div>
+        </div>
       </footer>
     </main>
   );
@@ -200,16 +213,12 @@ const styles = {
     marginBottom: "16px",
   },
 
-  heroTitle: {
-    fontSize: "clamp(48px, 7vw, 92px)",
-    lineHeight: "0.95",
-    margin: "0 0 25px 0",
-    fontWeight: "900",
-    letterSpacing: "-3px",
-  },
-
-  redText: {
-    color: "#e31b23",
+  heroBadge: {
+    width: "clamp(240px, 32vw, 420px)",
+    maxWidth: "100%",
+    borderRadius: "50%",
+    display: "block",
+    margin: "10px 0 28px 0",
   },
 
   heroText: {
@@ -296,17 +305,11 @@ const styles = {
     fontSize: "17px",
   },
 
-  cityBadge: {
-    width: "65px",
-    height: "65px",
+  fixtureBadge: {
+    width: "72px",
+    height: "72px",
     borderRadius: "50%",
-    background: "#e31b23",
-    color: "white",
-    display: "grid",
-    placeItems: "center",
-    fontWeight: "900",
-    fontSize: "19px",
-    border: "5px solid #111",
+    objectFit: "cover",
   },
 
   homeAway: {
@@ -441,10 +444,32 @@ const styles = {
     background: "#101010",
     color: "white",
     padding: "32px 6%",
-    display: "flex",
-    justifyContent: "space-between",
-    gap: "20px",
-    flexWrap: "wrap",
+  },
+
+  footerTop: {
+    display: "grid",
+    gridTemplateColumns: "1fr auto 1fr",
+    alignItems: "center",
+    gap: "30px",
+  },
+
+  sponsorBlock: {
+    textAlign: "center",
+  },
+
+  sponsorLabel: {
+    color: "#999",
+    fontSize: "10px",
+    letterSpacing: "2px",
+    fontWeight: "900",
+    marginBottom: "8px",
+  },
+
+  sponsorLogo: {
+    width: "150px",
+    maxWidth: "100%",
+    display: "block",
+    margin: "0 auto",
   },
 
   footerSmall: {
