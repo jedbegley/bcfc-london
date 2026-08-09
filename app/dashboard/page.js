@@ -11,6 +11,9 @@ const supabase = createClient(
 export default function DashboardPage() {
   const [loading, setLoading] = useState(true);
   const [user, setUser] = useState(null);
+  const [player, setPlayer] = useState(null);
+const [availability, setAvailability] = useState("");
+const [availabilityMessage, setAvailabilityMessage] = useState("");
 
   useEffect(() => {
     async function checkUser() {
@@ -19,11 +22,75 @@ export default function DashboardPage() {
       } = await supabase.auth.getUser();
 
       setUser(user);
+
+      if (user) {
+  const { data: playerData, error: playerError } = await supabase
+    .from("players")
+    .select("*")
+  .eq("user_id", user.id)
+    .single();
+
+  if (playerError) {
+    console.log("PLAYER ERROR:", playerError);
+  } else {
+    setPlayer(playerData);
+  }
+}
+      
       setLoading(false);
     }
 
     checkUser();
   }, []);
+
+  async function saveAvailability(status) {
+  if (!player) {
+    setAvailabilityMessage("Player profile not found.");
+    return;
+  }
+
+  setAvailabilityMessage("Saving...");
+
+  const { data: existing } = await supabase
+    .from("availability")
+    .select("id")
+    .eq("player_id", player.id)
+    .eq("match_id", 2)
+    .maybeSingle();
+
+  let error;
+
+  if (existing) {
+    const result = await supabase
+      .from("availability")
+      .update({
+        status,
+        responded_at: new Date().toISOString(),
+      })
+      .eq("id", existing.id);
+
+    error = result.error;
+  } else {
+    const result = await supabase
+      .from("availability")
+      .insert({
+        player_id: player.id,
+        match_id: 2,
+        status,
+        responded_at: new Date().toISOString(),
+      });
+
+    error = result.error;
+  }
+
+  if (error) {
+    setAvailabilityMessage(error.message);
+    return;
+  }
+
+  setAvailability(status);
+  setAvailabilityMessage("Availability saved!");
+}
 
   if (loading) {
     return (
@@ -93,18 +160,40 @@ export default function DashboardPage() {
       flexWrap: "wrap",
     }}
   >
-    <button style={styles.availableButton}>
+  <button
+  onClick={() => saveAvailability("available")}
+  style={styles.availableButton}
+>
       ✓ Available
     </button>
 
-    <button style={styles.maybeButton}>
+<button
+  onClick={() => saveAvailability("maybe")}
+  style={styles.maybeButton}
+>
       ? Maybe
     </button>
 
-    <button style={styles.unavailableButton}>
+ <button
+  onClick={() => saveAvailability("unavailable")}
+  style={styles.unavailableButton}
+>
       ✕ Unavailable
     </button>
   </div>
+
+    {availabilityMessage && (
+  <p
+    style={{
+      marginTop: "18px",
+      marginBottom: "0",
+      fontWeight: "800",
+      color: "#e31b23",
+    }}
+  >
+    {availabilityMessage}
+  </p>
+)}
 </div>
         </div>
 
