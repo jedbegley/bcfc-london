@@ -41,9 +41,18 @@ console.log("SUPABASE KEY EXISTS:", !!process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY)
   setMessage("Creating account...");
 
   const { data, error } = await supabase.auth.signUp({
-    email,
-    password,
-  });
+  email,
+  password,
+  options: {
+    data: {
+      full_name: fullName,
+      date_of_birth: dateOfBirth,
+      mobile,
+      postcode,
+      position,
+    },
+  },
+});
 
   if (error) {
     setMessage(error.message);
