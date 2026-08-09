@@ -103,9 +103,19 @@ export default function Home() {
     <span>⚽ Bellamy · Hayes · Nathaniel</span>
   </div>
 
-  <a href="/news" style={styles.friendlyTag}>
-    READ MATCH REPORT
-  </a>
+ <a
+  href="/news"
+  style={{
+    ...styles.friendlyTag,
+    display: "block",
+    width: "100%",
+    textAlign: "center",
+    textDecoration: "none",
+    boxSizing: "border-box",
+  }}
+>
+  READ MATCH REPORT
+</a>
 </div>
 
 
