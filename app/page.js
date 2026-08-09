@@ -27,7 +27,7 @@ export default function Home() {
   <a href="/fixtures" style={styles.navLink}>Fixtures</a>
   <a href="/squad" style={styles.navLink}>Squad</a>
   <a href="/stats" style={styles.navLink}>Stats</a>
-  <button style={styles.loginButton}>Player Login</button>
+<a href="/login" style={styles.loginButton}>Player Login</a>
 </nav>
       </header>
 
