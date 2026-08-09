@@ -11,6 +11,23 @@ export default function LoginPage() {
   const [mode, setMode] = useState("login");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [message, setMessage] = useState("");
+
+  async function handleLogin() {
+  setMessage("Signing in...");
+
+  const { error } = await supabase.auth.signInWithPassword({
+    email,
+    password,
+  });
+
+  if (error) {
+    setMessage(error.message);
+    return;
+  }
+
+  setMessage("Login successful!");
+}
 
   return (
     <main
@@ -99,6 +116,7 @@ export default function LoginPage() {
       />
 
       <button
+onClick={handleLogin}
         style={{
           width: "100%",
           padding: "12px",
@@ -111,6 +129,11 @@ export default function LoginPage() {
       >
         Sign In
       </button>
+          {message && (
+  <p style={{ marginTop: "15px", color: "#e31b23", fontWeight: "700" }}>
+    {message}
+  </p>
+)}
     </div>
   ) : (
     <p>Registration form coming next...</p>
