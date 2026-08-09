@@ -275,6 +275,12 @@ onClick={handleLogin}
   >
     Create Account
   </button>
+
+      {message && (
+  <p style={{ marginTop: "15px", color: "#e31b23", fontWeight: "700" }}>
+    {message}
+  </p>
+)}
 </div>
   )}
 </div>
