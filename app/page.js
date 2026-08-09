@@ -44,8 +44,18 @@ export default function Home() {
   pre-season victory in scorching conditions at Raynes Park.
 </p>
 
-<a href="/news" style={styles.newsButton}>
-  Read Match Report →
+<a
+  href="/news"
+  style={{
+    ...styles.friendlyTag,
+    display: "block",
+    width: "100%",
+    textAlign: "center",
+    textDecoration: "none",
+    boxSizing: "border-box",
+  }}
+>
+  READ MATCH REPORT
 </a>
         </div>
 <div style={styles.latestImageWrap}>
