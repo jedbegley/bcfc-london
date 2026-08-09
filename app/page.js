@@ -127,6 +127,8 @@ export default function Home() {
   <div style={styles.friendlyTag}>PRE-SEASON FRIENDLY</div>
 </div>
 
+        </section>
+
       <section style={styles.quickSection}>
         <div style={styles.sectionHeading}>
           <div>
