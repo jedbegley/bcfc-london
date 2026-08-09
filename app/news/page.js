@@ -313,6 +313,7 @@ const styles = {
     borderRadius: "6px",
     fontWeight: "900",
     fontSize: "14px",
+    alignSelf: "flex-start",
   },
 
  xEmbed: {
