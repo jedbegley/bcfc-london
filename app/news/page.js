@@ -144,18 +144,7 @@ export default function News() {
         </p>
       </div>
 
-      <div
-        style={{
-          border: "2px dashed #ddd",
-          borderRadius: "10px",
-          padding: "35px 20px",
-          textAlign: "center",
-          color: "#999",
-          fontWeight: "800",
-          fontSize: "12px",
-          letterSpacing: "1px",
-        }}
-      >
+     <div style={{ marginTop: "10px" }}>
 <img
   src="/IMG_5497.jpeg"
   alt="Bristol City London Supporters FC team after the Aberdeen match"
