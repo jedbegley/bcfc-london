@@ -1,9 +1,16 @@
 "use client";
 
 import { useState } from "react";
+import { createClient } from "@supabase/supabase-js";
 
+const supabase = createClient(
+  process.env.NEXT_PUBLIC_SUPABASE_URL,
+  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
+);
 export default function LoginPage() {
   const [mode, setMode] = useState("login");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
   return (
     <main
@@ -62,14 +69,53 @@ export default function LoginPage() {
           Register
         </button>
 
-        <div style={{ marginTop: "30px" }}>
-          {mode === "login" ? (
-            <p>Login form coming next...</p>
-          ) : (
-            <p>Registration form coming next...</p>
-          )}
-        </div>
+      <div style={{ marginTop: "30px" }}>
+  {mode === "login" ? (
+    <div>
+      <input
+        type="email"
+        placeholder="Email address"
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
+        style={{
+          width: "100%",
+          padding: "12px",
+          marginBottom: "12px",
+          boxSizing: "border-box",
+        }}
+      />
 
+      <input
+        type="password"
+        placeholder="Password"
+        value={password}
+        onChange={(e) => setPassword(e.target.value)}
+        style={{
+          width: "100%",
+          padding: "12px",
+          marginBottom: "12px",
+          boxSizing: "border-box",
+        }}
+      />
+
+      <button
+        style={{
+          width: "100%",
+          padding: "12px",
+          background: "#e31b23",
+          color: "#fff",
+          border: "none",
+          fontWeight: "700",
+          cursor: "pointer",
+        }}
+      >
+        Sign In
+      </button>
+    </div>
+  ) : (
+    <p>Registration form coming next...</p>
+  )}
+</div>
         <a
           href="/"
           style={{
