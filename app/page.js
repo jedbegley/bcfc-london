@@ -40,7 +40,7 @@ export default function Home() {
           </p>
 
           <div style={styles.heroButtons}>
-            <button style={styles.primaryButton}>View Fixtures</button>
+         <a href="/fixtures" style={styles.primaryButton}>View Fixtures</a>
             <button style={styles.secondaryButton}>Latest News</button>
           </div>
         </div>
@@ -244,6 +244,7 @@ navLink: {
   primaryButton: {
     background: "#e31b23",
     color: "white",
+    textDecoration: "none",
     border: 0,
     padding: "15px 22px",
     borderRadius: "6px",
