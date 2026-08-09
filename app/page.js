@@ -55,7 +55,8 @@ export default function Home() {
     style={styles.latestImage}
   />
 </div>
-         <div style={styles.matchCard}>
+    <div style={styles.matchCardsRow}>
+    <div style={styles.matchCard}>
   <div style={styles.matchLabel}>LATEST RESULT</div>
   <div style={styles.competition}>PRE-SEASON FRIENDLY</div>
 
@@ -97,7 +98,6 @@ export default function Home() {
   </a>
 </div>
 
-<div style={{ height: "30px" }} />
 
 <div style={styles.matchCard}>
   <div style={styles.matchLabel}>NEXT MATCH</div>
@@ -131,6 +131,7 @@ export default function Home() {
 
   <div style={styles.friendlyTag}>PRE-SEASON FRIENDLY</div>
 </div>
+        </div>
 
         </section>
 
@@ -361,15 +362,21 @@ heroBadge: {
     cursor: "pointer",
   },
 
- matchCard: {
+matchCardsRow: {
+  gridColumn: "1 / -1",
+  display: "grid",
+  gridTemplateColumns: "1fr 1fr",
+  gap: "24px",
+  width: "100%",
+  maxWidth: "1200px",
+  margin: "15px auto 0",
+}, 
+  matchCard: {
   background: "white",
   color: "#111",
   borderRadius: "14px",
   padding: "30px",
   boxShadow: "0 25px 60px rgba(0,0,0,0.25)",
-  width: "100%",
-  maxWidth: "1200px",
-  margin: "0 auto",
 },
   matchLabel: {
     fontSize: "12px",
