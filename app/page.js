@@ -249,13 +249,14 @@ newsButton: {
   fontSize: "14px",
 },
 
-  heroBadge: {
-    width: "clamp(240px, 32vw, 420px)",
-    maxWidth: "100%",
-    borderRadius: "50%",
-    display: "block",
-    margin: "10px 0 28px 0",
-  },
+heroBadge: {
+  width: "120px",
+  height: "120px",
+  objectFit: "contain",
+  borderRadius: "50%",
+  display: "block",
+  margin: "0 auto 12px 0",
+},
 
   heroText: {
     color: "#d3d3d3",
