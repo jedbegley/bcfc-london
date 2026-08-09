@@ -1,3 +1,4 @@
+import Script from "next/script";
 export default function News() {
   return (
     <main style={styles.page}>
@@ -76,14 +77,20 @@ export default function News() {
                 Read Bristol Post Story
               </a>
 
-              <a
-                href="https://x.com/bcfc_fans_fc/status/2084898845209633273"
-                target="_blank"
-                rel="noopener noreferrer"
-                style={styles.xButton}
-              >
-                𝕏 View Original Post
-              </a>
+            <div style={styles.xEmbed}>
+  <div style={styles.embedLabel}>OUR ORIGINAL APPEAL</div>
+
+  <blockquote className="twitter-tweet">
+    <a href="https://x.com/bcfc_fans_fc/status/2084898845209633273">
+      View our original post on X
+    </a>
+  </blockquote>
+
+  <Script
+    src="https://platform.twitter.com/widgets.js"
+    strategy="afterInteractive"
+  />
+</div>
             </div>
           </div>
 
@@ -308,15 +315,18 @@ const styles = {
     fontSize: "14px",
   },
 
-  xButton: {
-    background: "#111",
-    color: "white",
-    textDecoration: "none",
-    padding: "14px 20px",
-    borderRadius: "6px",
-    fontWeight: "900",
-    fontSize: "14px",
-  },
+ xEmbed: {
+  marginTop: "30px",
+  maxWidth: "550px",
+},
+
+embedLabel: {
+  color: "#df1e2f",
+  fontSize: "11px",
+  fontWeight: "900",
+  letterSpacing: "2px",
+  marginBottom: "12px",
+},
 
   storySide: {
     display: "flex",
