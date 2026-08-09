@@ -9,10 +9,17 @@ export default function Home() {
   return (
     <main style={styles.page}>
       <header style={styles.header}>
-        <div>
-          <div style={styles.clubName}>BRISTOL CITY</div>
-          <div style={styles.clubSub}>LONDON SUPPORTERS FC</div>
-        </div>
+       <div style={styles.headerBrand}>
+  <img
+    src="/374fadec-093f-4e7e-9f54-01c06a034caa.jpeg"
+    alt="BCFC London badge"
+    style={styles.headerBadge}
+  />
+  <div>
+    <div style={styles.clubName}>BRISTOL CITY</div>
+    <div style={styles.clubSub}>LONDON SUPPORTERS FC</div>
+  </div>
+</div>
 
        <nav style={styles.nav}>
   <a href="/" style={styles.navLink}>Home</a>
@@ -26,23 +33,20 @@ export default function Home() {
 
       <section style={styles.hero}>
         <div style={styles.heroContent}>
-          <div style={styles.eyebrow}>BRISTOL CITY IN LONDON</div>
+          <div style={styles.eyebrow}>LATEST NEWS</div>
 
-          <img
-            src="/374fadec-093f-4e7e-9f54-01c06a034caa.jpeg"
-            alt="Bristol City London Supporters FC badge"
-            style={styles.heroBadge}
-          />
+<h1 style={styles.latestTitle}>
+  BCFC London call on former player Andy Burnham for a little help
+</h1>
 
-          <p style={styles.heroText}>
-            The home of Bristol City London Supporters FC. Fixtures, results,
-            match reports, player stats and everything happening around the club.
-          </p>
+<p style={styles.latestSummary}>
+  Our search for support with a new kit took an unexpected turn when we
+  called on one of the club&apos;s most high-profile former players.
+</p>
 
-          <div style={styles.heroButtons}>
-         <a href="/fixtures" style={styles.primaryButton}>View Fixtures</a>
-            <button style={styles.secondaryButton}>Latest News</button>
-          </div>
+<a href="/news" style={styles.newsButton}>
+  Read Story →
+</a>
         </div>
 
         <div style={styles.matchCard}>
@@ -202,7 +206,7 @@ navLink: {
     color: "white",
     padding: "70px 6%",
     display: "grid",
-    gridTemplateColumns: "1.2fr 0.8fr",
+    gridTemplateColumns: "1fr",
     gap: "50px",
     alignItems: "center",
   },
@@ -218,6 +222,32 @@ navLink: {
     fontWeight: "900",
     marginBottom: "16px",
   },
+  latestTitle: {
+  fontSize: "48px",
+  lineHeight: "1.05",
+  fontWeight: "900",
+  margin: "0 0 20px 0",
+  maxWidth: "750px",
+},
+
+latestSummary: {
+  fontSize: "18px",
+  lineHeight: "1.6",
+  color: "#dddddd",
+  maxWidth: "650px",
+  margin: "0 0 28px 0",
+},
+
+newsButton: {
+  display: "inline-block",
+  background: "#e31b23",
+  color: "white",
+  textDecoration: "none",
+  padding: "14px 22px",
+  borderRadius: "6px",
+  fontWeight: "900",
+  fontSize: "14px",
+},
 
   heroBadge: {
     width: "clamp(240px, 32vw, 420px)",
