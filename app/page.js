@@ -49,7 +49,6 @@ export default function Home() {
 </a>
         </div>
 
-        <div style={styles.matchCard}>
          <div style={styles.matchCard}>
   <div style={styles.matchLabel}>LATEST RESULT</div>
   <div style={styles.competition}>PRE-SEASON FRIENDLY</div>
