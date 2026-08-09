@@ -81,8 +81,31 @@ export default function DashboardPage() {
           </p>
 
           <div style={styles.availabilityBox}>
-            Availability coming next...
-          </div>
+  <p style={{ marginTop: "0", fontWeight: "900", fontSize: "18px" }}>
+    Are you available?
+  </p>
+
+  <div
+    style={{
+      display: "flex",
+      gap: "10px",
+      justifyContent: "center",
+      flexWrap: "wrap",
+    }}
+  >
+    <button style={styles.availableButton}>
+      ✓ Available
+    </button>
+
+    <button style={styles.maybeButton}>
+      ? Maybe
+    </button>
+
+    <button style={styles.unavailableButton}>
+      ✕ Unavailable
+    </button>
+  </div>
+</div>
         </div>
 
         <a href="/" style={styles.backLink}>
@@ -190,4 +213,37 @@ const styles = {
     textDecoration: "none",
     fontWeight: "800",
   },
+
+  availableButton: {
+  padding: "14px 20px",
+  background: "#1f8f4e",
+  color: "#fff",
+  border: "none",
+  borderRadius: "6px",
+  fontWeight: "900",
+  cursor: "pointer",
+  fontSize: "15px",
+},
+
+maybeButton: {
+  padding: "14px 20px",
+  background: "#e5a50a",
+  color: "#fff",
+  border: "none",
+  borderRadius: "6px",
+  fontWeight: "900",
+  cursor: "pointer",
+  fontSize: "15px",
+},
+
+unavailableButton: {
+  padding: "14px 20px",
+  background: "#e31b23",
+  color: "#fff",
+  border: "none",
+  borderRadius: "6px",
+  fontWeight: "900",
+  cursor: "pointer",
+  fontSize: "15px",
+},
 };
