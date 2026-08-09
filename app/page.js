@@ -361,14 +361,16 @@ heroBadge: {
     cursor: "pointer",
   },
 
-  matchCard: {
-    background: "white",
-    color: "#111",
-    borderRadius: "14px",
-    padding: "30px",
-    boxShadow: "0 25px 60px rgba(0,0,0,0.25)",
-  },
-
+ matchCard: {
+  background: "white",
+  color: "#111",
+  borderRadius: "14px",
+  padding: "30px",
+  boxShadow: "0 25px 60px rgba(0,0,0,0.25)",
+  width: "100%",
+  maxWidth: "1200px",
+  margin: "0 auto",
+},
   matchLabel: {
     fontSize: "12px",
     letterSpacing: "2px",
