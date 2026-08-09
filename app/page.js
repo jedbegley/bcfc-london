@@ -48,7 +48,13 @@ export default function Home() {
   Read Match Report →
 </a>
         </div>
-
+<div style={styles.latestImageWrap}>
+  <img
+    src="/IMG_5497.jpeg"
+    alt="Bristol City London Supporters FC team after the Aberdeen match"
+    style={styles.latestImage}
+  />
+</div>
          <div style={styles.matchCard}>
   <div style={styles.matchLabel}>LATEST RESULT</div>
   <div style={styles.competition}>PRE-SEASON FRIENDLY</div>
@@ -251,20 +257,32 @@ navLink: {
     cursor: "pointer",
   },
 
-  hero: {
-    background: "#151515",
-    color: "white",
-    padding: "70px 6%",
-    display: "grid",
-    gridTemplateColumns: "1fr",
-    gap: "50px",
-    alignItems: "center",
-  },
+ hero: {
+  background: "#151515",
+  color: "white",
+  padding: "70px 6%",
+  display: "grid",
+  gridTemplateColumns: "1.3fr 0.7fr",
+  gap: "50px",
+  alignItems: "center",
+},
 
   heroContent: {
     maxWidth: "720px",
   },
+latestImageWrap: {
+  width: "100%",
+  maxWidth: "520px",
+  justifySelf: "end",
+},
 
+latestImage: {
+  width: "100%",
+  height: "300px",
+  objectFit: "cover",
+  borderRadius: "12px",
+  display: "block",
+},
   eyebrow: {
     color: "#e31b23",
     fontSize: "13px",
