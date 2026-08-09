@@ -24,7 +24,7 @@ console.log("SUPABASE KEY EXISTS:", !!process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY)
   async function handleLogin() {
   setMessage("Signing in...");
 
-  const { error } = await supabase.auth.signInWithPassword({
+  const { data, error } = await supabase.auth.signInWithPassword({
     email,
     password,
   });
@@ -34,7 +34,8 @@ console.log("SUPABASE KEY EXISTS:", !!process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY)
     return;
   }
 
-  setMessage("Login successful!");
+  setMessage(data.session ? "Login successful!" : "No session created");
+console.log("LOGIN DATA:", data);
 }
 
   async function handleRegister() {
