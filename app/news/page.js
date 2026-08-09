@@ -156,7 +156,16 @@ export default function News() {
           letterSpacing: "1px",
         }}
       >
-        TEAM PHOTO TO BE ADDED
+<img
+  src="/IMG_5497.jpeg"
+  alt="Bristol City London Supporters FC team after the Aberdeen match"
+  style={{
+    width: "100%",
+    height: "auto",
+    display: "block",
+    borderRadius: "10px",
+  }}
+/>
       </div>
     </div>
   </article>
