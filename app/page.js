@@ -14,14 +14,14 @@ export default function Home() {
           <div style={styles.clubSub}>LONDON SUPPORTERS FC</div>
         </div>
 
-        <nav style={styles.nav}>
-          <span>Home</span>
-          <span>News</span>
-          <span>Fixtures</span>
-          <span>Squad</span>
-          <span>Stats</span>
-          <button style={styles.loginButton}>Player Login</button>
-        </nav>
+       <nav style={styles.nav}>
+  <a href="/" style={styles.navLink}>Home</a>
+  <a href="/news" style={styles.navLink}>News</a>
+  <a href="/fixtures" style={styles.navLink}>Fixtures</a>
+  <a href="/squad" style={styles.navLink}>Squad</a>
+  <a href="/stats" style={styles.navLink}>Stats</a>
+  <button style={styles.loginButton}>Player Login</button>
+</nav>
       </header>
 
       <section style={styles.hero}>
@@ -181,6 +181,12 @@ const styles = {
     flexWrap: "wrap",
   },
 
+navLink: {
+  textDecoration: "none",
+  color: "#111",
+  fontSize: "14px",
+  fontWeight: "700",
+},
   loginButton: {
     background: "#e31b23",
     color: "white",
