@@ -12,6 +12,11 @@ export default function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState("");
+  const [fullName, setFullName] = useState("");
+const [dateOfBirth, setDateOfBirth] = useState("");
+const [mobile, setMobile] = useState("");
+const [postcode, setPostcode] = useState("");
+const [position, setPosition] = useState("");
   
   console.log("SUPABASE URL:", process.env.NEXT_PUBLIC_SUPABASE_URL);
 console.log("SUPABASE KEY EXISTS:", !!process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY);
@@ -30,6 +35,22 @@ console.log("SUPABASE KEY EXISTS:", !!process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY)
   }
 
   setMessage("Login successful!");
+}
+
+  async function handleRegister() {
+  setMessage("Creating account...");
+
+  const { data, error } = await supabase.auth.signUp({
+    email,
+    password,
+  });
+
+  if (error) {
+    setMessage(error.message);
+    return;
+  }
+
+  setMessage("Account created successfully!");
 }
 
   return (
@@ -139,7 +160,112 @@ onClick={handleLogin}
 )}
     </div>
   ) : (
-    <p>Registration form coming next...</p>
+   <div>
+  <input
+    type="text"
+    placeholder="Full name"
+    value={fullName}
+    onChange={(e) => setFullName(e.target.value)}
+    style={{
+      width: "100%",
+      padding: "12px",
+      marginBottom: "12px",
+      boxSizing: "border-box",
+    }}
+  />
+
+  <input
+    type="date"
+    value={dateOfBirth}
+    onChange={(e) => setDateOfBirth(e.target.value)}
+    style={{
+      width: "100%",
+      padding: "12px",
+      marginBottom: "12px",
+      boxSizing: "border-box",
+    }}
+  />
+
+  <input
+    type="email"
+    placeholder="Email address"
+    value={email}
+    onChange={(e) => setEmail(e.target.value)}
+    style={{
+      width: "100%",
+      padding: "12px",
+      marginBottom: "12px",
+      boxSizing: "border-box",
+    }}
+  />
+
+  <input
+    type="tel"
+    placeholder="Mobile number"
+    value={mobile}
+    onChange={(e) => setMobile(e.target.value)}
+    style={{
+      width: "100%",
+      padding: "12px",
+      marginBottom: "12px",
+      boxSizing: "border-box",
+    }}
+  />
+
+  <input
+    type="text"
+    placeholder="Postcode"
+    value={postcode}
+    onChange={(e) => setPostcode(e.target.value)}
+    style={{
+      width: "100%",
+      padding: "12px",
+      marginBottom: "12px",
+      boxSizing: "border-box",
+    }}
+  />
+
+  <input
+    type="text"
+    placeholder="Position"
+    value={position}
+    onChange={(e) => setPosition(e.target.value)}
+    style={{
+      width: "100%",
+      padding: "12px",
+      marginBottom: "12px",
+      boxSizing: "border-box",
+    }}
+  />
+
+  <input
+    type="password"
+    placeholder="Create password"
+    value={password}
+    onChange={(e) => setPassword(e.target.value)}
+    style={{
+      width: "100%",
+      padding: "12px",
+      marginBottom: "12px",
+      boxSizing: "border-box",
+    }}
+  />
+
+  <button
+    onClick={handleRegister}
+    style={{
+      width: "100%",
+      padding: "12px",
+      background: "#e31b23",
+      color: "#fff",
+      border: "none",
+      fontWeight: "700",
+      cursor: "pointer",
+    }}
+  >
+    Create Account
+  </button>
+</div>
   )}
 </div>
         <a
