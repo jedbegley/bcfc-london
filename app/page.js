@@ -36,16 +36,16 @@ export default function Home() {
           <div style={styles.eyebrow}>LATEST NEWS</div>
 
 <h1 style={styles.latestTitle}>
-  BCFC London call on former player Andy Burnham for a little help
+  Aberdeen 0–3 Bristol City
 </h1>
 
 <p style={styles.latestSummary}>
-  Our search for support with a new kit took an unexpected turn when we
-  called on one of the club&apos;s most high-profile former players.
+  First-half goals from Bellamy, Hayes and Nathaniel secured a convincing
+  pre-season victory in scorching conditions at Raynes Park.
 </p>
 
 <a href="/news" style={styles.newsButton}>
-  Read Story →
+  Read Match Report →
 </a>
         </div>
 
