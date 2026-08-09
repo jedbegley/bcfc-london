@@ -37,6 +37,24 @@ console.log("SUPABASE KEY EXISTS:", !!process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY)
   window.location.href = "/dashboard";
 }
 
+  async function handleForgotPassword() {
+  if (!email) {
+    setMessage("Enter your email address first.");
+    return;
+  }
+
+  const { error } = await supabase.auth.resetPasswordForEmail(email, {
+    redirectTo: "https://bcfc-london.vercel.app/reset-password",
+  });
+
+  if (error) {
+    setMessage(error.message);
+    return;
+  }
+
+  setMessage("Password reset email sent!");
+}
+
   async function handleRegister() {
   setMessage("Creating account...");
 
@@ -162,6 +180,22 @@ onClick={handleLogin}
       >
         Sign In
       </button>
+
+<button
+  onClick={handleForgotPassword}
+  style={{
+    width: "100%",
+    marginTop: "10px",
+    padding: "10px",
+    background: "transparent",
+    color: "#e31b23",
+    border: "none",
+    fontWeight: "700",
+    cursor: "pointer",
+  }}
+>
+  Forgot password?
+</button>
           {message && (
   <p style={{ marginTop: "15px", color: "#e31b23", fontWeight: "700" }}>
     {message}
