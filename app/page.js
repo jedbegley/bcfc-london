@@ -50,38 +50,82 @@ export default function Home() {
         </div>
 
         <div style={styles.matchCard}>
-          <div style={styles.matchLabel}>NEXT MATCH</div>
-          <div style={styles.competition}>FRIENDLY</div>
+         <div style={styles.matchCard}>
+  <div style={styles.matchLabel}>LATEST RESULT</div>
+  <div style={styles.competition}>PRE-SEASON FRIENDLY</div>
 
-          <div style={styles.teams}>
-            <div style={styles.team}>
-              <div style={styles.aberdeenBadge}>AFC</div>
-              <strong>Aberdeen</strong>
-              <span style={styles.homeAway}>HOME</span>
-            </div>
+  <div style={styles.teams}>
+    <div style={styles.team}>
+      <div style={styles.aberdeenBadge}>AFC</div>
+      <strong>Aberdeen</strong>
+      <span style={styles.homeAway}>HOME</span>
+    </div>
 
-            <div style={styles.versus}>VS</div>
+    <div style={styles.versus}>
+      <div style={{ fontSize: "34px", fontWeight: "900", color: "#111" }}>
+        0–3
+      </div>
+      <div style={{ fontSize: "11px", fontWeight: "900", marginTop: "6px" }}>
+        FULL TIME
+      </div>
+    </div>
 
-            <div style={styles.team}>
-              <img
-                src="/374fadec-093f-4e7e-9f54-01c06a034caa.jpeg"
-                alt="Bristol City"
-                style={styles.fixtureBadge}
-              />
-              <strong>Bristol City</strong>
-              <span style={styles.homeAway}>AWAY</span>
-            </div>
-          </div>
+    <div style={styles.team}>
+      <img
+        src="/374fadec-093f-4e7e-9f54-01c06a034caa.jpeg"
+        alt="Bristol City"
+        style={styles.fixtureBadge}
+      />
+      <strong>Bristol City</strong>
+      <span style={styles.homeAway}>AWAY</span>
+    </div>
+  </div>
 
-          <div style={styles.matchInfo}>
-            <strong>Sunday 9 August 2026</strong>
-            <span>14:00 Kick Off</span>
-            <span>Prince George&apos;s Playing Fields, Raynes Park</span>
-          </div>
+  <div style={styles.matchInfo}>
+    <strong>Sunday 9 August 2026</strong>
+    <span>Prince George&apos;s Playing Fields, Raynes Park</span>
+    <span>⚽ Bellamy · Hayes · Nathaniel</span>
+  </div>
 
-          <div style={styles.friendlyTag}>THE SCOTTY MURRAY DERBY</div>
-        </div>
-      </section>
+  <a href="/news" style={styles.friendlyTag}>
+    READ MATCH REPORT
+  </a>
+</div>
+
+<div style={{ height: "30px" }} />
+
+<div style={styles.matchCard}>
+  <div style={styles.matchLabel}>NEXT MATCH</div>
+  <div style={styles.competition}>FRIENDLY</div>
+
+  <div style={styles.teams}>
+    <div style={styles.team}>
+      <div style={styles.aberdeenBadge}>ST</div>
+      <strong>Shepherd&apos;s Tuesday</strong>
+      <span style={styles.homeAway}>HOME</span>
+    </div>
+
+    <div style={styles.versus}>VS</div>
+
+    <div style={styles.team}>
+      <img
+        src="/374fadec-093f-4e7e-9f54-01c06a034caa.jpeg"
+        alt="Bristol City"
+        style={styles.fixtureBadge}
+      />
+      <strong>Bristol City</strong>
+      <span style={styles.homeAway}>AWAY</span>
+    </div>
+  </div>
+
+  <div style={styles.matchInfo}>
+    <strong>Sunday 16 August 2026</strong>
+    <span>10:15 Kick Off</span>
+    <span>Burgess Park</span>
+  </div>
+
+  <div style={styles.friendlyTag}>PRE-SEASON FRIENDLY</div>
+</div>
 
       <section style={styles.quickSection}>
         <div style={styles.sectionHeading}>
