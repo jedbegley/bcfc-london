@@ -161,6 +161,11 @@ const styles = {
     flexWrap: "wrap",
     gap: "20px",
   },
+  headerBadge: {
+  width: "70px",
+  height: "70px",
+  objectFit: "contain",
+},
 
   clubName: {
     fontWeight: "900",
