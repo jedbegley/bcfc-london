@@ -34,8 +34,7 @@ console.log("SUPABASE KEY EXISTS:", !!process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY)
     return;
   }
 
-  setMessage(data.session ? "Login successful!" : "No session created");
-console.log("LOGIN DATA:", data);
+  window.location.href = "/dashboard";
 }
 
   async function handleRegister() {
