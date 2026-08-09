@@ -28,106 +28,180 @@ export default function News() {
         </p>
       </section>
 
-      {/* FEATURED STORY */}
-      <section style={styles.content}>
-        <p style={styles.redLabel}>FEATURED STORY</p>
+     {/* FEATURED STORY */}
+<section style={styles.content}>
+  <p style={styles.redLabel}>MATCH REPORT</p>
 
-        <article style={styles.featuredCard}>
-          <div style={styles.storyContent}>
-            <div style={styles.storyMeta}>
-              <span style={styles.category}>CLUB NEWS</span>
-              <span>August 2026</span>
-            </div>
+  <article style={styles.featuredCard}>
+    <div style={styles.storyContent}>
+      <div style={styles.storyMeta}>
+        <span style={styles.category}>PRE-SEASON FRIENDLY</span>
+        <span>9 August 2026</span>
+      </div>
 
-            <h2 style={styles.storyTitle}>
-              BCFC London call on former player Andy Burnham for a little help
-            </h2>
+      <h2 style={styles.storyTitle}>
+        Aberdeen 0–3 Bristol City
+      </h2>
 
-            <p style={styles.storyLead}>
-              Our search for support with a new kit took an unexpected turn
-              when we called on one of the club&apos;s most high-profile former
-              players.
-            </p>
+      <p style={styles.storyLead}>
+        City made the perfect start to pre-season with a convincing
+        victory in scorching conditions at Raynes Park.
+      </p>
 
-            <p style={styles.storyText}>
-              Bristol City London Supporters FC have had plenty of memorable
-              players over the years — but not many have gone on to become
-              Prime Minister.
-            </p>
+      <p style={styles.storyText}>
+        Bristol City London Supporters FC kicked off pre-season with a
+        3–0 win over Aberdeen at Prince George&apos;s Playing Fields in
+        Raynes Park.
+      </p>
 
-            <p style={styles.storyText}>
-              After Andy Burnham recently spoke about his time playing for the
-              team, we decided there was only one thing to do: remind him where
-              it all began and ask whether he might be able to help his old club
-              with a new kit.
-            </p>
+      <p style={styles.storyText}>
+        First-half goals from Bellamy, Hayes and Nathaniel did the damage,
+        ensuring City came away with the victory from their first outing
+        of the summer.
+      </p>
 
-            <p style={styles.storyText}>
-              The appeal quickly attracted attention and was picked up by the
-              Bristol Post, putting BCFC London firmly in the headlines.
-            </p>
+      <p style={styles.storyText}>
+        Conditions were far from easy, with temperatures soaring in
+        south-west London — made even tougher by City taking to the field
+        in the long-sleeved purple and lime kit.
+      </p>
 
-            <div style={styles.buttons}>
-              <a
-                href="https://www.bristolpost.co.uk/news/bristol-news/bristol-city-supporters-team-ask-11094119"
-                target="_blank"
-                rel="noopener noreferrer"
-                style={styles.primaryButton}
-              >
-                Read Bristol Post Story
-              </a>
+      <p style={styles.storyText}>
+        Despite the heat, City managed the game well, kept a clean sheet
+        and made an excellent start to preparations for the new season.
+      </p>
 
-            <div style={styles.xEmbed}>
-  <div style={styles.embedLabel}>OUR ORIGINAL APPEAL</div>
+      <p style={styles.storyText}>
+        <strong>Starting XI:</strong> Freddie, Louis, Ben, Shapes, Joycey,
+        Nikita, Ryan, Jack, Bellamy, Scoobs, Hayes.
+      </p>
 
-  <blockquote className="twitter-tweet">
-    <a href="https://x.com/bcfc_fans_fc/status/2084898845209633273">
-      View our original post on X
-    </a>
-  </blockquote>
+      <p style={styles.storyText}>
+        <strong>Subs:</strong> Meddy, Lewis, Sam, Nathaniel, Yeremi and Jed.
+      </p>
 
-  <Script
-    src="https://platform.twitter.com/widgets.js"
-    strategy="afterInteractive"
-  />
-</div>
-            </div>
-          </div>
+      <p style={styles.storyText}>
+        There was also a welcome return to football for gaffer Jed, who
+        made his first appearance in almost two years following an ACL
+        injury.
+      </p>
 
-          <div style={styles.storySide}>
-            <img
-              src="/374fadec-093f-4e7e-9f54-01c06a034caa.jpeg"
-              alt="Bristol City London Supporters FC badge"
-              style={styles.badge}
-            />
+      <p style={styles.storyText}>
+        A cracking start to pre-season for City.
+      </p>
+    </div>
 
-            <div style={styles.quoteBox}>
-              <span style={styles.quoteMark}>“</span>
-              <p style={styles.quoteText}>
-                Bristol City London Supporters FC have produced many legends
-                over the years. One of them happens to be the Prime Minister.
-              </p>
-            </div>
-          </div>
-        </article>
-      </section>
-
-      {/* MORE NEWS */}
-      <section style={styles.moreNews}>
-        <div style={styles.content}>
-          <p style={styles.redLabel}>MORE FROM BCFC LONDON</p>
-          <h2 style={styles.sectionTitle}>More News</h2>
-
-          <div style={styles.emptyNews}>
-            <div style={styles.emptyIcon}>📰</div>
-            <h3 style={styles.emptyTitle}>More stories coming soon</h3>
-            <p style={styles.emptyText}>
-              Match reports, player news and club announcements will appear here.
-            </p>
-          </div>
+    <div style={styles.storySide}>
+      <div
+        style={{
+          background: "#111",
+          color: "white",
+          borderRadius: "12px",
+          padding: "35px 25px",
+          textAlign: "center",
+        }}
+      >
+        <div
+          style={{
+            color: "#df1e2f",
+            fontSize: "11px",
+            fontWeight: "900",
+            letterSpacing: "2px",
+            marginBottom: "18px",
+          }}
+        >
+          FULL TIME
         </div>
-      </section>
 
+        <div style={{ fontSize: "22px", fontWeight: "900" }}>
+          Aberdeen
+        </div>
+
+        <div
+          style={{
+            fontSize: "52px",
+            fontWeight: "900",
+            margin: "12px 0",
+          }}
+        >
+          0 – 3
+        </div>
+
+        <div style={{ fontSize: "22px", fontWeight: "900" }}>
+          Bristol City
+        </div>
+      </div>
+
+      <div style={styles.quoteBox}>
+        <span style={styles.quoteMark}>⚽</span>
+
+        <p style={styles.quoteText}>
+          Bellamy
+          <br />
+          Hayes
+          <br />
+          Nathaniel
+        </p>
+      </div>
+
+      <div
+        style={{
+          border: "2px dashed #ddd",
+          borderRadius: "10px",
+          padding: "35px 20px",
+          textAlign: "center",
+          color: "#999",
+          fontWeight: "800",
+          fontSize: "12px",
+          letterSpacing: "1px",
+        }}
+      >
+        TEAM PHOTO TO BE ADDED
+      </div>
+    </div>
+  </article>
+</section>
+
+    {/* MORE NEWS */}
+<section style={styles.moreNews}>
+  <div style={styles.content}>
+    <p style={styles.redLabel}>MORE FROM BCFC LONDON</p>
+    <h2 style={styles.sectionTitle}>More News</h2>
+
+    <div style={styles.emptyNews}>
+      <div style={styles.storyMeta}>
+        <span style={styles.category}>CLUB NEWS</span>
+        <span>August 2026</span>
+      </div>
+
+      <h3 style={styles.emptyTitle}>
+        BCFC London call on former player Andy Burnham for a little help
+      </h3>
+
+      <p style={styles.emptyText}>
+        Our search for support with a new kit took an unexpected turn when
+        we called on one of the club&apos;s most high-profile former players.
+      </p>
+
+      <a
+        href="/news"
+        style={{
+          display: "inline-block",
+          marginTop: "20px",
+          background: "#df1e2f",
+          color: "white",
+          textDecoration: "none",
+          padding: "12px 18px",
+          borderRadius: "6px",
+          fontWeight: "900",
+          fontSize: "13px",
+        }}
+      >
+        Read Story →
+      </a>
+    </div>
+  </div>
+</section>
       {/* FOOTER */}
       <footer style={styles.footer}>
         <div>
