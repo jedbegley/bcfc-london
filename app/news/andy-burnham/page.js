@@ -1,4 +1,22 @@
+"use client";
+
+import { useEffect } from "react";
+
 export default function AndyBurnhamStory() {
+  useEffect(() => {
+    const script = document.createElement("script");
+    script.src = "https://platform.twitter.com/widgets.js";
+    script.async = true;
+    script.charset = "utf-8";
+    document.body.appendChild(script);
+
+    return () => {
+      if (document.body.contains(script)) {
+        document.body.removeChild(script);
+      }
+    };
+  }, []);
+
   return (
     <main style={styles.page}>
       <header style={styles.header}>
@@ -18,51 +36,81 @@ export default function AndyBurnhamStory() {
         <div style={styles.tag}>CLUB NEWS</div>
 
         <h1 style={styles.title}>
-          City legend Andy Burnham answers the call
+          BCFC London call on former City striker Andy Burnham for kit help
         </h1>
 
-        <p style={styles.date}>Bristol City London Supporters FC</p>
+        <p style={styles.date}>5 August 2026</p>
 
         <p style={styles.lead}>
-          Our search for support with a new kit took an unexpected turn when
-          we called on one of the club&apos;s most high-profile former players.
+          Our slightly ambitious search for a new kit sponsor has made the
+          Bristol headlines.
         </p>
       </section>
 
-      <section style={styles.article}>
+      <article style={styles.article}>
         <p>
-          Bristol City London Supporters FC have been looking for support as
-          we prepare for the new season, including helping the team secure a
-          new kit.
+          Bristol City London Supporters FC&apos;s search for help with a new
+          kit took an unexpected turn when we decided to call on one of the
+          club&apos;s most high-profile former players.
         </p>
 
         <p>
-          As part of the search, we decided to aim high and reach out to
-          Bristol City fan and former Ashton Gate regular Andy Burnham.
+          With the team preparing for the new season, we put out a slightly
+          ambitious appeal to Andy Burnham to see whether he could help us
+          with our search for a new kit.
         </p>
 
         <p>
-          The Mayor of Greater Manchester responded to the club&apos;s request,
-          giving our search for sponsorship an unexpected boost and helping
-          spread the word about the team.
+          Burnham has previously pulled on the red shirt for the London
+          Supporters side, so we thought it was worth asking an old player
+          for a favour.
         </p>
 
-        <p>
-          The London Supporters team brings together City fans living in and
-          around the capital, representing the club in supporters&apos; football
-          while building a community for Bristol City fans away from home.
-        </p>
+        <div style={styles.tweetWrap}>
+          <blockquote className="twitter-tweet">
+            <a href="https://x.com/bcfc_fans_fc/status/2084898845209633273">
+              View our post on X
+            </a>
+          </blockquote>
+        </div>
 
         <p>
-          With preparations for the new season continuing, the search for
-          support goes on — although getting a response from Andy Burnham
-          certainly wasn&apos;t a bad place to start.
+          The appeal soon attracted attention beyond the supporters&apos;
+          football world, with Bristol Live picking up the story.
+        </p>
+
+        <div style={styles.pressBox}>
+          <div style={styles.pressLabel}>IN THE PRESS</div>
+
+          <h2 style={styles.pressTitle}>
+            Bristol Live picks up BCFC London&apos;s Andy Burnham appeal
+          </h2>
+
+          <p style={styles.pressText}>
+            Read the Bristol Live story about the London Supporters&apos;
+            search for help with the new kit.
+          </p>
+
+          <a
+            href="https://www.bristolpost.co.uk/news/bristol-news/bristol-city-supporters-team-ask-11094119"
+            target="_blank"
+            rel="noopener noreferrer"
+            style={styles.pressButton}
+          >
+            Read the Bristol Live story →
+          </a>
+        </div>
+
+        <p>
+          Whether our former striker can come through with the goods remains
+          to be seen, but it&apos;s already given BCFC London a bit more
+          attention than we were expecting.
         </p>
 
         <a href="/news" style={styles.backButton}>
           ← Back to News
         </a>
-      </section>
+      </article>
 
       <footer style={styles.footer}>
         <div>
@@ -136,7 +184,7 @@ const styles = {
   title: {
     fontSize: "clamp(36px, 6vw, 72px)",
     lineHeight: "1",
-    maxWidth: "900px",
+    maxWidth: "950px",
     margin: "0 0 18px",
     fontWeight: "900",
   },
@@ -162,10 +210,54 @@ const styles = {
     lineHeight: "1.8",
   },
 
+  tweetWrap: {
+    margin: "35px 0",
+    display: "flex",
+    justifyContent: "center",
+    width: "100%",
+    overflow: "hidden",
+  },
+
+  pressBox: {
+    background: "#f4f4f4",
+    borderRadius: "12px",
+    padding: "28px",
+    margin: "35px 0",
+    boxSizing: "border-box",
+  },
+
+  pressLabel: {
+    color: "#df1e2f",
+    fontWeight: "900",
+    fontSize: "12px",
+    letterSpacing: "1px",
+  },
+
+  pressTitle: {
+    margin: "8px 0 10px",
+    fontSize: "24px",
+    lineHeight: "1.2",
+  },
+
+  pressText: {
+    margin: "0 0 20px",
+  },
+
+  pressButton: {
+    display: "inline-block",
+    background: "#df1e2f",
+    color: "white",
+    textDecoration: "none",
+    padding: "12px 18px",
+    borderRadius: "6px",
+    fontWeight: "900",
+    fontSize: "13px",
+  },
+
   backButton: {
     display: "inline-block",
     marginTop: "25px",
-    background: "#df1e2f",
+    background: "#151515",
     color: "white",
     textDecoration: "none",
     padding: "12px 18px",
