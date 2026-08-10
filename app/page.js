@@ -237,9 +237,10 @@ export default function Home() {
 }
 
 .match-cards-row > div {
-  width: 100% !important;
-  max-width: none !important;
-  margin-bottom: 24px !important;
+  width: calc(100% - 24px) !important;
+  max-width: 100% !important;
+  margin: 0 auto 24px auto !important;
+  box-sizing: border-box !important;
 }
   }
 `}</style>
