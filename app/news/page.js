@@ -183,7 +183,7 @@ export default function News() {
       </p>
 
       <a
-        href="/news"
+        href="/news/andy-burnham"
         style={{
           display: "inline-block",
           marginTop: "20px",
