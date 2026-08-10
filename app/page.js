@@ -31,7 +31,7 @@ export default function Home() {
 </nav>
       </header>
 
-      <section style={styles.hero}>
+      <section className="hero-section" style={styles.hero}>
         <div style={styles.heroContent}>
           <div style={styles.eyebrow}>LATEST NEWS</div>
 
@@ -66,7 +66,7 @@ export default function Home() {
   style={styles.latestImage}
 />
 </div>
-    <div style={styles.matchCardsRow}>
+    <div className="match-cards-row" style={styles.matchCardsRow}>
     <div style={styles.matchCard}>
   <div style={styles.matchLabel}>LATEST RESULT</div>
   <div style={styles.competition}>PRE-SEASON FRIENDLY</div>
@@ -211,13 +211,18 @@ export default function Home() {
           <div style={styles.footerSmall}>© 2026 BCFC London</div>
         </div>
       </footer>
-              <style>{`
+          <style>{`
   @media (max-width: 768px) {
+    .hero-section {
+      display: block !important;
+      padding: 48px 6% !important;
+    }
+
     .latest-image-wrap {
       width: 100% !important;
       max-width: none !important;
       justify-self: stretch !important;
-      margin-top: 24px;
+      margin-top: 28px;
     }
 
     .latest-image {
@@ -227,6 +232,15 @@ export default function Home() {
       object-fit: cover !important;
       border-radius: 12px !important;
     }
+    .match-cards-row {
+  display: block !important;
+}
+
+.match-cards-row > div {
+  width: 100% !important;
+  max-width: none !important;
+  margin-bottom: 24px !important;
+}
   }
 `}</style>
     </main>
