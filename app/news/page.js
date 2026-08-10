@@ -47,6 +47,17 @@ export default function News() {
         City made the perfect start to pre-season with a convincing
         victory in scorching conditions at Raynes Park.
       </p>
+           <div style={{ marginTop: "10px" }}>
+<img
+  src="/IMG_5497.jpeg"
+  alt="Bristol City London Supporters FC team after the Aberdeen match"
+  style={{
+    width: "100%",
+    height: "auto",
+    display: "block",
+    borderRadius: "10px",
+  }}
+/>
 
       <p style={styles.storyText}>
         Bristol City London Supporters FC kicked off pre-season with a
@@ -144,17 +155,7 @@ export default function News() {
         </p>
       </div>
 
-     <div style={{ marginTop: "10px" }}>
-<img
-  src="/IMG_5497.jpeg"
-  alt="Bristol City London Supporters FC team after the Aberdeen match"
-  style={{
-    width: "100%",
-    height: "auto",
-    display: "block",
-    borderRadius: "10px",
-  }}
-/>
+    
       </div>
     </div>
   </article>
