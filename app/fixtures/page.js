@@ -147,41 +147,51 @@ export default function Fixtures() {
     overflow: hidden !important;
   }
 
-  .fixture-teams {
+.fixture-teams {
   display: grid !important;
   grid-template-columns: 1fr 1fr !important;
-  grid-template-areas:
-    "home away"
-    "kickoff kickoff" !important;
-  gap: 14px 20px !important;
-  align-items: center !important;
-  justify-items: center !important;
+  gap: 12px 20px !important;
+  align-items: start !important;
   width: 100% !important;
 }
 
 .fixture-teams > div:first-child {
-  grid-area: home !important;
-  width: 100% !important;
+  grid-column: 1 !important;
   text-align: center !important;
+  width: 100% !important;
 }
 
 .fixture-teams > div:nth-child(2) {
-  grid-area: kickoff !important;
-  width: 70px !important;
-  height: 70px !important;
-  min-width: 70px !important;
-  min-height: 70px !important;
-  margin: 0 auto !important;
+  grid-column: 1 / span 2 !important;
+  grid-row: 2 !important;
+  width: auto !important;
+  height: auto !important;
+  min-width: 0 !important;
+  min-height: 0 !important;
+  background: transparent !important;
+  color: #df1e2f !important;
+  border-radius: 0 !important;
+  margin: 8px auto 0 !important;
+  font-size: 22px !important;
+  font-weight: 900 !important;
 }
 
 .fixture-teams > div:last-child {
-  grid-area: away !important;
-  width: 100% !important;
+  grid-column: 2 !important;
+  grid-row: 1 !important;
   text-align: center !important;
+  width: 100% !important;
 }
 
 .fixture-teams strong {
-  font-size: 15px !important;
+  font-size: 22px !important;
+}
+.fixture-card {
+  text-align: center !important;
+}
+
+.fixture-card > div:first-child {
+  margin-bottom: 24px !important;
 }
 }
 `}</style>
