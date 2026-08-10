@@ -58,12 +58,13 @@ export default function Home() {
   READ MATCH REPORT
 </a>
         </div>
-<div style={styles.latestImageWrap}>
+<div className="latest-image-wrap" style={styles.latestImageWrap}>
   <img
-    src="/IMG_5497.jpeg"
-    alt="Bristol City London Supporters FC team after the Aberdeen match"
-    style={styles.latestImage}
-  />
+  className="latest-image"
+  src="/IMG_5497.jpeg"
+  alt="Bristol City London Supporters FC team after the Aberdeen match"
+  style={styles.latestImage}
+/>
 </div>
     <div style={styles.matchCardsRow}>
     <div style={styles.matchCard}>
@@ -210,6 +211,24 @@ export default function Home() {
           <div style={styles.footerSmall}>© 2026 BCFC London</div>
         </div>
       </footer>
+              <style>{`
+  @media (max-width: 768px) {
+    .latest-image-wrap {
+      width: 100% !important;
+      max-width: none !important;
+      justify-self: stretch !important;
+      margin-top: 24px;
+    }
+
+    .latest-image {
+      width: 100% !important;
+      height: auto !important;
+      max-height: none !important;
+      object-fit: cover !important;
+      border-radius: 12px !important;
+    }
+  }
+`}</style>
     </main>
   );
 }
