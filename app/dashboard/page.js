@@ -51,37 +51,19 @@ const [availabilityMessage, setAvailabilityMessage] = useState("");
 
   setAvailabilityMessage("Saving...");
 
-  const { data: existing } = await supabase
-    .from("availability")
-    .select("id")
-    .eq("player_id", player.id)
-    .eq("match_id", 2)
-    .maybeSingle();
-
-  let error;
-
-  if (existing) {
-    const result = await supabase
-      .from("availability")
-      .update({
-        status,
-        responded_at: new Date().toISOString(),
-      })
-      .eq("id", existing.id);
-
-    error = result.error;
-  } else {
-    const result = await supabase
-      .from("availability")
-      .insert({
-        player_id: player.id,
-        match_id: 2,
-        status,
-        responded_at: new Date().toISOString(),
-      });
-
-    error = result.error;
-  }
+  const { error } = await supabase
+  .from("availability")
+  .upsert(
+    {
+      player_id: player.id,
+      match_id: 2,
+      status,
+      responded_at: new Date().toISOString(),
+    },
+    {
+      onConflict: "player_id,match_id",
+    }
+  );
 
   if (error) {
     setAvailabilityMessage(error.message);
