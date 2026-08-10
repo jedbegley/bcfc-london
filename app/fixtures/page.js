@@ -149,9 +149,10 @@ export default function Fixtures() {
 
   .fixture-teams {
   display: grid !important;
-  grid-template-columns: 1fr 70px 1fr !important;
-  gap: 10px !important;
+  grid-template-columns: 120px 70px 120px !important;
+  gap: 8px !important;
   align-items: center !important;
+  justify-content: center !important;
   width: 100% !important;
 }
 
