@@ -149,32 +149,34 @@ export default function Fixtures() {
 
   .fixture-teams {
   display: grid !important;
-  grid-template-columns: 120px 70px 120px !important;
-  gap: 8px !important;
+  grid-template-columns: 1fr 1fr !important;
+  grid-template-areas:
+    "home away"
+    "kickoff kickoff" !important;
+  gap: 14px 20px !important;
   align-items: center !important;
-  justify-content: center !important;
+  justify-items: center !important;
   width: 100% !important;
 }
 
-.fixture-teams > div {
-  min-width: 0 !important;
-  width: auto !important;
-}
-
 .fixture-teams > div:first-child {
+  grid-area: home !important;
+  width: 100% !important;
   text-align: center !important;
 }
 
 .fixture-teams > div:nth-child(2) {
+  grid-area: kickoff !important;
   width: 70px !important;
   height: 70px !important;
   min-width: 70px !important;
   min-height: 70px !important;
-  margin: 0 !important;
-  font-size: 14px !important;
+  margin: 0 auto !important;
 }
 
 .fixture-teams > div:last-child {
+  grid-area: away !important;
+  width: 100% !important;
   text-align: center !important;
 }
 
