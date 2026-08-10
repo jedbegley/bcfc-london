@@ -217,7 +217,17 @@ onClick={handleLogin}
     }}
   />
 
-  <input
+  <label
+  style={{
+    display: "block",
+    marginBottom: "6px",
+    fontWeight: "700",
+    color: "#555",
+  }}
+>
+  Date of birth
+</label>
+    <input
     type="date"
     value={dateOfBirth}
     onChange={(e) => setDateOfBirth(e.target.value)}
@@ -268,18 +278,28 @@ onClick={handleLogin}
     }}
   />
 
-  <input
-    type="text"
-    placeholder="Position"
-    value={position}
-    onChange={(e) => setPosition(e.target.value)}
-    style={{
-      width: "100%",
-      padding: "12px",
-      marginBottom: "12px",
-      boxSizing: "border-box",
-    }}
-  />
+ <select
+  value={position}
+  onChange={(e) => setPosition(e.target.value)}
+  style={{
+    width: "100%",
+    padding: "12px",
+    marginBottom: "12px",
+    boxSizing: "border-box",
+  }}
+>
+  <option value="">Select position</option>
+  <option value="GK">GK</option>
+  <option value="CB">CB</option>
+  <option value="RB">RB</option>
+  <option value="LB">LB</option>
+  <option value="CDM">CDM</option>
+  <option value="CM">CM</option>
+  <option value="CAM">CAM</option>
+  <option value="LW">LW</option>
+  <option value="RW">RW</option>
+  <option value="ST">ST</option>
+</select>
 
   <input
     type="password"
