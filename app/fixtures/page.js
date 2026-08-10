@@ -35,7 +35,7 @@ export default function Fixtures() {
         <p style={styles.eyebrow}>2026/27</p>
         <h1 style={styles.title}>Fixtures & Results</h1>
         <p style={styles.intro}>
-          Follow Bristol City throughout the season. ixtures,
+          Follow Bristol City throughout the season. fixtures,
           results and match details all in one place.
         </p>
       </section>
@@ -91,13 +91,26 @@ export default function Fixtures() {
           <p style={styles.redLabel}>2026/27</p>
           <h2 style={styles.heading}>Results</h2>
 
-          <div style={styles.emptyResults}>
-            <div style={styles.emptyScore}>— : —</div>
-            <h3 style={styles.emptyTitle}>No results yet</h3>
-            <p style={styles.emptyText}>
-              The 2026/27 season is about to get underway.
-            </p>
-          </div>
+         <div style={styles.emptyResults}>
+  <div style={styles.emptyScore}>Aberdeen 0 – 3 Bristol City</div>
+  <h3 style={styles.emptyTitle}>Pre-season Friendly</h3>
+  <p style={styles.emptyText}>
+    Sunday 9 August 2026 · Prince George&apos;s Playing Fields, Raynes Park
+  </p>
+
+  <a
+    href="/news"
+    style={{
+      display: "inline-block",
+      marginTop: "14px",
+      color: "#df1e2f",
+      fontWeight: "900",
+      textDecoration: "none",
+    }}
+  >
+    Read match report →
+  </a>
+</div>
         </div>
       </section>
 
@@ -117,7 +130,7 @@ export default function Fixtures() {
             PROUDLY SPONSORED BY
           </span>
           <img
-            src="/sponsor.jpeg"
+           src="/IMG_1146.jpeg"
             alt="DUZZ Sports"
             style={styles.sponsorLogo}
           />
@@ -126,43 +139,41 @@ export default function Fixtures() {
         <div style={styles.copyright}>© 2026 BCFC London</div>
       </footer>
             <style>{`
-  @media (max-width: 768px) {
-    .fixture-card {
-      padding: 20px !important;
-      box-sizing: border-box !important;
-      width: 100% !important;
-      overflow: hidden !important;
-    }
-
-    .fixture-teams {
-  display: grid !important;
-  grid-template-columns: minmax(0, 1fr) 90px minmax(0, 1fr) !important;
-  gap: 8px !important;
-  align-items: center !important;
-}
-
-.fixture-teams > div {
-  min-width: 0 !important;
-}
-
-.fixture-teams > div:first-child {
-  text-align: left !important;
-}
-
-.fixture-teams > div:last-child {
-  text-align: right !important;
-}
-
-.fixture-teams strong {
-  font-size: 18px !important;
-}
+ @media (max-width: 768px) {
+  .fixture-card {
+    padding: 22px 16px !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+    overflow: hidden !important;
   }
+
+  .fixture-teams {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    gap: 16px !important;
+    width: 100% !important;
+  }
+
+  .fixture-teams > div {
+    width: 100% !important;
+    min-width: 0 !important;
+    height: auto !important;
+    min-height: 0 !important;
+    text-align: center !important;
+  }
+
   .fixture-teams > div:nth-child(2) {
-  width: 90px !important;
-  height: 90px !important;
-  min-width: 90px !important;
-  min-height: 90px !important;
-  font-size: 16px !important;
+    width: 82px !important;
+    height: 82px !important;
+    min-width: 82px !important;
+    min-height: 82px !important;
+    margin: 0 auto !important;
+  }
+
+  .fixture-teams strong {
+    font-size: 18px !important;
+  }
 }
 `}</style>
     </main>
