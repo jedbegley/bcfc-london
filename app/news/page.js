@@ -32,7 +32,7 @@ export default function News() {
 <section style={styles.content}>
   <p style={styles.redLabel}>MATCH REPORT</p>
 
-  <article style={styles.featuredCard}>
+  <article className="featured-card" style={styles.featuredCard}>
     <div style={styles.storyContent}>
       <div style={styles.storyMeta}>
         <span style={styles.category}>PRE-SEASON FRIENDLY</span>
@@ -222,6 +222,15 @@ export default function News() {
 
         <div style={styles.copyright}>© 2026 BCFC London</div>
       </footer>
+           <style>{`
+  @media (max-width: 768px) {
+    .featured-card {
+      display: block !important;
+      padding: 24px !important;
+    }
+  }
+`}</style>
+            
     </main>
   );
 }
