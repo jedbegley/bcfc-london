@@ -43,7 +43,7 @@ export default function Fixtures() {
         <p style={styles.eyebrow}>2026/27</p>
         <h1 style={styles.title}>Fixtures & Results</h1>
         <p style={styles.intro}>
-          Follow Bristol City throughout the season. Upcoming fixtures,
+          Follow Bristol City throughout the season. ixtures,
           results and match details all in one place.
         </p>
       </section>
@@ -57,9 +57,9 @@ export default function Fixtures() {
           </div>
         </div>
 
-        <div style={styles.fixtureList}>
+        <div className="fixture-list" style={styles.fixtureList}>
           {upcomingFixtures.map((fixture, index) => (
-            <div key={index} style={styles.fixtureCard}>
+            <div key={index} className="fixture-card" style={styles.fixtureCard}>
               <div style={styles.fixtureTop}>
                 <span style={styles.competition}>
                   {fixture.competition}
@@ -67,7 +67,7 @@ export default function Fixtures() {
                 <span style={styles.date}>{fixture.date}</span>
               </div>
 
-              <div style={styles.teams}>
+              <div className="fixture-teams" style={styles.teams}>
                 <div style={styles.team}>
                   <span style={styles.teamName}>{fixture.home}</span>
                   <span style={styles.homeAway}>HOME</span>
@@ -133,6 +133,24 @@ export default function Fixtures() {
 
         <div style={styles.copyright}>© 2026 BCFC London</div>
       </footer>
+            <style>{`
+  @media (max-width: 768px) {
+    .fixture-card {
+      padding: 20px !important;
+      box-sizing: border-box !important;
+      width: 100% !important;
+      overflow: hidden !important;
+    }
+
+    .fixture-teams {
+      gap: 10px !important;
+    }
+
+    .fixture-teams > div {
+      min-width: 0 !important;
+    }
+  }
+`}</style>
     </main>
   );
 }
