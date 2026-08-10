@@ -25,7 +25,7 @@ const [availabilityMessage, setAvailabilityMessage] = useState("");
 
       if (user) {
   const { data: playerData, error: playerError } = await supabase
-    .from("players")
+    .from("Players")
     .select("*")
   .eq("user_id", user.id)
     .single();
