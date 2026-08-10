@@ -148,32 +148,38 @@ export default function Fixtures() {
   }
 
   .fixture-teams {
-    display: flex !important;
-    flex-direction: column !important;
-    align-items: center !important;
-    gap: 16px !important;
-    width: 100% !important;
-  }
+  display: grid !important;
+  grid-template-columns: 1fr 70px 1fr !important;
+  gap: 10px !important;
+  align-items: center !important;
+  width: 100% !important;
+}
 
-  .fixture-teams > div {
-    width: 100% !important;
-    min-width: 0 !important;
-    height: auto !important;
-    min-height: 0 !important;
-    text-align: center !important;
-  }
+.fixture-teams > div {
+  min-width: 0 !important;
+  width: auto !important;
+}
 
-  .fixture-teams > div:nth-child(2) {
-    width: 82px !important;
-    height: 82px !important;
-    min-width: 82px !important;
-    min-height: 82px !important;
-    margin: 0 auto !important;
-  }
+.fixture-teams > div:first-child {
+  text-align: center !important;
+}
 
-  .fixture-teams strong {
-    font-size: 18px !important;
-  }
+.fixture-teams > div:nth-child(2) {
+  width: 70px !important;
+  height: 70px !important;
+  min-width: 70px !important;
+  min-height: 70px !important;
+  margin: 0 !important;
+  font-size: 14px !important;
+}
+
+.fixture-teams > div:last-child {
+  text-align: center !important;
+}
+
+.fixture-teams strong {
+  font-size: 15px !important;
+}
 }
 `}</style>
     </main>
@@ -392,24 +398,28 @@ const styles = {
   },
 
   emptyResults: {
-    marginTop: "30px",
-    background: "white",
-    padding: "50px",
-    borderRadius: "10px",
-    textAlign: "center",
-    border: "1px solid #e5e5e5",
-  },
+  marginTop: "24px",
+  background: "white",
+  padding: "28px 20px",
+  borderRadius: "10px",
+  textAlign: "center",
+  border: "1px solid #e5e5e5",
+},
 
-  emptyScore: {
-    color: "#df1e2f",
-    fontSize: "40px",
-    fontWeight: "900",
-  },
+ emptyScore: {
+  color: "#171717",
+  fontSize: "26px",
+  fontWeight: "900",
+  lineHeight: "1.2",
+},
 
   emptyTitle: {
-    fontSize: "24px",
-    margin: "15px 0 5px",
-  },
+  fontSize: "16px",
+  margin: "12px 0 6px",
+  color: "#777",
+  textTransform: "uppercase",
+  letterSpacing: "1px",
+},
 
   emptyText: {
     color: "#777",
