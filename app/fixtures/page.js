@@ -1,14 +1,6 @@
 export default function Fixtures() {
   const upcomingFixtures = [
-    {
-      competition: "Friendly",
-      date: "Sunday 9 August 2026",
-      time: "14:00",
-      home: "Aberdeen",
-      away: "Bristol City",
-      venue: "Prince George's Playing Fields, Raynes Park",
-      note: "THE SCOTTY MURRAY DERBY",
-    },
+    
     {
       competition: "Friendly",
       date: "Sunday 16 August 2026",
@@ -143,13 +135,35 @@ export default function Fixtures() {
     }
 
     .fixture-teams {
-      gap: 10px !important;
-    }
+  display: grid !important;
+  grid-template-columns: minmax(0, 1fr) 90px minmax(0, 1fr) !important;
+  gap: 8px !important;
+  align-items: center !important;
+}
 
-    .fixture-teams > div {
-      min-width: 0 !important;
-    }
+.fixture-teams > div {
+  min-width: 0 !important;
+}
+
+.fixture-teams > div:first-child {
+  text-align: left !important;
+}
+
+.fixture-teams > div:last-child {
+  text-align: right !important;
+}
+
+.fixture-teams strong {
+  font-size: 18px !important;
+}
   }
+  .fixture-teams > div:nth-child(2) {
+  width: 90px !important;
+  height: 90px !important;
+  min-width: 90px !important;
+  min-height: 90px !important;
+  font-size: 16px !important;
+}
 `}</style>
     </main>
   );
