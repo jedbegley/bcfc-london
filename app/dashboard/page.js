@@ -40,6 +40,18 @@ if (user) {
   } else {
     setPlayer(playerData);
     setIsAdmin(playerData.is_admin === true);
+    const { data: savedAvailability, error: savedAvailabilityError } = await supabase
+  .from("availability")
+  .select("status")
+  .eq("player_id", playerData.id)
+  .eq("match_id", 2)
+  .maybeSingle();
+
+if (savedAvailabilityError) {
+  console.log("SAVED AVAILABILITY ERROR:", savedAvailabilityError);
+} else if (savedAvailability) {
+  setAvailability(savedAvailability.status);
+}
     if (playerData.is_admin === true) {
   const { data: playersData, error: playersError } = await supabase
     .from("Players")
