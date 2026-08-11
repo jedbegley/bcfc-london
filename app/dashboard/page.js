@@ -14,6 +14,7 @@ export default function DashboardPage() {
   const [player, setPlayer] = useState(null);
 const [availability, setAvailability] = useState("");
 const [availabilityMessage, setAvailabilityMessage] = useState("");
+  const [isAdmin, setIsAdmin] = useState(false);
 
   useEffect(() => {
     async function checkUser() {
@@ -34,6 +35,7 @@ const [availabilityMessage, setAvailabilityMessage] = useState("");
     console.log("PLAYER ERROR:", playerError);
   } else {
     setPlayer(playerData);
+    setIsAdmin(playerData.is_admin === true);
   }
 }
       
@@ -179,6 +181,16 @@ const [availabilityMessage, setAvailabilityMessage] = useState("");
 </div>
         </div>
 
+  {isAdmin && (
+  <div style={styles.adminCard}>
+    <div style={styles.matchLabel}>MANAGER VIEW</div>
+    <h2 style={{ marginTop: "10px" }}>Squad Availability</h2>
+    <p style={styles.text}>
+      Admin availability summary coming next...
+    </p>
+  </div>
+)}
+  
         <a href="/" style={styles.backLink}>
           ← Back to BCFC London
         </a>
@@ -317,4 +329,13 @@ unavailableButton: {
   cursor: "pointer",
   fontSize: "15px",
 },
+  
+  adminCard: {
+  marginTop: "30px",
+  border: "1px solid #ddd",
+  borderRadius: "12px",
+  padding: "25px",
+  background: "#fafafa",
+},
+  
 };
