@@ -144,27 +144,69 @@ const [availabilityMessage, setAvailabilityMessage] = useState("");
       flexWrap: "wrap",
     }}
   >
-  <button
+ <button
   onClick={() => saveAvailability("available")}
-  style={styles.availableButton}
+  style={{
+    ...styles.availableButton,
+    opacity: availability && availability !== "available" ? 0.45 : 1,
+    transform: availability === "available" ? "scale(1.05)" : "scale(1)",
+    boxShadow:
+      availability === "available"
+        ? "0 0 0 4px rgba(31, 143, 78, 0.25)"
+        : "none",
+  }}
 >
-      ✓ Available
-    </button>
+  {availability === "available" ? "✓ SELECTED — AVAILABLE" : "✓ Available"}
+</button>
 
 <button
   onClick={() => saveAvailability("maybe")}
-  style={styles.maybeButton}
+  style={{
+    ...styles.maybeButton,
+    opacity: availability && availability !== "maybe" ? 0.45 : 1,
+    transform: availability === "maybe" ? "scale(1.05)" : "scale(1)",
+    boxShadow:
+      availability === "maybe"
+        ? "0 0 0 4px rgba(229, 165, 10, 0.25)"
+        : "none",
+  }}
 >
-      ? Maybe
-    </button>
+  {availability === "maybe" ? "? SELECTED — MAYBE" : "? Maybe"}
+</button>
 
- <button
+<button
   onClick={() => saveAvailability("unavailable")}
-  style={styles.unavailableButton}
+  style={{
+    ...styles.unavailableButton,
+    opacity: availability && availability !== "unavailable" ? 0.45 : 1,
+    transform: availability === "unavailable" ? "scale(1.05)" : "scale(1)",
+    boxShadow:
+      availability === "unavailable"
+        ? "0 0 0 4px rgba(227, 27, 35, 0.25)"
+        : "none",
+  }}
 >
-      ✕ Unavailable
-    </button>
+  {availability === "unavailable"
+    ? "✕ SELECTED — UNAVAILABLE"
+    : "✕ Unavailable"}
+</button>
   </div>
+
+{availability && (
+  <div
+    style={{
+      marginTop: "20px",
+      padding: "12px 16px",
+      background: "#f4f4f4",
+      borderRadius: "6px",
+      fontWeight: "900",
+      fontSize: "14px",
+      textAlign: "center",
+    }}
+  >
+    YOUR RESPONSE: {availability.toUpperCase()}
+  </div>
+)}
 
     {availabilityMessage && (
   <p
