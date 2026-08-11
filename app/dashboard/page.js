@@ -15,6 +15,8 @@ export default function DashboardPage() {
 const [availability, setAvailability] = useState("");
 const [availabilityMessage, setAvailabilityMessage] = useState("");
   const [isAdmin, setIsAdmin] = useState(false);
+  const [allPlayers, setAllPlayers] = useState([]);
+const [allAvailability, setAllAvailability] = useState([]);
 
   useEffect(() => {
     async function checkUser() {
@@ -36,6 +38,29 @@ const [availabilityMessage, setAvailabilityMessage] = useState("");
   } else {
     setPlayer(playerData);
     setIsAdmin(playerData.is_admin === true);
+    if (playerData.is_admin === true) {
+  const { data: playersData, error: playersError } = await supabase
+    .from("Players")
+    .select("*")
+    .order("full_name");
+
+  const { data: availabilityData, error: availabilityError } = await supabase
+    .from("availability")
+    .select("*")
+    .eq("match_id", 2);
+
+  if (playersError) {
+    console.log("ADMIN PLAYERS ERROR:", playersError);
+  } else {
+    setAllPlayers(playersData || []);
+  }
+
+  if (availabilityError) {
+    console.log("ADMIN AVAILABILITY ERROR:", availabilityError);
+  } else {
+    setAllAvailability(availabilityData || []);
+  }
+}
   }
 }
       
@@ -227,9 +252,56 @@ const [availabilityMessage, setAvailabilityMessage] = useState("");
   <div style={styles.adminCard}>
     <div style={styles.matchLabel}>MANAGER VIEW</div>
     <h2 style={{ marginTop: "10px" }}>Squad Availability</h2>
-    <p style={styles.text}>
-      Admin availability summary coming next...
-    </p>
+
+    {["available", "maybe", "unavailable"].map((status) => {
+      const playersForStatus = allPlayers.filter((p) =>
+        allAvailability.some(
+          (a) => a.player_id === p.id && a.status === status
+        )
+      );
+
+      return (
+        <div key={status} style={{ marginTop: "20px" }}>
+          <h3 style={{ textTransform: "capitalize", marginBottom: "8px" }}>
+            {status} ({playersForStatus.length})
+          </h3>
+
+          {playersForStatus.length === 0 ? (
+            <p style={styles.text}>No players</p>
+          ) : (
+            playersForStatus.map((p) => (
+              <div key={p.id} style={{ marginBottom: "6px" }}>
+                {p.full_name}
+              </div>
+            ))
+          )}
+        </div>
+      );
+    })}
+
+    <div style={{ marginTop: "20px" }}>
+      <h3 style={{ marginBottom: "8px" }}>
+        No Response (
+        {
+          allPlayers.filter(
+            (p) =>
+              !allAvailability.some((a) => a.player_id === p.id)
+          ).length
+        }
+        )
+      </h3>
+
+      {allPlayers
+        .filter(
+          (p) =>
+            !allAvailability.some((a) => a.player_id === p.id)
+        )
+        .map((p) => (
+          <div key={p.id} style={{ marginBottom: "6px" }}>
+            {p.full_name}
+          </div>
+        ))}
+    </div>
   </div>
 )}
   
