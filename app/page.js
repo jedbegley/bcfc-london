@@ -1,160 +1,194 @@
 export default function Home() {
   const quickLinks = [
-    { title: "Fixtures & Results", text: "Upcoming games and latest scores", icon: "⚽" },
-    { title: "News", text: "Match reports, signings and club updates", icon: "📰" },
-    { title: "Squad", text: "Meet the BCFC London squad", icon: "👕" },
-    { title: "Stats", text: "Goals, assists, appearances and fantasy points", icon: "📊" },
+    {
+      title: "Fixtures & Results",
+      text: "Upcoming games and latest scores",
+      icon: "⚽",
+      href: "/fixtures",
+    },
+    {
+      title: "News",
+      text: "Match reports, signings and club updates",
+      icon: "📰",
+      href: "/news",
+    },
+    {
+      title: "Squad",
+      text: "Meet the BCFC London squad",
+      icon: "👕",
+      href: "/squad",
+    },
+    {
+      title: "Stats",
+      text: "Goals, assists, appearances and fantasy points",
+      icon: "📊",
+      href: "/stats",
+    },
   ];
 
   return (
     <main style={styles.page}>
       <header style={styles.header}>
-       <div style={styles.headerBrand}>
-  <img
-    src="/374fadec-093f-4e7e-9f54-01c06a034caa.jpeg"
-    alt="BCFC London badge"
-    style={styles.headerBadge}
-  />
-  <div>
-    <div style={styles.clubName}>BRISTOL CITY</div>
-    <div style={styles.clubSub}>LONDON SUPPORTERS FC</div>
-  </div>
-</div>
+        <div style={styles.headerBrand}>
+          <img
+            src="/374fadec-093f-4e7e-9f54-01c06a034caa.jpeg"
+            alt="BCFC London badge"
+            style={styles.headerBadge}
+          />
 
-       <nav style={styles.nav}>
-  <a href="/" style={styles.navLink}>Home</a>
-  <a href="/news" style={styles.navLink}>News</a>
-  <a href="/fixtures" style={styles.navLink}>Fixtures</a>
-  <a href="/squad" style={styles.navLink}>Squad</a>
-  <a href="/stats" style={styles.navLink}>Stats</a>
-<a href="/dashboard" style={styles.loginButton}>Player Portal</a>
-</nav>
+          <div>
+            <div style={styles.clubName}>BRISTOL CITY</div>
+            <div style={styles.clubSub}>LONDON SUPPORTERS FC</div>
+          </div>
+        </div>
+
+        <nav style={styles.nav}>
+          <a href="/" style={styles.navLink}>Home</a>
+          <a href="/news" style={styles.navLink}>News</a>
+          <a href="/fixtures" style={styles.navLink}>Fixtures</a>
+          <a href="/squad" style={styles.navLink}>Squad</a>
+          <a href="/stats" style={styles.navLink}>Stats</a>
+          <a href="/dashboard" style={styles.loginButton}>Player Portal</a>
+        </nav>
       </header>
 
       <section className="hero-section" style={styles.hero}>
-        <div style={styles.heroContent}>
+        <div className="hero-content" style={styles.heroContent}>
           <div style={styles.eyebrow}>LATEST NEWS</div>
 
-<h1 style={styles.latestTitle}>
-  Aberdeen 0–3 Bristol City
-</h1>
+          <h1 style={styles.latestTitle}>
+            Aberdeen 0–3 Bristol City
+          </h1>
 
-<p style={styles.latestSummary}>
-  First-half goals from Bellamy, Hayes and Nathaniel secured a convincing
-  pre-season victory in scorching conditions at Raynes Park.
-</p>
+          <p style={styles.latestSummary}>
+            First-half goals from Bellamy, Hayes and Nathaniel secured a
+            convincing pre-season victory in scorching conditions at Raynes Park.
+          </p>
 
-<a
-  href="/news"
-  style={{
-    ...styles.friendlyTag,
-    display: "block",
-    width: "100%",
-    textAlign: "center",
-    textDecoration: "none",
-    boxSizing: "border-box",
-  }}
->
-  READ MATCH REPORT
-</a>
-        </div>
-<div className="latest-image-wrap" style={styles.latestImageWrap}>
-  <img
-  className="latest-image"
-  src="/IMG_5497.jpeg"
-  alt="Bristol City London Supporters FC team after the Aberdeen match"
-  style={styles.latestImage}
-/>
-</div>
-    <div className="match-cards-row" style={styles.matchCardsRow}>
-    <div style={styles.matchCard}>
-  <div style={styles.matchLabel}>LATEST RESULT</div>
-  <div style={styles.competition}>PRE-SEASON FRIENDLY</div>
-
-  <div style={styles.teams}>
-    <div style={styles.team}>
-      <div style={styles.aberdeenBadge}>AFC</div>
-      <strong>Aberdeen</strong>
-      <span style={styles.homeAway}>HOME</span>
-    </div>
-
-    <div style={styles.versus}>
-      <div style={{ fontSize: "34px", fontWeight: "900", color: "#111" }}>
-        0–3
-      </div>
-      <div style={{ fontSize: "11px", fontWeight: "900", marginTop: "6px" }}>
-        FULL TIME
-      </div>
-    </div>
-
-    <div style={styles.team}>
-      <img
-        src="/374fadec-093f-4e7e-9f54-01c06a034caa.jpeg"
-        alt="Bristol City"
-        style={styles.fixtureBadge}
-      />
-      <strong>Bristol City</strong>
-      <span style={styles.homeAway}>AWAY</span>
-    </div>
-  </div>
-
-  <div style={styles.matchInfo}>
-    <strong>Sunday 9 August 2026</strong>
-    <span>Prince George&apos;s Playing Fields, Raynes Park</span>
-    <span>⚽ Bellamy · Hayes · Nathaniel</span>
-  </div>
-
- <a
-  href="/news"
-  style={{
-    ...styles.friendlyTag,
-    display: "block",
-    width: "100%",
-    textAlign: "center",
-    textDecoration: "none",
-    boxSizing: "border-box",
-  }}
->
-  READ MATCH REPORT
-</a>
-</div>
-
-
-<div style={styles.matchCard}>
-  <div style={styles.matchLabel}>NEXT MATCH</div>
-  <div style={styles.competition}>FRIENDLY</div>
-
-  <div style={styles.teams}>
-    <div style={styles.team}>
-      <div style={styles.aberdeenBadge}>ST</div>
-      <strong>Shepherd&apos;s Tuesday</strong>
-      <span style={styles.homeAway}>HOME</span>
-    </div>
-
-    <div style={styles.versus}>VS</div>
-
-    <div style={styles.team}>
-      <img
-        src="/374fadec-093f-4e7e-9f54-01c06a034caa.jpeg"
-        alt="Bristol City"
-        style={styles.fixtureBadge}
-      />
-      <strong>Bristol City</strong>
-      <span style={styles.homeAway}>AWAY</span>
-    </div>
-  </div>
-
-  <div style={styles.matchInfo}>
-    <strong>Sunday 16 August 2026</strong>
-    <span>10:15 Kick Off</span>
-    <span>Burgess Park</span>
-  </div>
-
-  <div style={styles.friendlyTag}>PRE-SEASON FRIENDLY</div>
-</div>
+          <a
+            href="/news"
+            style={{
+              ...styles.friendlyTag,
+              display: "block",
+              width: "100%",
+              textAlign: "center",
+              textDecoration: "none",
+              boxSizing: "border-box",
+            }}
+          >
+            READ MATCH REPORT
+          </a>
         </div>
 
-        </section>
+        <div className="latest-image-wrap" style={styles.latestImageWrap}>
+          <img
+            className="latest-image"
+            src="/IMG_5497.jpeg"
+            alt="Bristol City London Supporters FC team after the Aberdeen match"
+            style={styles.latestImage}
+          />
+        </div>
+
+        <div className="match-cards-row" style={styles.matchCardsRow}>
+          <div style={styles.matchCard}>
+            <div style={styles.matchLabel}>LATEST RESULT</div>
+            <div style={styles.competition}>PRE-SEASON FRIENDLY</div>
+
+            <div style={styles.teams}>
+              <div style={styles.team}>
+                <div style={styles.aberdeenBadge}>AFC</div>
+                <strong>Aberdeen</strong>
+                <span style={styles.homeAway}>HOME</span>
+              </div>
+
+              <div style={styles.versus}>
+                <div
+                  style={{
+                    fontSize: "34px",
+                    fontWeight: "900",
+                    color: "#111",
+                  }}
+                >
+                  0–3
+                </div>
+
+                <div
+                  style={{
+                    fontSize: "11px",
+                    fontWeight: "900",
+                    marginTop: "6px",
+                  }}
+                >
+                  FULL TIME
+                </div>
+              </div>
+
+              <div style={styles.team}>
+                <img
+                  src="/374fadec-093f-4e7e-9f54-01c06a034caa.jpeg"
+                  alt="Bristol City"
+                  style={styles.fixtureBadge}
+                />
+                <strong>Bristol City</strong>
+                <span style={styles.homeAway}>AWAY</span>
+              </div>
+            </div>
+
+            <div style={styles.matchInfo}>
+              <strong>Sunday 9 August 2026</strong>
+              <span>Prince George&apos;s Playing Fields, Raynes Park</span>
+              <span>⚽ Bellamy · Hayes · Nathaniel</span>
+            </div>
+
+            <a
+              href="/news"
+              style={{
+                ...styles.friendlyTag,
+                display: "block",
+                width: "100%",
+                textAlign: "center",
+                textDecoration: "none",
+                boxSizing: "border-box",
+              }}
+            >
+              READ MATCH REPORT
+            </a>
+          </div>
+
+          <div style={styles.matchCard}>
+            <div style={styles.matchLabel}>NEXT MATCH</div>
+            <div style={styles.competition}>FRIENDLY</div>
+
+            <div style={styles.teams}>
+              <div style={styles.team}>
+                <div style={styles.aberdeenBadge}>ST</div>
+                <strong>Shepherd&apos;s Tuesday</strong>
+                <span style={styles.homeAway}>HOME</span>
+              </div>
+
+              <div style={styles.versus}>VS</div>
+
+              <div style={styles.team}>
+                <img
+                  src="/374fadec-093f-4e7e-9f54-01c06a034caa.jpeg"
+                  alt="Bristol City"
+                  style={styles.fixtureBadge}
+                />
+                <strong>Bristol City</strong>
+                <span style={styles.homeAway}>AWAY</span>
+              </div>
+            </div>
+
+            <div style={styles.matchInfo}>
+              <strong>Sunday 16 August 2026</strong>
+              <span>10:15 Kick Off</span>
+              <span>Burgess Park</span>
+            </div>
+
+            <div style={styles.friendlyTag}>PRE-SEASON FRIENDLY</div>
+          </div>
+        </div>
+      </section>
 
       <section style={styles.quickSection}>
         <div style={styles.sectionHeading}>
@@ -173,9 +207,14 @@ export default function Home() {
           {quickLinks.map((item) => (
             <div key={item.title} style={styles.quickCard}>
               <div style={styles.icon}>{item.icon}</div>
+
               <h3 style={styles.cardTitle}>{item.title}</h3>
+
               <p style={styles.cardText}>{item.text}</p>
-              <div style={styles.cardLink}>Explore →</div>
+
+              <a href={item.href} style={styles.cardLink}>
+                Explore →
+              </a>
             </div>
           ))}
         </div>
@@ -187,13 +226,16 @@ export default function Home() {
           <h2 style={styles.newsTitle}>News, reports and announcements</h2>
         </div>
 
-        <button style={styles.whiteButton}>View all news</button>
+        <a href="/news" style={styles.whiteButton}>
+          View all news
+        </a>
       </section>
 
       <footer style={styles.footer}>
         <div style={styles.footerTop}>
           <div>
             <strong>Bristol City London Supporters FC</strong>
+
             <div style={styles.footerSmall}>
               London-based Bristol City supporters football club.
             </div>
@@ -201,6 +243,7 @@ export default function Home() {
 
           <div style={styles.sponsorBlock}>
             <div style={styles.sponsorLabel}>PROUDLY SPONSORED BY</div>
+
             <img
               src="/IMG_1146.jpeg"
               alt="DUZZ Sports"
@@ -211,39 +254,41 @@ export default function Home() {
           <div style={styles.footerSmall}>© 2026 BCFC London</div>
         </div>
       </footer>
-          <style>{`
-  @media (max-width: 768px) {
-    .hero-section {
-      display: block !important;
-      padding: 48px 6% !important;
-    }
 
-    .latest-image-wrap {
-      width: 100% !important;
-      max-width: none !important;
-      justify-self: stretch !important;
-      margin-top: 28px;
-    }
+      <style>{`
+        @media (max-width: 768px) {
+          .hero-section {
+            display: block !important;
+            padding: 48px 6% !important;
+          }
 
-    .latest-image {
-      width: 100% !important;
-      height: auto !important;
-      max-height: none !important;
-      object-fit: cover !important;
-      border-radius: 12px !important;
-    }
-    .match-cards-row {
-  display: block !important;
-}
+          .latest-image-wrap {
+            width: 100% !important;
+            max-width: none !important;
+            justify-self: stretch !important;
+            margin-top: 28px;
+          }
 
-.match-cards-row > div {
-  width: calc(100% - 24px) !important;
-  max-width: 100% !important;
-  margin: 0 auto 24px auto !important;
-  box-sizing: border-box !important;
-}
-  }
-`}</style>
+          .latest-image {
+            width: 100% !important;
+            height: auto !important;
+            max-height: none !important;
+            object-fit: cover !important;
+            border-radius: 12px !important;
+          }
+
+          .match-cards-row {
+            display: block !important;
+          }
+
+          .match-cards-row > div {
+            width: calc(100% - 24px) !important;
+            max-width: 100% !important;
+            margin: 0 auto 24px auto !important;
+            box-sizing: border-box !important;
+          }
+        }
+      `}</style>
     </main>
   );
 }
@@ -267,11 +312,18 @@ const styles = {
     flexWrap: "wrap",
     gap: "20px",
   },
+
+  headerBrand: {
+    display: "flex",
+    alignItems: "center",
+    gap: "18px",
+  },
+
   headerBadge: {
-  width: "70px",
-  height: "70px",
-  objectFit: "contain",
-},
+    width: "70px",
+    height: "70px",
+    objectFit: "contain",
+  },
 
   clubName: {
     fontWeight: "900",
@@ -296,12 +348,13 @@ const styles = {
     flexWrap: "wrap",
   },
 
-navLink: {
-  textDecoration: "none",
-  color: "#111",
-  fontSize: "14px",
-  fontWeight: "700",
-},
+  navLink: {
+    textDecoration: "none",
+    color: "#111",
+    fontSize: "14px",
+    fontWeight: "700",
+  },
+
   loginButton: {
     background: "#e31b23",
     color: "white",
@@ -310,34 +363,39 @@ navLink: {
     borderRadius: "6px",
     fontWeight: "800",
     cursor: "pointer",
+    textDecoration: "none",
   },
 
- hero: {
-  background: "#151515",
-  color: "white",
-  padding: "70px 6%",
-  display: "grid",
-  gridTemplateColumns: "1.3fr 0.7fr",
-  gap: "50px",
-  alignItems: "center",
-},
+  hero: {
+    background: "#151515",
+    color: "white",
+    padding: "70px 6%",
+    display: "grid",
+    gridTemplateColumns: "0.8fr 1.2fr",
+    gap: "50px",
+    alignItems: "center",
+  },
 
   heroContent: {
     maxWidth: "720px",
+    order: 2,
   },
-latestImageWrap: {
-  width: "100%",
-  maxWidth: "520px",
-  justifySelf: "end",
-},
 
-latestImage: {
-  width: "100%",
-  height: "300px",
-  objectFit: "cover",
-  borderRadius: "12px",
-  display: "block",
-},
+  latestImageWrap: {
+    width: "100%",
+    maxWidth: "520px",
+    justifySelf: "start",
+    order: 1,
+  },
+
+  latestImage: {
+    width: "100%",
+    height: "300px",
+    objectFit: "cover",
+    borderRadius: "12px",
+    display: "block",
+  },
+
   eyebrow: {
     color: "#e31b23",
     fontSize: "13px",
@@ -345,93 +403,42 @@ latestImage: {
     fontWeight: "900",
     marginBottom: "16px",
   },
+
   latestTitle: {
-  fontSize: "48px",
-  lineHeight: "1.05",
-  fontWeight: "900",
-  margin: "0 0 20px 0",
-  maxWidth: "750px",
-},
+    fontSize: "48px",
+    lineHeight: "1.05",
+    fontWeight: "900",
+    margin: "0 0 20px 0",
+    maxWidth: "750px",
+  },
 
-latestSummary: {
-  fontSize: "18px",
-  lineHeight: "1.6",
-  color: "#dddddd",
-  maxWidth: "650px",
-  margin: "0 0 28px 0",
-},
-
-newsButton: {
-  display: "inline-block",
-  background: "#e31b23",
-  color: "white",
-  textDecoration: "none",
-  padding: "14px 22px",
-  borderRadius: "6px",
-  fontWeight: "900",
-  fontSize: "14px",
-},
-
-heroBadge: {
-  width: "120px",
-  height: "120px",
-  objectFit: "contain",
-  borderRadius: "50%",
-  display: "block",
-  margin: "0 auto 12px 0",
-},
-
-  heroText: {
-    color: "#d3d3d3",
-    lineHeight: "1.7",
+  latestSummary: {
     fontSize: "18px",
+    lineHeight: "1.6",
+    color: "#dddddd",
     maxWidth: "650px",
+    margin: "0 0 28px 0",
   },
 
-  heroButtons: {
-    display: "flex",
-    gap: "12px",
-    marginTop: "30px",
-    flexWrap: "wrap",
+  matchCardsRow: {
+    gridColumn: "1 / -1",
+    display: "grid",
+    gridTemplateColumns: "1fr 1fr",
+    gap: "24px",
+    width: "100%",
+    maxWidth: "1200px",
+    margin: "15px auto 0",
+    order: 3,
   },
 
-  primaryButton: {
-    background: "#e31b23",
-    color: "white",
-    textDecoration: "none",
-    border: 0,
-    padding: "15px 22px",
-    borderRadius: "6px",
-    fontWeight: "900",
-    cursor: "pointer",
-  },
-
-  secondaryButton: {
-    background: "transparent",
-    color: "white",
-    border: "1px solid #555",
-    padding: "15px 22px",
-    borderRadius: "6px",
-    fontWeight: "900",
-    cursor: "pointer",
-  },
-
-matchCardsRow: {
-  gridColumn: "1 / -1",
-  display: "grid",
-  gridTemplateColumns: "1fr 1fr",
-  gap: "24px",
-  width: "100%",
-  maxWidth: "1200px",
-  margin: "15px auto 0",
-}, 
   matchCard: {
-  background: "white",
-  color: "#111",
-  borderRadius: "14px",
-  padding: "30px",
-  boxShadow: "0 25px 60px rgba(0,0,0,0.25)",
-},
+    background: "white",
+    color: "#111",
+    borderRadius: "14px",
+    padding: "30px",
+    boxShadow: "0 25px 60px rgba(0,0,0,0.25)",
+  },
+
   matchLabel: {
     fontSize: "12px",
     letterSpacing: "2px",
@@ -571,9 +578,11 @@ matchCardsRow: {
   },
 
   cardLink: {
+    display: "inline-block",
     color: "#e31b23",
     marginTop: "20px",
     fontWeight: "900",
+    textDecoration: "none",
   },
 
   newsStrip: {
@@ -600,13 +609,14 @@ matchCardsRow: {
   },
 
   whiteButton: {
+    display: "inline-block",
     background: "white",
     color: "#e31b23",
-    border: 0,
     borderRadius: "6px",
     padding: "14px 20px",
     fontWeight: "900",
     cursor: "pointer",
+    textDecoration: "none",
   },
 
   footer: {
