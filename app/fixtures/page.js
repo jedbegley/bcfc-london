@@ -1,17 +1,4 @@
 export default function Fixtures() {
-  const upcomingFixtures = [
-    
-    {
-      competition: "Friendly",
-      date: "Sunday 16 August 2026",
-      time: "10:15",
-      home: "Shepherd's Tuesday",
-      away: "Bristol City",
-      venue: "Burgess Park",
-      note: "FRIENDLY",
-    },
-  ];
-
   return (
     <main style={styles.page}>
       {/* HEADER */}
@@ -35,82 +22,123 @@ export default function Fixtures() {
         <p style={styles.eyebrow}>2026/27</p>
         <h1 style={styles.title}>Fixtures & Results</h1>
         <p style={styles.intro}>
-          Follow Bristol City throughout the season. fixtures,
-          results and match details all in one place.
+          Keep up with upcoming fixtures, results and match details for
+          Bristol City London Supporters FC.
         </p>
       </section>
 
-      {/* UPCOMING FIXTURES */}
-      <section style={styles.content}>
-        <div style={styles.sectionHeading}>
-          <div>
-            <p style={styles.redLabel}>NEXT UP</p>
-            <h2 style={styles.heading}>Upcoming Fixtures</h2>
-          </div>
-        </div>
+      {/* UPCOMING */}
+      <section style={styles.section}>
+        <p style={styles.redLabel}>NEXT UP</p>
+        <h2 style={styles.heading}>Upcoming Fixtures</h2>
 
-        <div className="fixture-list" style={styles.fixtureList}>
-          {upcomingFixtures.map((fixture, index) => (
-            <div key={index} className="fixture-card" style={styles.fixtureCard}>
-              <div style={styles.fixtureTop}>
-                <span style={styles.competition}>
-                  {fixture.competition}
-                </span>
-                <span style={styles.date}>{fixture.date}</span>
+        <div style={styles.cardWrap}>
+          <div style={styles.matchCard}>
+            <div style={styles.matchLabel}>NEXT MATCH</div>
+            <div style={styles.competition}>FRIENDLY</div>
+
+            <div style={styles.teams}>
+              <div style={styles.team}>
+                <div style={styles.aberdeenBadge}>ST</div>
+                <strong>Shepherd&apos;s Tuesday</strong>
+                <span style={styles.homeAway}>HOME</span>
               </div>
 
-              <div className="fixture-teams" style={styles.teams}>
-                <div style={styles.team}>
-                  <span style={styles.teamName}>{fixture.home}</span>
-                  <span style={styles.homeAway}>HOME</span>
-                </div>
+              <div style={styles.versus}>VS</div>
 
-                <div style={styles.kickoff}>
-                  <strong>{fixture.time}</strong>
-                  <span style={styles.vs}>VS</span>
-                </div>
-
-                <div style={styles.team}>
-                  <span style={styles.teamName}>{fixture.away}</span>
-                  <span style={styles.homeAway}>AWAY</span>
-                </div>
-              </div>
-
-              <div style={styles.fixtureBottom}>
-                <span>{fixture.venue}</span>
-                <strong style={styles.note}>{fixture.note}</strong>
+              <div style={styles.team}>
+                <img
+                  src="/374fadec-093f-4e7e-9f54-01c06a034caa.jpeg"
+                  alt="Bristol City"
+                  style={styles.fixtureBadge}
+                />
+                <strong>Bristol City</strong>
+                <span style={styles.homeAway}>AWAY</span>
               </div>
             </div>
-          ))}
+
+            <div style={styles.matchInfo}>
+              <strong>Sunday 16 August 2026</strong>
+              <span>10:15 Kick Off</span>
+              <span>Burgess Park</span>
+            </div>
+
+            <div style={styles.friendlyTag}>PRE-SEASON FRIENDLY</div>
+          </div>
         </div>
       </section>
 
       {/* RESULTS */}
       <section style={styles.resultsSection}>
-        <div style={styles.content}>
+        <div style={styles.section}>
           <p style={styles.redLabel}>2026/27</p>
           <h2 style={styles.heading}>Results</h2>
 
-         <div style={styles.emptyResults}>
-  <div style={styles.emptyScore}>Aberdeen 0 – 3 Bristol City</div>
-  <h3 style={styles.emptyTitle}>Pre-season Friendly</h3>
-  <p style={styles.emptyText}>
-    Sunday 9 August 2026 · Prince George&apos;s Playing Fields, Raynes Park
-  </p>
+          <div style={styles.cardWrap}>
+            <div style={styles.matchCard}>
+              <div style={styles.matchLabel}>LATEST RESULT</div>
+              <div style={styles.competition}>PRE-SEASON FRIENDLY</div>
 
-  <a
-    href="/news"
-    style={{
-      display: "inline-block",
-      marginTop: "14px",
-      color: "#df1e2f",
-      fontWeight: "900",
-      textDecoration: "none",
-    }}
-  >
-    Read match report →
-  </a>
-</div>
+              <div style={styles.teams}>
+                <div style={styles.team}>
+                  <div style={styles.aberdeenBadge}>AFC</div>
+                  <strong>Aberdeen</strong>
+                  <span style={styles.homeAway}>HOME</span>
+                </div>
+
+                <div style={styles.versus}>
+                  <div
+                    style={{
+                      fontSize: "34px",
+                      fontWeight: "900",
+                      color: "#111",
+                    }}
+                  >
+                    0–3
+                  </div>
+                  <div
+                    style={{
+                      fontSize: "11px",
+                      fontWeight: "900",
+                      marginTop: "6px",
+                    }}
+                  >
+                    FULL TIME
+                  </div>
+                </div>
+
+                <div style={styles.team}>
+                  <img
+                    src="/374fadec-093f-4e7e-9f54-01c06a034caa.jpeg"
+                    alt="Bristol City"
+                    style={styles.fixtureBadge}
+                  />
+                  <strong>Bristol City</strong>
+                  <span style={styles.homeAway}>AWAY</span>
+                </div>
+              </div>
+
+              <div style={styles.matchInfo}>
+                <strong>Sunday 9 August 2026</strong>
+                <span>Prince George&apos;s Playing Fields, Raynes Park</span>
+                <span>⚽ Bellamy · Hayes · Nathaniel</span>
+              </div>
+
+              <a
+                href="/news"
+                style={{
+                  ...styles.friendlyTag,
+                  display: "block",
+                  width: "100%",
+                  textAlign: "center",
+                  textDecoration: "none",
+                  boxSizing: "border-box",
+                }}
+              >
+                READ MATCH REPORT
+              </a>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -126,11 +154,9 @@ export default function Fixtures() {
         </div>
 
         <div style={styles.sponsor}>
-          <span style={styles.sponsorLabel}>
-            PROUDLY SPONSORED BY
-          </span>
+          <span style={styles.sponsorLabel}>PROUDLY SPONSORED BY</span>
           <img
-           src="/IMG_1146.jpeg"
+            src="/IMG_1146.jpeg"
             alt="DUZZ Sports"
             style={styles.sponsorLogo}
           />
@@ -138,63 +164,14 @@ export default function Fixtures() {
 
         <div style={styles.copyright}>© 2026 BCFC London</div>
       </footer>
-            <style>{`
- @media (max-width: 768px) {
-  .fixture-card {
-    padding: 22px 16px !important;
-    width: 100% !important;
-    box-sizing: border-box !important;
-    overflow: hidden !important;
-  }
 
-.fixture-teams {
-  display: grid !important;
-  grid-template-columns: 1fr 1fr !important;
-  gap: 12px 20px !important;
-  align-items: start !important;
-  width: 100% !important;
-}
-
-.fixture-teams > div:first-child {
-  grid-column: 1 !important;
-  text-align: center !important;
-  width: 100% !important;
-}
-
-.fixture-teams > div:nth-child(2) {
-  grid-column: 1 / span 2 !important;
-  grid-row: 2 !important;
-  width: auto !important;
-  height: auto !important;
-  min-width: 0 !important;
-  min-height: 0 !important;
-  background: transparent !important;
-  color: #df1e2f !important;
-  border-radius: 0 !important;
-  margin: 8px auto 0 !important;
-  font-size: 22px !important;
-  font-weight: 900 !important;
-}
-
-.fixture-teams > div:last-child {
-  grid-column: 2 !important;
-  grid-row: 1 !important;
-  text-align: center !important;
-  width: 100% !important;
-}
-
-.fixture-teams strong {
-  font-size: 22px !important;
-}
-.fixture-card {
-  text-align: center !important;
-}
-
-.fixture-card > div:first-child {
-  margin-bottom: 24px !important;
-}
-}
-`}</style>
+      <style>{`
+        @media (max-width: 768px) {
+          .fixtures-card-wrap {
+            width: 100% !important;
+          }
+        }
+      `}</style>
     </main>
   );
 }
@@ -269,7 +246,7 @@ const styles = {
 
   title: {
     fontSize: "clamp(45px, 7vw, 90px)",
-    margin: "0",
+    margin: 0,
     lineHeight: "1",
     fontWeight: "900",
   },
@@ -282,18 +259,11 @@ const styles = {
     marginTop: "25px",
   },
 
-  content: {
+  section: {
     width: "88%",
     maxWidth: "1200px",
     margin: "0 auto",
     padding: "65px 0",
-  },
-
-  sectionHeading: {
-    display: "flex",
-    justifyContent: "space-between",
-    alignItems: "end",
-    marginBottom: "30px",
   },
 
   redLabel: {
@@ -306,137 +276,109 @@ const styles = {
 
   heading: {
     fontSize: "36px",
-    margin: 0,
+    margin: "0 0 30px",
     fontWeight: "900",
   },
 
-  fixtureList: {
-    display: "grid",
-    gap: "20px",
+  cardWrap: {
+    width: "100%",
+    maxWidth: "620px",
+    margin: "0 auto",
   },
 
-  fixtureCard: {
-    border: "1px solid #ddd",
-    borderRadius: "10px",
-    overflow: "hidden",
+  matchCard: {
     background: "white",
-    boxShadow: "0 8px 25px rgba(0,0,0,0.06)",
+    color: "#111",
+    borderRadius: "14px",
+    padding: "30px",
+    boxShadow: "0 25px 60px rgba(0,0,0,0.18)",
   },
 
-  fixtureTop: {
-    padding: "15px 25px",
-    background: "#f5f5f5",
-    display: "flex",
-    justifyContent: "space-between",
-    gap: "20px",
-    flexWrap: "wrap",
+  matchLabel: {
+    fontSize: "12px",
+    letterSpacing: "2px",
+    fontWeight: "900",
+    color: "#e31b23",
   },
 
   competition: {
-    color: "#df1e2f",
-    fontWeight: "900",
-    textTransform: "uppercase",
-    letterSpacing: "1px",
     fontSize: "12px",
-  },
-
-  date: {
     fontWeight: "800",
-    fontSize: "14px",
+    color: "#777",
+    marginTop: "6px",
   },
 
   teams: {
     display: "grid",
     gridTemplateColumns: "1fr auto 1fr",
     alignItems: "center",
-    padding: "35px 25px",
-    gap: "30px",
+    gap: "15px",
+    margin: "30px 0",
+    textAlign: "center",
   },
 
   team: {
-    textAlign: "center",
-    display: "flex",
-    flexDirection: "column",
-    gap: "7px",
-  },
-
-  teamName: {
-    fontSize: "clamp(20px, 3vw, 32px)",
-    fontWeight: "900",
-  },
-
-  homeAway: {
-    color: "#999",
-    fontSize: "10px",
-    letterSpacing: "2px",
-    fontWeight: "900",
-  },
-
-  kickoff: {
-    width: "80px",
-    height: "80px",
-    borderRadius: "50%",
-    background: "#df1e2f",
-    color: "white",
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
-    justifyContent: "center",
-    gap: "3px",
+    gap: "10px",
   },
 
-  vs: {
-    fontSize: "10px",
+  aberdeenBadge: {
+    width: "65px",
+    height: "65px",
+    borderRadius: "50%",
+    background: "#d71920",
+    color: "white",
+    display: "grid",
+    placeItems: "center",
     fontWeight: "900",
-    opacity: 0.8,
+    fontSize: "17px",
   },
 
-  fixtureBottom: {
-    borderTop: "1px solid #eee",
-    padding: "18px 25px",
-    display: "flex",
-    justifyContent: "space-between",
-    gap: "15px",
-    flexWrap: "wrap",
-    fontSize: "13px",
+  fixtureBadge: {
+    width: "72px",
+    height: "72px",
+    borderRadius: "50%",
+    objectFit: "cover",
   },
 
-  note: {
-    color: "#df1e2f",
+  homeAway: {
+    fontSize: "10px",
     letterSpacing: "1px",
+    fontWeight: "900",
+    color: "#999",
+  },
+
+  versus: {
+    fontWeight: "900",
+    color: "#999",
+  },
+
+  matchInfo: {
+    display: "flex",
+    flexDirection: "column",
+    gap: "7px",
+    textAlign: "center",
+    fontSize: "14px",
+    borderTop: "1px solid #eee",
+    paddingTop: "20px",
+  },
+
+  friendlyTag: {
+    marginTop: "20px",
+    background: "#111",
+    color: "white",
+    textAlign: "center",
+    padding: "11px",
+    fontWeight: "900",
+    fontSize: "12px",
+    letterSpacing: "1px",
+    borderRadius: "5px",
   },
 
   resultsSection: {
     background: "#f4f4f4",
-  },
-
-  emptyResults: {
-  marginTop: "24px",
-  background: "white",
-  padding: "28px 20px",
-  borderRadius: "10px",
-  textAlign: "center",
-  border: "1px solid #e5e5e5",
-},
-
- emptyScore: {
-  color: "#171717",
-  fontSize: "26px",
-  fontWeight: "900",
-  lineHeight: "1.2",
-},
-
-  emptyTitle: {
-  fontSize: "16px",
-  margin: "12px 0 6px",
-  color: "#777",
-  textTransform: "uppercase",
-  letterSpacing: "1px",
-},
-
-  emptyText: {
-    color: "#777",
-    margin: 0,
   },
 
   footer: {
