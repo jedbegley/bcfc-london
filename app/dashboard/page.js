@@ -21,12 +21,14 @@ const [allAvailability, setAllAvailability] = useState([]);
   useEffect(() => {
     async function checkUser() {
       const {
-        data: { user },
-      } = await supabase.auth.getUser();
+  data: { session },
+} = await supabase.auth.getSession();
 
-      setUser(user);
+const user = session?.user || null;
 
-      if (user) {
+setUser(user);
+
+if (user) {
   const { data: playerData, error: playerError } = await supabase
     .from("Players")
     .select("*")
