@@ -371,7 +371,7 @@ const styles = {
     color: "white",
     padding: "70px 6%",
     display: "grid",
-    gridTemplateColumns: "0.8fr 1.2fr",
+    gridTemplateColumns: "1fr 1fr",
     gap: "50px",
     alignItems: "center",
   },
@@ -381,16 +381,16 @@ const styles = {
     order: 2,
   },
 
-  latestImageWrap: {
-    width: "100%",
-    maxWidth: "520px",
-    justifySelf: "start",
-    order: 1,
-  },
+ latestImageWrap: {
+  width: "100%",
+  maxWidth: "none",
+  justifySelf: "stretch",
+  order: 1,
+},
 
   latestImage: {
     width: "100%",
-    height: "300px",
+    height: "360px",
     objectFit: "cover",
     borderRadius: "12px",
     display: "block",
@@ -523,7 +523,7 @@ const styles = {
   },
 
   quickSection: {
-    padding: "70px 6%",
+   padding: "50px 6%",
     background: "#ffffff",
   },
 
