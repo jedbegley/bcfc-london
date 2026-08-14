@@ -225,137 +225,6 @@ export default function News() {
     </div>
   </article>
 </section>
-<section style={styles.content}>
-  <p style={styles.redLabel}>MATCH REPORT</p>
-
-  <article className="featured-card" style={styles.featuredCard}>
-    <div style={styles.storyContent}>
-      <div style={styles.storyMeta}>
-        <span style={styles.category}>PRE-SEASON FRIENDLY</span>
-        <span>9 August 2026</span>
-      </div>
-
-      <h2 style={styles.storyTitle}>
-        Aberdeen 0–3 Bristol City
-      </h2>
-
-      <p style={styles.storyLead}>
-        City made the perfect start to pre-season with a convincing
-        victory in scorching conditions at Raynes Park.
-      </p>
-           <div style={{ marginTop: "10px" }}>
-<img
-  src="/IMG_5497.jpeg"
-  alt="Bristol City London Supporters FC team after the Aberdeen match"
-  style={{
-    width: "100%",
-    height: "auto",
-    display: "block",
-    borderRadius: "10px",
-  }}
-/>
-
-      <p style={styles.storyText}>
-        Bristol City London Supporters FC kicked off pre-season with a
-        3–0 win over Aberdeen at Prince George&apos;s Playing Fields in
-        Raynes Park.
-      </p>
-
-      <p style={styles.storyText}>
-        First-half goals from Bellamy, Hayes and Nathaniel did the damage,
-        ensuring City came away with the victory from their first outing
-        of the summer.
-      </p>
-
-      <p style={styles.storyText}>
-        Conditions were far from easy, with temperatures soaring in
-        south-west London — made even tougher by City taking to the field
-        in the long-sleeved purple and lime kit.
-      </p>
-
-      <p style={styles.storyText}>
-        Despite the heat, City managed the game well, kept a clean sheet
-        and made an excellent start to preparations for the new season.
-      </p>
-
-      <p style={styles.storyText}>
-        <strong>Starting XI:</strong> Freddie, Louis, Ben, Shapes, Joycey,
-        Nikita, Ryan, Jack, Bellamy, Scoobs, Hayes.
-      </p>
-
-      <p style={styles.storyText}>
-        <strong>Subs:</strong> Meddy, Lewis, Sam, Nathaniel, Yeremi and Jed.
-      </p>
-
-      <p style={styles.storyText}>
-        There was also a welcome return to football for gaffer Jed, who
-        made his first appearance in almost two years following an ACL
-        injury.
-      </p>
-
-      <p style={styles.storyText}>
-        A cracking start to pre-season for City.
-      </p>
-    </div>
-
-    <div style={styles.storySide}>
-      <div
-        style={{
-          background: "#111",
-          color: "white",
-          borderRadius: "12px",
-          padding: "35px 25px",
-          textAlign: "center",
-        }}
-      >
-        <div
-          style={{
-            color: "#df1e2f",
-            fontSize: "11px",
-            fontWeight: "900",
-            letterSpacing: "2px",
-            marginBottom: "18px",
-          }}
-        >
-          FULL TIME
-        </div>
-
-        <div style={{ fontSize: "22px", fontWeight: "900" }}>
-          Aberdeen
-        </div>
-
-        <div
-          style={{
-            fontSize: "52px",
-            fontWeight: "900",
-            margin: "12px 0",
-          }}
-        >
-          0 – 3
-        </div>
-
-        <div style={{ fontSize: "22px", fontWeight: "900" }}>
-          Bristol City
-        </div>
-      </div>
-
-      <div style={styles.quoteBox}>
-        <span style={styles.quoteMark}>⚽</span>
-
-        <p style={styles.quoteText}>
-          Bellamy
-          <br />
-          Hayes
-          <br />
-          Nathaniel
-        </p>
-      </div>
-
-    
-      </div>
-    </div>
-  </article>
-</section>
 
     {/* MORE NEWS */}
 <section style={styles.moreNews}>
@@ -363,7 +232,40 @@ export default function News() {
     <p style={styles.redLabel}>MORE FROM BCFC LONDON</p>
     <h2 style={styles.sectionTitle}>More News</h2>
 
-    <div style={styles.emptyNews}>
+  <div style={styles.emptyNews}>
+  <div style={styles.storyMeta}>
+    <span style={styles.category}>MATCH REPORT</span>
+    <span>9 August 2026</span>
+  </div>
+
+  <h3 style={styles.emptyTitle}>
+    Aberdeen 0–3 Bristol City
+  </h3>
+
+  <p style={styles.emptyText}>
+    City made the perfect start to pre-season with a convincing 3–0 victory
+    at Raynes Park.
+  </p>
+
+  <a
+    href="/news/aberdeen-0-3-bristol-city"
+    style={{
+      display: "inline-block",
+      marginTop: "20px",
+      background: "#df1e2f",
+      color: "white",
+      textDecoration: "none",
+      padding: "12px 18px",
+      borderRadius: "6px",
+      fontWeight: "900",
+      fontSize: "13px",
+    }}
+  >
+    Read Match Report →
+  </a>
+</div>  
+  
+  <div style={styles.emptyNews}>
       <div style={styles.storyMeta}>
         <span style={styles.category}>CLUB NEWS</span>
         <span>August 2026</span>
