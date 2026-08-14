@@ -117,7 +117,7 @@ export default function News() {
         for their first victory in the fixture.
       </p>
 
-      <div style={styles.recordBox}>
+      <div className="record-box" style={styles.recordBox}>
         <span>PLAYED <strong>9</strong></span>
         <span>WON <strong>6</strong></span>
         <span>DRAWN <strong>3</strong></span>
@@ -422,6 +422,21 @@ export default function News() {
            <style>{`
   @media (max-width: 768px) {
     .featured-card {
+    <style>{`
+  @media (max-width: 768px) {
+    .featured-card {
+      display: block !important;
+      padding: 24px !important;
+    }
+
+    .record-box {
+      display: grid !important;
+      grid-template-columns: 1fr 1fr !important;
+      gap: 18px 12px !important;
+      text-align: center !important;
+    }
+  }
+`}</style>
       display: block !important;
       padding: 24px !important;
     }
