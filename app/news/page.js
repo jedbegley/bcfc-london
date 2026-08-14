@@ -72,6 +72,29 @@ export default function News() {
         begin their Championship campaign at home to Millwall, a small corner
         of south-east London will have City business of its own.
       </p>
+          <div style={{ margin: "28px 0" }}>
+  <img
+    src="/IMG_9338.jpeg"
+    alt="Bristol City and Shepherd's Tuesday line up before the 2025 cup final"
+    style={{
+      width: "100%",
+      height: "auto",
+      display: "block",
+      borderRadius: "10px",
+    }}
+  />
+
+  <p
+    style={{
+      margin: "8px 0 0",
+      color: "#777",
+      fontSize: "12px",
+      fontStyle: "italic",
+    }}
+  >
+    Bristol City and Shepherd&apos;s Tuesday line up ahead of the 2025 cup final.
+  </p>
+</div>
 
       <p style={styles.storyText}>
         Bristol City London Supporters FC return to action on Sunday morning
