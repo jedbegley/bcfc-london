@@ -125,7 +125,7 @@ export default function Fixtures() {
               </div>
 
               <a
-                href="/news"
+              href="/news/aberdeen-0-3-bristol-city"
                 style={{
                   ...styles.friendlyTag,
                   display: "block",
