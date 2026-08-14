@@ -419,9 +419,6 @@ export default function News() {
 
         <div style={styles.copyright}>© 2026 BCFC London</div>
       </footer>
-           <style>{`
-  @media (max-width: 768px) {
-    .featured-card {
     <style>{`
   @media (max-width: 768px) {
     .featured-card {
@@ -434,11 +431,6 @@ export default function News() {
       grid-template-columns: 1fr 1fr !important;
       gap: 18px 12px !important;
       text-align: center !important;
-    }
-  }
-`}</style>
-      display: block !important;
-      padding: 24px !important;
     }
   }
 `}</style>
