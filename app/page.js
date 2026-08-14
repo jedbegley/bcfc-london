@@ -56,35 +56,35 @@ export default function Home() {
         <div className="hero-content" style={styles.heroContent}>
           <div style={styles.eyebrow}>LATEST NEWS</div>
 
-          <h1 style={styles.latestTitle}>
-            Aberdeen 0–3 Bristol City
-          </h1>
+<h1 style={styles.latestTitle}>
+  Match Preview: Shepherd&apos;s Tuesday vs Bristol City
+</h1>
 
-          <p style={styles.latestSummary}>
-            First-half goals from Bellamy, Hayes and Nathaniel secured a
-            convincing pre-season victory in scorching conditions at Raynes Park.
-          </p>
+<p style={styles.latestSummary}>
+  City return to Burgess Park on Sunday looking to make it two wins from two
+  in pre-season against familiar opponents Shepherd&apos;s Tuesday.
+</p>
 
-          <a
-            href="/news"
-            style={{
-              ...styles.friendlyTag,
-              display: "block",
-              width: "100%",
-              textAlign: "center",
-              textDecoration: "none",
-              boxSizing: "border-box",
-            }}
-          >
-            READ MATCH REPORT
-          </a>
+<a
+  href="/news"
+  style={{
+    ...styles.friendlyTag,
+    display: "block",
+    width: "100%",
+    textAlign: "center",
+    textDecoration: "none",
+    boxSizing: "border-box",
+  }}
+>
+  READ MATCH PREVIEW
+</a>
         </div>
 
         <div className="latest-image-wrap" style={styles.latestImageWrap}>
           <img
             className="latest-image"
-            src="/IMG_5497.jpeg"
-            alt="Bristol City London Supporters FC team after the Aberdeen match"
+            src="/IMG_9338.jpeg"
+            alt="Shepherd's Tuesday and Bristol City line up before the 2025 cup final"
             style={styles.latestImage}
           />
         </div>
