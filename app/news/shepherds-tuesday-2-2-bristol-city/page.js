@@ -114,9 +114,14 @@ export default function ShepherdsTuesdayReport() {
                   PLAYER PORTAL
                 </a>
 
-                <a href="/login" style={styles.registerButton}>
-                  REGISTER
-                </a>
+                <a
+  href="https://pay.sumup.com/b2c/Q9GDM34D"
+  target="_blank"
+  rel="noopener noreferrer"
+  style={styles.registerButton}
+>
+  PAY REGISTRATION
+</a>
               </div>
             </div>
 
