@@ -235,6 +235,37 @@ export default function News() {
   <div style={styles.emptyNews}>
   <div style={styles.storyMeta}>
     <span style={styles.category}>MATCH REPORT</span>
+    <span>16 August 2026</span>
+  </div>
+
+  <h3 style={styles.emptyTitle}>
+    Shepherd&apos;s Tuesday 2–2 Bristol City
+  </h3>
+
+  <p style={styles.emptyText}>
+    City rounded off an unbeaten pre-season with a 2–2 draw at Burgess Park.
+  </p>
+
+  <a
+    href="/news/shepherds-tuesday-2-2-bristol-city"
+    style={{
+      display: "inline-block",
+      marginTop: "20px",
+      background: "#df1e2f",
+      color: "white",
+      textDecoration: "none",
+      padding: "12px 18px",
+      borderRadius: "6px",
+      fontWeight: "900",
+      fontSize: "13px",
+    }}
+  >
+    Read Match Report →
+  </a>
+</div>
+  <div style={styles.emptyNews}>
+  <div style={styles.storyMeta}>
+    <span style={styles.category}>MATCH REPORT</span>
     <span>9 August 2026</span>
   </div>
 
