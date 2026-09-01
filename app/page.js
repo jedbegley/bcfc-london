@@ -57,16 +57,17 @@ export default function Home() {
           <div style={styles.eyebrow}>LATEST NEWS</div>
 
 <h1 style={styles.latestTitle}>
-  Match Preview: Shepherd&apos;s Tuesday vs Bristol City
+  City Begin League Eight Campaign Against Barnes Stormers
 </h1>
 
 <p style={styles.latestSummary}>
-  City return to Burgess Park on Sunday looking to make it two wins from two
-  in pre-season against familiar opponents Shepherd&apos;s Tuesday.
+  City open the 2026/27 league season at home to familiar opponents Barnes
+  Stormers FC, looking for a first victory over the side after two meetings
+  last season.
 </p>
 
 <a
-  href="/news"
+ href="/news/barnes-stormers-preview"
   style={{
     ...styles.friendlyTag,
     display: "block",
@@ -82,11 +83,11 @@ export default function Home() {
 
         <div className="latest-image-wrap" style={styles.latestImageWrap}>
           <img
-            className="latest-image"
-            src="/IMG_9338.jpeg"
-            alt="Shepherd's Tuesday and Bristol City line up before the 2025 cup final"
-            style={styles.latestImage}
-          />
+  className="latest-image"
+  src="/IMG_5497.jpeg"
+  alt="Bristol City London Supporters FC squad"
+  style={styles.latestImage}
+/>
         </div>
 
         <div className="match-cards-row" style={styles.matchCardsRow}>
