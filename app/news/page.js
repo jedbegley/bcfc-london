@@ -32,50 +32,48 @@ export default function News() {
   <section style={styles.content}>
   <p style={styles.redLabel}>MATCH PREVIEW</p>
 
-  <article className="featured-card" style={styles.featuredCard}>
-    <div style={styles.storyContent}>
-      <div style={styles.storyMeta}>
-        <span style={styles.category}>PRE-SEASON FRIENDLY</span>
-        <span>16 August 2026</span>
-      </div>
+<article className="featured-card" style={styles.featuredCard}>
+  <div style={styles.storyContent}>
+    <div style={styles.storyMeta}>
+      <span style={styles.category}>LEAGUE</span>
+      <span>13 September 2026</span>
+    </div>
 
-      <h2 style={styles.storyTitle}>
-        Shepherd&apos;s Tuesday vs Bristol City
-      </h2>
+    <h2 style={styles.storyTitle}>
+      City Begin League Eight Campaign Against Barnes Stormers
+    </h2>
 
-      {/* MATCH DETAILS */}
-      <div style={styles.previewDetails}>
-        <div style={styles.previewDetail}>
-          <span style={styles.previewLabel}>DATE</span>
-          <strong>Sunday 16 August 2026</strong>
-        </div>
+     {/* MATCH DETAILS */}
+<div style={styles.previewDetails}>
+  <div style={styles.previewDetail}>
+    <span style={styles.previewLabel}>DATE</span>
+    <strong>Sunday 13 September 2026</strong>
+  </div>
 
-        <div style={styles.previewDetail}>
-          <span style={styles.previewLabel}>FIXTURE</span>
-          <strong>Shepherd&apos;s Tuesday (A)</strong>
-        </div>
+  <div style={styles.previewDetail}>
+    <span style={styles.previewLabel}>FIXTURE</span>
+    <strong>Barnes Stormers FC (H)</strong>
+  </div>
 
-        <div style={styles.previewDetail}>
-          <span style={styles.previewLabel}>VENUE</span>
-          <strong>Burgess Park</strong>
-          <span>Loncroft Road, SE5 0JE</span>
-        </div>
+  <div style={styles.previewDetail}>
+    <span style={styles.previewLabel}>VENUE</span>
+    <strong>Clapham Common</strong>
+  </div>
 
-        <div style={styles.previewDetail}>
-          <span style={styles.previewLabel}>MEET</span>
-          <strong>9:30am</strong>
-        </div>
-      </div>
-
-      <p style={styles.storyLead}>
-        While most eyes will be on Ashton Gate this weekend as Bristol City
-        begin their Championship campaign at home to Millwall, a small corner
-        of south-east London will have City business of its own.
-      </p>
-          <div style={{ margin: "28px 0" }}>
+  <div style={styles.previewDetail}>
+    <span style={styles.previewLabel}>KICK OFF</span>
+    <strong>10:30am</strong>
+  </div>
+</div>
+     <p style={styles.storyLead}>
+  City open the 2026/27 league season at home to familiar opponents Barnes
+  Stormers FC, looking for a first victory over the side after two meetings
+  last season.
+</p>
+         <div style={{ margin: "28px 0" }}>
   <img
-    src="/IMG_9338.jpeg"
-    alt="Bristol City and Shepherd's Tuesday line up before the 2025 cup final"
+    src="/IMG_5497.jpeg"
+    alt="Bristol City London Supporters FC squad"
     style={{
       width: "100%",
       height: "auto",
@@ -92,137 +90,77 @@ export default function News() {
       fontStyle: "italic",
     }}
   >
-    Bristol City and Shepherd&apos;s Tuesday line up ahead of the 2025 cup final.
+    Bristol City London Supporters FC ahead of the 2026/27 league campaign.
   </p>
 </div>
+     <p style={styles.storyText}>
+  Barnes will be a familiar opponent for City, with the sides meeting twice
+  during last season&apos;s League Nine campaign. City were unable to get the
+  better of the Stormers on either occasion, taking just one point from the
+  two games.
+</p>
 
-      <p style={styles.storyText}>
-        Bristol City London Supporters FC return to action on Sunday morning
-        looking to make it two wins from two in pre-season following last
-        weekend&apos;s 3–0 victory over Aberdeen.
-      </p>
+<p style={styles.storyText}>
+  The first meeting at Clapham Common ended in a 2–2 draw before Barnes took
+  all three points in the return fixture with a 2–1 victory later in the
+  season.
+</p>
 
-      <p style={styles.storyText}>
-        Up next are familiar opponents Shepherd&apos;s Tuesday, with City
-        heading to the 4G at Burgess Park for their second outing of the
-        summer.
-      </p>
+<p style={styles.storyText}>
+  Despite those results, it was City who ultimately finished higher in the
+  table, ending the campaign one place above Barnes.
+</p>
 
-      <h3 style={styles.articleHeading}>A FAMILIAR OPPONENT</h3>
+<p style={styles.storyText}>
+  A summer restructuring of the Southern Sunday Football League means the
+  two sides will meet again this season, with both competing in League Eight.
+</p>
 
-      <p style={styles.storyText}>
-        It&apos;s a fixture that has been particularly kind to City over the
-        years. The sides have met nine times, with Bristol City winning six
-        and drawing three — meaning Shepherd&apos;s Tuesday are still searching
-        for their first victory in the fixture.
-      </p>
+<p style={styles.storyText}>
+  City head into the opener unbeaten in pre-season following a 3–0 victory
+  over Aberdeen and a 2–2 draw against Shepherd&apos;s Tuesday.
+</p>
 
-      <div className="record-box" style={styles.recordBox}>
-        <span>PLAYED <strong>9</strong></span>
-        <span>WON <strong>6</strong></span>
-        <span>DRAWN <strong>3</strong></span>
-        <span>LOST <strong>0</strong></span>
-      </div>
+<a
+  href="/news/barnes-stormers-preview"
+  style={{
+    display: "inline-block",
+    marginTop: "12px",
+    padding: "12px 18px",
+    background: "#e31b23",
+    color: "#fff",
+    textDecoration: "none",
+    fontWeight: "900",
+    borderRadius: "4px",
+  }}
+>
+  READ MATCH PREVIEW
+</a>
+</div>
 
-      <p style={styles.storyText}>
-        That record includes one particularly memorable meeting, with City
-        beating Shepherd&apos;s Tuesday in the 2025 cup final at the London
-        Marathon Community Stadium.
-      </p>
+{/* RIGHT-HAND MATCH CARD */}
+<div style={styles.storySide}>
+  <div style={styles.previewMatchCard}>
+    <div style={styles.previewMatchLabel}>NEXT MATCH</div>
 
-      <h3 style={styles.articleHeading}>SQUAD NEWS</h3>
-
-      <p style={styles.storyText}>
-        Pre-season continues to provide an opportunity to look at some
-        potential new additions, with Trialist B and Trialist H both set to
-        be involved on Sunday.
-      </p>
-
-      <p style={styles.storyText}>
-        The pair have been recruited from partner club Colombian Cowboys FC
-        and will be looking to cement their places in the squad ahead of the
-        new season.
-      </p>
-
-      <div style={styles.squadBox}>
-        <div style={styles.squadLabel}>SUNDAY&apos;S SQUAD</div>
-
-        <p style={styles.squadNames}>
-          Alfie (c) · Ellis · Jack L · Smithy · Scoobs · Nico · Nikita ·
-          Ryan · Sam · Jed · Yeremi · Nathan · Ollie · Zion · Louis ·
-          Trialist B · Trialist H
-        </p>
-
-        <p style={styles.squadExtra}>
-          + anyone else that is available
-        </p>
-      </div>
-
-      <h3 style={styles.articleHeading}>PLAYER REMINDER</h3>
-
-      <p style={styles.storyText}>
-        Any players who haven&apos;t yet registered on the new BCFC London
-        Player Portal should do so as soon as possible.
-      </p>
-
-      <p style={styles.storyText}>
-        Players with outstanding registration fees are also reminded to get
-        these paid ahead of the new season.
-      </p>
-
-      <div style={styles.actionButtons}>
-        <a href="/dashboard" style={styles.portalButton}>
-          PLAYER PORTAL
-        </a>
-
-        <a
-          href="https://pay.sumup.com/b2c/Q9GDM34D"
-          target="_blank"
-          rel="noopener noreferrer"
-          style={styles.payButton}
-        >
-          PAY REGISTRATION
-        </a>
-      </div>
-
-      <p style={styles.previewClosing}>
-        Two games. Two wins? We&apos;ll find out on Sunday.
-        <br />
-        <strong>Up the City. 🔴⚪</strong>
-      </p>
+    <div style={styles.previewTeam}>
+      Bristol City
     </div>
 
-    {/* RIGHT-HAND MATCH CARD */}
-    <div style={styles.storySide}>
-      <div style={styles.previewMatchCard}>
-        <div style={styles.previewMatchLabel}>NEXT MATCH</div>
+    <div style={styles.previewVs}>VS</div>
 
-        <div style={styles.previewTeam}>
-          Shepherd&apos;s Tuesday
-        </div>
-
-        <div style={styles.previewVs}>VS</div>
-
-        <div style={styles.previewTeam}>
-          Bristol City
-        </div>
-
-        <div style={styles.previewMatchInfo}>
-          <strong>Sunday 16 August</strong>
-          <span>9:30am Meet</span>
-          <span>Burgess Park</span>
-          <span>Loncroft Road · SE5 0JE</span>
-        </div>
-      </div>
-
-      <div style={styles.formBox}>
-        <div style={styles.formLabel}>HEAD-TO-HEAD</div>
-        <div style={styles.formRecord}>6W · 3D · 0L</div>
-        <div style={styles.formText}>
-          Unbeaten in nine meetings
-        </div>
-      </div>
+    <div style={styles.previewTeam}>
+      Barnes Stormers FC
     </div>
+
+    <div style={styles.previewMatchInfo}>
+      <strong>Sunday 13 September</strong>
+      <span>10:30 Kick Off</span>
+      <span>Clapham Common</span>
+      <span>League Eight</span>
+    </div>
+  </div>
+</div>
   </article>
 </section>
 
