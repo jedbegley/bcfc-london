@@ -33,7 +33,50 @@ export default function Fixtures() {
   <h2 style={styles.heading}>Upcoming Fixtures</h2>
 
   <div style={styles.cardWrap}>
-  <div style={styles.matchCard}>
+  
+    <div style={styles.matchCard}>
+      <div style={styles.matchLabel}>NEXT MATCH</div>
+      <div style={styles.competition}>SOUTHERN SUNDAY FOOTBALL LEAGUE</div>
+
+      <div style={styles.teams}>
+        <div style={styles.team}>
+          <img
+            src="/374fadec-093f-4e7e-9f54-01c06a034caa.jpeg"
+            alt="Bristol City"
+            style={styles.fixtureBadge}
+          />
+          <strong>Bristol City</strong>
+          <span style={styles.homeAway}>HOME</span>
+        </div>
+
+        <div style={styles.versus}>VS</div>
+
+        <div style={styles.team}>
+          <div style={styles.aberdeenBadge}>BS</div>
+          <strong>Barnes Stormers FC</strong>
+          <span style={styles.homeAway}>AWAY</span>
+        </div>
+      </div>
+
+      <div style={styles.matchInfo}>
+        <strong>Sunday 13 September 2026</strong>
+        <span>10:30 Kick Off</span>
+        <span>Clapham Common</span>
+      </div>
+
+      <div style={styles.friendlyTag}>LEAGUE</div>
+    </div>
+  </div>
+</section>
+
+      {/* RESULTS */}
+      <section style={styles.resultsSection}>
+        <div style={styles.section}>
+          <p style={styles.redLabel}>2026/27</p>
+          <h2 style={styles.heading}>Results</h2>
+
+          <div style={styles.cardWrap}>
+        <div style={styles.matchCard}>
   <div style={styles.matchLabel}>LATEST RESULT</div>
   <div style={styles.competition}>PRE-SEASON FRIENDLY</div>
 
@@ -82,55 +125,23 @@ export default function Fixtures() {
     <span>Own Goal · Nathan</span>
   </div>
 
-  <a
-    href="/news/shepherds-tuesday-2-2-bristol-city"
-    style={styles.reportLink}
-  >
-    READ MATCH REPORT
-  </a>
+ <a
+  href="/news/shepherds-tuesday-2-2-bristol-city"
+  style={{
+    display: "inline-block",
+    marginTop: "20px",
+    padding: "12px 18px",
+    background: "#111",
+    color: "#fff",
+    textDecoration: "none",
+    fontWeight: "900",
+    fontSize: "13px",
+    borderRadius: "4px",
+  }}
+>
+  READ MATCH REPORT
+</a>
 </div>
-    <div style={styles.matchCard}>
-      <div style={styles.matchLabel}>NEXT MATCH</div>
-      <div style={styles.competition}>SOUTHERN SUNDAY FOOTBALL LEAGUE</div>
-
-      <div style={styles.teams}>
-        <div style={styles.team}>
-          <img
-            src="/374fadec-093f-4e7e-9f54-01c06a034caa.jpeg"
-            alt="Bristol City"
-            style={styles.fixtureBadge}
-          />
-          <strong>Bristol City</strong>
-          <span style={styles.homeAway}>HOME</span>
-        </div>
-
-        <div style={styles.versus}>VS</div>
-
-        <div style={styles.team}>
-          <div style={styles.aberdeenBadge}>BS</div>
-          <strong>Barnes Stormers FC</strong>
-          <span style={styles.homeAway}>AWAY</span>
-        </div>
-      </div>
-
-      <div style={styles.matchInfo}>
-        <strong>Sunday 13 September 2026</strong>
-        <span>10:30 Kick Off</span>
-        <span>Clapham Common</span>
-      </div>
-
-      <div style={styles.friendlyTag}>LEAGUE</div>
-    </div>
-  </div>
-</section>
-
-      {/* RESULTS */}
-      <section style={styles.resultsSection}>
-        <div style={styles.section}>
-          <p style={styles.redLabel}>2026/27</p>
-          <h2 style={styles.heading}>Results</h2>
-
-          <div style={styles.cardWrap}>
             <div style={styles.matchCard}>
               <div style={styles.matchLabel}>PRE-SEASON RESULT</div>
               <div style={styles.competition}>PRE-SEASON FRIENDLY</div>
