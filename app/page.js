@@ -1,3 +1,11 @@
+const featuredStory = {
+  title: "City Begin League Eight Campaign Against Barnes Stormers",
+  summary:
+    "City open the 2026/27 league season at home to familiar opponents Barnes Stormers FC, looking for a first victory over the side after two meetings last season.",
+  image: "/IMG_5497.jpeg",
+  imageAlt: "Bristol City London Supporters FC squad",
+  link: "/news/barnes-stormers-preview",
+};
 export default function Home() {
   const quickLinks = [
     {
@@ -57,17 +65,15 @@ export default function Home() {
           <div style={styles.eyebrow}>LATEST NEWS</div>
 
 <h1 style={styles.latestTitle}>
-  City Begin League Eight Campaign Against Barnes Stormers
+  {featuredStory.title}
 </h1>
 
 <p style={styles.latestSummary}>
-  City open the 2026/27 league season at home to familiar opponents Barnes
-  Stormers FC, looking for a first victory over the side after two meetings
-  last season.
+ {featuredStory.summary}
 </p>
 
 <a
- href="/news/barnes-stormers-preview"
+href={featuredStory.link}
   style={{
     ...styles.friendlyTag,
     display: "block",
@@ -84,8 +90,8 @@ export default function Home() {
         <div className="latest-image-wrap" style={styles.latestImageWrap}>
           <img
   className="latest-image"
-  src="/IMG_5497.jpeg"
-  alt="Bristol City London Supporters FC squad"
+  src={featuredStory.image}
+alt={featuredStory.imageAlt}
   style={styles.latestImage}
 />
         </div>
