@@ -17,6 +17,14 @@ const [availabilityMessage, setAvailabilityMessage] = useState("");
   const [isAdmin, setIsAdmin] = useState(false);
   const [allPlayers, setAllPlayers] = useState([]);
 const [allAvailability, setAllAvailability] = useState([]);
+  const [currentMatch, setCurrentMatch] = useState(null);
+  const formatMatchDate = (date) =>
+  new Date(`${date}T12:00:00`).toLocaleDateString("en-GB", {
+    weekday: "long",
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+  });
   
 const handleLogout = async () => {
   await supabase.auth.signOut();
@@ -32,6 +40,19 @@ const handleLogout = async () => {
 const user = session?.user || null;
 
 setUser(user);
+      const { data: nextMatchData, error: nextMatchError } = await supabase
+  .from("matches")
+  .select("*")
+  .eq("status", "Upcoming")
+  .order("match_date", { ascending: true })
+  .limit(1)
+  .single();
+
+if (nextMatchError) {
+  console.log("MATCH ERROR:", nextMatchError);
+} else {
+  setCurrentMatch(nextMatchData);
+}
 
 if (user) {
   const { data: playerData, error: playerError } = await supabase
@@ -49,7 +70,7 @@ if (user) {
   .from("availability")
   .select("status")
   .eq("player_id", playerData.id)
-  .eq("match_id", 2)
+  .eq("match_id", nextMatchData.id)
   .maybeSingle();
 
 if (savedAvailabilityError) {
@@ -66,7 +87,7 @@ if (savedAvailabilityError) {
   const { data: availabilityData, error: availabilityError } = await supabase
     .from("availability")
     .select("*")
-    .eq("match_id", 3);
+    .eq("match_id", nextMatchData.id);
 
   if (playersError) {
     console.log("ADMIN PLAYERS ERROR:", playersError);
@@ -90,6 +111,10 @@ if (savedAvailabilityError) {
   }, []);
 
   async function saveAvailability(status) {
+    if (!currentMatch) {
+  setAvailabilityMessage("Match is still loading. Please try again.");
+  return;
+}
   if (!player) {
     setAvailabilityMessage("Player profile not found.");
     return;
@@ -102,7 +127,7 @@ if (savedAvailabilityError) {
   .upsert(
     {
       player_id: player.id,
-      match_id: 3,
+      match_id: currentMatch.id,
       status,
       responded_at: new Date().toISOString(),
     },
@@ -171,14 +196,15 @@ if (savedAvailabilityError) {
         <div style={styles.matchCard}>
           <div style={styles.matchLabel}>NEXT MATCH</div>
 
-         <h2 style={styles.matchTitle}>
-  Bristol City v Barnes Stormers FC
+        <h2 style={styles.matchTitle}>
+  Bristol City v {currentMatch?.opponent}
 </h2>
 
 <p style={styles.matchDetails}>
-  Sunday 13 September 2026 · 10:30
+  {currentMatch?.match_date && formatMatchDate(currentMatch.match_date)} ·{" "}
+{currentMatch?.kickoff_time?.slice(0, 5)}
   <br />
-  Clapham Common
+  {currentMatch?.venue}
 </p>
 
           <div style={styles.availabilityBox}>
