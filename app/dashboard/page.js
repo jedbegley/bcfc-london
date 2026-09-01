@@ -303,6 +303,22 @@ if (savedAvailabilityError) {
   <div style={styles.adminCard}>
     <div style={styles.matchLabel}>MANAGER VIEW</div>
     <h2 style={{ marginTop: "10px" }}>Squad Availability</h2>
+<a
+  href="/dashboard/players"
+  style={{
+    display: "inline-block",
+    marginBottom: "10px",
+    padding: "10px 16px",
+    background: "#d71920",
+    color: "#fff",
+    textDecoration: "none",
+    borderRadius: "4px",
+    fontWeight: "700",
+    fontSize: "13px",
+  }}
+>
+  SQUAD ADMIN
+</a>
 
     {["available", "maybe", "unavailable"].map((status) => {
       const playersForStatus = allPlayers.filter((p) =>
