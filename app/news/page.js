@@ -1,4 +1,22 @@
 import Script from "next/script";
+
+const featuredNews = {
+  label: "MATCH PREVIEW",
+  category: "LEAGUE",
+  date: "13 September 2026",
+  title: "City Begin League Eight Campaign Against Barnes Stormers",
+  matchDate: "Sunday 13 September 2026",
+  fixture: "Barnes Stormers FC (H)",
+  venue: "Clapham Common",
+  kickOff: "10:30am",
+  summary:
+    "City open the 2026/27 league season at home to familiar opponents Barnes Stormers FC, looking for a first victory over the side after two meetings last season.",
+  image: "/IMG_5497.jpeg",
+  imageAlt: "Bristol City London Supporters FC squad",
+  imageCaption:
+    "Bristol City London Supporters FC ahead of the 2026/27 league campaign.",
+  link: "/news/barnes-stormers-preview",
+};
 export default function News() {
   return (
     <main style={styles.page}>
@@ -30,50 +48,48 @@ export default function News() {
 
      {/* FEATURED STORY */}
   <section style={styles.content}>
-  <p style={styles.redLabel}>MATCH PREVIEW</p>
+  <p style={styles.redLabel}>{featuredNews.label}</p>
 
 <article className="featured-card" style={styles.featuredCard}>
   <div style={styles.storyContent}>
     <div style={styles.storyMeta}>
-      <span style={styles.category}>LEAGUE</span>
-      <span>13 September 2026</span>
+      <span style={styles.category}>{featuredNews.category}</span>
+      <span>{featuredNews.date}</span>
     </div>
 
     <h2 style={styles.storyTitle}>
-      City Begin League Eight Campaign Against Barnes Stormers
-    </h2>
+  {featuredNews.title}
+</h2>
 
      {/* MATCH DETAILS */}
 <div style={styles.previewDetails}>
   <div style={styles.previewDetail}>
     <span style={styles.previewLabel}>DATE</span>
-    <strong>Sunday 13 September 2026</strong>
+    <strong>{featuredNews.matchDate}</strong>
   </div>
 
   <div style={styles.previewDetail}>
     <span style={styles.previewLabel}>FIXTURE</span>
-    <strong>Barnes Stormers FC (H)</strong>
+    <strong>{featuredNews.fixture}</strong>
   </div>
 
   <div style={styles.previewDetail}>
     <span style={styles.previewLabel}>VENUE</span>
-    <strong>Clapham Common</strong>
+    <strong>{featuredNews.venue}</strong>
   </div>
 
   <div style={styles.previewDetail}>
     <span style={styles.previewLabel}>KICK OFF</span>
-    <strong>10:30am</strong>
+    <strong>{featuredNews.kickOff}</strong>
   </div>
 </div>
-     <p style={styles.storyLead}>
-  City open the 2026/27 league season at home to familiar opponents Barnes
-  Stormers FC, looking for a first victory over the side after two meetings
-  last season.
+   <p style={styles.storyLead}>
+  {featuredNews.summary}
 </p>
          <div style={{ margin: "28px 0" }}>
   <img
-    src="/IMG_5497.jpeg"
-    alt="Bristol City London Supporters FC squad"
+   src={featuredNews.image}
+   alt={featuredNews.imageAlt}
     style={{
       width: "100%",
       height: "auto",
@@ -90,7 +106,7 @@ export default function News() {
       fontStyle: "italic",
     }}
   >
-    Bristol City London Supporters FC ahead of the 2026/27 league campaign.
+   {featuredNews.imageCaption}
   </p>
 </div>
      <p style={styles.storyText}>
@@ -122,7 +138,7 @@ export default function News() {
 </p>
 
 <a
-  href="/news/barnes-stormers-preview"
+ href={featuredNews.link}
   style={{
     display: "inline-block",
     marginTop: "12px",
