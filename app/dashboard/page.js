@@ -17,7 +17,12 @@ const [availabilityMessage, setAvailabilityMessage] = useState("");
   const [isAdmin, setIsAdmin] = useState(false);
   const [allPlayers, setAllPlayers] = useState([]);
 const [allAvailability, setAllAvailability] = useState([]);
-
+  
+const handleLogout = async () => {
+  await supabase.auth.signOut();
+  window.location.href = "/login";
+};
+  
   useEffect(() => {
     async function checkUser() {
       const {
@@ -61,7 +66,7 @@ if (savedAvailabilityError) {
   const { data: availabilityData, error: availabilityError } = await supabase
     .from("availability")
     .select("*")
-    .eq("match_id", 2);
+    .eq("match_id", 3);
 
   if (playersError) {
     console.log("ADMIN PLAYERS ERROR:", playersError);
@@ -97,7 +102,7 @@ if (savedAvailabilityError) {
   .upsert(
     {
       player_id: player.id,
-      match_id: 2,
+      match_id: 3,
       status,
       responded_at: new Date().toISOString(),
     },
@@ -156,19 +161,25 @@ if (savedAvailabilityError) {
         <p style={styles.text}>
           Signed in as <strong>{user.email}</strong>
         </p>
+    <button
+  onClick={handleLogout}
+  style={styles.button}
+>
+  Log Out
+</button>
 
         <div style={styles.matchCard}>
           <div style={styles.matchLabel}>NEXT MATCH</div>
 
-          <h2 style={styles.matchTitle}>
-            Shepherd&apos;s Tuesday v Bristol City
-          </h2>
+         <h2 style={styles.matchTitle}>
+  Bristol City v Barnes Stormers FC
+</h2>
 
-          <p style={styles.matchDetails}>
-            Sunday 16 August 2026 · 10:15
-            <br />
-            Burgess Park
-          </p>
+<p style={styles.matchDetails}>
+  Sunday 13 September 2026 · 10:30
+  <br />
+  Clapham Common
+</p>
 
           <div style={styles.availabilityBox}>
   <p style={{ marginTop: "0", fontWeight: "900", fontSize: "18px" }}>
