@@ -6,6 +6,17 @@ const featuredStory = {
   imageAlt: "Bristol City London Supporters FC squad",
   link: "/news/barnes-stormers-preview",
 };
+const latestResult = {
+  competition: "PRE-SEASON FRIENDLY",
+  opponent: "Shepherd's Tuesday",
+  opponentShort: "ST",
+  homeAway: "HOME",
+  score: "2-2",
+  date: "Sunday 16 August 2026",
+  venue: "Burgess Park",
+  scorers: "⚽ Own Goal · Nathan",
+  reportLink: "/news/shepherds-tuesday-2-2-bristol-city",
+};
 export default function Home() {
   const quickLinks = [
     {
@@ -99,13 +110,13 @@ alt={featuredStory.imageAlt}
         <div className="match-cards-row" style={styles.matchCardsRow}>
           <div style={styles.matchCard}>
             <div style={styles.matchLabel}>LATEST RESULT</div>
-            <div style={styles.competition}>PRE-SEASON FRIENDLY</div>
+            <div style={styles.competition}>{latestResult.competition}</div>
 
             <div style={styles.teams}>
               <div style={styles.team}>
-               <div style={styles.aberdeenBadge}>ST</div>
-<strong>Shepherd&apos;s Tuesday</strong>
-<span style={styles.homeAway}>HOME</span>
+               <div style={styles.aberdeenBadge}>{latestResult.opponentShort}</div>
+<strong>{latestResult.opponent}</strong>
+<span style={styles.homeAway}>{latestResult.homeAway}</span>
               </div>
 
               <div style={styles.versus}>
@@ -116,7 +127,7 @@ alt={featuredStory.imageAlt}
                     color: "#111",
                   }}
                 >
-                  2-2
+                 {latestResult.score}
                 </div>
 
                 <div
@@ -142,13 +153,13 @@ alt={featuredStory.imageAlt}
             </div>
 
             <div style={styles.matchInfo}>
-  <strong>Sunday 16 August 2026</strong>
-  <span>Burgess Park</span>
-  <span>⚽ Own Goal · Nathan</span>
+  <strong>{latestResult.date}</strong>
+  <span>{latestResult.venue}</span>
+  <span>{latestResult.scorers}</span>
 </div>
 
 <a
-  href="/news/shepherds-tuesday-2-2-bristol-city"
+  href={latestResult.reportLink}
               style={{
                 ...styles.friendlyTag,
                 display: "block",
