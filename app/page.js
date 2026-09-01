@@ -109,7 +109,7 @@ export default function Home() {
                     color: "#111",
                   }}
                 >
-                  0–3
+                  2-2
                 </div>
 
                 <div
@@ -156,18 +156,10 @@ export default function Home() {
           </div>
 
           <div style={styles.matchCard}>
-            <div style={styles.matchLabel}>NEXT MATCH</div>
-<div style={styles.competition}>SOUTHERN SUNDAY LEAGUE EIGHT</div>
+           <div style={styles.matchLabel}>NEXT MATCH</div>
+<div style={styles.competition}>SOUTHERN SUNDAY FOOTBALL LEAGUE</div>
 
-            <div style={styles.teams}>
-  <div style={styles.team}>
-    <div style={styles.aberdeenBadge}>?</div>
-    <strong>Opponent TBC</strong>
-    <span style={styles.homeAway}>TBC</span>
-  </div>
-
-  <div style={styles.versus}>VS</div>
-
+<div style={styles.teams}>
   <div style={styles.team}>
     <img
       src="/374fadec-093f-4e7e-9f54-01c06a034caa.jpeg"
@@ -175,17 +167,25 @@ export default function Home() {
       style={styles.fixtureBadge}
     />
     <strong>Bristol City</strong>
-    <span style={styles.homeAway}>TBC</span>
+    <span style={styles.homeAway}>HOME</span>
+  </div>
+
+  <div style={styles.versus}>VS</div>
+
+  <div style={styles.team}>
+    <div style={styles.aberdeenBadge}>BS</div>
+    <strong>Barnes Stormers FC</strong>
+    <span style={styles.homeAway}>AWAY</span>
   </div>
 </div>
 
-            <div style={styles.matchInfo}>
-  <strong>Sunday 6 September 2026</strong>
-  <span>League Opener</span>
-  <span>Opponent &amp; venue TBC</span>
+<div style={styles.matchInfo}>
+  <strong>Sunday 13 September 2026</strong>
+  <span>10:30 Kick Off</span>
+  <span>Clapham Common</span>
 </div>
 
-            <div style={styles.friendlyTag}>SOUTHERN SUNDAY LEAGUE EIGHT</div>
+<div style={styles.friendlyTag}>LEAGUE</div>
           </div>
         </div>
       </section>
