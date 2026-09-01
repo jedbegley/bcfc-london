@@ -12,6 +12,10 @@ export default function PlayersAdmin() {
   const [players, setPlayers] = useState([]);
   const [loading, setLoading] = useState(true);
   const [isAdmin, setIsAdmin] = useState(false);
+  const [search, setSearch] = useState("");
+  const filteredPlayers = players.filter((player) =>
+  player.full_name?.toLowerCase().includes(search.toLowerCase())
+);
 
   useEffect(() => {
     async function loadPlayers() {
@@ -71,6 +75,21 @@ export default function PlayersAdmin() {
   <h1>Squad Admin</h1>
 
   <p>{players.length} players registered</p>
+    <input
+  type="text"
+  placeholder="Search player..."
+  value={search}
+  onChange={(e) => setSearch(e.target.value)}
+  style={{
+    padding: "10px 12px",
+    width: "280px",
+    maxWidth: "100%",
+    marginTop: "10px",
+    border: "1px solid #ccc",
+    borderRadius: "6px",
+    fontSize: "14px",
+  }}
+/>
 
   <div style={{ overflowX: "auto", marginTop: "24px" }}>
     <table
@@ -94,10 +113,14 @@ export default function PlayersAdmin() {
       </thead>
 
       <tbody>
-        {players.map((player) => (
+        {filteredPlayers.map((player) => (
           <tr key={player.id}>
             <td style={styles.td}>{player.full_name || "-"}</td>
-            <td style={styles.td}>{player.date_of_birth || "-"}</td>
+            <td style={styles.td}>
+  {player.date_of_birth
+    ? new Date(`${player.date_of_birth}T12:00:00`).toLocaleDateString("en-GB")
+    : "-"}
+</td>
             <td style={styles.td}>{player.email || "-"}</td>
             <td style={styles.td}>{player.mobile || "-"}</td>
             <td style={styles.td}>{player.postcode || "-"}</td>
