@@ -122,21 +122,18 @@ export default function Fixtures() {
   <div style={styles.matchInfo}>
     <strong>Sunday 16 August 2026</strong>
     <span>Burgess Park</span>
-    <span>Own Goal · Nathan</span>
+    <span>⚽ Own Goal · Nathan</span>
   </div>
 
  <a
   href="/news/shepherds-tuesday-2-2-bristol-city"
   style={{
-    display: "inline-block",
-    marginTop: "20px",
-    padding: "12px 18px",
-    background: "#111",
-    color: "#fff",
+    ...styles.friendlyTag,
+    display: "block",
+    width: "100%",
+    textAlign: "center",
     textDecoration: "none",
-    fontWeight: "900",
-    fontSize: "13px",
-    borderRadius: "4px",
+    boxSizing: "border-box",
   }}
 >
   READ MATCH REPORT
