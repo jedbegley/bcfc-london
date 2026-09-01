@@ -27,46 +27,102 @@ export default function Fixtures() {
         </p>
       </section>
 
-      {/* UPCOMING */}
-      <section style={styles.section}>
-        <p style={styles.redLabel}>NEXT UP</p>
-        <h2 style={styles.heading}>Upcoming Fixtures</h2>
+{/* UPCOMING */}
+<section style={styles.section}>
+  <p style={styles.redLabel}>NEXT UP</p>
+  <h2 style={styles.heading}>Upcoming Fixtures</h2>
 
-        <div style={styles.cardWrap}>
-          <div style={styles.matchCard}>
-            <div style={styles.matchLabel}>NEXT MATCH</div>
-            <div style={styles.competition}>FRIENDLY</div>
+  <div style={styles.cardWrap}>
+  <div style={styles.matchCard}>
+  <div style={styles.matchLabel}>LATEST RESULT</div>
+  <div style={styles.competition}>PRE-SEASON FRIENDLY</div>
 
-            <div style={styles.teams}>
-              <div style={styles.team}>
-                <div style={styles.aberdeenBadge}>ST</div>
-                <strong>Shepherd&apos;s Tuesday</strong>
-                <span style={styles.homeAway}>HOME</span>
-              </div>
+  <div style={styles.teams}>
+    <div style={styles.team}>
+      <div style={styles.aberdeenBadge}>ST</div>
+      <strong>Shepherd&apos;s Tuesday</strong>
+      <span style={styles.homeAway}>HOME</span>
+    </div>
 
-              <div style={styles.versus}>VS</div>
+    <div style={styles.versus}>
+      <div
+        style={{
+          fontSize: "34px",
+          fontWeight: "900",
+          color: "#111",
+        }}
+      >
+        2–2
+      </div>
+      <div
+        style={{
+          fontSize: "11px",
+          fontWeight: "900",
+          marginTop: "6px",
+        }}
+      >
+        FULL TIME
+      </div>
+    </div>
 
-              <div style={styles.team}>
-                <img
-                  src="/374fadec-093f-4e7e-9f54-01c06a034caa.jpeg"
-                  alt="Bristol City"
-                  style={styles.fixtureBadge}
-                />
-                <strong>Bristol City</strong>
-                <span style={styles.homeAway}>AWAY</span>
-              </div>
-            </div>
+    <div style={styles.team}>
+      <img
+        src="/374fadec-093f-4e7e-9f54-01c06a034caa.jpeg"
+        alt="Bristol City"
+        style={styles.fixtureBadge}
+      />
+      <strong>Bristol City</strong>
+      <span style={styles.homeAway}>AWAY</span>
+    </div>
+  </div>
 
-            <div style={styles.matchInfo}>
-              <strong>Sunday 16 August 2026</strong>
-              <span>10:15 Kick Off</span>
-              <span>Burgess Park</span>
-            </div>
+  <div style={styles.matchInfo}>
+    <strong>Sunday 16 August 2026</strong>
+    <span>Burgess Park</span>
+    <span>Own Goal · Nathan</span>
+  </div>
 
-            <div style={styles.friendlyTag}>PRE-SEASON FRIENDLY</div>
-          </div>
+  <a
+    href="/news/shepherds-tuesday-2-2-bristol-city"
+    style={styles.reportLink}
+  >
+    READ MATCH REPORT
+  </a>
+</div>
+    <div style={styles.matchCard}>
+      <div style={styles.matchLabel}>NEXT MATCH</div>
+      <div style={styles.competition}>SOUTHERN SUNDAY FOOTBALL LEAGUE</div>
+
+      <div style={styles.teams}>
+        <div style={styles.team}>
+          <img
+            src="/374fadec-093f-4e7e-9f54-01c06a034caa.jpeg"
+            alt="Bristol City"
+            style={styles.fixtureBadge}
+          />
+          <strong>Bristol City</strong>
+          <span style={styles.homeAway}>HOME</span>
         </div>
-      </section>
+
+        <div style={styles.versus}>VS</div>
+
+        <div style={styles.team}>
+          <div style={styles.aberdeenBadge}>BS</div>
+          <strong>Barnes Stormers FC</strong>
+          <span style={styles.homeAway}>AWAY</span>
+        </div>
+      </div>
+
+      <div style={styles.matchInfo}>
+        <strong>Sunday 13 September 2026</strong>
+        <span>10:30 Kick Off</span>
+        <span>Clapham Common</span>
+      </div>
+
+      <div style={styles.friendlyTag}>LEAGUE</div>
+    </div>
+  </div>
+</section>
 
       {/* RESULTS */}
       <section style={styles.resultsSection}>
@@ -76,7 +132,7 @@ export default function Fixtures() {
 
           <div style={styles.cardWrap}>
             <div style={styles.matchCard}>
-              <div style={styles.matchLabel}>LATEST RESULT</div>
+              <div style={styles.matchLabel}>PRE-SEASON RESULT</div>
               <div style={styles.competition}>PRE-SEASON FRIENDLY</div>
 
               <div style={styles.teams}>
