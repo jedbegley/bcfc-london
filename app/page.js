@@ -17,6 +17,18 @@ const latestResult = {
   scorers: "⚽ Own Goal · Nathan",
   reportLink: "/news/shepherds-tuesday-2-2-bristol-city",
 };
+const nextMatch = {
+  competition: "SOUTHERN SUNDAY FOOTBALL LEAGUE",
+  opponent: "Barnes Stormers FC",
+  opponentShort: "BS",
+  cityHomeAway: "HOME",
+  opponentHomeAway: "AWAY",
+  date: "Sunday 13 September 2026",
+  kickOff: "10:30 Kick Off",
+  venue: "Clapham Common",
+  tag: "LEAGUE",
+};
+
 export default function Home() {
   const quickLinks = [
     {
@@ -175,7 +187,7 @@ alt={featuredStory.imageAlt}
 
           <div style={styles.matchCard}>
            <div style={styles.matchLabel}>NEXT MATCH</div>
-<div style={styles.competition}>SOUTHERN SUNDAY FOOTBALL LEAGUE</div>
+<div style={styles.competition}>{nextMatch.competition}</div>
 
 <div style={styles.teams}>
   <div style={styles.team}>
@@ -185,25 +197,25 @@ alt={featuredStory.imageAlt}
       style={styles.fixtureBadge}
     />
     <strong>Bristol City</strong>
-    <span style={styles.homeAway}>HOME</span>
+    <span style={styles.homeAway}>{nextMatch.cityHomeAway}</span>
   </div>
 
   <div style={styles.versus}>VS</div>
 
   <div style={styles.team}>
-    <div style={styles.aberdeenBadge}>BS</div>
-    <strong>Barnes Stormers FC</strong>
-    <span style={styles.homeAway}>AWAY</span>
+    <div style={styles.aberdeenBadge}>{nextMatch.opponentShort}</div>
+    <strong>{nextMatch.opponent}</strong>
+    <span style={styles.homeAway}>{nextMatch.opponentHomeAway}</span>
   </div>
 </div>
 
 <div style={styles.matchInfo}>
-  <strong>Sunday 13 September 2026</strong>
-  <span>10:30 Kick Off</span>
-  <span>Clapham Common</span>
+  <strong>{nextMatch.date}</strong>
+  <span>{nextMatch.kickOff}</span>
+  <span>{nextMatch.venue}</span>
 </div>
 
-<div style={styles.friendlyTag}>LEAGUE</div>
+<div style={styles.friendlyTag}>{nextMatch.tag}</div>
           </div>
         </div>
       </section>
