@@ -124,8 +124,59 @@ export default function PlayersAdmin() {
             <td style={styles.td}>{player.email || "-"}</td>
             <td style={styles.td}>{player.mobile || "-"}</td>
             <td style={styles.td}>{player.postcode || "-"}</td>
-            <td style={styles.td}>{player.position || "-"}</td>
-            <td style={styles.td}>{player.squad_number || "-"}</td>
+            <td style={styles.td}>
+  <select
+    defaultValue={player.position || ""}
+    onChange={async (e) => {
+      const value = e.target.value || null;
+
+      const { error } = await supabase
+        .from("Players")
+        .update({ position: value })
+        .eq("id", player.id);
+
+      if (error) {
+        alert("Could not save position");
+      }
+    }}
+    style={{
+      padding: "6px",
+      border: "1px solid #ccc",
+      borderRadius: "4px",
+    }}
+  >
+    <option value="">-</option>
+    <option value="Goalkeeper">Goalkeeper</option>
+    <option value="Defender">Defender</option>
+    <option value="Midfielder">Midfielder</option>
+    <option value="Striker">Striker</option>
+  </select>
+</td>
+            <td style={styles.td}>
+  <input
+    type="number"
+    defaultValue={player.squad_number ?? ""}
+    onBlur={async (e) => {
+      const value =
+        e.target.value === "" ? null : Number(e.target.value);
+
+      const { error } = await supabase
+        .from("Players")
+        .update({ squad_number: value })
+        .eq("id", player.id);
+
+      if (error) {
+        alert("Could not save squad number");
+      }
+    }}
+    style={{
+      width: "60px",
+      padding: "6px",
+      border: "1px solid #ccc",
+      borderRadius: "4px",
+    }}
+  />
+</td>
             <td style={styles.td}>
               {player.is_guest ? "Guest" : "Registered"}
             </td>
