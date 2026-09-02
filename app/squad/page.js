@@ -1,4 +1,48 @@
+"use client";
+
+import { useEffect, useState } from "react";
+import { createClient } from "@supabase/supabase-js";
+
+const supabase = createClient(
+  process.env.NEXT_PUBLIC_SUPABASE_URL,
+  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
+);
 export default function SquadPage() {
+  const [players, setPlayers] = useState([]);
+const [loading, setLoading] = useState(true);
+  useEffect(() => {
+  async function loadPlayers() {
+    const { data, error } = await supabase
+     .from("public_squad")
+.select("id, full_name, squad_number, position, public_role")
+.order("squad_number", { ascending: true });
+
+    if (error) {
+      console.error("SQUAD ERROR:", error);
+    } else {
+      setPlayers(data || []);
+    }
+
+    setLoading(false);
+  }
+
+  loadPlayers();
+}, []);
+  const goalkeepers = players.filter(
+  (player) => player.position === "Goalkeeper"
+);
+
+const defenders = players.filter(
+  (player) => player.position === "Defender"
+);
+
+const midfielders = players.filter(
+  (player) => player.position === "Midfielder"
+);
+
+const strikers = players.filter(
+  (player) => player.position === "Striker"
+);
   return (
     <main style={styles.page}>
       <header style={styles.header}>
@@ -25,20 +69,97 @@ export default function SquadPage() {
         </p>
       </section>
 
-      <section style={styles.content}>
-        <div style={styles.card}>
-          <div style={styles.comingSoon}>COMING SOON</div>
-          <h2 style={styles.cardTitle}>Meet the Squad</h2>
-          <p style={styles.cardText}>
-            Full player profiles, positions, squad numbers and more will be
-            added here soon.
-          </p>
+     <section style={styles.content}>
+  {loading ? (
+    <p>Loading squad...</p>
+  ) : (
+    [
+      ["GOALKEEPERS", goalkeepers],
+      ["DEFENDERS", defenders],
+      ["MIDFIELDERS", midfielders],
+      ["STRIKERS", strikers],
+    ].map(([title, group]) => (
+      <div key={title} style={{ marginBottom: "50px" }}>
+        <h2
+          style={{
+            fontSize: "24px",
+            marginBottom: "20px",
+            borderBottom: "3px solid #df1e2f",
+            paddingBottom: "8px",
+          }}
+        >
+          {title}
+        </h2>
 
-          <a href="/" style={styles.button}>
-            ← Back to Home
-          </a>
+        <div
+          style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(auto-fit, minmax(180px, 1fr))",
+            gap: "18px",
+          }}
+        >
+          {group.map((player) => (
+            <div
+              key={player.id}
+              style={{
+                border: "1px solid #ddd",
+                borderRadius: "10px",
+                padding: "24px 18px",
+                textAlign: "center",
+                background: "#fff",
+              }}
+            >
+              <div
+                style={{
+                  fontSize: "52px",
+                  fontWeight: "900",
+                  color: "#df1e2f",
+                  marginBottom: "14px",
+                }}
+              >
+                {player.squad_number || "-"}
+              </div>
+
+              <div
+                style={{
+                  fontSize: "18px",
+                  fontWeight: "900",
+                  marginBottom: "6px",
+                }}
+              >
+                {player.full_name}
+              </div>
+
+              <div
+                style={{
+                  fontSize: "13px",
+                  color: "#666",
+                  textTransform: "uppercase",
+                }}
+              >
+                {player.position}
+              </div>
+
+              {player.public_role && (
+                <div
+                  style={{
+                    marginTop: "12px",
+                    fontSize: "11px",
+                    fontWeight: "900",
+                    color: "#df1e2f",
+                    textTransform: "uppercase",
+                  }}
+                >
+                  {player.public_role}
+                </div>
+              )}
+            </div>
+          ))}
         </div>
-      </section>
+      </div>
+    ))
+  )}
+</section>
     </main>
   );
 }
