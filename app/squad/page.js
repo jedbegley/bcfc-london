@@ -36,8 +36,8 @@ const defenders = players.filter((player) =>
   player.position?.includes("Defender")
 );
 
-const midfielders = players.filter((player) =>
-  player.position?.includes("Midfielder")
+const midfielders = players.filter(
+  (player) => player.position === "Midfielder"
 );
 
 const strikers = players.filter((player) =>
