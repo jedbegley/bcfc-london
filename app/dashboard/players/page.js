@@ -149,6 +149,9 @@ export default function PlayersAdmin() {
     <option value="Goalkeeper">Goalkeeper</option>
     <option value="Defender">Defender</option>
     <option value="Midfielder">Midfielder</option>
+    <option value="Goalkeeper / Midfielder">
+  Goalkeeper / Midfielder
+</option>
     <option value="Striker">Striker</option>
   </select>
 </td>
