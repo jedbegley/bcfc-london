@@ -37,7 +37,7 @@ export default function NewsShareBar() {
   if (!mountPoint) return null;
 
   return createPortal(
-    <ShareButtons title="Bristol City London Supporters FC" />,
+    <ShareButtons title={document.title.replace(" | BCFC London", "")} />
     mountPoint
   );
 }
