@@ -395,6 +395,16 @@ const styles = {
     cursor: "pointer",
     textDecoration: "none",
   },
+  loginButton: {
+  background: "#e31b23",
+  color: "white",
+  border: 0,
+  padding: "12px 18px",
+  borderRadius: "6px",
+  fontWeight: "800",
+  cursor: "pointer",
+  textDecoration: "none",
+},
 
   hero: {
     background: "#151515",
