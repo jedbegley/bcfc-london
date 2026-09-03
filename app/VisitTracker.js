@@ -14,6 +14,14 @@ export default function VisitTracker() {
 
   useEffect(() => {
     async function recordVisit() {
+      if (
+  pathname.startsWith("/dashboard") ||
+  pathname.startsWith("/login") ||
+  pathname.startsWith("/register") ||
+  pathname.startsWith("/reset-password")
+) {
+  return;
+}
       let visitorId = localStorage.getItem("bcfc_visitor_id");
 
       if (!visitorId) {
