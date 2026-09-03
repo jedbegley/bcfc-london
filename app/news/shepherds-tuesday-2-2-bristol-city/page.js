@@ -1,3 +1,28 @@
+export const metadata = {
+  title: "Shepherd's Tuesday 2–2 Bristol City | BCFC London",
+  description:
+    "City rounded off an unbeaten pre-season with a frustrating 2–2 draw at Burgess Park.",
+  openGraph: {
+    title: "Shepherd's Tuesday 2–2 Bristol City",
+    description:
+      "City rounded off an unbeaten pre-season with a frustrating 2–2 draw at Burgess Park.",
+    url: "https://www.bcfclondon.co.uk/news/shepherds-tuesday-2-2-bristol-city",
+    siteName: "Bristol City London Supporters FC",
+    images: [
+      {
+        url: "https://www.bcfclondon.co.uk/IMG_5615.jpeg",
+      },
+    ],
+    type: "article",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Shepherd's Tuesday 2–2 Bristol City",
+    description:
+      "City rounded off an unbeaten pre-season with a frustrating 2–2 draw at Burgess Park.",
+    images: ["https://www.bcfclondon.co.uk/IMG_5615.jpeg"],
+  },
+};
 export default function ShepherdsTuesdayReport() {
   return (
     <main style={styles.page}>
