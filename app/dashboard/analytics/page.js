@@ -51,15 +51,53 @@ export default function AnalyticsPage() {
     loadAnalytics();
   }, [router]);
 
-  if (loading) {
-    return <main style={{ padding: "40px" }}>Loading analytics...</main>;
-  }
+ if (loading) {
+  return <main style={{ padding: "40px" }}>Loading analytics...</main>;
+}
 
-  return (
-    <main style={{ padding: "40px" }}>
-      <h1>Site Analytics</h1>
-      <p>Visitor tracking is working. Dashboard coming next.</p>
-      <p>Recorded page views: {visits.length}</p>
-    </main>
-  );
+const today = new Date();
+today.setHours(0, 0, 0, 0);
+
+const sevenDaysAgo = new Date();
+sevenDaysAgo.setDate(sevenDaysAgo.getDate() - 7);
+
+const visitsToday = visits.filter(
+  (visit) => new Date(visit.created_at) >= today
+).length;
+
+const visitsLast7Days = visits.filter(
+  (visit) => new Date(visit.created_at) >= sevenDaysAgo
+).length;
+
+const uniqueVisitors = new Set(
+  visits.map((visit) => visit.visitor_id)
+).size;
+
+return (
+  <main style={{ padding: "40px" }}>
+    <h1>Site Analytics</h1>
+
+    <div style={{ display: "flex", gap: "20px", flexWrap: "wrap", marginTop: "30px" }}>
+      <div style={{ border: "1px solid #ddd", borderRadius: "12px", padding: "20px", minWidth: "180px" }}>
+        <strong>Total Page Views</strong>
+        <div style={{ fontSize: "32px", marginTop: "10px" }}>{visits.length}</div>
+      </div>
+
+      <div style={{ border: "1px solid #ddd", borderRadius: "12px", padding: "20px", minWidth: "180px" }}>
+        <strong>Unique Visitors</strong>
+        <div style={{ fontSize: "32px", marginTop: "10px" }}>{uniqueVisitors}</div>
+      </div>
+
+      <div style={{ border: "1px solid #ddd", borderRadius: "12px", padding: "20px", minWidth: "180px" }}>
+        <strong>Visits Today</strong>
+        <div style={{ fontSize: "32px", marginTop: "10px" }}>{visitsToday}</div>
+      </div>
+
+      <div style={{ border: "1px solid #ddd", borderRadius: "12px", padding: "20px", minWidth: "180px" }}>
+        <strong>Last 7 Days</strong>
+        <div style={{ fontSize: "32px", marginTop: "10px" }}>{visitsLast7Days}</div>
+      </div>
+    </div>
+  </main>
+);
 }
