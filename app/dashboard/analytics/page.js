@@ -73,6 +73,15 @@ const uniqueVisitors = new Set(
   visits.map((visit) => visit.visitor_id)
 ).size;
 
+const pageCounts = visits.reduce((acc, visit) => {
+  acc[visit.path] = (acc[visit.path] || 0) + 1;
+  return acc;
+}, {});
+
+const mostViewedPages = Object.entries(pageCounts)
+  .sort((a, b) => b[1] - a[1])
+  .slice(0, 10);
+
 return (
   <main style={{ padding: "40px" }}>
     <h1>Site Analytics</h1>
@@ -98,6 +107,24 @@ return (
         <div style={{ fontSize: "32px", marginTop: "10px" }}>{visitsLast7Days}</div>
       </div>
     </div>
+  <section style={{ marginTop: "40px", maxWidth: "850px" }}>
+  <h2>Most Viewed Pages</h2>
+
+  {mostViewedPages.map(([path, count]) => (
+    <div
+      key={path}
+      style={{
+        display: "flex",
+        justifyContent: "space-between",
+        padding: "12px 0",
+        borderBottom: "1px solid #ddd",
+      }}
+    >
+      <span>{path === "/" ? "Homepage" : path}</span>
+      <strong>{count} views</strong>
+    </div>
+  ))}
+</section>
   </main>
 );
 }
