@@ -15,19 +15,7 @@ export default function Fixtures() {
           <a href="/fixtures" style={styles.activeNav}>Fixtures</a>
           <a href="/squad" style={styles.navLink}>Squad</a>
           <a href="/stats" style={styles.navLink}>Stats</a>
-        </nav>
-      </header>
-
-      {/* HERO */}
-      <section style={styles.hero}>
-        <p style={styles.eyebrow}>2026/27</p>
-        <h1 style={styles.title}>Fixtures & Results</h1>
-        <p style={styles.intro}>
-          Keep up with upcoming fixtures, results and match details for
-          Bristol City London Supporters FC.
-        </p>
-      </section>
-   <a
+    <a
   href="/dashboard"
   style={{
     background: "#e31b23",
@@ -39,7 +27,20 @@ export default function Fixtures() {
   }}
 >
   Player Portal
-</a>
+</a>    
+    </nav>
+      </header>
+
+      {/* HERO */}
+      <section style={styles.hero}>
+        <p style={styles.eyebrow}>2026/27</p>
+        <h1 style={styles.title}>Fixtures & Results</h1>
+        <p style={styles.intro}>
+          Keep up with upcoming fixtures, results and match details for
+          Bristol City London Supporters FC.
+        </p>
+      </section>
+   
 
 {/* UPCOMING */}
 <section style={styles.section}>
