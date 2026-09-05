@@ -29,19 +29,19 @@ const [loading, setLoading] = useState(true);
   loadPlayers();
 }, []);
 const goalkeepers = players.filter(
-  (player) => player.squad_group === "Goalkeeper"
+  (player) => player.squad_group?.toLowerCase() === "goalkeeper"
 );
 
 const defenders = players.filter(
-  (player) => player.squad_group === "Defender"
+  (player) => player.squad_group?.toLowerCase() === "defender"
 );
 
 const midfielders = players.filter(
-  (player) => player.squad_group === "Midfielder"
+  (player) => player.squad_group?.toLowerCase() === "midfielder"
 );
 
 const strikers = players.filter(
-  (player) => player.squad_group === "Striker"
+  (player) => player.squad_group?.toLowerCase() === "striker"
 );
   return (
     <main style={styles.page}>
