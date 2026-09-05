@@ -111,7 +111,8 @@ const strikers = players.filter((player) =>
           }}
         >
           {group.map((player) => (
-            <div
+            <a
+  href={`/squad/${player.id}`}
               key={player.id}
               style={{
                 border: "1px solid #ddd",
@@ -119,6 +120,8 @@ const strikers = players.filter((player) =>
                 padding: "24px 18px",
                 textAlign: "center",
                 background: "#fff",
+                textDecoration: "none",
+color: "inherit",
               }}
             >
               <div
@@ -165,7 +168,7 @@ const strikers = players.filter((player) =>
                   {player.public_role}
                 </div>
               )}
-            </div>
+            </a>
           ))}
         </div>
       </div>
