@@ -20,7 +20,7 @@ export default function PlayerProfilePage() {
     async function loadPlayer() {
       const { data, error } = await supabase
         .from("public_squad")
-        .select("id, full_name, squad_number, position, public_role")
+        .select("id, full_name, squad_number, position, public_role, nationality, bio")
         .eq("id", playerId)
         .single();
 
