@@ -33,7 +33,9 @@ const goalkeepers = players.filter((player) =>
 );
 
 const defenders = players.filter((player) =>
-  player.position?.includes("Defender")
+  ["Defender", "Right Back", "Left Back", "Centre Back"].some((position) =>
+    player.position?.includes(position)
+  )
 );
 
 const midfielders = players.filter(
