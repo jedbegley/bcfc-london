@@ -95,8 +95,21 @@ export default function PlayerProfilePage() {
     style={{
       marginTop: "10px",
       fontSize: "16px",
+      display: "flex",
+      alignItems: "center",
+      gap: "8px",
     }}
   >
+    {player.nationality === "South African" && (
+      <img
+        src="https://flagcdn.com/w40/za.png"
+        alt="South African flag"
+        width="24"
+        style={{
+          borderRadius: "2px",
+        }}
+      />
+    )}
     {player.nationality}
   </p>
 )}
