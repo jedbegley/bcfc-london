@@ -14,7 +14,7 @@ const [loading, setLoading] = useState(true);
   async function loadPlayers() {
     const { data, error } = await supabase
      .from("public_squad")
-.select("id, full_name, squad_number, position, public_role")
+.select("id, full_name, squad_number, position, public_role, squad_group")
 .order("squad_number", { ascending: true });
 
     if (error) {
