@@ -123,9 +123,19 @@ export default function PlayerProfilePage() {
       >
         <h2>Player Profile</h2>
 
-        <p>
-          Player biography, career information and season statistics will appear here.
-        </p>
+        {player.bio ? (
+  <p
+    style={{
+      fontSize: "18px",
+      lineHeight: "1.7",
+      whiteSpace: "pre-line",
+    }}
+  >
+    {player.bio}
+  </p>
+) : (
+  <p>Player profile coming soon.</p>
+)}
 
         <a
           href="/squad"
