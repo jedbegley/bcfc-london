@@ -57,6 +57,19 @@ const strikers = players.filter((player) =>
           <a href="/fixtures" style={styles.navLink}>Fixtures</a>
           <a href="/squad" style={styles.activeNav}>Squad</a>
           <a href="/stats" style={styles.navLink}>Stats</a>
+    <a
+  href="/dashboard"
+  style={{
+    background: "#e31b23",
+    color: "#fff",
+    padding: "12px 18px",
+    borderRadius: "6px",
+    fontWeight: "800",
+    textDecoration: "none",
+  }}
+>
+  Player Portal
+</a>
         </nav>
       </header>
 
