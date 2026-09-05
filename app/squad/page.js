@@ -76,10 +76,9 @@ const strikers = players.filter((player) =>
       <section style={styles.hero}>
         <p style={styles.eyebrow}>BCFC LONDON</p>
         <h1 style={styles.title}>Squad</h1>
-        <p style={styles.intro}>
-          Player profiles and the full Bristol City London Supporters FC squad
-          are coming soon.
-        </p>
+       <p style={styles.intro}>
+  Meet the Bristol City London Supporters FC squad for the 2026/27 season.
+</p>
       </section>
 
      <section style={styles.content}>
