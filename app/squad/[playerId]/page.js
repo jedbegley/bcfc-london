@@ -90,6 +90,17 @@ export default function PlayerProfilePage() {
           {player.position}
         </p>
 
+{player.nationality && (
+  <p
+    style={{
+      marginTop: "10px",
+      fontSize: "16px",
+    }}
+  >
+    {player.nationality}
+  </p>
+)}
+
         {player.public_role && (
           <p
             style={{
