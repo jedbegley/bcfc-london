@@ -10,19 +10,7 @@ export default function Fixtures() {
 
         <nav style={styles.nav}>
           <a href="/" style={styles.navLink}>Home</a>
-    <a
-  href="/dashboard"
-  style={{
-    background: "#e31b23",
-    color: "#fff",
-    padding: "12px 18px",
-    borderRadius: "6px",
-    fontWeight: "800",
-    textDecoration: "none",
-  }}
->
-  Player Portal
-</a>
+   
           <a href="/news" style={styles.navLink}>News</a>
           <a href="/fixtures" style={styles.activeNav}>Fixtures</a>
           <a href="/squad" style={styles.navLink}>Squad</a>
@@ -39,6 +27,19 @@ export default function Fixtures() {
           Bristol City London Supporters FC.
         </p>
       </section>
+   <a
+  href="/dashboard"
+  style={{
+    background: "#e31b23",
+    color: "#fff",
+    padding: "12px 18px",
+    borderRadius: "6px",
+    fontWeight: "800",
+    textDecoration: "none",
+  }}
+>
+  Player Portal
+</a>
 
 {/* UPCOMING */}
 <section style={styles.section}>
