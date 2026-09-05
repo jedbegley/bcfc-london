@@ -212,6 +212,7 @@ const styles = {
 
   nav: {
     display: "flex",
+    alignItems: "center",
     gap: "25px",
     flexWrap: "wrap",
   },
