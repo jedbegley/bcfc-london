@@ -28,22 +28,20 @@ const [loading, setLoading] = useState(true);
 
   loadPlayers();
 }, []);
-const goalkeepers = players.filter((player) =>
-  player.position?.includes("Goalkeeper")
+const goalkeepers = players.filter(
+  (player) => player.squad_group === "Goalkeeper"
 );
 
-const defenders = players.filter((player) =>
-  ["Defender", "Right Back", "Left Back", "Centre Back"].some((position) =>
-    player.position?.includes(position)
-  )
+const defenders = players.filter(
+  (player) => player.squad_group === "Defender"
 );
 
 const midfielders = players.filter(
-  (player) => player.position === "Midfielder"
+  (player) => player.squad_group === "Midfielder"
 );
 
-const strikers = players.filter((player) =>
-  player.position?.includes("Striker")
+const strikers = players.filter(
+  (player) => player.squad_group === "Striker"
 );
   return (
     <main style={styles.page}>
