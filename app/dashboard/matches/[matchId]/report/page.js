@@ -280,6 +280,7 @@ loadPlayers();
   </div>
 ))}
   <button
+  onClick={savePlayerStats}
   style={{
     marginTop: "20px",
     padding: "10px 18px",
