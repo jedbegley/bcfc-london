@@ -20,7 +20,7 @@ export default function PlayerProfilePage() {
     async function loadPlayer() {
       const { data, error } = await supabase
         .from("public_squad")
-        .select("id, full_name, squad_number, position, public_role, nationality, bio")
+        .select("id, full_name, squad_number, position, public_role, nationality, bio, photo_url")
         .eq("id", playerId)
         .single();
 
@@ -51,13 +51,18 @@ export default function PlayerProfilePage() {
         fontFamily: "Arial, Helvetica, sans-serif",
       }}
     >
+     
       <section
-        style={{
-          background: "#111",
-          color: "#fff",
-          padding: "70px 6%",
-        }}
-      >
+  style={{
+    background: "#111",
+    color: "#fff",
+    padding: "70px 6%",
+    display: "flex",
+    justifyContent: "space-between",
+    alignItems: "center",
+    gap: "40px",
+  }}
+>
         <div
           style={{
             color: "#df1e2f",
@@ -141,6 +146,20 @@ export default function PlayerProfilePage() {
             {player.public_role}
           </p>
         )}
+{player.photo_url && (
+  <img
+    src={player.photo_url}
+    alt={player.full_name}
+    style={{
+      width: "300px",
+      height: "300px",
+      objectFit: "cover",
+      objectPosition: "center 25%",
+      borderRadius: "12px",
+      flexShrink: 0,
+    }}
+  />
+)}
       </section>
 
       <section
