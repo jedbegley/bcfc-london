@@ -94,7 +94,25 @@ loadPlayers();
     return;
   }
 
-  alert(`${selectedIds.length} players selected.`);
+  const squadRows = selectedIds.map((id) => ({
+    match_id: Number(matchId),
+    player_id: Number(id),
+    selected: true,
+    starting: !!startedPlayers[id],
+    fantasy_position: fantasyPositions[id] || null,
+  }));
+
+  const { error } = await supabase
+    .from("match_squad")
+    .insert(squadRows);
+
+  if (error) {
+    console.error("Error saving match squad:", error);
+    alert("There was a problem saving the match squad.");
+    return;
+  }
+
+  alert("Match squad saved!");
 };
   if (loading) {
     return <main style={{ padding: "40px" }}>Loading...</main>;
