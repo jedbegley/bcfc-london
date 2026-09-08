@@ -122,7 +122,19 @@ loadPlayers();
     own_goals: 0,
     clean_sheet: false,
     motm: false,
-    fantasy_points: 0,
+    fantasy_points:
+  2 +
+  Number(playerGoals[id] || 0) *
+    (fantasyPositions[id] === "Goalkeeper"
+      ? 6
+      : fantasyPositions[id] === "Defender"
+      ? 6
+      : fantasyPositions[id] === "Midfielder"
+      ? 5
+      : 4) +
+  Number(playerAssists[id] || 0) * 3 -
+  Number(playerYellowCards[id] || 0) * 2 -
+  Number(playerRedCards[id] || 0) * 4,
   }));
 
   const { error: statsError } = await supabase
