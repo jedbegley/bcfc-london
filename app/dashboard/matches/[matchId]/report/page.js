@@ -144,7 +144,7 @@ loadPlayers();
 ? 3
 : 2
 : 0
-}));
+)}));
 
   const { error: statsError } = await supabase
     .from("match_stats")
