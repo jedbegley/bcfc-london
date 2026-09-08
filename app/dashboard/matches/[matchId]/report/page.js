@@ -67,11 +67,13 @@ const [opponentScore, setOpponentScore] = useState("");
 
   <div style={{ display: "flex", gap: "12px", alignItems: "center" }}>
     <input
-      type="number"
-      min="0"
-      placeholder="City"
-      style={{ width: "80px", padding: "8px" }}
-    />
+  type="number"
+  min="0"
+  placeholder="City"
+  value={ourScore}
+  onChange={(e) => setOurScore(e.target.value)}
+  style={{ width: "80px", padding: "8px" }}
+/>
 
     <span>-</span>
 
