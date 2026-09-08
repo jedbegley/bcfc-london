@@ -86,6 +86,16 @@ const [opponentScore, setOpponentScore] = useState("");
   style={{ width: "120px", padding: "8px" }}
 />
   </div>
+
+  <button
+  style={{
+    marginTop: "15px",
+    padding: "10px 18px",
+    cursor: "pointer",
+  }}
+>
+  Save Result
+</button>
 </div>
     </main>
   );
