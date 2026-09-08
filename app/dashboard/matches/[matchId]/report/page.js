@@ -168,35 +168,38 @@ loadPlayers();
   {player.full_name}
 </span>
     {selectedPlayers[player.id] && (
-  <label style={{ marginLeft: "12px" }}>
-    <input
-  type="checkbox"
-  checked={!!startedPlayers[player.id]}
-  onChange={(e) =>
-    setStartedPlayers({
-      ...startedPlayers,
-      [player.id]: e.target.checked,
-    })
-  }
-/>
-    {" "}Started
-  </label>
-<select
-  value={fantasyPositions[player.id] || ""}
-  onChange={(e) =>
-    setFantasyPositions({
-      ...fantasyPositions,
-      [player.id]: e.target.value,
-    })
-  }
-  style={{ marginLeft: "12px", padding: "5px" }}
->
-  <option value="">Match position</option>
-  <option value="Goalkeeper">Goalkeeper</option>
-  <option value="Defender">Defender</option>
-  <option value="Midfielder">Midfielder</option>
-  <option value="Striker">Striker</option>
-</select>
+  <>
+    <label style={{ marginLeft: "12px" }}>
+      <input
+        type="checkbox"
+        checked={!!startedPlayers[player.id]}
+        onChange={(e) =>
+          setStartedPlayers({
+            ...startedPlayers,
+            [player.id]: e.target.checked,
+          })
+        }
+      />
+      {" "}Started
+    </label>
+
+    <select
+      value={fantasyPositions[player.id] || ""}
+      onChange={(e) =>
+        setFantasyPositions({
+          ...fantasyPositions,
+          [player.id]: e.target.value,
+        })
+      }
+      style={{ marginLeft: "12px", padding: "5px" }}
+    >
+      <option value="">Match position</option>
+      <option value="Goalkeeper">Goalkeeper</option>
+      <option value="Defender">Defender</option>
+      <option value="Midfielder">Midfielder</option>
+      <option value="Striker">Striker</option>
+    </select>
+  </>
 )}
   </div>
 ))}
