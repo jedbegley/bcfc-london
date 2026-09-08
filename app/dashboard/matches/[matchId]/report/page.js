@@ -38,6 +38,29 @@ const [opponentScore, setOpponentScore] = useState("");
     loadMatch();
   }, [matchId]);
 
+  const saveResult = async () => {
+  if (ourScore === "" || opponentScore === "") {
+    alert("Please enter both scores.");
+    return;
+  }
+
+  const { error } = await supabase
+    .from("matches")
+    .update({
+      our_score: Number(ourScore),
+      opponent_score: Number(opponentScore),
+      status: "Completed",
+    })
+    .eq("id", matchId);
+
+  if (error) {
+    console.error("Error saving result:", error);
+    alert("There was a problem saving the result.");
+    return;
+  }
+
+  alert("Result saved!");
+};
   if (loading) {
     return <main style={{ padding: "40px" }}>Loading...</main>;
   }
