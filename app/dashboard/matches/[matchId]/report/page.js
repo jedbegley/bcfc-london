@@ -141,10 +141,10 @@ loadPlayers();
     : fantasyPositions[id] === "Defender"
     ? 4
     : fantasyPositions[id] === "Midfielder"
-    ? 3
-    : 2
-  : 0)
-  }));
+? 3
+: 2
+: 0
+}));
 
   const { error: statsError } = await supabase
     .from("match_stats")
