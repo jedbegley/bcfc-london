@@ -127,6 +127,7 @@ color: "inherit",
               {player.photo_url ? (
   <>
     <img
+                className="squad-player-photo"
       src={player.photo_url}
       alt={player.full_name}
       style={{
@@ -205,6 +206,14 @@ objectPosition: "center 25%",
     ))
   )}
 </section>
+  <style>{`
+  @media (max-width: 700px) {
+    .squad-player-photo {
+      height: 240px !important;
+      object-position: center 20% !important;
+    }
+  }
+`}</style>
     </main>
   );
 }
