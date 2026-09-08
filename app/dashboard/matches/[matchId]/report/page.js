@@ -111,6 +111,8 @@ const [opponentScore, setOpponentScore] = useState("");
   </div>
 
   <button
+  onClick={saveResult}
+  style={{
   style={{
     marginTop: "15px",
     padding: "10px 18px",
