@@ -1,4 +1,65 @@
-export default function StatsPage() {
+import { createClient } from "@supabase/supabase-js";
+
+const supabase = createClient(
+  process.env.NEXT_PUBLIC_SUPABASE_URL,
+  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
+);
+export default async function StatsPage() {
+    const { data: stats, error } = await supabase
+    .from("match_stats")
+   .select(`
+  player_id,
+  goals,
+  assists,
+  yellow_cards,
+  red_cards,
+  clean_sheet,
+  motm,
+  fantasy_points
+`);
+    const { data: squad } = await supabase
+    .from("public_squad")
+    .select("id, full_name, squad_number");
+
+  if (error) {
+    console.error("Error loading stats:", error);
+  }
+    const leaderboard = (squad || [])
+    .map((player) => {
+      const playerStats = (stats || []).filter(
+        (row) => row.player_id === player.id
+      );
+
+      return {
+        id: player.id,
+        full_name: player.full_name,
+        squad_number: player.squad_number,
+        apps: playerStats.length,
+        goals: playerStats.reduce((sum, row) => sum + (row.goals || 0), 0),
+        assists: playerStats.reduce((sum, row) => sum + (row.assists || 0), 0),
+        cleanSheets: playerStats.reduce(
+          (sum, row) => sum + (row.clean_sheet ? 1 : 0),
+          0
+        ),
+        yellowCards: playerStats.reduce(
+          (sum, row) => sum + (row.yellow_cards || 0),
+          0
+        ),
+        redCards: playerStats.reduce(
+          (sum, row) => sum + (row.red_cards || 0),
+          0
+        ),
+        motm: playerStats.reduce(
+          (sum, row) => sum + (row.motm ? 1 : 0),
+          0
+        ),
+        fantasyPoints: playerStats.reduce(
+          (sum, row) => sum + (row.fantasy_points || 0),
+          0
+        ),
+      };
+    })
+    .sort((a, b) => b.fantasyPoints - a.fantasyPoints);
   return (
     <main style={styles.page}>
       <header style={styles.header}>
@@ -39,8 +100,77 @@ export default function StatsPage() {
 
       <section style={styles.content}>
         <div style={styles.card}>
-          <div style={styles.comingSoon}>COMING SOON</div>
-          <h2 style={styles.cardTitle}>Player Stats</h2>
+  <h2 style={styles.cardTitle}>Fantasy Leaderboard</h2>
+
+  <div style={{ overflowX: "auto" }}>
+    <table
+      style={{
+        width: "100%",
+        borderCollapse: "collapse",
+        marginTop: "20px",
+      }}
+    >
+      <thead>
+        <tr>
+          <th style={{ textAlign: "left", padding: "10px" }}>Pos</th>
+          <th style={{ textAlign: "left", padding: "10px" }}>Player</th>
+          <th style={{ textAlign: "center", padding: "10px" }}>Apps</th>
+          <th style={{ textAlign: "center", padding: "10px" }}>Goals</th>
+          <th style={{ textAlign: "center", padding: "10px" }}>Assists</th>
+          <th style={{ textAlign: "center", padding: "10px" }}>CS</th>
+          <th style={{ textAlign: "center", padding: "10px" }}>YC</th>
+          <th style={{ textAlign: "center", padding: "10px" }}>RC</th>
+          <th style={{ textAlign: "center", padding: "10px" }}>MOTM</th>
+          <th style={{ textAlign: "center", padding: "10px" }}>Pts</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        {leaderboard.map((player, index) => (
+          <tr key={player.id}>
+            <td style={{ padding: "10px" }}>{index + 1}</td>
+
+            <td style={{ padding: "10px" }}>
+              {player.squad_number ? `#${player.squad_number} ` : ""}
+              {player.full_name}
+            </td>
+
+            <td style={{ textAlign: "center", padding: "10px" }}>
+              {player.apps}
+            </td>
+            <td style={{ textAlign: "center", padding: "10px" }}>
+              {player.goals}
+            </td>
+            <td style={{ textAlign: "center", padding: "10px" }}>
+              {player.assists}
+            </td>
+            <td style={{ textAlign: "center", padding: "10px" }}>
+              {player.cleanSheets}
+            </td>
+            <td style={{ textAlign: "center", padding: "10px" }}>
+              {player.yellowCards}
+            </td>
+            <td style={{ textAlign: "center", padding: "10px" }}>
+              {player.redCards}
+            </td>
+            <td style={{ textAlign: "center", padding: "10px" }}>
+              {player.motm}
+            </td>
+            <td
+              style={{
+                textAlign: "center",
+                padding: "10px",
+                fontWeight: "700",
+              }}
+            >
+              {player.fantasyPoints}
+            </td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+</div>
           <p style={styles.cardText}>
             Appearances, goals, assists, cards and season statistics will all
             be available here soon.
