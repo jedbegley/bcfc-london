@@ -101,15 +101,31 @@ export default function PlayerProfilePage() {
     }}
   >
     {player.nationality === "South African" && (
-      <img
-        src="https://flagcdn.com/w40/za.png"
-        alt="South African flag"
-        width="24"
-        style={{
-          borderRadius: "2px",
-        }}
-      />
-    )}
+  <img
+    src="https://flagcdn.com/w40/za.png"
+    alt="South African flag"
+    width="24"
+    style={{ borderRadius: "2px" }}
+  />
+)}
+
+{player.nationality === "Spanish" && (
+  <img
+    src="https://flagcdn.com/w40/es.png"
+    alt="Spanish flag"
+    width="24"
+    style={{ borderRadius: "2px" }}
+  />
+)}
+
+{player.nationality === "French" && (
+  <img
+    src="https://flagcdn.com/w40/fr.png"
+    alt="French flag"
+    width="24"
+    style={{ borderRadius: "2px" }}
+  />
+)}
     {player.nationality}
   </p>
 )}
