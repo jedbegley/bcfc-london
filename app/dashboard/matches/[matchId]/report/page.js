@@ -267,6 +267,15 @@ loadPlayers();
 )}
   </div>
 ))}
+  <button
+  style={{
+    marginTop: "20px",
+    padding: "10px 18px",
+    cursor: "pointer",
+  }}
+>
+  Save Player Stats
+</button>
 </div>
     </main>
   );
