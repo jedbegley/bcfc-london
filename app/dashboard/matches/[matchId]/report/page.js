@@ -113,7 +113,6 @@ const [opponentScore, setOpponentScore] = useState("");
   <button
   onClick={saveResult}
   style={{
-  style={{
     marginTop: "15px",
     padding: "10px 18px",
     cursor: "pointer",
