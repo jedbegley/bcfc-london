@@ -57,10 +57,7 @@ export default function PlayerProfilePage() {
     background: "#111",
     color: "#fff",
     padding: "70px 6%",
-    display: "flex",
-    justifyContent: "space-between",
-    alignItems: "center",
-    gap: "40px",
+    
   }}
 >
         <div
@@ -146,20 +143,7 @@ export default function PlayerProfilePage() {
             {player.public_role}
           </p>
         )}
-{player.photo_url && (
-  <img
-    src={player.photo_url}
-    alt={player.full_name}
-    style={{
-      width: "300px",
-      height: "300px",
-      objectFit: "cover",
-      objectPosition: "center 25%",
-      borderRadius: "12px",
-      flexShrink: 0,
-    }}
-  />
-)}
+
       </section>
 
       <section
@@ -167,9 +151,28 @@ export default function PlayerProfilePage() {
           maxWidth: "1000px",
           margin: "0 auto",
           padding: "50px 6%",
+          display: "grid",
+gridTemplateColumns: "300px 1fr",
+gap: "60px",
         }}
       >
-        <h2>Player Profile</h2>
+        {player.photo_url ? (
+  <img
+    src={player.photo_url}
+    alt={player.full_name}
+    style={{
+      width: "300px",
+      height: "400px",
+      objectFit: "cover",
+      objectPosition: "center 25%",
+      borderRadius: "12px",
+    }}
+  />
+) : (
+  <div />
+)}
+  <div>      
+  <h2>Player Profile</h2>
 
         {player.bio ? (
   <p
@@ -200,6 +203,7 @@ export default function PlayerProfilePage() {
         >
           ← Back to Squad
         </a>
+            </div>
       </section>
     </main>
   );
