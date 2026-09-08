@@ -15,6 +15,8 @@ export default function MatchReportPage() {
 
   const [match, setMatch] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [ourScore, setOurScore] = useState("");
+const [opponentScore, setOpponentScore] = useState("");
 
   useEffect(() => {
     async function loadMatch() {
