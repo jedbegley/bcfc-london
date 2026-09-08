@@ -37,6 +37,22 @@ const [opponentScore, setOpponentScore] = useState("");
     }
 
     loadMatch();
+
+    async function loadPlayers() {
+  const { data, error } = await supabase
+    .from("Players")
+    .select("id, full_name, squad_number, position")
+    .eq("is_guest", false)
+    .order("full_name", { ascending: true });
+
+  if (error) {
+    console.error("Error loading players:", error);
+  } else {
+    setPlayers(data || []);
+  }
+}
+
+loadPlayers();
   }, [matchId]);
 
   const saveResult = async () => {
@@ -121,6 +137,16 @@ const [opponentScore, setOpponentScore] = useState("");
 >
   Save Result
 </button>
+</div>
+    <div style={{ marginTop: "40px" }}>
+  <h2>Players</h2>
+
+  {players.map((player) => (
+    <p key={player.id}>
+      {player.squad_number ? `#${player.squad_number} ` : ""}
+      {player.full_name}
+    </p>
+  ))}
 </div>
     </main>
   );
