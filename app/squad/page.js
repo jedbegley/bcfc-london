@@ -132,9 +132,8 @@ color: "inherit",
       style={{
         width: "100%",
         height: "220px",
-        objectFit: "contain",
-        objectPosition: "center",
-background: "#f5f5f5",
+        objectFit: "cover",
+objectPosition: "center 25%",
         borderRadius: "8px",
         marginBottom: "14px",
       }}
