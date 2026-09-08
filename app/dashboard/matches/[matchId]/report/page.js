@@ -84,6 +84,18 @@ loadPlayers();
 
   alert("Result saved!");
 };
+  const savePlayerStats = async () => {
+  const selectedIds = Object.keys(selectedPlayers).filter(
+    (id) => selectedPlayers[id]
+  );
+
+  if (selectedIds.length === 0) {
+    alert("Please select at least one player.");
+    return;
+  }
+
+  alert(`${selectedIds.length} players selected.`);
+};
   if (loading) {
     return <main style={{ padding: "40px" }}>Loading...</main>;
   }
