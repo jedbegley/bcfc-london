@@ -171,15 +171,7 @@ export default async function StatsPage() {
     </table>
   </div>
 </div>
-          <p style={styles.cardText}>
-            Appearances, goals, assists, cards and season statistics will all
-            be available here soon.
-          </p>
-
-          <a href="/" style={styles.button}>
-            ← Back to Home
-          </a>
-        </div>
+          
       </section>
     </main>
   );
