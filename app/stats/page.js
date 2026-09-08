@@ -94,7 +94,7 @@ export default async function StatsPage() {
         <p style={styles.eyebrow}>BCFC LONDON</p>
         <h1 style={styles.title}>Stats</h1>
         <p style={styles.intro}>
-          Player appearances, goals, assists and more are coming soon.
+          Player stats and Fantasy League standings for the 2026/27 season.
         </p>
       </section>
 
