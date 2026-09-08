@@ -248,6 +248,21 @@ loadPlayers();
     style={{ width: "40px", marginLeft: "5px", padding: "5px" }}
   />
 </label>
+    <label style={{ marginLeft: "12px" }}>
+  RC
+  <input
+    type="number"
+    min="0"
+    value={playerRedCards[player.id] || ""}
+    onChange={(e) =>
+      setPlayerRedCards({
+        ...playerRedCards,
+        [player.id]: e.target.value,
+      })
+    }
+    style={{ width: "40px", marginLeft: "5px", padding: "5px" }}
+  />
+</label>
   </>
 )}
   </div>
