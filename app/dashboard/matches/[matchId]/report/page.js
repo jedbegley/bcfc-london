@@ -168,7 +168,16 @@ loadPlayers();
 </span>
     {selectedPlayers[player.id] && (
   <label style={{ marginLeft: "12px" }}>
-    <input type="checkbox" />
+    <input
+  type="checkbox"
+  checked={!!startedPlayers[player.id]}
+  onChange={(e) =>
+    setStartedPlayers({
+      ...startedPlayers,
+      [player.id]: e.target.checked,
+    })
+  }
+/>
     {" "}Started
   </label>
 )}
