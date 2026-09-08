@@ -147,6 +147,8 @@ export default function PlayerProfilePage() {
       </section>
 
       <section
+  className="player-profile-grid"
+  style={{
         style={{
           maxWidth: "1000px",
           margin: "0 auto",
@@ -158,7 +160,8 @@ gap: "60px",
       >
         {player.photo_url ? (
   <img
-    src={player.photo_url}
+  className="player-profile-photo"
+  src={player.photo_url}
     alt={player.full_name}
     style={{
       width: "300px",
@@ -205,6 +208,19 @@ gap: "60px",
         </a>
             </div>
       </section>
+<style>{`
+  @media (max-width: 700px) {
+    .player-profile-grid {
+      grid-template-columns: 1fr !important;
+      gap: 24px !important;
+    }
+
+    .player-profile-photo {
+      width: 100% !important;
+      height: 360px !important;
+    }
+  }
+`}</style>
     </main>
   );
 }
