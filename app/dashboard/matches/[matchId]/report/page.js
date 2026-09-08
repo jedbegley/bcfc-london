@@ -22,6 +22,7 @@ const [opponentScore, setOpponentScore] = useState("");
 const [startedPlayers, setStartedPlayers] = useState({});
   const [fantasyPositions, setFantasyPositions] = useState({});
   const [playerGoals, setPlayerGoals] = useState({});
+  const [playerAssists, setPlayerAssists] = useState({});
   useEffect(() => {
     async function loadMatch() {
       const { data, error } = await supabase
@@ -209,6 +210,21 @@ loadPlayers();
     onChange={(e) =>
       setPlayerGoals({
         ...playerGoals,
+        [player.id]: e.target.value,
+      })
+    }
+    style={{ width: "45px", marginLeft: "5px", padding: "5px" }}
+  />
+</label>
+    <label style={{ marginLeft: "12px" }}>
+  Assists
+  <input
+    type="number"
+    min="0"
+    value={playerAssists[player.id] || ""}
+    onChange={(e) =>
+      setPlayerAssists({
+        ...playerAssists,
         [player.id]: e.target.value,
       })
     }
