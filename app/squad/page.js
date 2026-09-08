@@ -124,26 +124,55 @@ const strikers = players.filter(
 color: "inherit",
               }}
             >
-              <div
-                style={{
-                  fontSize: "52px",
-                  fontWeight: "900",
-                  color: "#df1e2f",
-                  marginBottom: "14px",
-                }}
-              >
-                {player.squad_number || "-"}
-              </div>
+              {player.photo_url ? (
+  <>
+    <img
+      src={player.photo_url}
+      alt={player.full_name}
+      style={{
+        width: "100%",
+        height: "220px",
+        objectFit: "cover",
+        borderRadius: "8px",
+        marginBottom: "14px",
+      }}
+    />
 
-              <div
-                style={{
-                  fontSize: "18px",
-                  fontWeight: "900",
-                  marginBottom: "6px",
-                }}
-              >
-                {player.full_name}
-              </div>
+    <div
+      style={{
+        fontSize: "18px",
+        fontWeight: "900",
+        marginBottom: "6px",
+      }}
+    >
+      {player.squad_number ? `${player.squad_number}. ` : ""}
+      {player.full_name}
+    </div>
+  </>
+) : (
+  <>
+    <div
+      style={{
+        fontSize: "52px",
+        fontWeight: "900",
+        color: "#df1e2f",
+        marginBottom: "14px",
+      }}
+    >
+      {player.squad_number || "-"}
+    </div>
+
+    <div
+      style={{
+        fontSize: "18px",
+        fontWeight: "900",
+        marginBottom: "6px",
+      }}
+    >
+      {player.full_name}
+    </div>
+  </>
+)}
 
               <div
                 style={{
