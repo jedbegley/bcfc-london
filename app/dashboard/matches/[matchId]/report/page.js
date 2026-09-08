@@ -134,7 +134,7 @@ loadPlayers();
       : 4) +
   Number(playerAssists[id] || 0) * 3 -
   Number(playerYellowCards[id] || 0) * 2 -
-  Number(playerRedCards[id] || 0) * 4, +
+  Number(playerRedCards[id] || 0) * 4 +
 (Number(opponentScore) === 0
   ? fantasyPositions[id] === "Goalkeeper"
     ? 4
