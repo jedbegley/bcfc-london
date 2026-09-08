@@ -102,17 +102,40 @@ loadPlayers();
     fantasy_position: fantasyPositions[id] || null,
   }));
 
-  const { error } = await supabase
+  const { error: squadError } = await supabase
     .from("match_squad")
     .insert(squadRows);
 
-  if (error) {
-    console.error("Error saving match squad:", error);
+  if (squadError) {
+    console.error("Error saving match squad:", squadError);
     alert("There was a problem saving the match squad.");
     return;
   }
 
-  alert("Match squad saved!");
+  const statRows = selectedIds.map((id) => ({
+    match_id: Number(matchId),
+    player_id: Number(id),
+    goals: Number(playerGoals[id] || 0),
+    assists: Number(playerAssists[id] || 0),
+    yellow_cards: Number(playerYellowCards[id] || 0),
+    red_cards: Number(playerRedCards[id] || 0),
+    own_goals: 0,
+    clean_sheet: false,
+    motm: false,
+    fantasy_points: 0,
+  }));
+
+  const { error: statsError } = await supabase
+    .from("match_stats")
+    .insert(statRows);
+
+  if (statsError) {
+    console.error("Error saving match stats:", statsError);
+    alert("There was a problem saving the player stats.");
+    return;
+  }
+
+  alert("Match squad and player stats saved!");
 };
   if (loading) {
     return <main style={{ padding: "40px" }}>Loading...</main>;
