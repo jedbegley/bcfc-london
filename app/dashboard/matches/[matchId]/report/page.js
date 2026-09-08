@@ -120,7 +120,7 @@ loadPlayers();
     yellow_cards: Number(playerYellowCards[id] || 0),
     red_cards: Number(playerRedCards[id] || 0),
     own_goals: 0,
-    clean_sheet: false,
+    clean_sheet: Number(opponentScore) === 0,
     motm: false,
     fantasy_points:
   2 +
@@ -134,7 +134,16 @@ loadPlayers();
       : 4) +
   Number(playerAssists[id] || 0) * 3 -
   Number(playerYellowCards[id] || 0) * 2 -
-  Number(playerRedCards[id] || 0) * 4,
+  Number(playerRedCards[id] || 0) * 4, +
+(Number(opponentScore) === 0
+  ? fantasyPositions[id] === "Goalkeeper"
+    ? 4
+    : fantasyPositions[id] === "Defender"
+    ? 4
+    : fantasyPositions[id] === "Midfielder"
+    ? 3
+    : 2
+  : 0)
   }));
 
   const { error: statsError } = await supabase
