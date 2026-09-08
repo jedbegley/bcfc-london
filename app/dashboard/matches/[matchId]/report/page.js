@@ -21,6 +21,7 @@ const [opponentScore, setOpponentScore] = useState("");
   const [selectedPlayers, setSelectedPlayers] = useState({});
 const [startedPlayers, setStartedPlayers] = useState({});
   const [fantasyPositions, setFantasyPositions] = useState({});
+  const [playerGoals, setPlayerGoals] = useState({});
   useEffect(() => {
     async function loadMatch() {
       const { data, error } = await supabase
