@@ -59,6 +59,28 @@ export default function MatchReportPage() {
       <p>{match.competition}</p>
 
       <p>Status: {match.status}</p>
+
+        <div style={{ marginTop: "30px" }}>
+  <h3>Final Score</h3>
+
+  <div style={{ display: "flex", gap: "12px", alignItems: "center" }}>
+    <input
+      type="number"
+      min="0"
+      placeholder="City"
+      style={{ width: "80px", padding: "8px" }}
+    />
+
+    <span>-</span>
+
+    <input
+      type="number"
+      min="0"
+      placeholder={match.opponent}
+      style={{ width: "120px", padding: "8px" }}
+    />
+  </div>
+</div>
     </main>
   );
 }
