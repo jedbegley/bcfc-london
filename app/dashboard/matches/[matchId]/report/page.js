@@ -142,11 +142,23 @@ loadPlayers();
   <h2>Players</h2>
 
   {players.map((player) => (
-    <p key={player.id}>
+  <div
+    key={player.id}
+    style={{
+      display: "flex",
+      alignItems: "center",
+      gap: "10px",
+      marginBottom: "12px",
+    }}
+  >
+    <input type="checkbox" />
+
+    <span>
       {player.squad_number ? `#${player.squad_number} ` : ""}
       {player.full_name}
-    </p>
-  ))}
+    </span>
+  </div>
+))}
 </div>
     </main>
   );
