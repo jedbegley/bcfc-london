@@ -163,10 +163,12 @@ loadPlayers();
   }
 />
 
-    <span>
-      {player.squad_number ? `#${player.squad_number} ` : ""}
-      {player.full_name}
-    </span>
+    {selectedPlayers[player.id] && (
+  <label style={{ marginLeft: "12px" }}>
+    <input type="checkbox" />
+    {" "}Started
+  </label>
+)}
   </div>
 ))}
 </div>
