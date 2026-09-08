@@ -152,7 +152,16 @@ loadPlayers();
       marginBottom: "12px",
     }}
   >
-    <input type="checkbox" />
+    <input
+  type="checkbox"
+  checked={!!selectedPlayers[player.id]}
+  onChange={(e) =>
+    setSelectedPlayers({
+      ...selectedPlayers,
+      [player.id]: e.target.checked,
+    })
+  }
+/>
 
     <span>
       {player.squad_number ? `#${player.squad_number} ` : ""}
