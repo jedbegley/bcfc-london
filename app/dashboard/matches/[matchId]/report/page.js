@@ -200,6 +200,21 @@ loadPlayers();
       <option value="Midfielder">Midfielder</option>
       <option value="Striker">Striker</option>
     </select>
+      <label style={{ marginLeft: "12px" }}>
+  Goals
+  <input
+    type="number"
+    min="0"
+    value={playerGoals[player.id] || ""}
+    onChange={(e) =>
+      setPlayerGoals({
+        ...playerGoals,
+        [player.id]: e.target.value,
+      })
+    }
+    style={{ width: "45px", marginLeft: "5px", padding: "5px" }}
+  />
+</label>
   </>
 )}
   </div>
