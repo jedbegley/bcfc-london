@@ -149,7 +149,6 @@ export default function PlayerProfilePage() {
       <section
   className="player-profile-grid"
   style={{
-        style={{
           maxWidth: "1000px",
           margin: "0 auto",
           padding: "50px 6%",
