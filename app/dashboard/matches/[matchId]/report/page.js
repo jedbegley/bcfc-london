@@ -232,6 +232,21 @@ loadPlayers();
     style={{ width: "45px", marginLeft: "5px", padding: "5px" }}
   />
 </label>
+    <label style={{ marginLeft: "12px" }}>
+  YC
+  <input
+    type="number"
+    min="0"
+    value={playerYellowCards[player.id] || ""}
+    onChange={(e) =>
+      setPlayerYellowCards({
+        ...playerYellowCards,
+        [player.id]: e.target.value,
+      })
+    }
+    style={{ width: "40px", marginLeft: "5px", padding: "5px" }}
+  />
+</label>
   </>
 )}
   </div>
