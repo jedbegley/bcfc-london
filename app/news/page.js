@@ -330,6 +330,28 @@ export default function News() {
       </footer>
     <style>{`
   @media (max-width: 768px) {
+  header nav {
+  display: grid !important;
+  grid-template-columns: auto auto auto auto !important;
+  width: 100% !important;
+  justify-content: space-between !important;
+  column-gap: 0 !important;
+  row-gap: 22px !important;
+  align-items: center !important;
+}
+
+header nav a:nth-child(5) {
+  grid-column: 1;
+}
+
+header nav a:nth-child(6) {
+  grid-column: 2;
+}
+
+header nav a:nth-child(7) {
+  grid-column: 3 / 5;
+  justify-self: start;
+}
     .featured-card {
       display: block !important;
       padding: 24px !important;
@@ -357,19 +379,21 @@ const styles = {
     minHeight: "100vh",
   },
 
-  header: {
-    padding: "24px 6%",
-    display: "flex",
-    justifyContent: "space-between",
-    alignItems: "center",
-    borderBottom: "4px solid #df1e2f",
-    flexWrap: "wrap",
-    gap: "20px",
-  },
-  headerBrand: {
+header: {
+  background: "#ffffff",
+  padding: "22px 6%",
+  display: "flex",
+  justifyContent: "space-between",
+  alignItems: "center",
+  borderBottom: "4px solid #e31b23",
+  flexWrap: "wrap",
+  gap: "20px",
+},
+
+headerBrand: {
   display: "flex",
   alignItems: "center",
-  gap: "16px",
+  gap: "18px",
 },
 
 headerBadge: {
@@ -378,40 +402,42 @@ headerBadge: {
   objectFit: "contain",
 },
 
-  clubName: {
-    color: "#df1e2f",
-    fontSize: "20px",
-    fontWeight: "900",
-    letterSpacing: "3px",
-  },
+clubName: {
+  fontWeight: "900",
+  letterSpacing: "3px",
+  fontSize: "25px",
+  color: "#e31b23",
+},
 
-  clubSub: {
-    fontSize: "9px",
-    fontWeight: "800",
-    letterSpacing: "2px",
-    marginTop: "5px",
-  },
+clubSub: {
+  fontWeight: "800",
+  letterSpacing: "2px",
+  fontSize: "12px",
+  marginTop: "4px",
+},
 
-  nav: {
-    display: "flex",
-    alignItems: "center",
-    gap: "25px",
-    flexWrap: "wrap",
-  },
+nav: {
+  display: "flex",
+  alignItems: "center",
+  gap: "24px",
+  fontSize: "14px",
+  fontWeight: "700",
+  flexWrap: "wrap",
+},
 
-  navLink: {
-    textDecoration: "none",
-    color: "#111",
-    fontSize: "13px",
-    fontWeight: "800",
-  },
+navLink: {
+  textDecoration: "none",
+  color: "#111",
+  fontSize: "14px",
+  fontWeight: "700",
+},
 
-  activeNav: {
-    textDecoration: "none",
-    color: "#df1e2f",
-    fontSize: "13px",
-    fontWeight: "900",
-  },
+activeNav: {
+  textDecoration: "none",
+  color: "#e31b23",
+  fontSize: "14px",
+  fontWeight: "900",
+},
 
   hero: {
     background: "#111",
