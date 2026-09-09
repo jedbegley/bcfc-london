@@ -22,10 +22,18 @@ export default function News() {
     <main style={styles.page}>
       {/* HEADER */}
       <header style={styles.header}>
-        <div>
-          <div style={styles.clubName}>BRISTOL CITY</div>
-          <div style={styles.clubSub}>LONDON SUPPORTERS FC</div>
-        </div>
+        <div style={styles.headerBrand}>
+  <img
+    src="/374fadce-093f-4e7e-9f54-01c06a034caa.jpeg"
+    alt="BCFC London badge"
+    style={styles.headerBadge}
+  />
+
+  <div>
+    <div style={styles.clubName}>BRISTOL CITY</div>
+    <div style={styles.clubSub}>LONDON SUPPORTERS FC</div>
+  </div>
+</div>
 
         <nav style={styles.nav}>
           <a href="/" style={styles.navLink}>Home</a>
@@ -358,6 +366,17 @@ const styles = {
     flexWrap: "wrap",
     gap: "20px",
   },
+  headerBrand: {
+  display: "flex",
+  alignItems: "center",
+  gap: "16px",
+},
+
+headerBadge: {
+  width: "70px",
+  height: "70px",
+  objectFit: "contain",
+},
 
   clubName: {
     color: "#df1e2f",
