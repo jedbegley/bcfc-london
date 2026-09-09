@@ -63,33 +63,28 @@ export default async function StatsPage() {
   return (
     <main style={styles.page}>
       <header style={styles.header}>
-        <div>
-          <div style={styles.clubName}>BRISTOL CITY</div>
-          <div style={styles.clubSub}>LONDON SUPPORTERS FC</div>
-        </div>
+  <div style={styles.headerBrand}>
+    <img
+      src="/374fadec-093f-4e7e-9f54-01c06a034caa.jpeg"
+      alt="BCFC London badge"
+      style={styles.headerBadge}
+    />
+    <div>
+      <div style={styles.clubName}>BRISTOL CITY</div>
+      <div style={styles.clubSub}>LONDON SUPPORTERS FC</div>
+    </div>
+  </div>
 
-        <nav style={styles.nav}>
-          <a href="/" style={styles.navLink}>Home</a>
-          <a href="/news" style={styles.navLink}>News</a>
+  <nav style={styles.nav}>
+    <a href="/" style={styles.navLink}>Home</a>
+    <a href="/news" style={styles.navLink}>News</a>
     <a href="/league" style={styles.navLink}>League</a>
-          <a href="/fixtures" style={styles.navLink}>Fixtures</a>
-          <a href="/squad" style={styles.navLink}>Squad</a>
-          <a href="/stats" style={styles.activeNav}>Stats</a>
-    <a
-  href="/dashboard"
-  style={{
-    background: "#e31b23",
-    color: "#fff",
-    padding: "12px 18px",
-    borderRadius: "6px",
-    fontWeight: "800",
-    textDecoration: "none",
-  }}
->
-  Player Portal
-</a>    
-    </nav>
-      </header>
+    <a href="/fixtures" style={styles.navLink}>Fixtures</a>
+    <a href="/squad" style={styles.navLink}>Squad</a>
+    <a href="/stats" style={styles.activeNav}>Stats</a>
+    <a href="/dashboard" style={styles.loginButton}>Player Portal</a>
+  </nav>
+</header>
 
       <section style={styles.hero}>
         <p style={styles.eyebrow}>BCFC LONDON</p>
@@ -174,6 +169,32 @@ export default async function StatsPage() {
 </div>
           
       </section>
+          <style>{`
+  @media (max-width: 768px) {
+    header nav {
+      display: grid !important;
+      grid-template-columns: auto auto auto auto !important;
+      width: 100% !important;
+      justify-content: space-between !important;
+      column-gap: 0 !important;
+      row-gap: 22px !important;
+      align-items: center !important;
+    }
+
+    header nav a:nth-child(5) {
+      grid-column: 1;
+    }
+
+    header nav a:nth-child(6) {
+      grid-column: 2;
+    }
+
+    header nav a:nth-child(7) {
+      grid-column: 3 / 5;
+      justify-self: start;
+    }
+  }
+`}</style>
     </main>
   );
 }
@@ -188,50 +209,73 @@ const styles = {
   },
 
   header: {
-    padding: "24px 6%",
-    display: "flex",
-    justifyContent: "space-between",
-    alignItems: "center",
-    borderBottom: "4px solid #df1e2f",
-    flexWrap: "wrap",
-    gap: "20px",
-  },
+  background: "#ffffff",
+  padding: "22px 6%",
+  display: "flex",
+  justifyContent: "space-between",
+  alignItems: "center",
+  borderBottom: "4px solid #e31b23",
+  flexWrap: "wrap",
+  gap: "20px",
+},
 
-  clubName: {
-    color: "#df1e2f",
-    fontSize: "20px",
-    fontWeight: "900",
-    letterSpacing: "3px",
-  },
+headerBrand: {
+  display: "flex",
+  alignItems: "center",
+  gap: "18px",
+},
 
-  clubSub: {
-    fontSize: "9px",
-    fontWeight: "800",
-    letterSpacing: "2px",
-    marginTop: "5px",
-  },
+headerBadge: {
+  width: "70px",
+  height: "70px",
+  objectFit: "contain",
+},
 
-  nav: {
-    display: "flex",
-    alignItems: "center",
-    gap: "25px",
-    flexWrap: "wrap",
-  },
+clubName: {
+  fontWeight: "900",
+  letterSpacing: "3px",
+  fontSize: "25px",
+  color: "#e31b23",
+},
 
-  navLink: {
-    textDecoration: "none",
-    color: "#111",
-    fontSize: "13px",
-    fontWeight: "800",
-  },
+clubSub: {
+  fontWeight: "800",
+  letterSpacing: "2px",
+  fontSize: "12px",
+  marginTop: "4px",
+},
 
-  activeNav: {
-    textDecoration: "none",
-    color: "#df1e2f",
-    fontSize: "13px",
-    fontWeight: "900",
-  },
+nav: {
+  display: "flex",
+  alignItems: "center",
+  gap: "24px",
+  fontSize: "14px",
+  fontWeight: "700",
+  flexWrap: "wrap",
+},
 
+navLink: {
+  textDecoration: "none",
+  color: "#111",
+  fontSize: "14px",
+  fontWeight: "700",
+},
+
+activeNav: {
+  textDecoration: "none",
+  color: "#e31b23",
+  fontSize: "14px",
+  fontWeight: "900",
+},
+
+loginButton: {
+  background: "#e31b23",
+  color: "white",
+  padding: "12px 18px",
+  borderRadius: "6px",
+  fontWeight: "800",
+  textDecoration: "none",
+},
   hero: {
     background: "#111",
     color: "white",
