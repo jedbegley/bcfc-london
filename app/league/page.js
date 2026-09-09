@@ -45,13 +45,15 @@ export default function LeaguePage() {
       </section>
             <section style={{ padding: "60px 6%", flex: 1 }}>
         <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
-            gap: "60px",
-            alignItems: "start",
-          }}
-        >
+  style={{
+    display: "grid",
+    gridTemplateColumns: "minmax(0, 1.2fr) minmax(320px, 0.8fr)",
+    gap: "40px",
+    alignItems: "start",
+    maxWidth: "1100px",
+    margin: "0 auto",
+  }}
+>
           {/* LEAGUE TABLE */}
           <div>
             <p
