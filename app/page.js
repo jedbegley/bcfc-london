@@ -288,6 +288,18 @@ alt={featuredStory.imageAlt}
 
       <style>{`
         @media (max-width: 768px) {
+        header nav {
+  display: grid !important;
+  grid-template-columns: repeat(4, auto) !important;
+  width: 100% !important;
+  justify-content: start !important;
+  column-gap: 28px !important;
+  row-gap: 22px !important;
+}
+
+header nav a:nth-child(5) {
+  grid-column: 1;
+}
           .hero-section {
             display: block !important;
             padding: 48px 6% !important;
