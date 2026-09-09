@@ -43,7 +43,7 @@ export default function LeaguePage() {
           Supporters FC.
         </p>
       </section>
-      <section style={{ padding: "60px 6%" }}>
+      <section style={{ padding: "60px 6%", flex: 1 }}>
         <p
           style={{
             color: "#df1e2f",
@@ -114,13 +114,15 @@ export default function LeaguePage() {
   );
 }
 const styles = {
-    page: {
-    margin: 0,
-    fontFamily: "Arial, Helvetica, sans-serif",
-    background: "#fff",
-    color: "#111",
-    minHeight: "100vh",
-  },
+   page: {
+  margin: 0,
+  fontFamily: "Arial, Helvetica, sans-serif",
+  background: "#fff",
+  color: "#111",
+  minHeight: "100vh",
+  display: "flex",
+  flexDirection: "column",
+},
   header: {
     padding: "24px 6%",
     display: "flex",
