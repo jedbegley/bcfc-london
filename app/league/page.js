@@ -43,79 +43,41 @@ export default function LeaguePage() {
   Football League – League Eight.
 </p>
       </section>
-            <section style={{ padding: "60px 6%", flex: 1 }}>
-        <div
-  style={{
-    display: "grid",
-    gridTemplateColumns: "minmax(0, 1.2fr) minmax(320px, 0.8fr)",
-    gap: "40px",
-    alignItems: "start",
-    maxWidth: "1100px",
-    margin: "0 auto",
-  }}
->
+                 <section style={{ padding: "60px 6%", flex: 1 }}>
+        <div className="league-grid">
+
           {/* LEAGUE TABLE */}
-          <div>
-            <p
-              style={{
-                color: "#df1e2f",
-                fontSize: "12px",
-                fontWeight: "900",
-                letterSpacing: "3px",
-              }}
-            >
-              LEAGUE EIGHT
-            </p>
+          <div className="league-column">
+            <p style={styles.redLabel}>LEAGUE EIGHT</p>
+            <h2 style={styles.sectionHeading}>League Table</h2>
 
-            <h1 style={{ fontSize: "48px", marginBottom: "30px" }}>
-              League Table
-            </h1>
-
-            <div
-              id="lrep918233212"
-              style={{
-                width: "100%",
-                maxWidth: "600px",
-                overflowX: "auto",
-              }}
-            >
-              Data loading....
-              <a
-                href="https://fulltime.thefa.com/index.html?divisionseason=383208413"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                View League Eight on FA Full-Time
-              </a>
-            </div>
+            <iframe
+              title="League Eight Table"
+              className="league-frame"
+              srcDoc={`
+                <html>
+                  <body style="margin:0;font-family:Arial,Helvetica,sans-serif;">
+                    <div id="lrep918233212" style="width:100%;">
+                      Data loading....
+                    </div>
+                    <script>
+                      var lrcode = '918233212';
+                    </script>
+                    <script src="https://fulltime.thefa.com/client/api/cs1.js"></script>
+                  </body>
+                </html>
+              `}
+            />
           </div>
 
           {/* RECENT RESULTS */}
-          <div>
-            <p
-              style={{
-                color: "#df1e2f",
-                fontSize: "12px",
-                fontWeight: "900",
-                letterSpacing: "3px",
-              }}
-            >
-              LEAGUE EIGHT
-            </p>
-
-            <h2 style={{ fontSize: "48px", margin: "0 0 30px" }}>
-              Recent Results
-            </h2>
+          <div className="league-column">
+            <p style={styles.redLabel}>LEAGUE EIGHT</p>
+            <h2 style={styles.sectionHeading}>Recent Results</h2>
 
             <iframe
               title="League Eight Recent Results"
-              style={{
-                width: "100%",
-                maxWidth: "500px",
-                height: "340px",
-                border: "0",
-                overflow: "hidden",
-              }}
+              className="league-frame"
               srcDoc={`
                 <html>
                   <body style="margin:0;font-family:Arial,Helvetica,sans-serif;">
@@ -131,7 +93,65 @@ export default function LeaguePage() {
               `}
             />
           </div>
+
+          {/* UPCOMING FIXTURES */}
+          <div className="league-column">
+            <p style={styles.redLabel}>LEAGUE EIGHT</p>
+            <h2 style={styles.sectionHeading}>Upcoming Fixtures</h2>
+
+            <iframe
+              title="League Eight Upcoming Fixtures"
+              className="league-frame"
+              srcDoc={`
+                <html>
+                  <body style="margin:0;font-family:Arial,Helvetica,sans-serif;">
+                    <div id="lrep694682523" style="width:100%;">
+                      Data loading....
+                    </div>
+                    <script>
+                      var lrcode = '694682523';
+                    </script>
+                    <script src="https://fulltime.thefa.com/client/api/cs1.js"></script>
+                  </body>
+                </html>
+              `}
+            />
+          </div>
+
         </div>
+
+        <style>{`
+          .league-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 36px;
+            max-width: 1400px;
+            margin: 0 auto;
+            align-items: start;
+          }
+
+          .league-column {
+            min-width: 0;
+          }
+
+          .league-frame {
+            width: 100%;
+            height: 420px;
+            border: 0;
+            display: block;
+          }
+
+          @media (max-width: 900px) {
+            .league-grid {
+              grid-template-columns: 1fr;
+              gap: 50px;
+            }
+
+            .league-frame {
+              height: 380px;
+            }
+          }
+        `}</style>
       </section>
 
            {/* FOOTER */}
@@ -296,5 +316,18 @@ const styles = {
     color: "#999",
     textAlign: "right",
     fontSize: "13px",
+  },
+    redLabel: {
+    color: "#df1e2f",
+    fontSize: "12px",
+    fontWeight: "900",
+    letterSpacing: "3px",
+    margin: "0 0 8px",
+  },
+
+  sectionHeading: {
+    fontSize: "36px",
+    margin: "0 0 25px",
+    fontWeight: "900",
   },
 };
