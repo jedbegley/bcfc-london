@@ -36,12 +36,12 @@ export default function LeaguePage() {
 
       {/* HERO */}
       <section style={styles.hero}>
-        <p style={styles.eyebrow}>2026/27</p>
-        <h1 style={styles.title}>League</h1>
-        <p style={styles.intro}>
-          League Eight standings, fixtures and results for Bristol City London
-          Supporters FC.
-        </p>
+        <p style={styles.eyebrow}>SOUTHERN SUNDAY FOOTBALL LEAGUE</p>
+<h1 style={styles.title}>League Eight</h1>
+<p style={styles.intro}>
+  League standings, recent results and upcoming fixtures for Southern Sunday
+  Football League – League Eight.
+</p>
       </section>
       <section style={{ padding: "60px 6%", flex: 1 }}>
         <p
