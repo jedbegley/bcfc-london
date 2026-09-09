@@ -36,7 +36,9 @@ export default function LeaguePage() {
 
       {/* HERO */}
       <section style={styles.hero}>
-        <p style={styles.eyebrow}>SOUTHERN SUNDAY FOOTBALL LEAGUE</p>
+        <p style={styles.eyebrow}>
+  SOUTHERN SUNDAY<span className="mobileLeagueBreak"><br /></span> FOOTBALL LEAGUE
+</p>
 <h1 style={styles.title}>League Eight</h1>
 <p style={styles.intro}>
   League standings, recent results and upcoming fixtures for Southern Sunday
@@ -151,8 +153,13 @@ max-width: none;
 .fixtures-frame {
   height: 390px;
 }
-
+.mobileLeagueBreak {
+  display: none;
+}
           @media (max-width: 900px) {
+          .mobileLeagueBreak {
+  display: inline;
+}
   .league-grid {
     grid-template-columns: 1fr;
     gap: 20px;
