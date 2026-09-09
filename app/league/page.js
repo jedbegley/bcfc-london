@@ -60,7 +60,7 @@ export default function LeaguePage() {
         </h1>
 
         <div
-          id="lrep216855742"
+          id="lrep918233212"
           style={{
             width: "100%",
             maxWidth: "600px",
@@ -103,7 +103,7 @@ export default function LeaguePage() {
 
               
               <Script id="fulltime-league-code" strategy="afterInteractive">
-        {`var lrcode = '216855742';`}
+        {`var lrcode = '918233212';`}
       </Script>
 
       <Script
