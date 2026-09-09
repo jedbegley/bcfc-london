@@ -122,13 +122,13 @@ export default function LeaguePage() {
 
         <style>{`
           .league-grid {
-            display: grid;
-            grid-template-columns: repeat(3, minmax(0, 1fr));
-            gap: 36px;
-            max-width: 1400px;
-            margin: 0 auto;
-            align-items: start;
-          }
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 28px;
+  max-width: 1600px;
+  margin: 0 auto;
+  align-items: start;
+}
 
           .league-column {
             min-width: 0;
@@ -144,7 +144,7 @@ export default function LeaguePage() {
           @media (max-width: 900px) {
             .league-grid {
               grid-template-columns: 1fr;
-              gap: 50px;
+              gap: 28px;
             }
 
             .league-frame {
