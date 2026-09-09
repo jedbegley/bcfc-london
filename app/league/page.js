@@ -2,7 +2,7 @@ import Script from "next/script";
 
 export default function LeaguePage() {
   return (
-    <main>
+    <main style={styles.page}>
           {/* HEADER */}
       <header style={styles.header}>
         <div>
@@ -90,6 +90,13 @@ export default function LeaguePage() {
   );
 }
 const styles = {
+    page: {
+    margin: 0,
+    fontFamily: "Arial, Helvetica, sans-serif",
+    background: "#fff",
+    color: "#111",
+    minHeight: "100vh",
+  },
   header: {
     padding: "24px 6%",
     display: "flex",
