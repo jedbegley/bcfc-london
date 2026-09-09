@@ -85,29 +85,7 @@ export default function Fixtures() {
     </div>
   </div>
 </section>
- <section style={styles.section}>
-  <p style={styles.redLabel}>LEAGUE EIGHT</p>
-  <h2 style={styles.heading}>League Table</h2>
-
-  <div
-    id="lrep216855742"
-    style={{
-      width: "100%",
-      maxWidth: "600px",
-      overflowX: "auto",
-      marginTop: "20px",
-    }}
-  >
-    Data loading....
-    <a
-      href="https://fulltime.thefa.com/index.html?divisionseason=383208413"
-      target="_blank"
-      rel="noopener noreferrer"
-    >
-      View League Eight on FA Full-Time
-    </a>
-  </div>
-</section>
+ 
       {/* RESULTS */}
       <section style={styles.resultsSection}>
         <div style={styles.section}>
