@@ -78,7 +78,31 @@ export default function LeaguePage() {
         </div>
       </section>
 
-      <Script id="fulltime-league-code" strategy="afterInteractive">
+           {/* FOOTER */}
+      <footer style={styles.footer}>
+        <div>
+          <strong style={styles.footerClub}>
+            Bristol City London Supporters FC
+          </strong>
+          <p style={styles.footerText}>
+            London-based Bristol City supporters football club.
+          </p>
+        </div>
+
+        <div style={styles.sponsor}>
+          <span style={styles.sponsorLabel}>PROUDLY SPONSORED BY</span>
+          <img
+            src="/IMG_1146.jpeg"
+            alt="DUZZ Sports"
+            style={styles.sponsorLogo}
+          />
+        </div>
+
+        <div style={styles.copyright}>© 2026 BCFC London</div>
+      </footer>
+
+              
+              <Script id="fulltime-league-code" strategy="afterInteractive">
         {`var lrcode = '216855742';`}
       </Script>
 
@@ -169,5 +193,50 @@ const styles = {
     fontSize: "18px",
     lineHeight: "1.6",
     marginTop: "25px",
+  },
+    footer: {
+    background: "#111",
+    color: "white",
+    padding: "35px 6%",
+    display: "grid",
+    gridTemplateColumns: "1fr auto 1fr",
+    alignItems: "center",
+    gap: "30px",
+  },
+
+  footerClub: {
+    fontSize: "16px",
+  },
+
+  footerText: {
+    color: "#aaa",
+    margin: "7px 0 0",
+    fontSize: "13px",
+  },
+
+  sponsor: {
+    textAlign: "center",
+  },
+
+  sponsorLabel: {
+    display: "block",
+    color: "#999",
+    fontSize: "10px",
+    fontWeight: "900",
+    letterSpacing: "3px",
+    marginBottom: "8px",
+  },
+
+  sponsorLogo: {
+    width: "150px",
+    maxWidth: "100%",
+    display: "block",
+    margin: "0 auto",
+  },
+
+  copyright: {
+    color: "#999",
+    textAlign: "right",
+    fontSize: "13px",
   },
 };
