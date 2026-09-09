@@ -43,7 +43,7 @@ export default function LeaguePage() {
   Football League – League Eight.
 </p>
       </section>
-                 <section style={{ padding: "60px 6%", flex: 1 }}>
+                 <section style={{ padding: "50px 4%", flex: 1 }}>
         <div className="league-grid">
 
           {/* LEAGUE TABLE */}
@@ -53,7 +53,7 @@ export default function LeaguePage() {
 
             <iframe
               title="League Eight Table"
-              className="league-frame"
+              className="league-frame league-table-frame"
               srcDoc={`
                 <html>
                   <body style="margin:0;font-family:Arial,Helvetica,sans-serif;">
@@ -77,7 +77,7 @@ export default function LeaguePage() {
 
             <iframe
               title="League Eight Recent Results"
-              className="league-frame"
+              className="league-frame results-frame"
               srcDoc={`
                 <html>
                   <body style="margin:0;font-family:Arial,Helvetica,sans-serif;">
@@ -101,7 +101,7 @@ export default function LeaguePage() {
 
             <iframe
               title="League Eight Upcoming Fixtures"
-              className="league-frame"
+              className="league-frame fixtures-frame"
               srcDoc={`
                 <html>
                   <body style="margin:0;font-family:Arial,Helvetica,sans-serif;">
@@ -124,8 +124,8 @@ export default function LeaguePage() {
           .league-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 28px;
-  max-width: 1600px;
+  gap: 45px;
+max-width: none;
   margin: 0 auto;
   align-items: start;
 }
@@ -134,23 +134,42 @@ export default function LeaguePage() {
             min-width: 0;
           }
 
-          .league-frame {
-            width: 100%;
-            height: 420px;
-            border: 0;
-            display: block;
-          }
+         .league-frame {
+  width: 100%;
+  border: 0;
+  display: block;
+}
+
+.league-table-frame {
+  height: 260px;
+}
+
+.results-frame {
+  height: 190px;
+}
+
+.fixtures-frame {
+  height: 390px;
+}
 
           @media (max-width: 900px) {
-            .league-grid {
-              grid-template-columns: 1fr;
-              gap: 28px;
-            }
+  .league-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
 
-            .league-frame {
-              height: 380px;
-            }
-          }
+  .league-table-frame {
+    height: 310px;
+  }
+
+  .results-frame {
+    height: 220px;
+  }
+
+  .fixtures-frame {
+    height: 430px;
+  }
+}
         `}</style>
       </section>
 
