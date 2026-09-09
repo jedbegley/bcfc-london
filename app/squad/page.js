@@ -54,6 +54,7 @@ const strikers = players.filter(
         <nav style={styles.nav}>
           <a href="/" style={styles.navLink}>Home</a>
           <a href="/news" style={styles.navLink}>News</a>
+    <a href="/league" style={styles.navLink}>League</a>
           <a href="/fixtures" style={styles.navLink}>Fixtures</a>
           <a href="/squad" style={styles.activeNav}>Squad</a>
           <a href="/stats" style={styles.navLink}>Stats</a>
