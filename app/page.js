@@ -288,17 +288,27 @@ alt={featuredStory.imageAlt}
 
       <style>{`
         @media (max-width: 768px) {
-        header nav {
+       header nav {
   display: grid !important;
-  grid-template-columns: repeat(4, auto) !important;
+  grid-template-columns: auto auto auto auto !important;
   width: 100% !important;
-  justify-content: start !important;
-  column-gap: 28px !important;
+  justify-content: space-between !important;
+  column-gap: 0 !important;
   row-gap: 22px !important;
+  align-items: center !important;
 }
 
 header nav a:nth-child(5) {
   grid-column: 1;
+}
+
+header nav a:nth-child(6) {
+  grid-column: 2;
+}
+
+header nav a:nth-child(7) {
+  grid-column: 3 / 5;
+  justify-self: start;
 }
           .hero-section {
             display: block !important;
