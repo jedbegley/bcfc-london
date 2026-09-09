@@ -71,6 +71,7 @@ export default async function StatsPage() {
         <nav style={styles.nav}>
           <a href="/" style={styles.navLink}>Home</a>
           <a href="/news" style={styles.navLink}>News</a>
+    <a href="/league" style={styles.navLink}>League</a>
           <a href="/fixtures" style={styles.navLink}>Fixtures</a>
           <a href="/squad" style={styles.navLink}>Squad</a>
           <a href="/stats" style={styles.activeNav}>Stats</a>
