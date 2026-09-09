@@ -24,7 +24,7 @@ export default function News() {
       <header style={styles.header}>
         <div style={styles.headerBrand}>
   <img
-    src="/374fadce-093f-4e7e-9f54-01c06a034caa.jpeg"
+    src="/374fadec-093f-4e7e-9f54-01c06a034caa.jpeg"
     alt="BCFC London badge"
     style={styles.headerBadge}
   />
