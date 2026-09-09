@@ -81,11 +81,11 @@ export default function LeaguePage() {
               srcDoc={`
                 <html>
                   <body style="margin:0;font-family:Arial,Helvetica,sans-serif;">
-                    <div id="lrep172375918" style="width:100%;">
+                    <div id="lrep236550629" style="width:100%;">
                       Data loading....
                     </div>
                     <script>
-                      var lrcode = '172375918';
+                      var lrcode = '236550629';
                     </script>
                     <script src="https://fulltime.thefa.com/client/api/cs1.js"></script>
                   </body>
@@ -105,11 +105,11 @@ export default function LeaguePage() {
               srcDoc={`
                 <html>
                   <body style="margin:0;font-family:Arial,Helvetica,sans-serif;">
-                    <div id="lrep694682523" style="width:100%;">
+                    <div id="lrep239506247" style="width:100%;">
                       Data loading....
                     </div>
                     <script>
-                      var lrcode = '694682523';
+                      var lrcode = '239506247';
                     </script>
                     <script src="https://fulltime.thefa.com/client/api/cs1.js"></script>
                   </body>
