@@ -1,3 +1,14 @@
+export const metadata = {
+  title: "Bristol City v Barnes Stormers | Match Preview",
+  description:
+    "Bristol City London Supporters FC begin their League Eight campaign against Barnes Stormers this Sunday at Clapham Common.",
+  openGraph: {
+    title: "Bristol City v Barnes Stormers | Match Preview",
+    description:
+      "Sunday 13 September • 10:30 KO • Clapham Common",
+    images: ["/IMG_5497.jpeg"],
+  },
+};
 export default function BarnesStormersPreview() {
   return (
     <main style={styles.page}>
