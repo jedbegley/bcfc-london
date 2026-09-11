@@ -69,12 +69,35 @@ export default function BarnesStormersPreview() {
             Bristol City v Barnes Stormers FC
           </h2>
 
-          <div style={styles.matchDetails}>
-            <strong>Sunday 13 September 2026</strong>
-            <span>10:30 Kick Off</span>
-            <span>Clapham Common</span>
-            <span>Southern Sunday Football League — League Eight</span>
-          </div>
+         <div style={styles.matchDetails}>
+  <strong>Sunday 13 September 2026</strong>
+  <span>9:45 Meet</span>
+  <span>10:30 Kick Off</span>
+  <span>Nets to go up</span>
+  <span>Clapham Common #3</span>
+  <span>Southern Sunday Football League - League Eight</span>
+</div>
+              <div style={styles.squad}>
+  <div style={styles.squadTitle}>MATCHDAY SQUAD</div>
+  <div style={styles.squadList}>
+    <span>Alfie Hill-Kitcherside (C)</span>
+    <span>Eamon Gaughan</span>
+    <span>Ellis Sims</span>
+    <span>Jack Lowe</span>
+    <span>Jack Smith</span>
+    <span>James Hayes</span>
+    <span>Jed Begley</span>
+    <span>Jonathan &quot;Shapes&quot; Jones</span>
+    <span>Josh Joyce</span>
+    <span>Louis Hodgson</span>
+    <span>Meddy Deschamps</span>
+    <span>Nick Bellamy</span>
+    <span>Nikita Tertychnyy</span>
+    <span>Ollie Bennett</span>
+    <span>Sam Rodgerson</span>
+    <span>Zion Ebede</span>
+  </div>
+</div>
         </div>
 
         <a href="/fixtures" style={styles.button}>
@@ -177,6 +200,27 @@ const styles = {
     flexDirection: "column",
     gap: "7px",
     fontSize: "16px",
+  },
+    squad: {
+    marginTop: "24px",
+    paddingTop: "22px",
+    borderTop: "1px solid #444",
+  },
+
+  squadTitle: {
+    color: "#e31b23",
+    fontSize: "12px",
+    fontWeight: "900",
+    letterSpacing: "1.5px",
+    marginBottom: "14px",
+  },
+
+  squadList: {
+    display: "grid",
+    gridTemplateColumns: "repeat(2, 1fr)",
+    gap: "9px 25px",
+    fontSize: "15px",
+    lineHeight: "1.4",
   },
 
   button: {
