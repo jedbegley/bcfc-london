@@ -35,8 +35,33 @@ export default async function PublicMatchReport({ params }) {
  const opponent = match.opponent || "Opponent";
 
   return (
-    <main style={styles.main}>
-      <section style={styles.hero}>
+   <main style={styles.page}>
+  <header style={styles.header}>
+    <div style={styles.headerBrand}>
+      <img
+        src="/374fadec-093f-4e7e-9f54-01c06a034caa.jpeg"
+        alt="BCFC London badge"
+        style={styles.headerBadge}
+      />
+
+      <div>
+        <div style={styles.clubName}>BRISTOL CITY</div>
+        <div style={styles.clubSub}>LONDON SUPPORTERS FC</div>
+      </div>
+    </div>
+
+    <nav style={styles.nav}>
+      <a href="/" style={styles.navLink}>Home</a>
+      <a href="/news" style={styles.navLink}>News</a>
+      <a href="/league" style={styles.navLink}>League</a>
+      <a href="/fixtures" style={styles.navLink}>Fixtures</a>
+      <a href="/squad" style={styles.navLink}>Squad</a>
+      <a href="/stats" style={styles.navLink}>Stats</a>
+      <a href="/dashboard" style={styles.loginButton}>Player Portal</a>
+    </nav>
+  </header>
+
+  <section style={styles.hero}>
         <div style={styles.heroInner}>
           <div style={styles.eyebrow}>MATCH REPORT</div>
 
@@ -67,12 +92,102 @@ export default async function PublicMatchReport({ params }) {
         <Link href="/fixtures" style={styles.backLink}>
           ← Back to Fixtures
         </Link>
-      </section>
+          </section>
+
+      <footer style={styles.footer}>
+        <div>
+          <div style={styles.footerClub}>BRISTOL CITY</div>
+          <div style={styles.footerSub}>LONDON SUPPORTERS FC</div>
+        </div>
+
+        <div style={styles.footerSponsor}>
+          <span style={styles.sponsorLabel}>SPONSORED BY</span>
+          <img
+            src="/IMG_1146.jpeg"
+            alt="DUZZ Sports"
+            style={styles.sponsorImage}
+          />
+        </div>
+
+        <div style={styles.copyright}>
+          © 2026 Bristol City London Supporters FC
+        </div>
+      </footer>
     </main>
   );
 }
 
 const styles = {
+    page: {
+    minHeight: "100vh",
+    background: "#fff",
+    fontFamily: "Arial, Helvetica, sans-serif",
+    color: "#111",
+  },
+
+  header: {
+    background: "#ffffff",
+    padding: "22px 6%",
+    display: "flex",
+    justifyContent: "space-between",
+    alignItems: "center",
+    borderBottom: "4px solid #e31b23",
+    flexWrap: "wrap",
+    gap: "20px",
+  },
+
+  headerBrand: {
+    display: "flex",
+    alignItems: "center",
+    gap: "18px",
+  },
+
+  headerBadge: {
+    width: "70px",
+    height: "70px",
+    objectFit: "contain",
+  },
+
+  clubName: {
+    fontWeight: "900",
+    letterSpacing: "3px",
+    fontSize: "25px",
+    color: "#e31b23",
+  },
+
+  clubSub: {
+    fontWeight: "800",
+    letterSpacing: "2px",
+    fontSize: "12px",
+    marginTop: "4px",
+  },
+
+  nav: {
+    display: "flex",
+    alignItems: "center",
+    gap: "24px",
+    fontSize: "14px",
+    fontWeight: "700",
+    flexWrap: "wrap",
+  },
+
+  navLink: {
+    textDecoration: "none",
+    color: "#111",
+    fontSize: "14px",
+    fontWeight: "700",
+  },
+
+  loginButton: {
+    background: "#e31b23",
+    color: "white",
+    border: 0,
+    padding: "12px 18px",
+    borderRadius: "6px",
+    fontWeight: "800",
+    cursor: "pointer",
+    textDecoration: "none",
+  },
   main: {
     minHeight: "100vh",
     background: "#fff",
@@ -134,5 +249,52 @@ const styles = {
     color: "#e31b23",
     fontWeight: "800",
     textDecoration: "none",
+  },
+    footer: {
+    background: "#111",
+    color: "#fff",
+    padding: "30px 6%",
+    display: "flex",
+    justifyContent: "space-between",
+    alignItems: "center",
+    gap: "30px",
+    flexWrap: "wrap",
+  },
+
+  footerClub: {
+    fontWeight: "900",
+    letterSpacing: "3px",
+    fontSize: "18px",
+    color: "#e31b23",
+  },
+
+  footerSub: {
+    fontWeight: "800",
+    letterSpacing: "2px",
+    fontSize: "10px",
+    marginTop: "4px",
+  },
+
+  footerSponsor: {
+    display: "flex",
+    alignItems: "center",
+    gap: "12px",
+  },
+
+  sponsorLabel: {
+    fontSize: "9px",
+    fontWeight: "800",
+    letterSpacing: "1px",
+  },
+
+  sponsorImage: {
+    height: "45px",
+    width: "auto",
+    objectFit: "contain",
+  },
+
+  copyright: {
+    fontSize: "11px",
+    opacity: 0.7,
   },
 };
