@@ -319,6 +319,23 @@ if (savedAvailabilityError) {
 >
   SQUAD ADMIN
 </a>
+<a
+  href={`/dashboard/matches/${currentMatch?.id}/report`}
+  style={{
+    display: "inline-block",
+    marginLeft: "10px",
+    marginBottom: "10px",
+    padding: "10px 16px",
+    background: "#111",
+    color: "#fff",
+    textDecoration: "none",
+    borderRadius: "4px",
+    fontWeight: "700",
+    fontSize: "13px",
+  }}
+>
+  MATCH REPORT
+</a>
 
     {["available", "maybe", "unavailable"].map((status) => {
       const playersForStatus = allPlayers.filter((p) =>
