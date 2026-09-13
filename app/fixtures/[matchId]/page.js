@@ -87,7 +87,7 @@ export default async function PublicMatchReport({ params }) {
       {paragraph}
     </p>
 
-    {paragraph.includes("crossbar") && (
+    {paragraph.includes("smashed an effort against the crossbar") && (
       <video
         controls
         playsInline
