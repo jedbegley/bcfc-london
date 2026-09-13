@@ -17,6 +17,7 @@ export default function MatchReportPage() {
   const [loading, setLoading] = useState(true);
   const [ourScore, setOurScore] = useState("");
 const [opponentScore, setOpponentScore] = useState("");
+  const [matchReport, setMatchReport] = useState("");
   const [players, setPlayers] = useState([]);
   const [selectedPlayers, setSelectedPlayers] = useState({});
 const [startedPlayers, setStartedPlayers] = useState({});
@@ -35,9 +36,10 @@ const [startedPlayers, setStartedPlayers] = useState({});
 
       if (error) {
         console.error("Error loading match:", error);
-      } else {
-        setMatch(data);
-      }
+     } else {
+  setMatch(data);
+  setMatchReport(data.match_report || "");
+}
 
       setLoading(false);
     }
@@ -163,6 +165,23 @@ alert("Result saved!");
   }
 
   alert("Match squad and player stats saved!");
+};
+
+  const saveMatchReport = async () => {
+  const { error } = await supabase
+    .from("matches")
+    .update({
+      match_report: matchReport,
+    })
+    .eq("id", matchId);
+
+  if (error) {
+    console.error("Error saving match report:", error);
+    alert("There was a problem saving the match report.");
+    return;
+  }
+
+  alert("Match report saved!");
 };
   if (loading) {
     return <main style={{ padding: "40px" }}>Loading...</main>;
@@ -355,8 +374,40 @@ alert("Result saved!");
     cursor: "pointer",
   }}
 >
-  Save Player Stats
+   Save Player Stats
 </button>
+
+<div style={{ marginTop: "40px" }}>
+  <h3>Match Report</h3>
+
+  <textarea
+    value={matchReport}
+    onChange={(e) => setMatchReport(e.target.value)}
+    placeholder="Write the match report here..."
+    rows="14"
+    style={{
+      width: "100%",
+      maxWidth: "800px",
+      padding: "12px",
+      fontSize: "14px",
+      lineHeight: "1.6",
+      boxSizing: "border-box",
+    }}
+  />
+
+  <br />
+
+  <button
+    onClick={saveMatchReport}
+    style={{
+      marginTop: "12px",
+      padding: "10px 18px",
+      cursor: "pointer",
+    }}
+  >
+    Save Match Report
+  </button>
+</div>
 </div>
     </main>
   );
