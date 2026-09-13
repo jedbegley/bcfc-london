@@ -1,3 +1,4 @@
+import Link from "next/link";
 import Script from "next/script";
 import { createClient } from "@supabase/supabase-js";
 
@@ -156,7 +157,20 @@ export default async function Fixtures() {
       <span>Clapham Common</span>
     </div>
 
-    <div style={styles.friendlyTag}>MATCH REPORT COMING SOON</div>
+    <Link
+  href={`/fixtures/${barnesMatch.id}`}
+  style={{
+    display: "inline-block",
+    marginTop: "14px",
+    color: "#e31b23",
+    fontSize: "12px",
+    fontWeight: "900",
+    letterSpacing: "1px",
+    textDecoration: "none",
+  }}
+>
+  READ MATCH REPORT →
+</Link>
   </div>
 )}
         <div style={styles.matchCard}>
