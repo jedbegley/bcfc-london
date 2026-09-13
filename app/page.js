@@ -164,7 +164,7 @@ alt={featuredStory.imageAlt}
     <span style={styles.homeAway}>AWAY</span>
   </div>
 </div>
-            </div>
+      
 
             <div style={styles.matchInfo}>
   <strong>{latestResult.date}</strong>
