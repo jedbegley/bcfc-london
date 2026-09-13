@@ -112,9 +112,7 @@ export default async function PublicMatchReport({ params }) {
 />
 </div>
 
-        <Link href="/fixtures" style={styles.backLink}>
-
-  <div
+       <div
   style={{
     marginTop: "45px",
     paddingTop: "30px",
@@ -179,8 +177,10 @@ export default async function PublicMatchReport({ params }) {
     </a>
   </div>
 </div>
-          ← Back to Fixtures
-        </Link>
+
+<Link href="/fixtures" style={styles.backLink}>
+  ← Back to Fixtures
+</Link>
           </section>
 
       <footer style={styles.footer}>
