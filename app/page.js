@@ -1,17 +1,17 @@
 const featuredStory = {
-  title: "City Begin League Eight Campaign Against Barnes Stormers",
+  title: "City Start League Eight Campaign With Barnes Victory",
   summary:
-    "City open the 2026/27 league season at home to familiar opponents Barnes Stormers FC, looking for a first victory over the side after two meetings last season.",
+    "City opened their 2026/27 League Eight campaign with a 2-1 win over Barnes Stormers at Clapham Common, with goals from James Hayes and Jack Lowe.",
   image: "/IMG_5497.jpeg",
   imageAlt: "Bristol City London Supporters FC squad",
-  link: "/news/barnes-stormers-preview",
+  link: "/fixtures/3",
 };
 const latestResult = {
   competition: "SOUTHERN SUNDAY FOOTBALL LEAGUE",
   opponent: "Barnes Stormers FC",
   opponentShort: "BS",
   homeAway: "AWAY",
-  score: "1-2",
+  score: "2-1",
   date: "Sunday 13 September 2026",
   venue: "Clapham Common",
   scorers: "⚽ James Hayes · Jack Lowe",
@@ -107,7 +107,7 @@ href={featuredStory.link}
     boxSizing: "border-box",
   }}
 >
-  READ MATCH PREVIEW
+  READ MATCH REPORT
 </a>
         </div>
 
@@ -125,44 +125,45 @@ alt={featuredStory.imageAlt}
             <div style={styles.matchLabel}>LATEST RESULT</div>
             <div style={styles.competition}>{latestResult.competition}</div>
 
-            <div style={styles.teams}>
-              <div style={styles.team}>
-               <div style={styles.aberdeenBadge}>{latestResult.opponentShort}</div>
-<strong>{latestResult.opponent}</strong>
-<span style={styles.homeAway}>{latestResult.homeAway}</span>
-              </div>
+           <div style={styles.teams}>
+  <div style={styles.team}>
+    <img
+      src="/374fadec-093f-4e7e-9f54-01c06a034caa.jpeg"
+      alt="Bristol City"
+      style={styles.fixtureBadge}
+    />
+    <strong>Bristol City</strong>
+    <span style={styles.homeAway}>HOME</span>
+  </div>
 
-              <div style={styles.versus}>
-                <div
-                  style={{
-                    fontSize: "34px",
-                    fontWeight: "900",
-                    color: "#111",
-                  }}
-                >
-                 {latestResult.score}
-                </div>
+  <div style={styles.versus}>
+    <div
+      style={{
+        fontSize: "34px",
+        fontWeight: "900",
+        color: "#111",
+      }}
+    >
+      {latestResult.score}
+    </div>
 
-                <div
-                  style={{
-                    fontSize: "11px",
-                    fontWeight: "900",
-                    marginTop: "6px",
-                  }}
-                >
-                  FULL TIME
-                </div>
-              </div>
+    <div
+      style={{
+        fontSize: "11px",
+        fontWeight: "900",
+        marginTop: "6px",
+      }}
+    >
+      FULL TIME
+    </div>
+  </div>
 
-              <div style={styles.team}>
-                <img
-                  src="/374fadec-093f-4e7e-9f54-01c06a034caa.jpeg"
-                  alt="Bristol City"
-                  style={styles.fixtureBadge}
-                />
-                <strong>Bristol City</strong>
-                <span style={styles.homeAway}>HOME</span>
-              </div>
+  <div style={styles.team}>
+    <div style={styles.aberdeenBadge}>{latestResult.opponentShort}</div>
+    <strong>{latestResult.opponent}</strong>
+    <span style={styles.homeAway}>AWAY</span>
+  </div>
+</div>
             </div>
 
             <div style={styles.matchInfo}>
@@ -192,21 +193,21 @@ alt={featuredStory.imageAlt}
 
 <div style={styles.teams}>
   <div style={styles.team}>
+    <div style={styles.aberdeenBadge}>{nextMatch.opponentShort}</div>
+    <strong>{nextMatch.opponent}</strong>
+    <span style={styles.homeAway}>HOME</span>
+  </div>
+
+  <div style={styles.versus}>VS</div>
+
+  <div style={styles.team}>
     <img
       src="/374fadec-093f-4e7e-9f54-01c06a034caa.jpeg"
       alt="Bristol City"
       style={styles.fixtureBadge}
     />
     <strong>Bristol City</strong>
-    <span style={styles.homeAway}>{nextMatch.cityHomeAway}</span>
-  </div>
-
-  <div style={styles.versus}>VS</div>
-
-  <div style={styles.team}>
-    <div style={styles.aberdeenBadge}>{nextMatch.opponentShort}</div>
-    <strong>{nextMatch.opponent}</strong>
-    <span style={styles.homeAway}>{nextMatch.opponentHomeAway}</span>
+    <span style={styles.homeAway}>AWAY</span>
   </div>
 </div>
 
