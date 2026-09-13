@@ -113,6 +113,72 @@ export default async function PublicMatchReport({ params }) {
 </div>
 
         <Link href="/fixtures" style={styles.backLink}>
+
+  <div
+  style={{
+    marginTop: "45px",
+    paddingTop: "30px",
+    borderTop: "1px solid #ddd",
+  }}
+>
+  <div
+    style={{
+      color: "#e31b23",
+      fontSize: "12px",
+      fontWeight: "900",
+      letterSpacing: "2px",
+      marginBottom: "8px",
+    }}
+  >
+    MATCH FEES
+  </div>
+
+  <h2 style={{ marginTop: 0 }}>Pay your match fee</h2>
+
+  <p style={{ marginBottom: "20px" }}>
+    Please select the correct match fee below.
+  </p>
+
+  <div
+    style={{
+      display: "flex",
+      gap: "12px",
+      flexWrap: "wrap",
+    }}
+  >
+    <a
+      href="https://pay.sumup.com/b2c/QSB7R898"
+      target="_blank"
+      rel="noopener noreferrer"
+      style={{
+        background: "#e31b23",
+        color: "#fff",
+        padding: "13px 20px",
+        borderRadius: "6px",
+        fontWeight: "800",
+        textDecoration: "none",
+      }}
+    >
+      Starter — Pay £10
+    </a>
+
+    <a
+      href="https://pay.sumup.com/b2c/QEDUFBCD"
+      target="_blank"
+      rel="noopener noreferrer"
+      style={{
+        background: "#111",
+        color: "#fff",
+        padding: "13px 20px",
+        borderRadius: "6px",
+        fontWeight: "800",
+        textDecoration: "none",
+      }}
+    >
+      Substitute — Pay £5
+    </a>
+  </div>
+</div>
           ← Back to Fixtures
         </Link>
           </section>
