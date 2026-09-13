@@ -15,9 +15,28 @@ export default function MotmVote({ matchId, votingClosed }) {
   const [existingVote, setExistingVote] = useState(null);
   const [loading, setLoading] = useState(true);
   const [candidates, setCandidates] = useState([]);
+  const [winner, setWinner] = useState(null);
 
   useEffect(() => {
     async function loadVotingUser() {
+      if (votingClosed) {
+  const { data: winnerStats } = await supabase
+    .from("match_stats")
+    .select("player_id")
+    .eq("match_id", Number(matchId))
+    .eq("motm", true)
+    .maybeSingle();
+
+  if (winnerStats) {
+    const { data: winnerPlayer } = await supabase
+      .from("public_squad")
+      .select("id, full_name")
+      .eq("id", winnerStats.player_id)
+      .maybeSingle();
+
+    setWinner(winnerPlayer || null);
+  }
+}
       const {
         data: { session },
       } = await supabase.auth.getSession();
@@ -56,6 +75,7 @@ const { data: candidateData } = await supabase
   .order("full_name", { ascending: true });
 
 setCandidates(candidateData || []);
+      
 
       const { data: voteData } = await supabase
         .from("motm_votes")
@@ -72,7 +92,7 @@ setCandidates(candidateData || []);
     }
 
     loadVotingUser();
-  }, [matchId]);
+  }, [matchId, votingClosed]);
 
   async function submitVote() {
     if (!player || !selectedPlayerId) {
@@ -101,21 +121,47 @@ setCandidates(candidateData || []);
     return <p>Loading MOTM vote...</p>;
   }
 
-  if (!player) {
+ 
+
+if (votingClosed) {
+  return (
+    <div>
+      {winner ? (
+        <>
+          <div
+            style={{
+              fontSize: "24px",
+              fontWeight: "900",
+              marginBottom: "6px",
+            }}
+          >
+            🏆 {winner.full_name}
+          </div>
+
+          <div
+            style={{
+              fontSize: "14px",
+              fontWeight: "700",
+            }}
+          >
+            Man of the Match
+          </div>
+        </>
+      ) : (
+        <p style={{ margin: 0, fontWeight: "700" }}>
+          MOTM voting is closed.
+        </p>
+      )}
+    </div>
+  );
+} 
+ if (!player) {
     return (
       <p style={{ margin: 0 }}>
         Log in through the Player Portal to vote for Man of the Match.
       </p>
     );
   }
-
-if (votingClosed) {
-  return (
-    <p style={{ margin: 0, fontWeight: "700" }}>
-      MOTM voting is closed.
-    </p>
-  );
-}  
 if (existingVote) {
     const votedPlayer = candidates.find(
       (candidate) => Number(candidate.id) === Number(existingVote)
