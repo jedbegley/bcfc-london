@@ -10,8 +10,8 @@ const latestResult = {
   competition: "SOUTHERN SUNDAY FOOTBALL LEAGUE",
   opponent: "Barnes Stormers FC",
   opponentShort: "BS",
-  homeAway: "HOME",
-  score: "2-1",
+  homeAway: "AWAY",
+  score: "1-2",
   date: "Sunday 13 September 2026",
   venue: "Clapham Common",
   scorers: "⚽ James Hayes · Jack Lowe",
@@ -161,7 +161,7 @@ alt={featuredStory.imageAlt}
                   style={styles.fixtureBadge}
                 />
                 <strong>Bristol City</strong>
-                <span style={styles.homeAway}>AWAY</span>
+                <span style={styles.homeAway}>HOME</span>
               </div>
             </div>
 
