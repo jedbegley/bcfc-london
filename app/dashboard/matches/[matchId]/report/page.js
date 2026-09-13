@@ -18,6 +18,7 @@ export default function MatchReportPage() {
   const [ourScore, setOurScore] = useState("");
 const [opponentScore, setOpponentScore] = useState("");
   const [matchReport, setMatchReport] = useState("");
+  const [motmVotingClosed, setMotmVotingClosed] = useState(false);
   const [players, setPlayers] = useState([]);
   const [selectedPlayers, setSelectedPlayers] = useState({});
 const [startedPlayers, setStartedPlayers] = useState({});
@@ -39,6 +40,7 @@ const [startedPlayers, setStartedPlayers] = useState({});
      } else {
   setMatch(data);
   setMatchReport(data.match_report || "");
+        setMotmVotingClosed(data.motm_voting_closed === true);
 }
 
       setLoading(false);
@@ -182,6 +184,91 @@ alert("Result saved!");
   }
 
   alert("Match report saved!");
+};
+
+  const closeMotmVoting = async () => {
+  const { data: votes, error: votesError } = await supabase
+    .from("motm_votes")
+    .select("voted_player_id")
+    .eq("match_id", Number(matchId));
+
+  if (votesError) {
+    console.error("Error loading MOTM votes:", votesError);
+    alert("There was a problem loading MOTM votes.");
+    return;
+  }
+
+  if (!votes || votes.length === 0) {
+    alert("No MOTM votes have been cast yet.");
+    return;
+  }
+
+  const voteCounts = {};
+
+  votes.forEach((vote) => {
+    voteCounts[vote.voted_player_id] =
+      (voteCounts[vote.voted_player_id] || 0) + 1;
+  });
+
+ const highestVotes = Math.max(...Object.values(voteCounts));
+
+const winners = Object.keys(voteCounts).filter(
+  (playerId) => voteCounts[playerId] === highestVotes
+);
+
+if (winners.length > 1) {
+  alert("MOTM voting is tied. Please resolve the tie before closing voting.");
+  return;
+}
+
+const winnerId = Number(winners[0]);
+
+  const { data: winnerStats, error: statsError } = await supabase
+    .from("match_stats")
+    .select("id, fantasy_points, motm")
+    .eq("match_id", Number(matchId))
+    .eq("player_id", winnerId)
+    .single();
+
+  if (statsError || !winnerStats) {
+    console.error("Error finding winner stats:", statsError);
+    alert("Could not find the winning player's match stats.");
+    return;
+  }
+    if (winnerStats.motm === true) {
+  alert("MOTM has already been awarded for this match.");
+  return;
+}
+
+  const { error: updateStatsError } = await supabase
+    .from("match_stats")
+    .update({
+      motm: true,
+      fantasy_points: Number(winnerStats.fantasy_points || 0) + 3,
+    })
+    .eq("id", winnerStats.id);
+
+  if (updateStatsError) {
+    console.error("Error updating MOTM winner:", updateStatsError);
+    alert("There was a problem updating the MOTM winner.");
+    return;
+  }
+
+  const { error: closeError } = await supabase
+    .from("matches")
+    .update({
+      motm_voting_closed: true,
+    })
+    .eq("id", Number(matchId));
+
+  if (closeError) {
+    console.error("Error closing MOTM voting:", closeError);
+    alert("The winner was saved, but voting could not be closed.");
+    return;
+  }
+
+  setMotmVotingClosed(true);
+  alert("MOTM voting closed and winner awarded +3 fantasy points!");
 };
   if (loading) {
     return <main style={{ padding: "40px" }}>Loading...</main>;
@@ -407,6 +494,28 @@ alert("Result saved!");
   >
     Save Match Report
   </button>
+      <div style={{ marginTop: "30px" }}>
+  <h3>Man of the Match</h3>
+
+  {motmVotingClosed ? (
+    <p style={{ fontWeight: "700" }}>MOTM voting is closed.</p>
+  ) : (
+    <button
+      onClick={closeMotmVoting}
+      style={{
+        padding: "10px 18px",
+        cursor: "pointer",
+        background: "#e31b23",
+        color: "#fff",
+        border: "none",
+        borderRadius: "4px",
+        fontWeight: "700",
+      }}
+    >
+      Close MOTM Voting
+    </button>
+  )}
+</div>
 </div>
 </div>
     </main>
