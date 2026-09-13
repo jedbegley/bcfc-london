@@ -1,5 +1,6 @@
 import { createClient } from "@supabase/supabase-js";
 import Link from "next/link";
+import MotmVote from "./MotmVote";
 
 const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL,
@@ -16,7 +17,18 @@ export default async function PublicMatchReport({ params }) {
     .select("*")
     .eq("id", matchId)
     .single();
+  const { data: squadRows } = await supabase
+  .from("match_squad")
+  .select("player_id")
+  .eq("match_id", matchId)
+  .eq("selected", true);
+const squadPlayerIds = (squadRows || []).map((row) => row.player_id);
 
+const { data: motmCandidates } = await supabase
+  .from("Players")
+  .select("id, full_name")
+  .in("id", squadPlayerIds)
+  .order("full_name", { ascending: true });
   if (error || !match) {
     return (
       <main style={styles.main}>
@@ -24,7 +36,27 @@ export default async function PublicMatchReport({ params }) {
           <h1>Match Report</h1>
           <p>We couldn&apos;t find this match.</p>
 
-          <Link href="/fixtures" style={styles.backLink}>
+      <div style={{ marginTop: "45px", paddingTop: "30px", borderTop: "1px solid #ddd" }}>
+  <div
+    style={{
+      color: "#e31b23",
+      fontSize: "12px",
+      fontWeight: "900",
+      letterSpacing: "2px",
+      marginBottom: "8px",
+    }}
+  >
+    MAN OF THE MATCH
+  </div>
+
+  <h2 style={{ marginTop: 0 }}>Vote for your MOTM</h2>
+
+  <MotmVote
+    matchId={matchId}
+    candidates={motmCandidates || []}
+  />
+</div>   
+      <Link href="/fixtures" style={styles.backLink}>
             ← Back to Fixtures
           </Link>
         </div>
