@@ -103,6 +103,23 @@ export default async function PublicMatchReport({ params }) {
         <source src="/hayes-crossbar-web.mp4" type="video/mp4" />
       </video>
     )}
+
+      {paragraph.includes("bottom corner with his left foot") && (
+  <video
+    controls
+    playsInline
+    preload="metadata"
+    style={{
+      width: "100%",
+      maxWidth: "700px",
+      borderRadius: "8px",
+      margin: "10px 0 25px",
+      display: "block",
+    }}
+  >
+    <source src="/hayes-goal-web.mp4" type="video/mp4" />
+  </video>
+)}
   </div>
 ))
           ) : (
