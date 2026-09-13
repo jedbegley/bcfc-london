@@ -106,7 +106,10 @@ export default async function PublicMatchReport({ params }) {
 
   <h2 style={{ marginTop: 0 }}>Vote for your MOTM</h2>
 
- <MotmVote matchId={matchId} />
+<MotmVote
+  matchId={matchId}
+  votingClosed={match.motm_voting_closed === true}
+/>
 </div>
 
         <Link href="/fixtures" style={styles.backLink}>
