@@ -36,26 +36,7 @@ const { data: motmCandidates } = await supabase
           <h1>Match Report</h1>
           <p>We couldn&apos;t find this match.</p>
 
-      <div style={{ marginTop: "45px", paddingTop: "30px", borderTop: "1px solid #ddd" }}>
-  <div
-    style={{
-      color: "#e31b23",
-      fontSize: "12px",
-      fontWeight: "900",
-      letterSpacing: "2px",
-      marginBottom: "8px",
-    }}
-  >
-    MAN OF THE MATCH
-  </div>
-
-  <h2 style={{ marginTop: 0 }}>Vote for your MOTM</h2>
-
-  <MotmVote
-    matchId={matchId}
-    candidates={motmCandidates || []}
-  />
-</div>   
+       
       <Link href="/fixtures" style={styles.backLink}>
             ← Back to Fixtures
           </Link>
@@ -120,6 +101,27 @@ const { data: motmCandidates } = await supabase
             <p>Match report coming soon.</p>
           )}
         </div>
+
+            <div style={{ marginTop: "45px", paddingTop: "30px", borderTop: "1px solid #ddd" }}>
+  <div
+    style={{
+      color: "#e31b23",
+      fontSize: "12px",
+      fontWeight: "900",
+      letterSpacing: "2px",
+      marginBottom: "8px",
+    }}
+  >
+    MAN OF THE MATCH
+  </div>
+
+  <h2 style={{ marginTop: 0 }}>Vote for your MOTM</h2>
+
+  <MotmVote
+    matchId={matchId}
+    candidates={motmCandidates || []}
+  />
+</div>
 
         <Link href="/fixtures" style={styles.backLink}>
           ← Back to Fixtures
