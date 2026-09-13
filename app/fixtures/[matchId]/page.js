@@ -81,11 +81,30 @@ export default async function PublicMatchReport({ params }) {
             match.match_report
               .split("\n")
               .filter((paragraph) => paragraph.trim() !== "")
-              .map((paragraph, index) => (
-                <p key={index} style={styles.paragraph}>
-                  {paragraph}
-                </p>
-              ))
+             .map((paragraph, index) => (
+  <div key={index}>
+    <p style={styles.paragraph}>
+      {paragraph}
+    </p>
+
+    {paragraph.includes("crossbar") && (
+      <video
+        controls
+        playsInline
+        preload="metadata"
+        style={{
+          width: "100%",
+          maxWidth: "700px",
+          borderRadius: "8px",
+          margin: "10px 0 25px",
+          display: "block",
+        }}
+      >
+        <source src="/hayes-crossbar-web.mp4" type="video/mp4" />
+      </video>
+    )}
+  </div>
+))
           ) : (
             <p>Match report coming soon.</p>
           )}
