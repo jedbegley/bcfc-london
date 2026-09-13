@@ -8,7 +8,7 @@ const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
 );
 
-export default function MotmVote({ matchId }) {
+export default function MotmVote({ matchId, votingClosed }) {
   const [player, setPlayer] = useState(null);
   const [selectedPlayerId, setSelectedPlayerId] = useState("");
   const [message, setMessage] = useState("");
@@ -109,7 +109,14 @@ setCandidates(candidateData || []);
     );
   }
 
-  if (existingVote) {
+if (votingClosed) {
+  return (
+    <p style={{ margin: 0, fontWeight: "700" }}>
+      MOTM voting is closed.
+    </p>
+  );
+}  
+if (existingVote) {
     const votedPlayer = candidates.find(
       (candidate) => Number(candidate.id) === Number(existingVote)
     );
