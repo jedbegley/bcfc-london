@@ -8,7 +8,36 @@ const supabase = createClient(
 );
 
 export const dynamic = "force-dynamic";
+export async function generateMetadata({ params }) {
+  const matchId = params.matchId;
 
+  const { data: match } = await supabase
+    .from("matches")
+    .select("opponent, our_score, opponent_score")
+    .eq("id", matchId)
+    .single();
+
+  if (!match) {
+    return {
+      title: "Match Report | BCFC London",
+    };
+  }
+
+  const title = `Bristol City ${match.our_score}–${match.opponent_score} ${match.opponent} | Match Report`;
+  const description = `Read the full BCFC London match report, watch the highlights and vote for your Man of the Match.`;
+
+  return {
+    title,
+    description,
+    openGraph: {
+      title,
+      description,
+      type: "article",
+      url: `https://www.bcfclondon.co.uk/fixtures/${matchId}`,
+      siteName: "Bristol City London Supporters FC",
+    },
+  };
+}
 export default async function PublicMatchReport({ params }) {
   const matchId = params.matchId;
 
