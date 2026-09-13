@@ -129,7 +129,7 @@ const styles = {
     background: "#ffffff",
     padding: "22px 6%",
     display: "flex",
-    justifyContent: "space-between",
+    justifyContent: "flex-start",
     alignItems: "center",
     borderBottom: "4px solid #e31b23",
     flexWrap: "wrap",
@@ -169,6 +169,7 @@ const styles = {
     fontSize: "14px",
     fontWeight: "700",
     flexWrap: "wrap",
+    marginLeft: "auto",
   },
 
   navLink: {
