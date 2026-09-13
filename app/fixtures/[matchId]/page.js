@@ -17,18 +17,7 @@ export default async function PublicMatchReport({ params }) {
     .select("*")
     .eq("id", matchId)
     .single();
-  const { data: squadRows } = await supabase
-  .from("match_squad")
-  .select("player_id")
-  .eq("match_id", matchId)
-  .eq("selected", true);
-const squadPlayerIds = (squadRows || []).map((row) => row.player_id);
-
-const { data: motmCandidates } = await supabase
-  .from("Players")
-  .select("id, full_name")
-  .in("id", squadPlayerIds)
-  .order("full_name", { ascending: true });
+ 
   if (error || !match) {
     return (
       <main style={styles.main}>
@@ -117,10 +106,7 @@ const { data: motmCandidates } = await supabase
 
   <h2 style={{ marginTop: 0 }}>Vote for your MOTM</h2>
 
-  <MotmVote
-    matchId={matchId}
-    candidates={motmCandidates || []}
-  />
+ <MotmVote matchId={matchId} />
 </div>
 
         <Link href="/fixtures" style={styles.backLink}>
