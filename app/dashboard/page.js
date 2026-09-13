@@ -43,7 +43,8 @@ setUser(user);
       const { data: nextMatchData, error: nextMatchError } = await supabase
   .from("matches")
   .select("*")
-  .gte("match_date", new Date().toISOString().split("T")[0])
+.neq("status", "Completed")
+.gte("match_date", new Date().toISOString().split("T")[0])
   .order("match_date", { ascending: true })
   .limit(1)
   .single();
