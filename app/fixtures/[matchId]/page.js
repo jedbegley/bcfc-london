@@ -176,6 +176,46 @@ export default async function PublicMatchReport({ params }) {
       Substitute — Pay £5
     </a>
   </div>
+        <div
+  style={{
+    marginTop: "30px",
+    paddingTop: "30px",
+    borderTop: "1px solid #ddd",
+  }}
+>
+  <div
+    style={{
+      color: "#e31b23",
+      fontSize: "12px",
+      fontWeight: "900",
+      letterSpacing: "2px",
+      marginBottom: "8px",
+    }}
+  >
+    NEXT MATCH
+  </div>
+
+  <h2 style={{ marginTop: 0 }}>Pure Football — 20 September</h2>
+
+  <p style={{ marginBottom: "20px" }}>
+    Let us know if you&apos;re available for next Sunday&apos;s match.
+  </p>
+
+  <Link
+    href="/dashboard"
+    style={{
+      display: "inline-block",
+      background: "#111",
+      color: "#fff",
+      padding: "13px 20px",
+      borderRadius: "6px",
+      fontWeight: "800",
+      textDecoration: "none",
+    }}
+  >
+    CONFIRM AVAILABILITY →
+  </Link>
+</div>
 </div>
 
 <Link href="/fixtures" style={styles.backLink}>
