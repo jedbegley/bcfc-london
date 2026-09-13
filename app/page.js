@@ -7,25 +7,25 @@ const featuredStory = {
   link: "/news/barnes-stormers-preview",
 };
 const latestResult = {
-  competition: "PRE-SEASON FRIENDLY",
-  opponent: "Shepherd's Tuesday",
-  opponentShort: "ST",
-  homeAway: "HOME",
-  score: "2-2",
-  date: "Sunday 16 August 2026",
-  venue: "Burgess Park",
-  scorers: "⚽ Own Goal · Nathan",
-  reportLink: "/news/shepherds-tuesday-2-2-bristol-city",
-};
-const nextMatch = {
   competition: "SOUTHERN SUNDAY FOOTBALL LEAGUE",
   opponent: "Barnes Stormers FC",
   opponentShort: "BS",
-  cityHomeAway: "HOME",
-  opponentHomeAway: "AWAY",
+  homeAway: "HOME",
+  score: "2-1",
   date: "Sunday 13 September 2026",
-  kickOff: "10:30 Kick Off",
   venue: "Clapham Common",
+  scorers: "⚽ James Hayes · Jack Lowe",
+  reportLink: "/fixtures/3",
+};
+const nextMatch = {
+  competition: "SOUTHERN SUNDAY FOOTBALL LEAGUE",
+  opponent: "Pure Football",
+  opponentShort: "PF",
+  cityHomeAway: "AWAY",
+  opponentHomeAway: "HOME",
+  date: "Sunday 20 September 2026",
+  kickOff: "12:30 Kick Off",
+  venue: "Barn Elms Sports Centre",
   tag: "LEAGUE",
 };
 
