@@ -8,12 +8,13 @@ const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
 );
 
-export default function MotmVote({ matchId, candidates }) {
+export default function MotmVote({ matchId }) {
   const [player, setPlayer] = useState(null);
   const [selectedPlayerId, setSelectedPlayerId] = useState("");
   const [message, setMessage] = useState("");
   const [existingVote, setExistingVote] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [candidates, setCandidates] = useState([]);
 
   useEffect(() => {
     async function loadVotingUser() {
@@ -40,6 +41,21 @@ export default function MotmVote({ matchId, candidates }) {
       }
 
       setPlayer(playerData);
+      const { data: squadRows } = await supabase
+  .from("match_squad")
+  .select("player_id")
+  .eq("match_id", matchId)
+  .eq("selected", true);
+
+const playerIds = (squadRows || []).map((row) => row.player_id);
+
+const { data: candidateData } = await supabase
+  .from("Players")
+  .select("id, full_name")
+  .in("id", playerIds)
+  .order("full_name", { ascending: true });
+
+setCandidates(candidateData || []);
 
       const { data: voteData } = await supabase
         .from("motm_votes")
