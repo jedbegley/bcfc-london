@@ -1,5 +1,23 @@
 import Script from "next/script";
-export default function Fixtures() {
+import { createClient } from "@supabase/supabase-js";
+
+const supabase = createClient(
+  process.env.NEXT_PUBLIC_SUPABASE_URL,
+  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
+);
+
+export const dynamic = "force-dynamic";
+
+export default async function Fixtures() {
+  const { data: barnesMatch, error } = await supabase
+    .from("matches")
+    .select("*")
+    .eq("id", 3)
+    .single();
+
+  if (error) {
+    console.error("Error loading Barnes match:", error);
+  }
   return (
     <main style={styles.page}>
     {/* HEADER */}
@@ -43,8 +61,8 @@ export default function Fixtures() {
   <p style={styles.redLabel}>NEXT UP</p>
   <h2 style={styles.heading}>Upcoming Fixtures</h2>
 
-  <div style={styles.cardWrap}>
-  
+ <div style={styles.cardWrap}>
+  {barnesMatch?.status !== "Completed" && (
     <div style={styles.matchCard}>
       <div style={styles.matchLabel}>NEXT MATCH</div>
       <div style={styles.competition}>SOUTHERN SUNDAY FOOTBALL LEAGUE</div>
@@ -77,7 +95,8 @@ export default function Fixtures() {
 
       <div style={styles.friendlyTag}>LEAGUE</div>
     </div>
-  </div>
+  )}
+</div>
 </section>
  
       {/* RESULTS */}
@@ -87,6 +106,59 @@ export default function Fixtures() {
           <h2 style={styles.heading}>Results</h2>
 
           <div style={styles.cardWrap}>
+        {barnesMatch?.status === "Completed" && (
+  <div style={{ ...styles.matchCard, marginBottom: "30px" }}>
+    <div style={styles.matchLabel}>LATEST RESULT</div>
+    <div style={styles.competition}>SOUTHERN SUNDAY FOOTBALL LEAGUE — LEAGUE EIGHT</div>
+
+    <div style={styles.teams}>
+      <div style={styles.team}>
+        <img
+          src="/374fadec-093f-4e7e-9f54-01c06a034caa.jpeg"
+          alt="Bristol City"
+          style={styles.fixtureBadge}
+        />
+        <strong>Bristol City</strong>
+        <span style={styles.homeAway}>HOME</span>
+      </div>
+
+      <div style={styles.versus}>
+        <div
+          style={{
+            fontSize: "34px",
+            fontWeight: "900",
+            color: "#111",
+          }}
+        >
+          {barnesMatch.our_score}–{barnesMatch.opponent_score}
+        </div>
+
+        <div
+          style={{
+            fontSize: "11px",
+            fontWeight: "900",
+            marginTop: "6px",
+          }}
+        >
+          FULL TIME
+        </div>
+      </div>
+
+      <div style={styles.team}>
+        <div style={styles.aberdeenBadge}>BS</div>
+        <strong>Barnes Stormers FC</strong>
+        <span style={styles.homeAway}>AWAY</span>
+      </div>
+    </div>
+
+    <div style={styles.matchInfo}>
+      <strong>Sunday 13 September 2026</strong>
+      <span>Clapham Common</span>
+    </div>
+
+    <div style={styles.friendlyTag}>MATCH REPORT COMING SOON</div>
+  </div>
+)}
         <div style={styles.matchCard}>
   <div style={styles.matchLabel}>LATEST RESULT</div>
   <div style={styles.competition}>PRE-SEASON FRIENDLY</div>
