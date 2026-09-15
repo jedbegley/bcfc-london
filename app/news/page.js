@@ -76,6 +76,9 @@ export default function News() {
     <h2 style={styles.storyTitle}>
   {featuredNews.title}
 </h2>
+    <p style={styles.storyLead}>
+  {featuredNews.summary}
+</p>
 
    
          <div style={{ margin: "28px 0" }}>
