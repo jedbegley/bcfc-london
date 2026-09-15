@@ -1,10 +1,10 @@
 const featuredStory = {
-  title: "City Start League Eight Campaign With Barnes Victory",
+  title: "City Handed Two Home Ties in Opening Cup Draws",
   summary:
-    "City opened their 2026/27 League Eight campaign with a 2-1 win over Barnes Stormers at Clapham Common, with goals from James Hayes and Jack Lowe.",
-  image: "/IMG_5497.jpeg",
-  imageAlt: "Bristol City London Supporters FC squad",
-  link: "/fixtures/3",
+    "City will face Higham Park Rangers and Sue's Angels at home after the first two cup draws of the season, with another unusual fixture also on the horizon...",
+  image: "/london-fa.png",
+  imageAlt: "London FA",
+  link: "/news/cup-draws-2026",
 };
 const latestResult = {
   competition: "SOUTHERN SUNDAY FOOTBALL LEAGUE",
@@ -107,7 +107,7 @@ href={featuredStory.link}
     boxSizing: "border-box",
   }}
 >
-  READ MATCH REPORT
+  READ FULL STORY →
 </a>
         </div>
 
