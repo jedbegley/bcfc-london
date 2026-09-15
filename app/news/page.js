@@ -1,22 +1,16 @@
 import Script from "next/script";
 
 const featuredNews = {
-  label: "MATCH PREVIEW",
-  category: "LEAGUE",
-  date: "13 September 2026",
-  title: "City Begin League Eight Campaign Against Barnes Stormers",
-  matchDate: "Sunday 13 September 2026",
-  fixture: "Barnes Stormers FC (H)",
-  venue: "Clapham Common",
-  kickOff: "10:30am",
+  label: "CLUB NEWS",
+  category: "CUP DRAWS",
+  date: "15 September 2026",
+  title: "City Handed Two Home Ties in Opening Cup Draws",
   summary:
-    "City open the 2026/27 league season at home to familiar opponents Barnes Stormers FC, looking for a first victory over the side after two meetings last season.",
-  image: "/IMG_5497.jpeg",
-  imageAlt: "Bristol City London Supporters FC squad",
-  imageCaption:
-    "Bristol City London Supporters FC ahead of the 2026/27 league campaign.",
-  link: "/news/barnes-stormers-preview",
+    "City will face Higham Park Rangers and Sue's Angels at home after the first two cup draws of the season, with another rather unusual fixture also on the horizon...",
+  link: "/news/cup-draws-2026",
+  link: "/news/cup-draws-2026",
 };
+
 export default function News() {
   return (
     <main style={styles.page}>
@@ -83,82 +77,33 @@ export default function News() {
   {featuredNews.title}
 </h2>
 
-     {/* MATCH DETAILS */}
-<div style={styles.previewDetails}>
-  <div style={styles.previewDetail}>
-    <span style={styles.previewLabel}>DATE</span>
-    <strong>{featuredNews.matchDate}</strong>
-  </div>
-
-  <div style={styles.previewDetail}>
-    <span style={styles.previewLabel}>FIXTURE</span>
-    <strong>{featuredNews.fixture}</strong>
-  </div>
-
-  <div style={styles.previewDetail}>
-    <span style={styles.previewLabel}>VENUE</span>
-    <strong>{featuredNews.venue}</strong>
-  </div>
-
-  <div style={styles.previewDetail}>
-    <span style={styles.previewLabel}>KICK OFF</span>
-    <strong>{featuredNews.kickOff}</strong>
-  </div>
-</div>
-   <p style={styles.storyLead}>
-  {featuredNews.summary}
-</p>
+   
          <div style={{ margin: "28px 0" }}>
+  <div
+  style={{
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    gap: "40px",
+    background: "#f4f4f4",
+    padding: "35px",
+    borderRadius: "10px",
+  }}
+>
   <img
-   src={featuredNews.image}
-   alt={featuredNews.imageAlt}
-    style={{
-      width: "100%",
-      height: "auto",
-      display: "block",
-      borderRadius: "10px",
-    }}
+    src="/london-fa.png"
+    alt="London FA"
+    style={{ width: "150px", height: "150px", objectFit: "contain" }}
   />
 
-  <p
-    style={{
-      margin: "8px 0 0",
-      color: "#777",
-      fontSize: "12px",
-      fontStyle: "italic",
-    }}
-  >
-   {featuredNews.imageCaption}
-  </p>
+  <img
+    src="/southern-sunday-league.png"
+    alt="Southern Sunday Football League"
+    style={{ width: "150px", height: "150px", objectFit: "contain" }}
+  />
 </div>
-     <p style={styles.storyText}>
-  Barnes will be a familiar opponent for City, with the sides meeting twice
-  during last season&apos;s League Nine campaign. City were unable to get the
-  better of the Stormers on either occasion, taking just one point from the
-  two games.
-</p>
 
-<p style={styles.storyText}>
-  The first meeting at Clapham Common ended in a 2–2 draw before Barnes took
-  all three points in the return fixture with a 2–1 victory later in the
-  season.
-</p>
-
-<p style={styles.storyText}>
-  Despite those results, it was City who ultimately finished higher in the
-  table, ending the campaign one place above Barnes.
-</p>
-
-<p style={styles.storyText}>
-  A summer restructuring of the Southern Sunday Football League means the
-  two sides will meet again this season, with both competing in League Eight.
-</p>
-
-<p style={styles.storyText}>
-  City head into the opener unbeaten in pre-season following a 3–0 victory
-  over Aberdeen and a 2–2 draw against Shepherd&apos;s Tuesday.
-</p>
-
+     
 <a
  href={featuredNews.link}
   style={{
@@ -172,33 +117,10 @@ export default function News() {
     borderRadius: "4px",
   }}
 >
-  READ MATCH PREVIEW
+  READ FULL STORY →
 </a>
 </div>
 
-{/* RIGHT-HAND MATCH CARD */}
-<div style={styles.storySide}>
-  <div style={styles.previewMatchCard}>
-    <div style={styles.previewMatchLabel}>NEXT MATCH</div>
-
-    <div style={styles.previewTeam}>
-      Bristol City
-    </div>
-
-    <div style={styles.previewVs}>VS</div>
-
-    <div style={styles.previewTeam}>
-      Barnes Stormers FC
-    </div>
-
-    <div style={styles.previewMatchInfo}>
-      <strong>Sunday 13 September</strong>
-      <span>10:30 Kick Off</span>
-      <span>Clapham Common</span>
-      <span>League Eight</span>
-    </div>
-  </div>
-</div>
   </article>
 </section>
 
@@ -207,6 +129,68 @@ export default function News() {
   <div style={styles.content}>
     <p style={styles.redLabel}>MORE FROM BCFC LONDON</p>
     <h2 style={styles.sectionTitle}>More News</h2>
+  <div style={styles.emptyNews}>
+  <div style={styles.storyMeta}>
+    <span style={styles.category}>MATCH REPORT</span>
+    <span>13 September 2026</span>
+  </div>
+
+  <h3 style={styles.emptyTitle}>
+    Bristol City 2–1 Barnes Stormers
+  </h3>
+
+  <p style={styles.emptyText}>
+    City opened their League Eight campaign with a 2–1 victory at Clapham Common.
+  </p>
+
+  <a
+    href="/fixtures/3"
+    style={{
+      display: "inline-block",
+      marginTop: "20px",
+      background: "#df1e2f",
+      color: "white",
+      textDecoration: "none",
+      padding: "12px 18px",
+      borderRadius: "6px",
+      fontWeight: "900",
+      fontSize: "13px",
+    }}
+  >
+    Read Match Report →
+  </a>
+</div>
+      <div style={styles.emptyNews}>
+  <div style={styles.storyMeta}>
+    <span style={styles.category}>MATCH PREVIEW</span>
+    <span>13 September 2026</span>
+  </div>
+
+  <h3 style={styles.emptyTitle}>
+    City Begin League Eight Campaign Against Barnes Stormers
+  </h3>
+
+  <p style={styles.emptyText}>
+    City began the 2026/27 league season at home to familiar opponents Barnes Stormers.
+  </p>
+
+  <a
+    href="/news/barnes-stormers-preview"
+    style={{
+      display: "inline-block",
+      marginTop: "20px",
+      background: "#df1e2f",
+      color: "white",
+      textDecoration: "none",
+      padding: "12px 18px",
+      borderRadius: "6px",
+      fontWeight: "900",
+      fontSize: "13px",
+    }}
+  >
+    Read Match Preview →
+  </a>
+</div>
 
   <div style={styles.emptyNews}>
   <div style={styles.storyMeta}>
