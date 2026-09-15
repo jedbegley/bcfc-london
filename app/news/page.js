@@ -120,8 +120,9 @@ export default function News() {
   READ FULL STORY →
 </a>
 </div>
+</div>
 
-  </article>
+</article>
 </section>
 
     {/* MORE NEWS */}
