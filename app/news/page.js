@@ -470,7 +470,7 @@ activeNav: {
 
   featuredCard: {
     display: "grid",
-    gridTemplateColumns: "1.4fr 0.6fr",
+    gridTemplateColumns: "1fr",
     gap: "50px",
     padding: "45px",
     border: "1px solid #e5e5e5",
