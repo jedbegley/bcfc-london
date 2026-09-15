@@ -130,7 +130,7 @@ export default function CupDraws2026() {
             the club&apos;s pleas for a new kit were heard in high places...
           </p>
           <p style={styles.teaserClosing}>
-            More details on the fixture — and the new kit — coming soon. 👀
+            More details on the fixture - and the new kit - coming soon. 👀
           </p>
         </div>
 
