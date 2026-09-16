@@ -6,7 +6,7 @@ const featuredNews = {
   date: "15 September 2026",
   title: "City Handed Two Home Ties in Opening Cup Draws",
   summary:
-    "City will face Higham Park Rangers and Sue's Angels at home after the first two cup draws of the season, with another rather unusual fixture also on the horizon...",
+    "City will face Higham Park Rangers and Larkhall City at home after the first two cup draws of the season, with another rather unusual fixture also on the horizon...",
   link: "/news/cup-draws-2026",
   link: "/news/cup-draws-2026",
 };
