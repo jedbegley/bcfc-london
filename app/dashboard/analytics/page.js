@@ -36,15 +36,27 @@ export default function AnalyticsPage() {
         return;
       }
 
-      const { data, error } = await supabase
-  .from("page_visits")
-  .select("path, visitor_id, created_at")
-  .order("created_at", { ascending: false })
-  .range(0, 9999);
+      let allVisits = [];
+let from = 0;
+const batchSize = 1000;
 
-      if (!error) {
-        setVisits(data || []);
-      }
+while (true) {
+  const { data, error } = await supabase
+    .from("page_visits")
+    .select("path, visitor_id, created_at")
+    .order("created_at", { ascending: false })
+    .range(from, from + batchSize - 1);
+
+  if (error) break;
+
+  allVisits = [...allVisits, ...(data || [])];
+
+  if (!data || data.length < batchSize) break;
+
+  from += batchSize;
+}
+
+setVisits(allVisits);
 
       setLoading(false);
     }
