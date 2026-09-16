@@ -1,11 +1,11 @@
 export const metadata = {
   title: "City Handed Two Home Ties in Opening Cup Draws | BCFC London",
   description:
-    "City will face Higham Park Rangers and Sue's Angels at home after the first two cup draws of the season, with another unusual fixture also on the horizon.",
+    "City will face Higham Park Rangers and Larkhall City at home after the first two cup draws of the season, with another unusual fixture also on the horizon.",
   openGraph: {
     title: "City Handed Two Home Ties in Opening Cup Draws",
     description:
-      "City will face Higham Park Rangers and Sue's Angels at home after the first two cup draws of the season.",
+      "City will face Higham Park Rangers and Larkhall City at home after the first two cup draws of the season.",
     url: "https://www.bcfclondon.co.uk/news/cup-draws-2026",
     siteName: "BCFC London",
     images: [
@@ -22,7 +22,7 @@ export const metadata = {
     card: "summary_large_image",
     title: "City Handed Two Home Ties in Opening Cup Draws",
     description:
-      "City will face Higham Park Rangers and Sue's Angels at home after the first two cup draws of the season.",
+      "City will face Higham Park Rangers and Larkhall City at home after the first two cup draws of the season.",
     images: ["https://www.bcfclondon.co.uk/london-fa.png"],
   },
 };
