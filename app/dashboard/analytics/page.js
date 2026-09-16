@@ -37,9 +37,10 @@ export default function AnalyticsPage() {
       }
 
       const { data, error } = await supabase
-        .from("page_visits")
-        .select("path, visitor_id, created_at")
-        .order("created_at", { ascending: false });
+  .from("page_visits")
+  .select("path, visitor_id, created_at")
+  .order("created_at", { ascending: false })
+  .range(0, 9999);
 
       if (!error) {
         setVisits(data || []);
