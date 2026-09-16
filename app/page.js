@@ -1,7 +1,7 @@
 const featuredStory = {
   title: "City Handed Two Home Ties in Opening Cup Draws",
   summary:
-    "City will face Higham Park Rangers and Sue's Angels at home after the first two cup draws of the season, with another unusual fixture also on the horizon...",
+    "City will face Higham Park Rangers and Larkhall City at home after the first two cup draws of the season, with another unusual fixture also on the horizon...",
   image: "/london-fa.png",
   imageAlt: "London FA",
   link: "/news/cup-draws-2026",
