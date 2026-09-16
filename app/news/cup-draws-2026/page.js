@@ -121,22 +121,23 @@ export default function CupDraws2026() {
           </div>
         </div>
 
-        <p style={styles.text}>
+                <p style={styles.text}>
           The second cup draw of the season has also produced a home tie, with
-          City set to face fellow League Eight side Sue&apos;s Angels in the
-          Brian Howard&apos;s President Cup.
+          City set to face League Seven side Larkhall City in the Brian
+          Howard&apos;s President Cup.
         </p>
 
         <p style={styles.text}>
-          The competition features teams from Leagues Seven, Eight and Nine of
-          the Southern Sunday Football League, and City have been handed a
-          tough opening assignment.
+          Larkhall will be a familiar opponent, with the two sides having faced
+          each other twice last season when both were competing in the same
+          division. There was little to separate them across the two meetings,
+          with both sides winning the away fixture.
         </p>
 
         <p style={styles.text}>
-          Sue&apos;s Angels earned promotion last season after winning the
-          division below and have made an impressive start to life in League
-          Eight, winning both of their opening matches to sit top of the table.
+          City will now renew that rivalry in the President Cup, which features
+          teams from Leagues Seven, Eight and Nine of the Southern Sunday
+          Football League.
         </p>
 
         <div style={styles.drawCard}>
@@ -145,7 +146,7 @@ export default function CupDraws2026() {
           </div>
           <div style={styles.fixture}>BRISTOL CITY</div>
           <div style={styles.vs}>VS</div>
-          <div style={styles.fixture}>SUE&apos;S ANGELS</div>
+          <div style={styles.fixture}>LARKHALL CITY</div>
           <div style={styles.details}>October · Date TBC</div>
         </div>
 
