@@ -103,6 +103,46 @@ const { data: pureMatch, error: pureError } = await supabase
 </div>
 
       <div style={styles.friendlyTag}>LEAGUE</div>
+            <div style={{ marginTop: "25px", borderTop: "1px solid #eee", paddingTop: "20px" }}>
+  <div
+    style={{
+      fontSize: "12px",
+      fontWeight: "900",
+      letterSpacing: "2px",
+      color: "#e31b23",
+      marginBottom: "15px",
+      textAlign: "center",
+    }}
+  >
+    MATCHDAY SQUAD
+  </div>
+
+  <div
+    style={{
+      display: "grid",
+      gridTemplateColumns: "1fr 1fr",
+      gap: "8px 20px",
+      fontSize: "14px",
+      lineHeight: "1.5",
+    }}
+  >
+    <span>Ben Earle</span>
+    <span>Ennys Soydas</span>
+    <span>Jack Lowe</span>
+    <span>Jack Smith</span>
+    <span>James Hayes</span>
+    <span>Jed Begley</span>
+    <span>Meddy Deschamps</span>
+    <span>Nathan Pringle</span>
+    <span>Nick Bellamy</span>
+    <span>Nikita Tertychnyy</span>
+    <span>Oisin Brennan</span>
+    <span>Ryan Hayes</span>
+    <span>Samuel Sayer</span>
+    <span>Thomas Brennan</span>
+    <span>Witse Konings</span>
+  </div>
+</div>
     </div>
   )}
 </div>
