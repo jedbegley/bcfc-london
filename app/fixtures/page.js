@@ -11,10 +11,16 @@ export const dynamic = "force-dynamic";
 
 export default async function Fixtures() {
   const { data: barnesMatch, error } = await supabase
-    .from("matches")
-    .select("*")
-    .eq("id", 3)
-    .single();
+  .from("matches")
+  .select("*")
+  .eq("id", 3)
+  .single();
+
+const { data: pureMatch, error: pureError } = await supabase
+  .from("matches")
+  .select("*")
+  .eq("id", 4)
+  .single();
 
   if (error) {
     console.error("Error loading Barnes match:", error);
