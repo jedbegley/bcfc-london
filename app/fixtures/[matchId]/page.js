@@ -124,7 +124,7 @@ export default async function PublicMatchReport({ params }) {
     <p><strong>Venue:</strong> Barn Elms Sports Centre, SW13 0DG</p>
   </div>
 )}
-          {match.match_report ? (
+          {isCompleted && (match.match_report ? (
             match.match_report
               .split("\n")
               .filter((paragraph) => paragraph.trim() !== "")
@@ -171,7 +171,7 @@ export default async function PublicMatchReport({ params }) {
 ))
           ) : (
             <p>Match report coming soon.</p>
-          )}
+          ))}
         </div>
 
             <div style={{ marginTop: "45px", paddingTop: "30px", borderTop: "1px solid #ddd" }}>
