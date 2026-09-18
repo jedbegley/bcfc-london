@@ -64,6 +64,7 @@ export default async function PublicMatchReport({ params }) {
   }
 
  const opponent = match.opponent || "Opponent";
+  const isCompleted = match.status === "Completed";
 
   return (
    <main style={styles.page}>
