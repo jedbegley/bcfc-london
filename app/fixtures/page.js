@@ -69,12 +69,22 @@ const { data: pureMatch, error: pureError } = await supabase
   <h2 style={styles.heading}>Upcoming Fixtures</h2>
 
  <div style={styles.cardWrap}>
-  {barnesMatch?.status !== "Completed" && (
+  {pureMatch?.status !== "Completed" && (
     <div style={styles.matchCard}>
       <div style={styles.matchLabel}>NEXT MATCH</div>
-      <div style={styles.competition}>SOUTHERN SUNDAY FOOTBALL LEAGUE</div>
+      <div style={styles.competition}>
+        SOUTHERN SUNDAY FOOTBALL LEAGUE — LEAGUE EIGHT
+      </div>
 
       <div style={styles.teams}>
+        <div style={styles.team}>
+          <div style={styles.aberdeenBadge}>PF</div>
+          <strong>Pure Football</strong>
+          <span style={styles.homeAway}>HOME</span>
+        </div>
+
+        <div style={styles.versus}>VS</div>
+
         <div style={styles.team}>
           <img
             src="/374fadec-093f-4e7e-9f54-01c06a034caa.jpeg"
@@ -82,31 +92,20 @@ const { data: pureMatch, error: pureError } = await supabase
             style={styles.fixtureBadge}
           />
           <strong>Bristol City</strong>
-          <span style={styles.homeAway}>HOME</span>
-        </div>
-
-        <div style={styles.versus}>VS</div>
-
-        <div style={styles.team}>
-          <div style={styles.aberdeenBadge}>BS</div>
-          <strong>Barnes Stormers FC</strong>
           <span style={styles.homeAway}>AWAY</span>
         </div>
       </div>
 
       <div style={styles.matchInfo}>
-        <strong>Sunday 13 September 2026</strong>
-        <span>10:30 Kick Off</span>
-        <span>Clapham Common</span>
+        <strong>Sunday 20 September 2026</strong>
+        <span>12:30 Kick Off</span>
+        <span>Barn Elms Sports Centre</span>
       </div>
 
       <div style={styles.friendlyTag}>LEAGUE</div>
     </div>
   )}
 </div>
-</section>
- 
-      {/* RESULTS */}
       <section style={styles.resultsSection}>
         <div style={styles.section}>
           <p style={styles.redLabel}>2026/27</p>
