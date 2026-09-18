@@ -96,11 +96,11 @@ const { data: pureMatch, error: pureError } = await supabase
         </div>
       </div>
 
-      <div style={styles.matchInfo}>
-        <strong>Sunday 20 September 2026</strong>
-        <span>12:30 Kick Off</span>
-        <span>Barn Elms Sports Centre</span>
-      </div>
+     <div style={styles.matchInfo}>
+  <strong>Sunday 20 September 2026</strong>
+  <span>11:45 Meet · 12:30 Kick Off</span>
+  <span>Barn Elms Sports Centre · SW13 0DG</span>
+</div>
 
       <div style={styles.friendlyTag}>LEAGUE</div>
     </div>
