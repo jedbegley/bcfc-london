@@ -106,6 +106,7 @@ const { data: pureMatch, error: pureError } = await supabase
     </div>
   )}
 </div>
+    </section>
       <section style={styles.resultsSection}>
         <div style={styles.section}>
           <p style={styles.redLabel}>2026/27</p>
