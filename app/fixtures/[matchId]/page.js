@@ -93,17 +93,23 @@ export default async function PublicMatchReport({ params }) {
     </nav>
   </header>
 
-  <section style={styles.hero}>
-        <div style={styles.heroInner}>
-          <div style={styles.eyebrow}>MATCH REPORT</div>
+ <section style={styles.hero}>
+  <div style={styles.heroInner}>
+    <div style={styles.eyebrow}>
+      {isCompleted ? "MATCH REPORT" : "MATCH PREVIEW"}
+    </div>
 
-          <h1 style={styles.title}>
-            Bristol City {match.our_score}–{match.opponent_score} {opponent}
-          </h1>
+    <h1 style={styles.title}>
+      {isCompleted
+        ? `Bristol City ${match.our_score}–${match.opponent_score} ${opponent}`
+        : `${opponent} – Bristol City`}
+    </h1>
 
-          <div style={styles.fullTime}>FULL TIME</div>
-        </div>
-      </section>
+    <div style={styles.fullTime}>
+      {isCompleted ? "FULL TIME" : "SOUTHERN SUNDAY FOOTBALL LEAGUE — LEAGUE EIGHT"}
+    </div>
+  </div>
+</section>
 
       <section style={styles.content}>
         <div style={styles.report}>
