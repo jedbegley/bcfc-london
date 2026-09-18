@@ -124,6 +124,37 @@ export default async function PublicMatchReport({ params }) {
     <p><strong>Venue:</strong> Barn Elms Sports Centre, SW13 0DG</p>
   </div>
 )}
+{!isCompleted && (
+  <div style={{ marginBottom: "35px" }}>
+    <p style={styles.redLabel}>MATCHDAY SQUAD</p>
+
+    <div
+      style={{
+        display: "grid",
+        gridTemplateColumns: "1fr 1fr",
+        gap: "8px 25px",
+        fontSize: "16px",
+        lineHeight: "1.6",
+      }}
+    >
+      <span>Ben Earle</span>
+      <span>Ennys Soydas</span>
+      <span>Jack Lowe</span>
+      <span>Jack Smith</span>
+      <span>James Hayes</span>
+      <span>Jed Begley</span>
+      <span>Meddy Deschamps</span>
+      <span>Nathan Pringle</span>
+      <span>Nick Bellamy</span>
+      <span>Nikita Tertychnyy</span>
+      <span>Oisin Brennan</span>
+      <span>Ryan Hayes</span>
+      <span>Samuel Sayer</span>
+      <span>Thomas Brennan</span>
+      <span>Witse Konings</span>
+    </div>
+  </div>
+)}
           {isCompleted && (match.match_report ? (
             match.match_report
               .split("\n")
