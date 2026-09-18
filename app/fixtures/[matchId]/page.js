@@ -13,7 +13,7 @@ export async function generateMetadata({ params }) {
 
   const { data: match } = await supabase
     .from("matches")
-    .select("opponent, our_score, opponent_score")
+    .select("opponent, our_score, opponent_score, status")
     .eq("id", matchId)
     .single();
 
@@ -23,8 +23,15 @@ export async function generateMetadata({ params }) {
     };
   }
 
-  const title = `Bristol City ${match.our_score}–${match.opponent_score} ${match.opponent} | Match Report`;
-  const description = `Read the full BCFC London match report, watch the highlights and vote for your Man of the Match.`;
+  const isCompleted = match.status === "Completed";
+
+const title = isCompleted
+  ? `Bristol City ${match.our_score}–${match.opponent_score} ${match.opponent} | Match Report`
+  : `${match.opponent} v Bristol City | Match Preview`;
+
+const description = isCompleted
+  ? `Read the full BCFC London match report, watch the highlights and vote for your Man of the Match.`
+  : `League Eight · Sunday 20 September · 12:30 PM kick off · Barn Elms Sports Centre. View match details and the BCFC London squad.`;
 
   return {
     title,
