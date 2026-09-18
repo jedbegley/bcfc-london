@@ -113,6 +113,17 @@ export default async function PublicMatchReport({ params }) {
 
       <section style={styles.content}>
         <div style={styles.report}>
+      {!isCompleted && (
+  <div style={{ marginBottom: "35px" }}>
+    <p style={styles.redLabel}>MATCH DETAILS</p>
+
+    <h2 style={{ marginTop: 0 }}>Sunday 20 September 2026</h2>
+
+    <p><strong>Meet:</strong> 11:45 AM</p>
+    <p><strong>Kick Off:</strong> 12:30 PM</p>
+    <p><strong>Venue:</strong> Barn Elms Sports Centre, SW13 0DG</p>
+  </div>
+)}
           {match.match_report ? (
             match.match_report
               .split("\n")
