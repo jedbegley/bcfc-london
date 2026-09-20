@@ -71,7 +71,7 @@ if (user) {
   .from("availability")
   .select("status")
   .eq("player_id", playerData.id)
-  .eq("match_id", nextMatchData.id)
+  .eq("match_id", nextMatchData?.id ?? -1)
   .maybeSingle();
 
 if (savedAvailabilityError) {
@@ -88,7 +88,7 @@ if (savedAvailabilityError) {
   const { data: availabilityData, error: availabilityError } = await supabase
     .from("availability")
     .select("*")
-    .eq("match_id", nextMatchData.id);
+    .eq("match_id", nextMatchData?.id ?? -1);
 
   if (playersError) {
     console.log("ADMIN PLAYERS ERROR:", playersError);
