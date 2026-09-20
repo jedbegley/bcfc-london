@@ -107,10 +107,10 @@ export default async function PublicMatchReport({ params }) {
     </div>
 
     <h1 style={styles.title}>
-      {isCompleted
-        ? `Bristol City ${match.our_score}–${match.opponent_score} ${opponent}`
-        : `${opponent} – Bristol City`}
-    </h1>
+  {match.home_or_away === "Away"
+    ? `${opponent} ${match.opponent_score}–${match.our_score} Bristol City`
+    : `Bristol City ${match.our_score}–${match.opponent_score} ${opponent}`}
+</h1>
 
     <div style={styles.fullTime}>
       {isCompleted ? "FULL TIME" : "SOUTHERN SUNDAY FOOTBALL LEAGUE — LEAGUE EIGHT"}
