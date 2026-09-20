@@ -8,24 +8,24 @@ const featuredStory = {
 };
 const latestResult = {
   competition: "SOUTHERN SUNDAY FOOTBALL LEAGUE",
-  opponent: "Barnes Stormers FC",
-  opponentShort: "BS",
-  homeAway: "AWAY",
-  score: "2-1",
-  date: "Sunday 13 September 2026",
-  venue: "Clapham Common",
-  scorers: "⚽ James Hayes · Jack Lowe",
-  reportLink: "/fixtures/3",
+  opponent: "Pure Football",
+  opponentShort: "PF",
+  homeAway: "HOME",
+  score: "3-3",
+  date: "Sunday 20 September 2026",
+  venue: "Barn Elms Sports Centre",
+  scorers: "⚽ Meddy Deschamps · Ben Earle · Sam Sayer",
+  reportLink: "/fixtures/4",
 };
 const nextMatch = {
   competition: "SOUTHERN SUNDAY FOOTBALL LEAGUE",
-  opponent: "Pure Football",
-  opponentShort: "PF",
-  cityHomeAway: "AWAY",
-  opponentHomeAway: "HOME",
-  date: "Sunday 20 September 2026",
-  kickOff: "12:30 Kick Off",
-  venue: "Barn Elms Sports Centre",
+  opponent: "Junction Elite FC Sunday 3rd Team",
+  opponentShort: "JE",
+  cityHomeAway: "HOME",
+  opponentHomeAway: "AWAY",
+  date: "Sunday 27 September 2026",
+  kickOff: "10:30 Kick Off",
+  venue: "Clapham Common Pitch 8",
   tag: "LEAGUE",
 };
 
@@ -127,12 +127,8 @@ alt={featuredStory.imageAlt}
 
            <div style={styles.teams}>
   <div style={styles.team}>
-    <img
-      src="/374fadec-093f-4e7e-9f54-01c06a034caa.jpeg"
-      alt="Bristol City"
-      style={styles.fixtureBadge}
-    />
-    <strong>Bristol City</strong>
+    <div style={styles.aberdeenBadge}>{latestResult.opponentShort}</div>
+    <strong>{latestResult.opponent}</strong>
     <span style={styles.homeAway}>HOME</span>
   </div>
 
@@ -159,8 +155,12 @@ alt={featuredStory.imageAlt}
   </div>
 
   <div style={styles.team}>
-    <div style={styles.aberdeenBadge}>{latestResult.opponentShort}</div>
-    <strong>{latestResult.opponent}</strong>
+    <img
+      src="/374fadec-093f-4e7e-9f54-01c06a034caa.jpeg"
+      alt="Bristol City"
+      style={styles.fixtureBadge}
+    />
+    <strong>Bristol City</strong>
     <span style={styles.homeAway}>AWAY</span>
   </div>
 </div>
@@ -193,20 +193,20 @@ alt={featuredStory.imageAlt}
 
 <div style={styles.teams}>
   <div style={styles.team}>
-    <div style={styles.aberdeenBadge}>{nextMatch.opponentShort}</div>
-    <strong>{nextMatch.opponent}</strong>
-    <span style={styles.homeAway}>HOME</span>
-  </div>
-
-  <div style={styles.versus}>VS</div>
-
-  <div style={styles.team}>
     <img
       src="/374fadec-093f-4e7e-9f54-01c06a034caa.jpeg"
       alt="Bristol City"
       style={styles.fixtureBadge}
     />
     <strong>Bristol City</strong>
+    <span style={styles.homeAway}>HOME</span>
+  </div>
+
+  <div style={styles.versus}>VS</div>
+
+  <div style={styles.team}>
+    <div style={styles.aberdeenBadge}>{nextMatch.opponentShort}</div>
+    <strong>{nextMatch.opponent}</strong>
     <span style={styles.homeAway}>AWAY</span>
   </div>
 </div>
