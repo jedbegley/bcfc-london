@@ -291,7 +291,6 @@ export default async function PublicMatchReport({ params }) {
     MATCH FEES
   </div>
 
-  <h2 style={{ marginTop: 0 }}>Pay your match fee</h2>
 
  <h2 style={{ marginTop: 0 }}>Pay your match fee</h2>
 
@@ -334,11 +333,11 @@ export default async function PublicMatchReport({ params }) {
     NEXT MATCH
   </div>
 
-  <h2 style={{ marginTop: 0 }}>Pure Football — 20 September</h2>
+  <h2 style={{ marginTop: 0 }}>Junction Elite FC — 27 September</h2>
 
   <p style={{ marginBottom: "20px" }}>
-    Let us know if you&apos;re available for next Sunday&apos;s match.
-  </p>
+  Sunday 27 September · 10:30 · Clapham Common Pitch 8
+</p>
 
   <Link
     href="/dashboard"
