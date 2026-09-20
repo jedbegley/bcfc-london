@@ -22,6 +22,11 @@ const { data: pureMatch, error: pureError } = await supabase
   .eq("id", 4)
   .single();
 
+  const { data: nextMatch, error: nextMatchError } = await supabase
+  .from("matches")
+  .select("*")
+  .eq("id", 5)
+  .single();
   if (error) {
     console.error("Error loading Barnes match:", error);
   }
