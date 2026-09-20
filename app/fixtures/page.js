@@ -158,6 +158,61 @@ const { data: pureMatch, error: pureError } = await supabase
           <h2 style={styles.heading}>Results</h2>
 
           <div style={styles.cardWrap}>
+    {pureMatch?.status === "Completed" && (
+  <div style={{ ...styles.matchCard, marginBottom: "30px" }}>
+    <div style={styles.matchLabel}>LATEST RESULT</div>
+    <div style={styles.competition}>
+      SOUTHERN SUNDAY FOOTBALL LEAGUE — LEAGUE EIGHT
+    </div>
+
+    <div style={styles.teams}>
+      <div style={styles.team}>
+        <div style={styles.aberdeenBadge}>PF</div>
+        <strong>Pure Football</strong>
+        <span style={styles.homeAway}>HOME</span>
+      </div>
+
+      <div style={styles.versus}>
+        <div style={{ fontSize: "34px", fontWeight: "900", color: "#111" }}>
+          {pureMatch.opponent_score}–{pureMatch.our_score}
+        </div>
+        <div style={{ fontSize: "11px", fontWeight: "900", marginTop: "6px" }}>
+          FULL TIME
+        </div>
+      </div>
+
+      <div style={styles.team}>
+        <img
+          src="/374fadec-093f-4e7e-9f54-01c06a034caa.jpeg"
+          alt="Bristol City"
+          style={styles.fixtureBadge}
+        />
+        <strong>Bristol City</strong>
+        <span style={styles.homeAway}>AWAY</span>
+      </div>
+    </div>
+
+    <div style={styles.matchInfo}>
+      <strong>Sunday 20 September 2026</strong>
+      <span>Barn Elms Sports Centre</span>
+    </div>
+
+    <Link
+      href={`/fixtures/${pureMatch.id}`}
+      style={{
+        display: "inline-block",
+        marginTop: "14px",
+        color: "#e31b23",
+        fontSize: "12px",
+        fontWeight: "900",
+        letterSpacing: "1px",
+        textDecoration: "none",
+      }}
+    >
+      READ MATCH REPORT →
+    </Link>
+  </div>
+)}
         {barnesMatch?.status === "Completed" && (
   <div style={{ ...styles.matchCard, marginBottom: "30px" }}>
     <div style={styles.matchLabel}>LATEST RESULT</div>
