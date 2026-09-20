@@ -189,7 +189,26 @@ export default async function PublicMatchReport({ params }) {
       </video>
     )}
 
-      {paragraph.includes("bottom corner with his left foot") && (
+{paragraph.includes("Ben Earle stepped up and made no mistake") && (
+  <video
+    controls
+    playsInline
+    preload="metadata"
+    style={{
+      width: "100%",
+      maxWidth: "700px",
+      borderRadius: "8px",
+      margin: "10px 0 25px",
+      display: "block",
+    }}
+  >
+    <source
+      src="/WhatsApp Video 2026-09-20 at 13.36.44.mp4"
+      type="video/mp4"
+    />
+  </video>
+)}     
+{paragraph.includes("bottom corner with his left foot") && (
   <video
     controls
     playsInline
