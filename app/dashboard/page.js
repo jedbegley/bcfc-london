@@ -47,7 +47,7 @@ setUser(user);
 .gte("match_date", new Date().toISOString().split("T")[0])
   .order("match_date", { ascending: true })
   .limit(1)
-  .single();
+  .maybeSingle();
 
 if (nextMatchError) {
   console.log("MATCH ERROR:", nextMatchError);
