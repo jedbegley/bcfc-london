@@ -293,49 +293,28 @@ export default async function PublicMatchReport({ params }) {
 
   <h2 style={{ marginTop: 0 }}>Pay your match fee</h2>
 
-  <p style={{ marginBottom: "20px" }}>
-    Please select the correct match fee below.
-  </p>
+ <h2 style={{ marginTop: 0 }}>Pay your match fee</h2>
 
-  <div
-    style={{
-      display: "flex",
-      gap: "12px",
-      flexWrap: "wrap",
-    }}
-  >
-    <a
-      href="https://pay.sumup.com/b2c/QSB7R898"
-      target="_blank"
-      rel="noopener noreferrer"
-      style={{
-        background: "#e31b23",
-        color: "#fff",
-        padding: "13px 20px",
-        borderRadius: "6px",
-        fontWeight: "800",
-        textDecoration: "none",
-      }}
-    >
-      Starter — Pay £10
-    </a>
+<p style={{ marginBottom: "20px" }}>
+  Match fee — £10
+</p>
 
-    <a
-      href="https://pay.sumup.com/b2c/QEDUFBCD"
-      target="_blank"
-      rel="noopener noreferrer"
-      style={{
-        background: "#111",
-        color: "#fff",
-        padding: "13px 20px",
-        borderRadius: "6px",
-        fontWeight: "800",
-        textDecoration: "none",
-      }}
-    >
-      Substitute — Pay £5
-    </a>
-  </div>
+<a
+  href="https://pay.sumup.com/b2c/QVVL7SH7"
+  target="_blank"
+  rel="noopener noreferrer"
+  style={{
+    display: "inline-block",
+    background: "#e31b23",
+    color: "#fff",
+    padding: "13px 20px",
+    borderRadius: "6px",
+    fontWeight: "800",
+    textDecoration: "none",
+  }}
+>
+  PAY £10 →
+</a>
         <div
   style={{
     marginTop: "30px",
