@@ -74,37 +74,37 @@ const { data: pureMatch, error: pureError } = await supabase
   <h2 style={styles.heading}>Upcoming Fixtures</h2>
 
  <div style={styles.cardWrap}>
-  {pureMatch?.status !== "Completed" && (
+  {nextMatch?.status !== "Completed" && (
     <div style={styles.matchCard}>
       <div style={styles.matchLabel}>NEXT MATCH</div>
       <div style={styles.competition}>
         SOUTHERN SUNDAY FOOTBALL LEAGUE — LEAGUE EIGHT
       </div>
 
-      <div style={styles.teams}>
-        <div style={styles.team}>
-          <div style={styles.aberdeenBadge}>PF</div>
-          <strong>Pure Football</strong>
-          <span style={styles.homeAway}>HOME</span>
-        </div>
+     <div style={styles.teams}>
+  <div style={styles.team}>
+    <img
+      src="/374fadec-093f-4e7e-9f54-01c06a034caa.jpeg"
+      alt="Bristol City"
+      style={styles.fixtureBadge}
+    />
+    <strong>Bristol City</strong>
+    <span style={styles.homeAway}>HOME</span>
+  </div>
 
-        <div style={styles.versus}>VS</div>
+  <div style={styles.versus}>VS</div>
 
-        <div style={styles.team}>
-          <img
-            src="/374fadec-093f-4e7e-9f54-01c06a034caa.jpeg"
-            alt="Bristol City"
-            style={styles.fixtureBadge}
-          />
-          <strong>Bristol City</strong>
-          <span style={styles.homeAway}>AWAY</span>
-        </div>
-      </div>
+  <div style={styles.team}>
+    <div style={styles.aberdeenBadge}>JE</div>
+    <strong>Junction Elite FC Sunday 3rd Team</strong>
+    <span style={styles.homeAway}>AWAY</span>
+  </div>
+</div>
 
-     <div style={styles.matchInfo}>
-  <strong>Sunday 20 September 2026</strong>
-  <span>11:45 Meet · 12:30 Kick Off</span>
-  <span>Barn Elms Sports Centre · SW13 0DG</span>
+   <div style={styles.matchInfo}>
+  <strong>Sunday 27 September 2026</strong>
+  <span>10:30 Kick Off</span>
+  <span>Clapham Common Pitch 8</span>
 </div>
 
       <div style={styles.friendlyTag}>LEAGUE</div>
