@@ -8,12 +8,36 @@ const supabase = createClient(
 );
 
 export const dynamic = "force-dynamic";
+
+function formatMatchDate(value) {
+  if (!value) return null;
+  const [year, month, day] = value.split("-").map(Number);
+  if (!year || !month || !day) return null;
+  return new Intl.DateTimeFormat("en-GB", {
+    weekday: "long", day: "numeric", month: "long", year: "numeric",
+    timeZone: "Europe/London",
+  }).format(new Date(Date.UTC(year, month - 1, day, 12))).replace(/^([^,]+), /, "$1 ");
+}
+
+function formatMatchTime(value) {
+  if (!value) return null;
+  const [hours, minutes] = value.split(":").map(Number);
+  if (!Number.isInteger(hours) || !Number.isInteger(minutes)) return null;
+  return `${String(hours).padStart(2, "0")}:${String(minutes).padStart(2, "0")}`;
+}
+
+function teamsFor(match) {
+  return match.home_or_away === "Away"
+    ? `${match.opponent || "Opponent"} v Bristol City`
+    : `Bristol City v ${match.opponent || "Opponent"}`;
+}
+
 export async function generateMetadata({ params }) {
   const matchId = params.matchId;
 
   const { data: match } = await supabase
     .from("matches")
-    .select("opponent, our_score, opponent_score, status")
+    .select("opponent, our_score, opponent_score, status, match_date, kickoff_time, venue, venue_details, competition, match_type, home_or_away, meet_time")
     .eq("id", matchId)
     .single();
 
@@ -26,12 +50,18 @@ export async function generateMetadata({ params }) {
   const isCompleted = match.status === "Completed";
 
 const title = isCompleted
-  ? `Bristol City ${match.our_score}–${match.opponent_score} ${match.opponent} | Match Report`
-  : `${match.opponent} v Bristol City | Match Preview`;
+  ? (match.home_or_away === "Away"
+    ? `${match.opponent} ${match.opponent_score}–${match.our_score} Bristol City | Match Report`
+    : `Bristol City ${match.our_score}–${match.opponent_score} ${match.opponent} | Match Report`)
+  : `${teamsFor(match)} | Match Preview`;
 
 const description = isCompleted
   ? `Read the full BCFC London match report, watch the highlights and vote for your Man of the Match.`
-  : `League Eight · Sunday 20 September · 12:30 PM kick off · Barn Elms Sports Centre. View match details and the BCFC London squad.`;
+  : [match.competition, match.match_type, formatMatchDate(match.match_date),
+      formatMatchTime(match.kickoff_time) && `${formatMatchTime(match.kickoff_time)} kick off`,
+      match.home_or_away, match.venue, match.venue_details,
+      formatMatchTime(match.meet_time) && `Meet ${formatMatchTime(match.meet_time)}`]
+      .filter(Boolean).join(" · ") + ". View match details and the BCFC London squad.";
 
   return {
     title,
@@ -43,6 +73,7 @@ const description = isCompleted
       url: `https://www.bcfclondon.co.uk/fixtures/${matchId}`,
       siteName: "Bristol City London Supporters FC",
     },
+    ...(!isCompleted && { twitter: { card: "summary", title, description } }),
   };
 }
 export default async function PublicMatchReport({ params }) {
@@ -72,6 +103,49 @@ export default async function PublicMatchReport({ params }) {
 
  const opponent = match.opponent || "Opponent";
   const isCompleted = match.status === "Completed";
+  const date = formatMatchDate(match.match_date);
+  const kickoff = formatMatchTime(match.kickoff_time);
+  const meet = formatMatchTime(match.meet_time);
+  let squad = [];
+  let nextMatch = null;
+
+  if (!isCompleted) {
+    const { data: selectedSquad, error: squadError } = await supabase
+      .rpc("get_public_matchday_squad", { p_match_id: Number(matchId) });
+
+    if (squadError) {
+      console.error("Error loading match squad:", squadError);
+    } else {
+      squad = (selectedSquad || [])
+        .map((row) => row.full_name)
+        .filter(Boolean)
+        .sort((a, b) => a.localeCompare(b));
+    }
+  }
+
+  if (isCompleted) {
+    const todayParts = Object.fromEntries(
+      new Intl.DateTimeFormat("en-GB", {
+        timeZone: "Europe/London", year: "numeric", month: "2-digit", day: "2-digit",
+      }).formatToParts(new Date()).map(({ type, value }) => [type, value])
+    );
+    const today = `${todayParts.year}-${todayParts.month}-${todayParts.day}`;
+    const { data, error: nextMatchError } = await supabase
+      .from("matches")
+      .select("opponent, match_date, kickoff_time, venue, venue_details")
+      .eq("status", "Upcoming")
+      .gte("match_date", today)
+      .order("match_date", { ascending: true })
+      .order("kickoff_time", { ascending: true })
+      .limit(1)
+      .maybeSingle();
+
+    if (nextMatchError) {
+      console.error("Error loading next match:", nextMatchError);
+    } else {
+      nextMatch = data;
+    }
+  }
 
   return (
    <main style={styles.page}>
@@ -107,13 +181,15 @@ export default async function PublicMatchReport({ params }) {
     </div>
 
     <h1 style={styles.title}>
-  {match.home_or_away === "Away"
-    ? `${opponent} ${match.opponent_score}–${match.our_score} Bristol City`
-    : `Bristol City ${match.our_score}–${match.opponent_score} ${opponent}`}
-</h1>
+      {isCompleted
+        ? (match.home_or_away === "Away"
+          ? `${opponent} ${match.opponent_score}–${match.our_score} Bristol City`
+          : `Bristol City ${match.our_score}–${match.opponent_score} ${opponent}`)
+        : teamsFor(match)}
+    </h1>
 
     <div style={styles.fullTime}>
-      {isCompleted ? "FULL TIME" : "SOUTHERN SUNDAY FOOTBALL LEAGUE — LEAGUE EIGHT"}
+      {isCompleted ? "FULL TIME" : match.competition}
     </div>
   </div>
 </section>
@@ -124,14 +200,18 @@ export default async function PublicMatchReport({ params }) {
   <div style={{ marginBottom: "35px" }}>
     <p style={styles.redLabel}>MATCH DETAILS</p>
 
-    <h2 style={{ marginTop: 0 }}>Sunday 20 September 2026</h2>
+    <h2 style={{ marginTop: 0 }}>{date || "Date to be confirmed"}</h2>
 
-    <p><strong>Meet:</strong> 11:45 AM</p>
-    <p><strong>Kick Off:</strong> 12:30 PM</p>
-    <p><strong>Venue:</strong> Barn Elms Sports Centre, SW13 0DG</p>
+    {match.competition && <p><strong>Competition:</strong> {match.competition}</p>}
+    {match.match_type && <p><strong>Match Type:</strong> {match.match_type}</p>}
+    {match.home_or_away && <p><strong>Home/Away:</strong> {match.home_or_away}</p>}
+    {meet && <p><strong>Meet:</strong> {meet}</p>}
+    {kickoff && <p><strong>Kick Off:</strong> {kickoff}</p>}
+    {match.venue && <p><strong>Venue:</strong> {match.venue}</p>}
+    {match.venue_details && <p><strong>Venue Details:</strong> {match.venue_details}</p>}
   </div>
 )}
-{!isCompleted && (
+{!isCompleted && squad.length > 0 && (
   <div style={{ marginBottom: "35px" }}>
     <p style={styles.redLabel}>MATCHDAY SQUAD</p>
 
@@ -144,21 +224,7 @@ export default async function PublicMatchReport({ params }) {
         lineHeight: "1.6",
       }}
     >
-      <span>Ben Earle</span>
-      <span>Ennys Soydas</span>
-      <span>Jack Lowe</span>
-      <span>Jack Smith</span>
-      <span>James Hayes</span>
-      <span>Jed Begley</span>
-      <span>Meddy Deschamps</span>
-      <span>Nathan Pringle</span>
-      <span>Nick Bellamy</span>
-      <span>Nikita Tertychnyy</span>
-      <span>Oisin Brennan</span>
-      <span>Ryan Hayes</span>
-      <span>Samuel Sayer</span>
-      <span>Thomas Brennan</span>
-      <span>Witse Konings</span>
+      {squad.map((name, index) => <span key={`${name}-${index}`}>{name}</span>)}
     </div>
   </div>
 )}
@@ -251,6 +317,7 @@ export default async function PublicMatchReport({ params }) {
           ))}
         </div>
 
+            {isCompleted && (<>
             <div style={{ marginTop: "45px", paddingTop: "30px", borderTop: "1px solid #ddd" }}>
   <div
     style={{
@@ -314,7 +381,7 @@ export default async function PublicMatchReport({ params }) {
 >
   PAY £10 →
 </a>
-        <div
+        {nextMatch && <div
   style={{
     marginTop: "30px",
     paddingTop: "30px",
@@ -333,10 +400,11 @@ export default async function PublicMatchReport({ params }) {
     NEXT MATCH
   </div>
 
-  <h2 style={{ marginTop: 0 }}>Junction Elite FC — 27 September</h2>
+  <h2 style={{ marginTop: 0 }}>{nextMatch.opponent} — {formatMatchDate(nextMatch.match_date)}</h2>
 
   <p style={{ marginBottom: "20px" }}>
-  Sunday 27 September · 10:30 · Clapham Common Pitch 8
+  {[formatMatchDate(nextMatch.match_date), formatMatchTime(nextMatch.kickoff_time),
+    nextMatch.venue, nextMatch.venue_details].filter(Boolean).join(" · ")}
 </p>
 
   <Link
@@ -353,8 +421,9 @@ export default async function PublicMatchReport({ params }) {
   >
     CONFIRM AVAILABILITY →
   </Link>
+</div>}
 </div>
-</div>
+            </>)}
 
 <Link href="/fixtures" style={styles.backLink}>
   ← Back to Fixtures
