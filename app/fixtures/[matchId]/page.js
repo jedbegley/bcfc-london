@@ -32,6 +32,20 @@ function teamsFor(match) {
     : `Bristol City v ${match.opponent || "Opponent"}`;
 }
 
+function opponentInitials(name) {
+  const words = name.trim().split(/\s+/).filter(Boolean);
+  return words.length > 1
+    ? words.slice(0, 2).map((word) => word[0]).join("").toUpperCase()
+    : words[0]?.slice(0, 2).toUpperCase() || "?";
+}
+
+function previewCompetition(competition) {
+  return competition?.replace(
+    /^Southern Sunday League (?=.+$)/i,
+    "Southern Sunday Football League — League "
+  ).toUpperCase();
+}
+
 export async function generateMetadata({ params }) {
   const matchId = params.matchId;
 
@@ -174,7 +188,7 @@ export default async function PublicMatchReport({ params }) {
     </nav>
   </header>
 
- <section style={styles.hero}>
+ {isCompleted ? <section style={styles.hero}>
   <div style={styles.heroInner}>
     <div style={styles.eyebrow}>
       {isCompleted ? "MATCH REPORT" : "MATCH PREVIEW"}
@@ -192,42 +206,66 @@ export default async function PublicMatchReport({ params }) {
       {isCompleted ? "FULL TIME" : match.competition}
     </div>
   </div>
-</section>
+</section> : (
+  <section style={styles.previewSection}>
+    <div style={styles.previewCard}>
+      <div style={styles.previewLabel}>NEXT MATCH</div>
+      {match.competition && (
+        <div style={styles.previewCompetition}>{previewCompetition(match.competition)}</div>
+      )}
+
+      <div style={styles.previewTeams}>
+        <div style={styles.previewTeam}>
+          {match.home_or_away === "Away" ? (
+            <span style={styles.previewOpponentBadge} aria-hidden="true">
+              {opponentInitials(opponent)}
+            </span>
+          ) : (
+            <img src="/374fadec-093f-4e7e-9f54-01c06a034caa.jpeg" alt="Bristol City badge" style={styles.previewClubBadge} />
+          )}
+          <strong>{match.home_or_away === "Away" ? opponent : "Bristol City"}</strong>
+          <span style={styles.previewHomeAway}>HOME</span>
+        </div>
+        <div style={styles.previewVersus}>VS</div>
+        <div style={styles.previewTeam}>
+          {match.home_or_away === "Away" ? (
+            <img src="/374fadec-093f-4e7e-9f54-01c06a034caa.jpeg" alt="Bristol City badge" style={styles.previewClubBadge} />
+          ) : (
+            <span style={styles.previewOpponentBadge} aria-hidden="true">
+              {opponentInitials(opponent)}
+            </span>
+          )}
+          <strong>{match.home_or_away === "Away" ? "Bristol City" : opponent}</strong>
+          <span style={styles.previewHomeAway}>AWAY</span>
+        </div>
+      </div>
+
+      <div style={styles.previewInfo}>
+        <strong>{date || "Date to be confirmed"}</strong>
+        {(meet || kickoff) && (
+          <span>{[meet && `${meet} Meet`, kickoff && `${kickoff} Kick Off`].filter(Boolean).join(" · ")}</span>
+        )}
+        {(match.venue || match.venue_details) && (
+          <span>{[match.venue, match.venue_details].filter(Boolean).join(" · ")}</span>
+        )}
+      </div>
+
+      {match.match_type && <div style={styles.previewType}>{match.match_type.toUpperCase()}</div>}
+
+      {squad.length > 0 && (
+        <div style={styles.previewSquad}>
+          <h2 style={styles.previewSquadHeading}>MATCHDAY SQUAD</h2>
+          <div style={styles.previewSquadGrid}>
+            {squad.map((name, index) => <span key={`${name}-${index}`}>{name}</span>)}
+          </div>
+        </div>
+      )}
+    </div>
+  </section>
+ )}
 
       <section style={styles.content}>
         <div style={styles.report}>
-      {!isCompleted && (
-  <div style={{ marginBottom: "35px" }}>
-    <p style={styles.redLabel}>MATCH DETAILS</p>
-
-    <h2 style={{ marginTop: 0 }}>{date || "Date to be confirmed"}</h2>
-
-    {match.competition && <p><strong>Competition:</strong> {match.competition}</p>}
-    {match.match_type && <p><strong>Match Type:</strong> {match.match_type}</p>}
-    {match.home_or_away && <p><strong>Home/Away:</strong> {match.home_or_away}</p>}
-    {meet && <p><strong>Meet:</strong> {meet}</p>}
-    {kickoff && <p><strong>Kick Off:</strong> {kickoff}</p>}
-    {match.venue && <p><strong>Venue:</strong> {match.venue}</p>}
-    {match.venue_details && <p><strong>Venue Details:</strong> {match.venue_details}</p>}
-  </div>
-)}
-{!isCompleted && squad.length > 0 && (
-  <div style={{ marginBottom: "35px" }}>
-    <p style={styles.redLabel}>MATCHDAY SQUAD</p>
-
-    <div
-      style={{
-        display: "grid",
-        gridTemplateColumns: "1fr 1fr",
-        gap: "8px 25px",
-        fontSize: "16px",
-        lineHeight: "1.6",
-      }}
-    >
-      {squad.map((name, index) => <span key={`${name}-${index}`}>{name}</span>)}
-    </div>
-  </div>
-)}
           {isCompleted && (match.match_report ? (
             match.match_report
               .split("\n")
@@ -563,6 +601,133 @@ const styles = {
     fontSize: "12px",
     fontWeight: "900",
     letterSpacing: "2px",
+  },
+
+  previewSection: {
+    background: "#f4f4f4",
+    padding: "45px 6% 20px",
+  },
+
+  previewCard: {
+    maxWidth: "760px",
+    margin: "0 auto",
+    padding: "clamp(22px, 5vw, 40px)",
+    background: "#fff",
+    borderRadius: "14px",
+    boxShadow: "0 20px 55px rgba(0,0,0,0.12)",
+  },
+
+  previewLabel: {
+    color: "#e31b23",
+    fontSize: "12px",
+    fontWeight: "900",
+    letterSpacing: "2px",
+  },
+
+  previewCompetition: {
+    color: "#777",
+    fontSize: "12px",
+    fontWeight: "800",
+    letterSpacing: "0.3px",
+    marginTop: "7px",
+  },
+
+  previewTeams: {
+    display: "grid",
+    gridTemplateColumns: "minmax(0, 1fr) auto minmax(0, 1fr)",
+    alignItems: "center",
+    gap: "clamp(8px, 3vw, 25px)",
+    textAlign: "center",
+    margin: "35px 0 28px",
+  },
+
+  previewTeam: {
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    gap: "10px",
+    minWidth: 0,
+    fontSize: "clamp(14px, 2.5vw, 19px)",
+    lineHeight: 1.3,
+  },
+
+  previewClubBadge: {
+    width: "clamp(62px, 12vw, 90px)",
+    height: "clamp(62px, 12vw, 90px)",
+    borderRadius: "50%",
+    objectFit: "cover",
+  },
+
+  previewOpponentBadge: {
+    width: "clamp(62px, 12vw, 90px)",
+    height: "clamp(62px, 12vw, 90px)",
+    borderRadius: "50%",
+    background: "#d71920",
+    color: "#fff",
+    display: "grid",
+    placeItems: "center",
+    fontWeight: "900",
+    fontSize: "clamp(18px, 4vw, 25px)",
+  },
+
+  previewHomeAway: {
+    color: "#999",
+    fontSize: "10px",
+    fontWeight: "900",
+    letterSpacing: "1px",
+  },
+
+  previewVersus: {
+    color: "#999",
+    fontWeight: "900",
+    fontSize: "18px",
+  },
+
+  previewInfo: {
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    gap: "9px",
+    borderTop: "1px solid #eee",
+    paddingTop: "23px",
+    textAlign: "center",
+    fontSize: "15px",
+    lineHeight: 1.5,
+  },
+
+  previewType: {
+    background: "#111",
+    color: "#fff",
+    borderRadius: "5px",
+    textAlign: "center",
+    fontWeight: "900",
+    fontSize: "12px",
+    letterSpacing: "1px",
+    padding: "12px",
+    marginTop: "24px",
+  },
+
+  previewSquad: {
+    borderTop: "1px solid #ddd",
+    marginTop: "30px",
+    paddingTop: "28px",
+  },
+
+  previewSquadHeading: {
+    color: "#e31b23",
+    fontSize: "14px",
+    fontWeight: "900",
+    letterSpacing: "2px",
+    textAlign: "center",
+    margin: "0 0 24px",
+  },
+
+  previewSquadGrid: {
+    display: "grid",
+    gridTemplateColumns: "repeat(2, minmax(0, 1fr))",
+    gap: "9px 22px",
+    fontSize: "clamp(13px, 2vw, 16px)",
+    lineHeight: 1.5,
   },
 
   content: {
