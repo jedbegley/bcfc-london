@@ -276,6 +276,25 @@ export default async function PublicMatchReport({ params }) {
       {paragraph}
     </p>
 
+    {Number(matchId) === 5 &&
+      paragraph.includes("Witse Konings was brought down inside the area") &&
+      paragraph.includes("Ben Earle stepped up and calmly converted") && (
+        <video
+          controls
+          playsInline
+          preload="metadata"
+          style={{
+            width: "100%",
+            maxWidth: "700px",
+            borderRadius: "8px",
+            margin: "10px 0 25px",
+            display: "block",
+          }}
+        >
+          <source src="/junction-elite-ben-earle-penalty.mp4" type="video/mp4" />
+        </video>
+      )}
+
     {paragraph.includes("smashed an effort against the crossbar") && (
       <video
         controls
@@ -404,7 +423,9 @@ export default async function PublicMatchReport({ params }) {
 </p>
 
 <a
-  href="https://pay.sumup.com/b2c/QVVL7SH7"
+  href={Number(matchId) === 5
+    ? "https://pay.sumup.com/b2c/Q0MQ0YKS"
+    : "https://pay.sumup.com/b2c/QVVL7SH7"}
   target="_blank"
   rel="noopener noreferrer"
   style={{
