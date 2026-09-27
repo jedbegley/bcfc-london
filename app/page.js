@@ -1,3 +1,16 @@
+import { createClient } from "@supabase/supabase-js";
+import {
+  clubBadge, displayCompetition, formatMatchDate, formatMatchTime,
+  londonToday, opponentInitials,
+} from "./fixtureDisplay";
+
+const supabase = createClient(
+  process.env.NEXT_PUBLIC_SUPABASE_URL,
+  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
+);
+
+export const dynamic = "force-dynamic";
+
 const featuredStory = {
   title: "City Handed Two Home Ties in Opening Cup Draws",
   summary:
@@ -6,30 +19,61 @@ const featuredStory = {
   imageAlt: "London FA",
   link: "/news/cup-draws-2026",
 };
-const latestResult = {
-  competition: "SOUTHERN SUNDAY FOOTBALL LEAGUE",
-  opponent: "Pure Football",
-  opponentShort: "PF",
-  homeAway: "HOME",
-  score: "3-3",
-  date: "Sunday 20 September 2026",
-  venue: "Barn Elms Sports Centre",
-  scorers: "⚽ Meddy Deschamps · Ben Earle · Sam Sayer",
-  reportLink: "/fixtures/4",
-};
-const nextMatch = {
-  competition: "SOUTHERN SUNDAY FOOTBALL LEAGUE",
-  opponent: "Junction Elite FC Sunday 3rd Team",
-  opponentShort: "JE",
-  cityHomeAway: "HOME",
-  opponentHomeAway: "AWAY",
-  date: "Sunday 27 September 2026",
-  kickOff: "10:30 Kick Off",
-  venue: "Clapham Common Pitch 8",
-  tag: "LEAGUE",
-};
+function MatchTeam({ name, isClub, side }) {
+  return (
+    <div style={styles.team}>
+      {isClub ? (
+        <img src={clubBadge} alt="Bristol City" style={styles.fixtureBadge} />
+      ) : (
+        <div style={styles.aberdeenBadge}>{opponentInitials(name)}</div>
+      )}
+      <strong>{name}</strong>
+      <span style={styles.homeAway}>{side}</span>
+    </div>
+  );
+}
 
-export default function Home() {
+export default async function Home() {
+  const [{ data: latestResult, error: resultError }, { data: nextMatch, error: nextError }] =
+    await Promise.all([
+      supabase.from("matches")
+        .select("id, opponent, match_date, kickoff_time, venue, competition, home_or_away, our_score, opponent_score")
+        .eq("status", "Completed")
+        .order("match_date", { ascending: false })
+        .order("kickoff_time", { ascending: false })
+        .order("id", { ascending: false })
+        .limit(1).maybeSingle(),
+      supabase.from("matches")
+        .select("id, opponent, match_date, kickoff_time, venue, venue_details, competition, match_type, home_or_away")
+        .eq("status", "Upcoming")
+        .gte("match_date", londonToday())
+        .order("match_date", { ascending: true })
+        .order("kickoff_time", { ascending: true })
+        .order("id", { ascending: true })
+        .limit(1).maybeSingle(),
+    ]);
+
+  if (resultError) console.error("Error loading latest result:", resultError);
+  if (nextError) console.error("Error loading next match:", nextError);
+
+  let scorers = "";
+  if (latestResult) {
+    const { data: goalRows, error: goalsError } = await supabase.from("match_stats")
+      .select("player_id, goals")
+      .eq("match_id", latestResult.id)
+      .gt("goals", 0);
+    if (goalsError) console.error("Error loading scorers:", goalsError);
+    const ids = [...new Set((goalRows || []).map(({ player_id }) => player_id))];
+    if (ids.length) {
+      const { data: players, error: playersError } = await supabase.from("public_squad")
+        .select("id, full_name").in("id", ids);
+      if (playersError) console.error("Error loading scorer names:", playersError);
+      const names = new Map((players || []).map(({ id, full_name }) => [Number(id), full_name]));
+      scorers = (goalRows || []).filter(({ player_id }) => names.has(Number(player_id)))
+        .map(({ player_id, goals }) => `${names.get(Number(player_id))}${goals > 1 ? ` (${goals})` : ""}`)
+        .join(" · ");
+    }
+  }
   const quickLinks = [
     {
       title: "Fixtures & Results",
@@ -121,104 +165,71 @@ alt={featuredStory.imageAlt}
         </div>
 
         <div className="match-cards-row" style={styles.matchCardsRow}>
-          <div style={styles.matchCard}>
-            <div style={styles.matchLabel}>LATEST RESULT</div>
-            <div style={styles.competition}>{latestResult.competition}</div>
+          {latestResult && (
+            <div style={styles.matchCard}>
+              <div style={styles.matchLabel}>LATEST RESULT</div>
+              <div style={styles.competition}>{displayCompetition(latestResult.competition)}</div>
+              <div style={styles.teams}>
+                <MatchTeam
+                  name={latestResult.home_or_away === "Away" ? latestResult.opponent : "Bristol City"}
+                  isClub={latestResult.home_or_away !== "Away"} side="HOME"
+                />
+                <div style={styles.versus}>
+                  <div style={{ fontSize: "34px", fontWeight: "900", color: "#111" }}>
+                    {latestResult.home_or_away === "Away"
+                      ? `${latestResult.opponent_score}–${latestResult.our_score}`
+                      : `${latestResult.our_score}–${latestResult.opponent_score}`}
+                  </div>
+                  <div style={{ fontSize: "11px", fontWeight: "900", marginTop: "6px" }}>FULL TIME</div>
+                </div>
+                <MatchTeam
+                  name={latestResult.home_or_away === "Away" ? "Bristol City" : latestResult.opponent}
+                  isClub={latestResult.home_or_away === "Away"} side="AWAY"
+                />
+              </div>
+              <div style={styles.matchInfo}>
+                <strong>{formatMatchDate(latestResult.match_date)}</strong>
+                {latestResult.venue && <span>{latestResult.venue}</span>}
+                {scorers && <span>⚽ {scorers}</span>}
+              </div>
+              <a href={`/fixtures/${latestResult.id}`} style={{
+                ...styles.friendlyTag, display: "block", width: "100%",
+                textAlign: "center", textDecoration: "none", boxSizing: "border-box",
+              }}>
+                READ MATCH REPORT
+              </a>
+            </div>
+          )}
 
-           <div style={styles.teams}>
-  <div style={styles.team}>
-    <div style={styles.aberdeenBadge}>{latestResult.opponentShort}</div>
-    <strong>{latestResult.opponent}</strong>
-    <span style={styles.homeAway}>HOME</span>
-  </div>
-
-  <div style={styles.versus}>
-    <div
-      style={{
-        fontSize: "34px",
-        fontWeight: "900",
-        color: "#111",
-      }}
-    >
-      {latestResult.score}
-    </div>
-
-    <div
-      style={{
-        fontSize: "11px",
-        fontWeight: "900",
-        marginTop: "6px",
-      }}
-    >
-      FULL TIME
-    </div>
-  </div>
-
-  <div style={styles.team}>
-    <img
-      src="/374fadec-093f-4e7e-9f54-01c06a034caa.jpeg"
-      alt="Bristol City"
-      style={styles.fixtureBadge}
-    />
-    <strong>Bristol City</strong>
-    <span style={styles.homeAway}>AWAY</span>
-  </div>
-</div>
-      
-
-            <div style={styles.matchInfo}>
-  <strong>{latestResult.date}</strong>
-  <span>{latestResult.venue}</span>
-  <span>{latestResult.scorers}</span>
-</div>
-
-<a
-  href={latestResult.reportLink}
-              style={{
-                ...styles.friendlyTag,
-                display: "block",
-                width: "100%",
-                textAlign: "center",
-                textDecoration: "none",
-                boxSizing: "border-box",
-              }}
-            >
-              READ MATCH REPORT
+          {nextMatch && (
+            <a href={`/fixtures/${nextMatch.id}`} style={{
+              ...styles.matchCard, display: "block", color: "#111", textDecoration: "none",
+            }}>
+              <div style={styles.matchLabel}>NEXT MATCH</div>
+              <div style={styles.competition}>{displayCompetition(nextMatch.competition)}</div>
+              <div style={styles.teams}>
+                <MatchTeam
+                  name={nextMatch.home_or_away === "Away" ? nextMatch.opponent : "Bristol City"}
+                  isClub={nextMatch.home_or_away !== "Away"} side="HOME"
+                />
+                <div style={styles.versus}>VS</div>
+                <MatchTeam
+                  name={nextMatch.home_or_away === "Away" ? "Bristol City" : nextMatch.opponent}
+                  isClub={nextMatch.home_or_away === "Away"} side="AWAY"
+                />
+              </div>
+              <div style={styles.matchInfo}>
+                <strong>{formatMatchDate(nextMatch.match_date)}</strong>
+                {nextMatch.kickoff_time && <span>{formatMatchTime(nextMatch.kickoff_time)} Kick Off</span>}
+                {(nextMatch.venue || nextMatch.venue_details) && (
+                  <span>{[nextMatch.venue, nextMatch.venue_details].filter(Boolean).join(" · ")}</span>
+                )}
+              </div>
+              {nextMatch.match_type && (
+                <div style={styles.friendlyTag}>{nextMatch.match_type.toUpperCase()}</div>
+              )}
             </a>
-          </div>
-
-          <div style={styles.matchCard}>
-           <div style={styles.matchLabel}>NEXT MATCH</div>
-<div style={styles.competition}>{nextMatch.competition}</div>
-
-<div style={styles.teams}>
-  <div style={styles.team}>
-    <img
-      src="/374fadec-093f-4e7e-9f54-01c06a034caa.jpeg"
-      alt="Bristol City"
-      style={styles.fixtureBadge}
-    />
-    <strong>Bristol City</strong>
-    <span style={styles.homeAway}>HOME</span>
-  </div>
-
-  <div style={styles.versus}>VS</div>
-
-  <div style={styles.team}>
-    <div style={styles.aberdeenBadge}>{nextMatch.opponentShort}</div>
-    <strong>{nextMatch.opponent}</strong>
-    <span style={styles.homeAway}>AWAY</span>
-  </div>
-</div>
-
-<div style={styles.matchInfo}>
-  <strong>{nextMatch.date}</strong>
-  <span>{nextMatch.kickOff}</span>
-  <span>{nextMatch.venue}</span>
-</div>
-
-<div style={styles.friendlyTag}>{nextMatch.tag}</div>
-          </div>
+          )}
         </div>
       </section>
 
