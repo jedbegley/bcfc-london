@@ -1,6 +1,10 @@
 import Link from "next/link";
 import Script from "next/script";
 import { createClient } from "@supabase/supabase-js";
+import {
+  clubBadge, displayCompetition, formatMatchDate, formatMatchTime,
+  londonToday, opponentInitials,
+} from "../fixtureDisplay";
 
 const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL,
@@ -9,27 +13,49 @@ const supabase = createClient(
 
 export const dynamic = "force-dynamic";
 
+const legacyNewsLinks = {
+  1: "/news/aberdeen-0-3-bristol-city",
+  2: "/news/shepherds-tuesday-2-2-bristol-city",
+};
+const legacyScorers = {
+  1: "⚽ Bellamy · Hayes · Nathaniel",
+  2: "⚽ Own Goal · Nathan",
+};
+
+function MatchTeam({ name, isClub, side }) {
+  return (
+    <div style={styles.team}>
+      {isClub ? (
+        <img src={clubBadge} alt="Bristol City" style={styles.fixtureBadge} />
+      ) : (
+        <div style={styles.aberdeenBadge}>{opponentInitials(name)}</div>
+      )}
+      <strong>{name}</strong>
+      <span style={styles.homeAway}>{side}</span>
+    </div>
+  );
+}
+
 export default async function Fixtures() {
-  const { data: barnesMatch, error } = await supabase
-  .from("matches")
-  .select("*")
-  .eq("id", 3)
-  .single();
-
-const { data: pureMatch, error: pureError } = await supabase
-  .from("matches")
-  .select("*")
-  .eq("id", 4)
-  .single();
-
-  const { data: nextMatch, error: nextMatchError } = await supabase
-  .from("matches")
-  .select("*")
-  .eq("id", 5)
-  .single();
-  if (error) {
-    console.error("Error loading Barnes match:", error);
-  }
+  const [{ data: nextMatch, error: nextMatchError }, { data: completedMatches, error: resultsError }] =
+    await Promise.all([
+      supabase.from("matches")
+        .select("id, opponent, match_date, kickoff_time, venue, venue_details, competition, match_type, home_or_away")
+        .eq("status", "Upcoming")
+        .gte("match_date", londonToday())
+        .order("match_date", { ascending: true })
+        .order("kickoff_time", { ascending: true })
+        .order("id", { ascending: true })
+        .limit(1).maybeSingle(),
+      supabase.from("matches")
+        .select("id, opponent, match_date, kickoff_time, venue, competition, match_type, home_or_away, our_score, opponent_score")
+        .eq("status", "Completed")
+        .order("match_date", { ascending: false })
+        .order("kickoff_time", { ascending: false })
+        .order("id", { ascending: false }),
+    ]);
+  if (nextMatchError) console.error("Error loading next match:", nextMatchError);
+  if (resultsError) console.error("Error loading results:", resultsError);
   return (
     <main style={styles.page}>
     {/* HEADER */}
@@ -74,42 +100,36 @@ const { data: pureMatch, error: pureError } = await supabase
   <h2 style={styles.heading}>Upcoming Fixtures</h2>
 
  <div style={styles.cardWrap}>
-  {nextMatch?.status !== "Completed" && (
-    <div style={styles.matchCard}>
+  {nextMatch ? (
+    <Link href={`/fixtures/${nextMatch.id}`} style={{
+      ...styles.matchCard, display: "block", color: "#111", textDecoration: "none",
+    }}>
       <div style={styles.matchLabel}>NEXT MATCH</div>
-      <div style={styles.competition}>
-        SOUTHERN SUNDAY FOOTBALL LEAGUE — LEAGUE EIGHT
+      <div style={styles.competition}>{displayCompetition(nextMatch.competition)}</div>
+      <div style={styles.teams}>
+        <MatchTeam
+          name={nextMatch.home_or_away === "Away" ? nextMatch.opponent : "Bristol City"}
+          isClub={nextMatch.home_or_away !== "Away"} side="HOME"
+        />
+        <div style={styles.versus}>VS</div>
+        <MatchTeam
+          name={nextMatch.home_or_away === "Away" ? "Bristol City" : nextMatch.opponent}
+          isClub={nextMatch.home_or_away === "Away"} side="AWAY"
+        />
       </div>
-
-     <div style={styles.teams}>
-  <div style={styles.team}>
-    <img
-      src="/374fadec-093f-4e7e-9f54-01c06a034caa.jpeg"
-      alt="Bristol City"
-      style={styles.fixtureBadge}
-    />
-    <strong>Bristol City</strong>
-    <span style={styles.homeAway}>HOME</span>
-  </div>
-
-  <div style={styles.versus}>VS</div>
-
-  <div style={styles.team}>
-    <div style={styles.aberdeenBadge}>JE</div>
-    <strong>Junction Elite FC Sunday 3rd Team</strong>
-    <span style={styles.homeAway}>AWAY</span>
-  </div>
-</div>
-
-   <div style={styles.matchInfo}>
-  <strong>Sunday 27 September 2026</strong>
-  <span>10:30 Kick Off</span>
-  <span>Clapham Common Pitch 8</span>
-</div>
-
-      <div style={styles.friendlyTag}>LEAGUE</div>
-           
-    </div>
+      <div style={styles.matchInfo}>
+        <strong>{formatMatchDate(nextMatch.match_date)}</strong>
+        {nextMatch.kickoff_time && <span>{formatMatchTime(nextMatch.kickoff_time)} Kick Off</span>}
+        {(nextMatch.venue || nextMatch.venue_details) && (
+          <span>{[nextMatch.venue, nextMatch.venue_details].filter(Boolean).join(" · ")}</span>
+        )}
+      </div>
+      {nextMatch.match_type && (
+        <div style={styles.friendlyTag}>{nextMatch.match_type.toUpperCase()}</div>
+      )}
+    </Link>
+  ) : (
+    <p>Next fixture to be confirmed.</p>
   )}
 </div>
     </section>
@@ -119,253 +139,49 @@ const { data: pureMatch, error: pureError } = await supabase
           <h2 style={styles.heading}>Results</h2>
 
           <div style={styles.cardWrap}>
-    {pureMatch?.status === "Completed" && (
-  <div style={{ ...styles.matchCard, marginBottom: "30px" }}>
-    <div style={styles.matchLabel}>LATEST RESULT</div>
-    <div style={styles.competition}>
-      SOUTHERN SUNDAY FOOTBALL LEAGUE — LEAGUE EIGHT
-    </div>
-
-    <div style={styles.teams}>
-      <div style={styles.team}>
-        <div style={styles.aberdeenBadge}>PF</div>
-        <strong>Pure Football</strong>
-        <span style={styles.homeAway}>HOME</span>
-      </div>
-
-      <div style={styles.versus}>
-        <div style={{ fontSize: "34px", fontWeight: "900", color: "#111" }}>
-          {pureMatch.opponent_score}–{pureMatch.our_score}
-        </div>
-        <div style={{ fontSize: "11px", fontWeight: "900", marginTop: "6px" }}>
-          FULL TIME
-        </div>
-      </div>
-
-      <div style={styles.team}>
-        <img
-          src="/374fadec-093f-4e7e-9f54-01c06a034caa.jpeg"
-          alt="Bristol City"
-          style={styles.fixtureBadge}
-        />
-        <strong>Bristol City</strong>
-        <span style={styles.homeAway}>AWAY</span>
-      </div>
-    </div>
-
-    <div style={styles.matchInfo}>
-      <strong>Sunday 20 September 2026</strong>
-      <span>Barn Elms Sports Centre</span>
-    </div>
-
-    <Link
-      href={`/fixtures/${pureMatch.id}`}
-      style={{
-        display: "inline-block",
-        marginTop: "14px",
-        color: "#e31b23",
-        fontSize: "12px",
-        fontWeight: "900",
-        letterSpacing: "1px",
-        textDecoration: "none",
-      }}
-    >
-      READ MATCH REPORT →
-    </Link>
-  </div>
-)}
-        {barnesMatch?.status === "Completed" && (
-  <div style={{ ...styles.matchCard, marginBottom: "30px" }}>
-    <div style={styles.matchLabel}>LATEST RESULT</div>
-    <div style={styles.competition}>SOUTHERN SUNDAY FOOTBALL LEAGUE — LEAGUE EIGHT</div>
-
-    <div style={styles.teams}>
-      <div style={styles.team}>
-        <img
-          src="/374fadec-093f-4e7e-9f54-01c06a034caa.jpeg"
-          alt="Bristol City"
-          style={styles.fixtureBadge}
-        />
-        <strong>Bristol City</strong>
-        <span style={styles.homeAway}>HOME</span>
-      </div>
-
-      <div style={styles.versus}>
-        <div
-          style={{
-            fontSize: "34px",
-            fontWeight: "900",
-            color: "#111",
-          }}
-        >
-          {barnesMatch.our_score}–{barnesMatch.opponent_score}
-        </div>
-
-        <div
-          style={{
-            fontSize: "11px",
-            fontWeight: "900",
-            marginTop: "6px",
-          }}
-        >
-          FULL TIME
-        </div>
-      </div>
-
-      <div style={styles.team}>
-        <div style={styles.aberdeenBadge}>BS</div>
-        <strong>Barnes Stormers FC</strong>
-        <span style={styles.homeAway}>AWAY</span>
-      </div>
-    </div>
-
-    <div style={styles.matchInfo}>
-      <strong>Sunday 13 September 2026</strong>
-      <span>Clapham Common</span>
-    </div>
-
-    <Link
-  href={`/fixtures/${barnesMatch.id}`}
-  style={{
-    display: "inline-block",
-    marginTop: "14px",
-    color: "#e31b23",
-    fontSize: "12px",
-    fontWeight: "900",
-    letterSpacing: "1px",
-    textDecoration: "none",
-  }}
->
-  READ MATCH REPORT →
-</Link>
-  </div>
-)}
-        <div style={styles.matchCard}>
-  <div style={styles.matchLabel}>LATEST RESULT</div>
-  <div style={styles.competition}>PRE-SEASON FRIENDLY</div>
-
-  <div style={styles.teams}>
-    <div style={styles.team}>
-      <div style={styles.aberdeenBadge}>ST</div>
-      <strong>Shepherd&apos;s Tuesday</strong>
-      <span style={styles.homeAway}>HOME</span>
-    </div>
-
-    <div style={styles.versus}>
-      <div
-        style={{
-          fontSize: "34px",
-          fontWeight: "900",
-          color: "#111",
-        }}
-      >
-        2–2
-      </div>
-      <div
-        style={{
-          fontSize: "11px",
-          fontWeight: "900",
-          marginTop: "6px",
-        }}
-      >
-        FULL TIME
-      </div>
-    </div>
-
-    <div style={styles.team}>
-      <img
-        src="/374fadec-093f-4e7e-9f54-01c06a034caa.jpeg"
-        alt="Bristol City"
-        style={styles.fixtureBadge}
-      />
-      <strong>Bristol City</strong>
-      <span style={styles.homeAway}>AWAY</span>
-    </div>
-  </div>
-
-  <div style={styles.matchInfo}>
-    <strong>Sunday 16 August 2026</strong>
-    <span>Burgess Park</span>
-    <span>⚽ Own Goal · Nathan</span>
-  </div>
-
- <a
-  href="/news/shepherds-tuesday-2-2-bristol-city"
-  style={{
-    ...styles.friendlyTag,
-    display: "block",
-    width: "100%",
-    textAlign: "center",
-    textDecoration: "none",
-    boxSizing: "border-box",
-  }}
->
-  READ MATCH REPORT
-</a>
-</div>
-            <div style={styles.matchCard}>
-              <div style={styles.matchLabel}>PRE-SEASON RESULT</div>
-              <div style={styles.competition}>PRE-SEASON FRIENDLY</div>
-
-              <div style={styles.teams}>
-                <div style={styles.team}>
-                  <div style={styles.aberdeenBadge}>AFC</div>
-                  <strong>Aberdeen</strong>
-                  <span style={styles.homeAway}>HOME</span>
+            {(completedMatches || []).map((match, index) => (
+              <div key={match.id} style={{ ...styles.matchCard, marginBottom: "30px" }}>
+                <div style={styles.matchLabel}>
+                  {index === 0 ? "LATEST RESULT" : match.match_type === "Friendly" ? "PRE-SEASON RESULT" : "RESULT"}
                 </div>
-
-                <div style={styles.versus}>
-                  <div
-                    style={{
-                      fontSize: "34px",
-                      fontWeight: "900",
-                      color: "#111",
-                    }}
-                  >
-                    0–3
-                  </div>
-                  <div
-                    style={{
-                      fontSize: "11px",
-                      fontWeight: "900",
-                      marginTop: "6px",
-                    }}
-                  >
-                    FULL TIME
-                  </div>
-                </div>
-
-                <div style={styles.team}>
-                  <img
-                    src="/374fadec-093f-4e7e-9f54-01c06a034caa.jpeg"
-                    alt="Bristol City"
-                    style={styles.fixtureBadge}
+                <div style={styles.competition}>{displayCompetition(match.competition)}</div>
+                <div style={styles.teams}>
+                  <MatchTeam
+                    name={match.home_or_away === "Away" ? match.opponent : "Bristol City"}
+                    isClub={match.home_or_away !== "Away"} side="HOME"
                   />
-                  <strong>Bristol City</strong>
-                  <span style={styles.homeAway}>AWAY</span>
+                  <div style={styles.versus}>
+                    <div style={{ fontSize: "34px", fontWeight: "900", color: "#111" }}>
+                      {match.home_or_away === "Away"
+                        ? `${match.opponent_score}–${match.our_score}`
+                        : `${match.our_score}–${match.opponent_score}`}
+                    </div>
+                    <div style={{ fontSize: "11px", fontWeight: "900", marginTop: "6px" }}>
+                      FULL TIME
+                    </div>
+                  </div>
+                  <MatchTeam
+                    name={match.home_or_away === "Away" ? "Bristol City" : match.opponent}
+                    isClub={match.home_or_away === "Away"} side="AWAY"
+                  />
                 </div>
+                <div style={styles.matchInfo}>
+                  <strong>{formatMatchDate(match.match_date)}</strong>
+                  {match.venue && <span>{match.venue}</span>}
+                  {legacyScorers[match.id] && <span>{legacyScorers[match.id]}</span>}
+                </div>
+                <Link
+                  href={legacyNewsLinks[match.id] || `/fixtures/${match.id}`}
+                  style={{
+                    display: "inline-block", marginTop: "14px", color: "#e31b23",
+                    fontSize: "12px", fontWeight: "900", letterSpacing: "1px",
+                    textDecoration: "none",
+                  }}
+                >
+                  READ MATCH REPORT →
+                </Link>
               </div>
-
-              <div style={styles.matchInfo}>
-                <strong>Sunday 9 August 2026</strong>
-                <span>Prince George&apos;s Playing Fields, Raynes Park</span>
-                <span>⚽ Bellamy · Hayes · Nathaniel</span>
-              </div>
-
-              <a
-              href="/news/aberdeen-0-3-bristol-city"
-                style={{
-                  ...styles.friendlyTag,
-                  display: "block",
-                  width: "100%",
-                  textAlign: "center",
-                  textDecoration: "none",
-                  boxSizing: "border-box",
-                }}
-              >
-                READ MATCH REPORT
-              </a>
-            </div>
+            ))}
           </div>
         </div>
       </section>
