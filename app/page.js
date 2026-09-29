@@ -303,6 +303,9 @@ href={featuredStory.link}
       </footer>
 
       <style>{`
+        @media (min-width: 769px) {
+          .latest-image { height: auto !important; aspect-ratio: 3 / 2; }
+        }
         @media (max-width: 768px) {
        header nav {
   display: grid !important;
