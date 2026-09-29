@@ -60,7 +60,13 @@ export default async function StatsPage() {
         ),
       };
     })
-    .sort((a, b) => b.fantasyPoints - a.fantasyPoints);
+    .sort((a, b) =>
+      b.fantasyPoints - a.fantasyPoints ||
+      (b.goals + b.assists) - (a.goals + a.assists) ||
+      b.motm - a.motm ||
+      a.full_name.localeCompare(b.full_name) ||
+      a.id - b.id
+    );
   return (
     <main style={styles.page}>
       <header style={styles.header}>
