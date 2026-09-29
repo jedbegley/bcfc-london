@@ -154,6 +154,7 @@ export default async function SeptemberPlayerOfTheMonth() {
           .site-header nav a:nth-child(7) { grid-column: 3 / 5; }
           .article-hero { padding-top: 34px; padding-bottom: 65px; }
           .back { margin-bottom: 35px; }
+          .article-body { margin-top: 0; }
           .winner-feature { display: block; }
           .portrait { min-height: min(110vw, 520px); }
           .winner-details { padding: 28px; }
