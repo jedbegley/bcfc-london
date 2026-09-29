@@ -1,17 +1,10 @@
-import Script from "next/script";
+import Image from "next/image";
+import { getNewsArticles } from "./articles";
 
-const featuredNews = {
-  label: "CLUB NEWS",
-  category: "CUP DRAWS",
-  date: "15 September 2026",
-  title: "City Handed Two Home Ties in Opening Cup Draws",
-  summary:
-    "City will face Higham Park Rangers and Larkhall City at home after the first two cup draws of the season, with another rather unusual fixture also on the horizon...",
-  link: "/news/cup-draws-2026",
-  link: "/news/cup-draws-2026",
-};
+export const dynamic = "force-dynamic";
 
-export default function News() {
+export default async function News() {
+  const [featuredNews, ...moreNews] = await getNewsArticles();
   return (
     <main style={styles.page}>
       {/* HEADER */}
@@ -62,238 +55,57 @@ export default function News() {
         </p>
       </section>
 
-     {/* FEATURED STORY */}
-  <section style={styles.content}>
-  <p style={styles.redLabel}>{featuredNews.label}</p>
+      {/* FEATURED STORY */}
+      <section style={styles.content}>
+        <p style={styles.redLabel}>{featuredNews.label}</p>
+        <article className="featured-card" style={{ ...styles.featuredCard, gridTemplateColumns: "minmax(0, 1fr) minmax(260px, 0.8fr)", alignItems: "center" }}>
+          <div style={styles.storyContent}>
+            <div style={styles.storyMeta}>
+              <span style={styles.category}>{featuredNews.category}</span>
+              <span>{featuredNews.displayDate}</span>
+            </div>
+            <h2 style={styles.storyTitle}>{featuredNews.title}</h2>
+            <p style={styles.storyLead}>{featuredNews.summary}</p>
+            <a href={featuredNews.link} style={{ ...styles.primaryButton, display: "inline-block", marginTop: "8px" }}>READ FULL STORY →</a>
+          </div>
+          <div className="featured-image-wrap" style={{ position: "relative", height: "430px", background: "#151515", borderRadius: "10px", overflow: "hidden" }}>
+            {featuredNews.image ? (
+              featuredNews.imagePlayerId ? (
+                <Image src={featuredNews.image} alt={featuredNews.imageAlt}
+                  fill sizes="(max-width: 768px) 88vw, 40vw"
+                  style={{ objectFit: "cover", objectPosition: "center 22%" }} />
+              ) : (
+                <img src={featuredNews.image} alt={featuredNews.imageAlt}
+                  style={{ width: "100%", height: "100%", objectFit: "contain" }} />
+              )
+            ) : (
+              <img src="/374fadec-093f-4e7e-9f54-01c06a034caa.jpeg"
+                alt="BCFC London badge" style={{ width: "100%", height: "100%", objectFit: "contain" }} />
+            )}
+          </div>
+        </article>
+      </section>
 
-<article className="featured-card" style={styles.featuredCard}>
-  <div style={styles.storyContent}>
-    <div style={styles.storyMeta}>
-      <span style={styles.category}>{featuredNews.category}</span>
-      <span>{featuredNews.date}</span>
-    </div>
-
-    <h2 style={styles.storyTitle}>
-  {featuredNews.title}
-</h2>
-    <p style={styles.storyLead}>
-  {featuredNews.summary}
-</p>
-
-   
-         <div style={{ margin: "28px 0" }}>
-  <div
-  style={{
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    gap: "40px",
-    background: "#f4f4f4",
-    padding: "35px",
-    borderRadius: "10px",
-  }}
->
-  <img
-    src="/london-fa.png"
-    alt="London FA"
-    style={{ width: "150px", height: "150px", objectFit: "contain" }}
-  />
-
-  <img
-    src="/southern-sunday-league.png"
-    alt="Southern Sunday Football League"
-    style={{ width: "150px", height: "150px", objectFit: "contain" }}
-  />
-</div>
-
-     
-<a
- href={featuredNews.link}
-  style={{
-    display: "inline-block",
-    marginTop: "12px",
-    padding: "12px 18px",
-    background: "#e31b23",
-    color: "#fff",
-    textDecoration: "none",
-    fontWeight: "900",
-    borderRadius: "4px",
-  }}
->
-  READ FULL STORY →
-</a>
-</div>
-</div>
-
-</article>
-</section>
-
-    {/* MORE NEWS */}
-<section style={styles.moreNews}>
-  <div style={styles.content}>
-    <p style={styles.redLabel}>MORE FROM BCFC LONDON</p>
-    <h2 style={styles.sectionTitle}>More News</h2>
-  <div style={styles.emptyNews}>
-  <div style={styles.storyMeta}>
-    <span style={styles.category}>MATCH REPORT</span>
-    <span>13 September 2026</span>
-  </div>
-
-  <h3 style={styles.emptyTitle}>
-    Bristol City 2–1 Barnes Stormers
-  </h3>
-
-  <p style={styles.emptyText}>
-    City opened their League Eight campaign with a 2–1 victory at Clapham Common.
-  </p>
-
-  <a
-    href="/fixtures/3"
-    style={{
-      display: "inline-block",
-      marginTop: "20px",
-      background: "#df1e2f",
-      color: "white",
-      textDecoration: "none",
-      padding: "12px 18px",
-      borderRadius: "6px",
-      fontWeight: "900",
-      fontSize: "13px",
-    }}
-  >
-    Read Match Report →
-  </a>
-</div>
-      <div style={styles.emptyNews}>
-  <div style={styles.storyMeta}>
-    <span style={styles.category}>MATCH PREVIEW</span>
-    <span>13 September 2026</span>
-  </div>
-
-  <h3 style={styles.emptyTitle}>
-    City Begin League Eight Campaign Against Barnes Stormers
-  </h3>
-
-  <p style={styles.emptyText}>
-    City began the 2026/27 league season at home to familiar opponents Barnes Stormers.
-  </p>
-
-  <a
-    href="/news/barnes-stormers-preview"
-    style={{
-      display: "inline-block",
-      marginTop: "20px",
-      background: "#df1e2f",
-      color: "white",
-      textDecoration: "none",
-      padding: "12px 18px",
-      borderRadius: "6px",
-      fontWeight: "900",
-      fontSize: "13px",
-    }}
-  >
-    Read Match Preview →
-  </a>
-</div>
-
-  <div style={styles.emptyNews}>
-  <div style={styles.storyMeta}>
-    <span style={styles.category}>MATCH REPORT</span>
-    <span>16 August 2026</span>
-  </div>
-
-  <h3 style={styles.emptyTitle}>
-    Shepherd&apos;s Tuesday 2–2 Bristol City
-  </h3>
-
-  <p style={styles.emptyText}>
-    City rounded off an unbeaten pre-season with a 2–2 draw at Burgess Park.
-  </p>
-
-  <a
-    href="/news/shepherds-tuesday-2-2-bristol-city"
-    style={{
-      display: "inline-block",
-      marginTop: "20px",
-      background: "#df1e2f",
-      color: "white",
-      textDecoration: "none",
-      padding: "12px 18px",
-      borderRadius: "6px",
-      fontWeight: "900",
-      fontSize: "13px",
-    }}
-  >
-    Read Match Report →
-  </a>
-</div>
-  <div style={styles.emptyNews}>
-  <div style={styles.storyMeta}>
-    <span style={styles.category}>MATCH REPORT</span>
-    <span>9 August 2026</span>
-  </div>
-
-  <h3 style={styles.emptyTitle}>
-    Aberdeen 0–3 Bristol City
-  </h3>
-
-  <p style={styles.emptyText}>
-    City made the perfect start to pre-season with a convincing 3–0 victory
-    at Raynes Park.
-  </p>
-
-  <a
-    href="/news/aberdeen-0-3-bristol-city"
-    style={{
-      display: "inline-block",
-      marginTop: "20px",
-      background: "#df1e2f",
-      color: "white",
-      textDecoration: "none",
-      padding: "12px 18px",
-      borderRadius: "6px",
-      fontWeight: "900",
-      fontSize: "13px",
-    }}
-  >
-    Read Match Report →
-  </a>
-</div>  
-  
-  <div style={styles.emptyNews}>
-      <div style={styles.storyMeta}>
-        <span style={styles.category}>CLUB NEWS</span>
-        <span>August 2026</span>
-      </div>
-
-      <h3 style={styles.emptyTitle}>
-        BCFC London call on former player Andy Burnham for a little help
-      </h3>
-
-      <p style={styles.emptyText}>
-        Our search for support with a new kit took an unexpected turn when
-        we called on one of the club&apos;s most high-profile former players.
-      </p>
-
-      <a
-        href="/news/andy-burnham"
-        style={{
-          display: "inline-block",
-          marginTop: "20px",
-          background: "#df1e2f",
-          color: "white",
-          textDecoration: "none",
-          padding: "12px 18px",
-          borderRadius: "6px",
-          fontWeight: "900",
-          fontSize: "13px",
-        }}
-      >
-        Read Story →
-      </a>
-    </div>
-  </div>
-</section>
+      {/* MORE NEWS */}
+      <section style={styles.moreNews}>
+        <div style={styles.content}>
+          <p style={styles.redLabel}>MORE FROM BCFC LONDON</p>
+          <h2 style={styles.sectionTitle}>More News</h2>
+          {moreNews.map((article) => (
+            <article key={article.link} style={styles.emptyNews}>
+              <div style={{ ...styles.storyMeta, justifyContent: "center" }}>
+                <span style={styles.category}>{article.category}</span>
+                <span>{article.displayDate}</span>
+              </div>
+              <h3 style={styles.emptyTitle}>{article.title}</h3>
+              <p style={styles.emptyText}>{article.summary}</p>
+              <a href={article.link} style={{ ...styles.primaryButton, display: "inline-block", marginTop: "20px" }}>
+                {article.button}
+              </a>
+            </article>
+          ))}
+        </div>
+      </section>
       {/* FOOTER */}
       <footer style={styles.footer}>
         <div>
@@ -343,6 +155,10 @@ header nav a:nth-child(7) {
     .featured-card {
       display: block !important;
       padding: 24px !important;
+    }
+    .featured-image-wrap {
+      height: min(420px, 105vw) !important;
+      margin-top: 24px;
     }
 
     .record-box {

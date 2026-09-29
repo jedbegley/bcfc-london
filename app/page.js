@@ -1,4 +1,6 @@
 import { createClient } from "@supabase/supabase-js";
+import Image from "next/image";
+import { getNewsArticles } from "./news/articles";
 import {
   clubBadge, displayCompetition, formatMatchDate, formatMatchTime,
   londonToday, opponentInitials,
@@ -11,14 +13,6 @@ const supabase = createClient(
 
 export const dynamic = "force-dynamic";
 
-const featuredStory = {
-  title: "City Handed Two Home Ties in Opening Cup Draws",
-  summary:
-    "City will face Higham Park Rangers and Larkhall City at home after the first two cup draws of the season, with another unusual fixture also on the horizon...",
-  image: "/london-fa.png",
-  imageAlt: "London FA",
-  link: "/news/cup-draws-2026",
-};
 function MatchTeam({ name, isClub, side }) {
   return (
     <div style={styles.team}>
@@ -34,7 +28,7 @@ function MatchTeam({ name, isClub, side }) {
 }
 
 export default async function Home() {
-  const [{ data: latestResult, error: resultError }, { data: nextMatch, error: nextError }] =
+  const [{ data: latestResult, error: resultError }, { data: nextMatch, error: nextError }, newsArticles] =
     await Promise.all([
       supabase.from("matches")
         .select("id, opponent, match_date, kickoff_time, venue, competition, home_or_away, our_score, opponent_score")
@@ -51,7 +45,9 @@ export default async function Home() {
         .order("kickoff_time", { ascending: true })
         .order("id", { ascending: true })
         .limit(1).maybeSingle(),
+      getNewsArticles(),
     ]);
+  const featuredStory = newsArticles[0];
 
   if (resultError) console.error("Error loading latest result:", resultError);
   if (nextError) console.error("Error loading next match:", nextError);
@@ -156,12 +152,20 @@ href={featuredStory.link}
         </div>
 
         <div className="latest-image-wrap" style={styles.latestImageWrap}>
-          <img
-  className="latest-image"
-  src={featuredStory.image}
-alt={featuredStory.imageAlt}
-  style={styles.latestImage}
-/>
+          {featuredStory.image ? (
+            featuredStory.imagePlayerId ? (
+              <Image className="latest-image" src={featuredStory.image}
+                alt={featuredStory.imageAlt} width={900} height={1200}
+                sizes="(max-width: 768px) 88vw, 44vw"
+                style={{ ...styles.latestImage, objectPosition: "center 22%" }} />
+            ) : (
+              <img className="latest-image" src={featuredStory.image}
+                alt={featuredStory.imageAlt} style={styles.latestImage} />
+            )
+          ) : (
+            <img className="latest-image" src="/374fadec-093f-4e7e-9f54-01c06a034caa.jpeg"
+              alt="BCFC London badge" style={{ ...styles.latestImage, objectFit: "contain" }} />
+          )}
         </div>
 
         <div className="match-cards-row" style={styles.matchCardsRow}>
