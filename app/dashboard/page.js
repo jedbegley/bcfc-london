@@ -15,6 +15,9 @@ export default function DashboardPage() {
 const [availability, setAvailability] = useState("");
 const [availabilityMessage, setAvailabilityMessage] = useState("");
   const [isAdmin, setIsAdmin] = useState(false);
+  const [canViewAvailability, setCanViewAvailability] = useState(false);
+  const [viewerAvailability, setViewerAvailability] = useState([]);
+  const [viewerAvailabilityError, setViewerAvailabilityError] = useState(false);
   const [allPlayers, setAllPlayers] = useState([]);
 const [allAvailability, setAllAvailability] = useState([]);
   const [currentMatch, setCurrentMatch] = useState(null);
@@ -25,6 +28,19 @@ const [allAvailability, setAllAvailability] = useState([]);
     month: "long",
     year: "numeric",
   });
+
+  async function loadViewerAvailability(matchId) {
+    const { data, error } = await supabase.rpc("get_fixture_availability", {
+      p_match_id: matchId,
+    });
+    if (error) {
+      console.error("VIEWER AVAILABILITY ERROR:", error);
+      setViewerAvailabilityError(true);
+    } else {
+      setViewerAvailability(data || []);
+      setViewerAvailabilityError(false);
+    }
+  }
   
 const handleLogout = async () => {
   await supabase.auth.signOut();
@@ -67,6 +83,7 @@ if (user) {
   } else {
     setPlayer(playerData);
     setIsAdmin(playerData.is_admin === true);
+    setCanViewAvailability(playerData.can_view_availability === true);
     const { data: savedAvailability, error: savedAvailabilityError } = await supabase
   .from("availability")
   .select("status")
@@ -102,6 +119,9 @@ if (savedAvailabilityError) {
     setAllAvailability(availabilityData || []);
   }
 }
+    if (playerData.is_admin !== true && playerData.can_view_availability === true && nextMatchData) {
+      await loadViewerAvailability(nextMatchData.id);
+    }
   }
 }
       
@@ -144,6 +164,9 @@ if (savedAvailabilityError) {
 
   setAvailability(status);
   setAvailabilityMessage("Availability saved!");
+  if (canViewAvailability && !isAdmin) {
+    await loadViewerAvailability(currentMatch.id);
+  }
 }
 
   if (loading) {
@@ -389,6 +412,36 @@ if (savedAvailabilityError) {
     </div>
   </div>
 )}
+
+  {!isAdmin && canViewAvailability && currentMatch && (
+    <div style={styles.adminCard}>
+      <div style={styles.matchLabel}>AVAILABILITY VIEW</div>
+      <h2 style={{ marginTop: "10px" }}>Squad Availability</h2>
+      {viewerAvailabilityError ? (
+        <p style={styles.text}>Availability could not be loaded. Please refresh the page.</p>
+      ) : ["available", "maybe", "unavailable", "no_response"].map((status) => {
+        const playersForStatus = viewerAvailability.filter(
+          (entry) => entry.availability_status === status
+        );
+        return (
+          <div key={status} style={{ marginTop: "20px" }}>
+            <h3 style={{ textTransform: "capitalize", marginBottom: "8px" }}>
+              {status === "no_response" ? "No Response" : status} ({playersForStatus.length})
+            </h3>
+            {playersForStatus.length === 0 ? (
+              <p style={styles.text}>No players</p>
+            ) : (
+              playersForStatus.map((entry, index) => (
+                <div key={`${entry.full_name}-${index}`} style={{ marginBottom: "6px" }}>
+                  {entry.full_name}
+                </div>
+              ))
+            )}
+          </div>
+        );
+      })}
+    </div>
+  )}
   
         <a href="/" style={styles.backLink}>
           ← Back to BCFC London
