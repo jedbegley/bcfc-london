@@ -3,7 +3,7 @@ import Image from "next/image";
 import { getNewsArticles } from "./news/articles";
 import {
   clubBadge, displayCompetition, formatMatchDate, formatMatchTime,
-  londonToday, opponentInitials,
+  londonToday, opponentInitials, isWalkover, walkoverOutcome,
 } from "./fixtureDisplay";
 
 const supabase = createClient(
@@ -31,7 +31,7 @@ export default async function Home() {
   const [{ data: latestResult, error: resultError }, { data: nextMatch, error: nextError }, newsArticles] =
     await Promise.all([
       supabase.from("matches")
-        .select("id, opponent, match_date, kickoff_time, venue, competition, home_or_away, our_score, opponent_score")
+        .select("id, opponent, match_date, kickoff_time, venue, competition, home_or_away, our_score, opponent_score, result_type")
         .eq("status", "Completed")
         .order("match_date", { ascending: false })
         .order("kickoff_time", { ascending: false })
@@ -53,7 +53,7 @@ export default async function Home() {
   if (nextError) console.error("Error loading next match:", nextError);
 
   let scorers = "";
-  if (latestResult) {
+  if (latestResult && !isWalkover(latestResult)) {
     const { data: goalRows, error: goalsError } = await supabase.from("match_stats")
       .select("player_id, goals")
       .eq("match_id", latestResult.id)
@@ -180,11 +180,11 @@ href={featuredStory.link}
                 />
                 <div style={styles.versus}>
                   <div style={{ fontSize: "34px", fontWeight: "900", color: "#111" }}>
-                    {latestResult.home_or_away === "Away"
+                    {isWalkover(latestResult) ? "W/O" : latestResult.home_or_away === "Away"
                       ? `${latestResult.opponent_score}–${latestResult.our_score}`
                       : `${latestResult.our_score}–${latestResult.opponent_score}`}
                   </div>
-                  <div style={{ fontSize: "11px", fontWeight: "900", marginTop: "6px" }}>FULL TIME</div>
+                  <div style={{ fontSize: "11px", fontWeight: "900", marginTop: "6px" }}>{isWalkover(latestResult) ? "AWARDED RESULT" : "FULL TIME"}</div>
                 </div>
                 <MatchTeam
                   name={latestResult.home_or_away === "Away" ? "Bristol City" : latestResult.opponent}
@@ -192,7 +192,8 @@ href={featuredStory.link}
                 />
               </div>
               <div style={styles.matchInfo}>
-                <strong>{formatMatchDate(latestResult.match_date)}</strong>
+                {isWalkover(latestResult) && <strong>{walkoverOutcome(latestResult)}</strong>}
+                <strong>{isWalkover(latestResult) ? "Scheduled: " : ""}{formatMatchDate(latestResult.match_date)}</strong>
                 {latestResult.venue && <span>{latestResult.venue}</span>}
                 {scorers && <span>⚽ {scorers}</span>}
               </div>
@@ -200,7 +201,7 @@ href={featuredStory.link}
                 ...styles.friendlyTag, display: "block", width: "100%",
                 textAlign: "center", textDecoration: "none", boxSizing: "border-box",
               }}>
-                READ MATCH REPORT
+                {isWalkover(latestResult) ? "VIEW WALKOVER DETAILS" : "READ MATCH REPORT"}
               </a>
             </div>
           )}
@@ -739,3 +740,4 @@ const styles = {
     fontSize: "13px",
   },
 };
+
