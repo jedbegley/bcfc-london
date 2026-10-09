@@ -4,6 +4,13 @@ import { createClient } from "@supabase/supabase-js";
 // publication dates live here; player photos remain in public_squad.
 const articles = [
   {
+    date: "2026-10-09", displayDate: "9 October 2026", label: "CLUB NEWS",
+    category: "LONDON CUP", title: "Bristol City Progress in London Cup Following Walkover",
+    summary: "City progress to the next round of the London Sunday Junior Shield after Highams Park Rangers First withdrew due to an Essex Cup scheduling clash.",
+    link: "/news/london-cup-walkover-2026",
+    imageAlt: "BCFC London club crest", button: "Read Story →",
+  },
+  {
     date: "2026-09-29", displayDate: "29 September 2026", label: "CLUB NEWS",
     category: "PLAYER OF THE MONTH", title: "Smithy Wins September Player of the Month",
     summary: "Jack Smith is our first Player of the Month of 2026/27 after a 16-point September, three assists and a Man of the Match award.",
@@ -68,3 +75,4 @@ export async function getNewsArticles() {
     image: article.imagePlayerId ? photos.get(article.imagePlayerId) || null : article.image || null,
   }));
 }
+
