@@ -3,7 +3,7 @@ import Script from "next/script";
 import { createClient } from "@supabase/supabase-js";
 import {
   clubBadge, displayCompetition, formatMatchDate, formatMatchTime,
-  londonToday, opponentInitials,
+  londonToday, opponentInitials, isWalkover, walkoverOutcome,
 } from "../fixtureDisplay";
 
 const supabase = createClient(
@@ -48,7 +48,7 @@ export default async function Fixtures() {
         .order("id", { ascending: true })
         .limit(1).maybeSingle(),
       supabase.from("matches")
-        .select("id, opponent, match_date, kickoff_time, venue, competition, match_type, home_or_away, our_score, opponent_score")
+        .select("id, opponent, match_date, kickoff_time, venue, competition, match_type, home_or_away, our_score, opponent_score, result_type")
         .eq("status", "Completed")
         .order("match_date", { ascending: false })
         .order("kickoff_time", { ascending: false })
@@ -152,12 +152,12 @@ export default async function Fixtures() {
                   />
                   <div style={styles.versus}>
                     <div style={{ fontSize: "34px", fontWeight: "900", color: "#111" }}>
-                      {match.home_or_away === "Away"
+                      {isWalkover(match) ? "W/O" : match.home_or_away === "Away"
                         ? `${match.opponent_score}–${match.our_score}`
                         : `${match.our_score}–${match.opponent_score}`}
                     </div>
                     <div style={{ fontSize: "11px", fontWeight: "900", marginTop: "6px" }}>
-                      FULL TIME
+                      {isWalkover(match) ? "AWARDED RESULT" : "FULL TIME"}
                     </div>
                   </div>
                   <MatchTeam
@@ -166,7 +166,8 @@ export default async function Fixtures() {
                   />
                 </div>
                 <div style={styles.matchInfo}>
-                  <strong>{formatMatchDate(match.match_date)}</strong>
+                  {isWalkover(match) && <strong>{walkoverOutcome(match)}</strong>}
+                  <strong>{isWalkover(match) ? "Scheduled: " : ""}{formatMatchDate(match.match_date)}</strong>
                   {match.venue && <span>{match.venue}</span>}
                   {legacyScorers[match.id] && <span>{legacyScorers[match.id]}</span>}
                 </div>
@@ -178,7 +179,7 @@ export default async function Fixtures() {
                     textDecoration: "none",
                   }}
                 >
-                  READ MATCH REPORT →
+                  {isWalkover(match) ? "VIEW WALKOVER DETAILS →" : "READ MATCH REPORT →"}
                 </Link>
               </div>
             ))}
@@ -527,3 +528,4 @@ loginButton: {
     fontSize: "13px",
   },
 };
+
