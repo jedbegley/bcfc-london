@@ -1,6 +1,7 @@
 import { createClient } from "@supabase/supabase-js";
 import Link from "next/link";
 import MotmVote from "./MotmVote";
+import { isWalkover as matchIsWalkover, walkoverOutcome } from "../../fixtureDisplay";
 // Match report page
 const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL,
@@ -51,7 +52,7 @@ export async function generateMetadata({ params }) {
 
   const { data: match } = await supabase
     .from("matches")
-    .select("opponent, our_score, opponent_score, status, match_date, kickoff_time, venue, venue_details, competition, match_type, home_or_away, meet_time")
+    .select("opponent, our_score, opponent_score, status, match_date, kickoff_time, venue, venue_details, competition, match_type, home_or_away, meet_time, result_type")
     .eq("id", matchId)
     .single();
 
@@ -63,13 +64,17 @@ export async function generateMetadata({ params }) {
 
   const isCompleted = match.status === "Completed";
 
-const title = isCompleted
+const title = matchIsWalkover(match)
+  ? `${teamsFor(match)} | Bristol City ${match.result_type === "walkover_win" ? "Awarded" : "Concede"} Walkover`
+  : isCompleted
   ? (match.home_or_away === "Away"
     ? `${match.opponent} ${match.opponent_score}–${match.our_score} Bristol City | Match Report`
     : `Bristol City ${match.our_score}–${match.opponent_score} ${match.opponent} | Match Report`)
   : `${teamsFor(match)} | Match Preview`;
 
-const description = isCompleted
+const description = matchIsWalkover(match)
+  ? `${walkoverOutcome(match)}. ${match.competition}. Scheduled for ${formatMatchDate(match.match_date)}; this fixture was not played.`
+  : isCompleted
   ? `Read the full BCFC London match report, watch the highlights and vote for your Man of the Match.`
   : [match.competition, match.match_type, formatMatchDate(match.match_date),
       formatMatchTime(match.kickoff_time) && `${formatMatchTime(match.kickoff_time)} kick off`,
@@ -117,6 +122,7 @@ export default async function PublicMatchReport({ params }) {
 
  const opponent = match.opponent || "Opponent";
   const isCompleted = match.status === "Completed";
+  const isWalkover = matchIsWalkover(match);
   const date = formatMatchDate(match.match_date);
   const kickoff = formatMatchTime(match.kickoff_time);
   const meet = formatMatchTime(match.meet_time);
@@ -191,11 +197,11 @@ export default async function PublicMatchReport({ params }) {
  {isCompleted ? <section style={styles.hero}>
   <div style={styles.heroInner}>
     <div style={styles.eyebrow}>
-      {isCompleted ? "MATCH REPORT" : "MATCH PREVIEW"}
+      {isWalkover ? "WALKOVER — AWARDED RESULT" : isCompleted ? "MATCH REPORT" : "MATCH PREVIEW"}
     </div>
 
     <h1 style={styles.title}>
-      {isCompleted
+      {isWalkover ? teamsFor(match) : isCompleted
         ? (match.home_or_away === "Away"
           ? `${opponent} ${match.opponent_score}–${match.our_score} Bristol City`
           : `Bristol City ${match.our_score}–${match.opponent_score} ${opponent}`)
@@ -203,7 +209,7 @@ export default async function PublicMatchReport({ params }) {
     </h1>
 
     <div style={styles.fullTime}>
-      {isCompleted ? "FULL TIME" : match.competition}
+      {isWalkover ? walkoverOutcome(match) : isCompleted ? "FULL TIME" : match.competition}
     </div>
   </div>
 </section> : (
@@ -375,6 +381,7 @@ export default async function PublicMatchReport({ params }) {
         </div>
 
             {isCompleted && (<>
+            {!isWalkover && (<>
             <div style={{ marginTop: "45px", paddingTop: "30px", borderTop: "1px solid #ddd" }}>
   <div
     style={{
@@ -440,6 +447,8 @@ export default async function PublicMatchReport({ params }) {
 >
   PAY £10 →
 </a>
+</div>
+            </>)}
         {nextMatch && <div
   style={{
     marginTop: "30px",
@@ -481,7 +490,6 @@ export default async function PublicMatchReport({ params }) {
     CONFIRM AVAILABILITY →
   </Link>
 </div>}
-</div>
             </>)}
 
 <Link href="/fixtures" style={styles.backLink}>
@@ -821,3 +829,4 @@ const styles = {
     opacity: 0.7,
   },
 };
+
