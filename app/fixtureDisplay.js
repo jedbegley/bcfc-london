@@ -35,3 +35,14 @@ export function opponentInitials(name) {
     ? words.slice(0, 2).map((word) => word[0]).join("").toUpperCase()
     : words[0]?.slice(0, 2).toUpperCase() || "?";
 }
+
+export function isWalkover(match) {
+  return match?.result_type === "walkover_win" || match?.result_type === "walkover_loss";
+}
+
+export function walkoverOutcome(match) {
+  return match?.result_type === "walkover_loss"
+    ? "Opposition awarded walkover — Bristol City do not progress"
+    : "Bristol City awarded walkover — through to next round";
+}
+
