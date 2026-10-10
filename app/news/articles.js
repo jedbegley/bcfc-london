@@ -8,7 +8,7 @@ const articles = [
     "displayDate": "10 October 2026",
     "label": "CLUB NEWS",
     "category": "NEW KIT",
-    "title": "From Number 10 to Number 10: BCFC London Receive New Kit Thanks to Downing Street and Scott Murray",
+    "title": "The Bill Has Been Passed! Scott Murray Delivers for BCFC London",
     "summary": "A letter to Downing Street has led to a brand-new Bristol City kit, kindly arranged with Scott Murray — and a special friendly is in the works.",
     "link": "/news/from-number-10-to-number-10",
     "image": "/news/downing-street-number-10-shirts.jpg",
