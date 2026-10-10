@@ -10,7 +10,7 @@ const articles = [
     "category": "NEW KIT",
     "title": "The Bill Has Been Passed! Scott Murray Delivers for BCFC London",
     "summary": "After a letter to Andy Burnham and Bristol Live coverage, Downing Street helped coordinate a new Bristol City kit with Scott Murray — and a special friendly is in the works.",
-    "link": "/news/from-number-10-to-number-10",
+    "link": "/news/scott-murray-new-kit",
     "image": "/news/downing-street-number-10-shirts.jpg",
     "imageAlt": "Black and yellow Bristol City goalkeeper shirt beside the red number 10 shirt",
     "imageFit": "contain",
