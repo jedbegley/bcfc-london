@@ -9,7 +9,7 @@ export const metadata = {
   },
   "openGraph": {
     "title": "The Bill Has Been Passed! Scott Murray Delivers for BCFC London",
-    "description": "A letter to Downing Street, a new Bristol City kit from Scotty Murray and a friendly on the horizon. What a story!",
+    "description": "A letter to Andy Burnham, Bristol Live coverage and a helping hand from Downing Street brought a new kit from Scott Murray — with a friendly on the horizon.",
     "url": "https://www.bcfclondon.co.uk/news/from-number-10-to-number-10",
     "siteName": "BCFC London",
     "type": "article",
@@ -26,7 +26,7 @@ export const metadata = {
   "twitter": {
     "card": "summary_large_image",
     "title": "The Bill Has Been Passed! Scott Murray Delivers for BCFC London",
-    "description": "A letter to Downing Street, a new Bristol City kit from Scotty Murray and a friendly on the horizon. What a story!",
+    "description": "A letter to Andy Burnham, Bristol Live coverage and a helping hand from Downing Street brought a new kit from Scott Murray — with a friendly on the horizon.",
     "images": [
       "https://www.bcfclondon.co.uk/news/downing-street-number-10-shirts.jpg"
     ]
@@ -71,7 +71,7 @@ export default function Number10KitStory() {
       <article style={styles.article}>
         <Image src="/news/downing-street-number-10-shirts.jpg" alt="Black and yellow Bristol City goalkeeper shirt beside the red number 10 shirt" width={1200} height={1600} sizes="(max-width: 768px) 88vw, 600px" priority style={{ width: "100%", maxWidth: "600px", height: "auto", display: "block", margin: "0 auto 36px", borderRadius: "12px" }} />
         <p style={styles.lead}>Bristol City London Supporters FC are delighted to have received a brand-new playing kit, courtesy of Bristol City legend Scott Murray, with a helping hand from Downing Street.</p>
-        <p style={styles.text}>What started with <a href="/news/andy-burnham" style={{ color: "#e31b23", fontWeight: "700" }}>our original letter</a> to Downing Street has turned into something truly special for our London-based supporters’ football club.</p>
+        <p style={styles.text}>What started with <a href="/news/andy-burnham" style={{ color: "#e31b23", fontWeight: "700" }}>our original letter</a> to former Bristol City player Andy Burnham has turned into something truly special for our London-based supporters’ football club.</p>
         <p style={styles.text}>Following our original letter and the subsequent coverage in Bristol Live, Downing Street got in touch with the club and helped coordinate a fantastic gesture with Bristol City legend and current kitman Scott Murray.</p>
         <p style={styles.text}>Today, following Bristol City’s away fixture against Charlton Athletic, BCFC London captain Alfie met with Scotty to collect a brand-new set of playing kit for the team.</p>
         <p style={styles.text}>The generous donation includes a full set of Bristol City shirts, shorts and socks, a goalkeeper strip and footballs, giving the team a brilliant new look for the remainder of the season.</p>
