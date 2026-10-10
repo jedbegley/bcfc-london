@@ -2,13 +2,13 @@ import Image from "next/image";
 
 export const metadata = {
   metadataBase: new URL("https://www.bcfclondon.co.uk"),
-  "title": "From Number 10 to Number 10 | BCFC London",
+  "title": "The Bill Has Been Passed! Scott Murray Delivers for BCFC London",
   "description": "BCFC London receive a brand-new Bristol City kit thanks to Downing Street and club legend Scott Murray, with a special friendly also in the works.",
   "alternates": {
     "canonical": "/news/from-number-10-to-number-10"
   },
   "openGraph": {
-    "title": "From Number 10 to Number 10! 🔴⚪",
+    "title": "The Bill Has Been Passed! Scott Murray Delivers for BCFC London",
     "description": "A letter to Downing Street, a new Bristol City kit from Scotty Murray and a friendly on the horizon. What a story!",
     "url": "https://www.bcfclondon.co.uk/news/from-number-10-to-number-10",
     "siteName": "BCFC London",
@@ -25,7 +25,7 @@ export const metadata = {
   },
   "twitter": {
     "card": "summary_large_image",
-    "title": "From Number 10 to Number 10! 🔴⚪",
+    "title": "The Bill Has Been Passed! Scott Murray Delivers for BCFC London",
     "description": "A letter to Downing Street, a new Bristol City kit from Scotty Murray and a friendly on the horizon. What a story!",
     "images": [
       "https://www.bcfclondon.co.uk/news/downing-street-number-10-shirts.jpg"
@@ -63,14 +63,14 @@ export default function Number10KitStory() {
       <section style={styles.hero}>
         <p style={styles.eyebrow}>CLUB NEWS · SATURDAY 10 OCTOBER 2026</p>
         <h1 style={styles.title}>
-          From Number 10 to Number 10: BCFC London Receive New Kit Thanks to Downing Street and Scott Murray
+          The Bill Has Been Passed! Scott Murray Delivers for BCFC London
         </h1>
-        <p style={styles.intro}>A letter to Downing Street, a brand-new Bristol City kit and a friendly on the horizon.</p>
+        <p style={styles.intro}>From Downing Street to the Bristol City dressing room, a little help has gone a long way for BCFC London’s new kit.</p>
       </section>
 
       <article style={styles.article}>
         <Image src="/news/downing-street-number-10-shirts.jpg" alt="Black and yellow Bristol City goalkeeper shirt beside the red number 10 shirt" width={1200} height={1600} sizes="(max-width: 768px) 88vw, 600px" priority style={{ width: "100%", maxWidth: "600px", height: "auto", display: "block", margin: "0 auto 36px", borderRadius: "12px" }} />
-        <p style={styles.lead}>Bristol City London Supporters FC are delighted to have received a brand-new playing kit, thanks to the support of Downing Street and Bristol City legend Scott Murray.</p>
+        <p style={styles.lead}>Bristol City London Supporters FC are delighted to have received a brand-new playing kit, courtesy of Bristol City legend Scott Murray, with a helping hand from Downing Street.</p>
         <p style={styles.text}>What started with <a href="/news/andy-burnham" style={{ color: "#e31b23", fontWeight: "700" }}>our original letter</a> to Downing Street has turned into something truly special for our London-based supporters’ football club.</p>
         <p style={styles.text}>Following our original letter and the subsequent coverage in Bristol Live, Downing Street got in touch with the club and helped coordinate a fantastic gesture with Bristol City legend and current kitman Scott Murray.</p>
         <p style={styles.text}>Today, following Bristol City’s away fixture against Charlton Athletic, BCFC London captain Alfie met with Scotty to collect a brand-new set of playing kit for the team.</p>
@@ -81,7 +81,7 @@ export default function Number10KitStory() {
         </figure>
         <p style={styles.text}>And in a fitting nod to where this whole story began, we’ve even got a number 10 shirt — a little tribute to Number 10 Downing Street!</p>
         <p style={styles.text}>As a club made up of Bristol City supporters living in and around London, we’re absolutely delighted with the gesture. Support like this means a huge amount to a grassroots football club like ours.</p>
-        <p style={styles.text}>A massive thank you goes to everyone at Downing Street who helped make this happen, and particularly to Scotty Murray for his generosity and for taking the time to arrange the handover.</p>
+        <p style={styles.text}>A massive thank you to everyone at Downing Street who helped make this happen, and especially to Scotty Murray for helping arrange the kit and taking the time to hand it over to our captain Alfie.</p>
         <p style={styles.text}>We can’t wait to wear the new kit for the first time next Sunday, 18 October, when we return to competitive action.</p>
         <p style={styles.text}>And there’s more to come…</p>
         <p style={styles.text}>Following our correspondence with Downing Street, plans are also progressing for a friendly between BCFC London and a Downing Street team.</p>
