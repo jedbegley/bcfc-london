@@ -5,12 +5,12 @@ export const metadata = {
   "title": "The Bill Has Been Passed! Scott Murray Delivers for BCFC London",
   "description": "BCFC London receive a brand-new Bristol City kit thanks to Downing Street and club legend Scott Murray, with a special friendly also in the works.",
   "alternates": {
-    "canonical": "/news/from-number-10-to-number-10"
+    "canonical": "/news/scott-murray-new-kit"
   },
   "openGraph": {
     "title": "The Bill Has Been Passed! Scott Murray Delivers for BCFC London",
     "description": "A letter to Andy Burnham, Bristol Live coverage and a helping hand from Downing Street brought a new kit from Scott Murray — with a friendly on the horizon.",
-    "url": "https://www.bcfclondon.co.uk/news/from-number-10-to-number-10",
+    "url": "https://www.bcfclondon.co.uk/news/scott-murray-new-kit",
     "siteName": "BCFC London",
     "type": "article",
     "publishedTime": "2026-10-10",
