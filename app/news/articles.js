@@ -4,6 +4,20 @@ import { createClient } from "@supabase/supabase-js";
 // publication dates live here; player photos remain in public_squad.
 const articles = [
   {
+    "date": "2026-10-10",
+    "displayDate": "10 October 2026",
+    "label": "CLUB NEWS",
+    "category": "NEW KIT",
+    "title": "From Number 10 to Number 10: BCFC London Receive New Kit Thanks to Downing Street and Scott Murray",
+    "summary": "A letter to Downing Street has led to a brand-new Bristol City kit, kindly arranged with Scott Murray — and a special friendly is in the works.",
+    "link": "/news/from-number-10-to-number-10",
+    "image": "/news/downing-street-number-10-shirts.jpg",
+    "imageAlt": "Black and yellow Bristol City goalkeeper shirt beside the red number 10 shirt",
+    "imageFit": "contain",
+    "thumbnail": true,
+    "button": "Read Story →"
+  },
+  {
     date: "2026-10-09", displayDate: "9 October 2026", label: "CLUB NEWS",
     category: "LONDON CUP", title: "Bristol City Progress in London Cup Following Walkover",
     summary: "City progress to the next round of the London Sunday Junior Shield after Highams Park Rangers First withdrew due to an Essex Cup scheduling clash.",
