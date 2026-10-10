@@ -159,8 +159,8 @@ href={featuredStory.link}
                 sizes="(max-width: 768px) 88vw, 44vw"
                 style={{ ...styles.latestImage, objectPosition: "center 22%" }} />
             ) : (
-              <img className="latest-image" src={featuredStory.image}
-                alt={featuredStory.imageAlt} style={styles.latestImage} />
+              <img className={`latest-image${featuredStory.imageFit === "contain" ? " latest-image--contain" : ""}`} src={featuredStory.image}
+                alt={featuredStory.imageAlt} style={{ ...styles.latestImage, objectFit: featuredStory.imageFit || styles.latestImage.objectFit }} />
             )
           ) : (
             <img className="latest-image" src="/374fadec-093f-4e7e-9f54-01c06a034caa.jpeg"
@@ -349,6 +349,8 @@ header nav a:nth-child(7) {
             object-fit: cover !important;
             border-radius: 12px !important;
           }
+
+          .latest-image--contain { object-fit: contain !important; }
 
           .match-cards-row {
             display: block !important;
