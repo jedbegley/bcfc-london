@@ -93,6 +93,13 @@ export default async function News() {
           <h2 style={styles.sectionTitle}>More News</h2>
           {moreNews.map((article) => (
             <article key={article.link} style={styles.emptyNews}>
+              {article.thumbnail && article.image && (
+                <a href={article.link} aria-label={`Read ${article.title}`}>
+                  <Image src={article.image} alt={article.imageAlt} width={1200} height={1600}
+                    sizes="(max-width: 768px) 70vw, 280px"
+                    style={{ width: "100%", maxWidth: "280px", height: "auto", borderRadius: "8px", display: "block", margin: "0 auto 24px" }} />
+                </a>
+              )}
               <div style={{ ...styles.storyMeta, justifyContent: "center" }}>
                 <span style={styles.category}>{article.category}</span>
                 <span>{article.displayDate}</span>
