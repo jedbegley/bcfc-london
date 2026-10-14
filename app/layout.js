@@ -1,5 +1,6 @@
 import VisitTracker from "./VisitTracker";
 import NewsShareBar from "./NewsShareBar";
+import SiteFooter from "./SiteFooter";
 
 export const metadata = {
   title: "Bristol City London Supporters FC",
@@ -13,6 +14,7 @@ export default function RootLayout({ children }) {
   <VisitTracker />
     <NewsShareBar />
   {children}
+  <SiteFooter />
 </body>
     </html>
   );
