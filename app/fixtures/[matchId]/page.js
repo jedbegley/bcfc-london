@@ -497,25 +497,6 @@ export default async function PublicMatchReport({ params }) {
 </Link>
           </section>
 
-      <footer style={styles.footer}>
-        <div>
-          <div style={styles.footerClub}>BRISTOL CITY</div>
-          <div style={styles.footerSub}>LONDON SUPPORTERS FC</div>
-        </div>
-
-        <div style={styles.footerSponsor}>
-          <span style={styles.sponsorLabel}>SPONSORED BY</span>
-          <img
-            src="/IMG_1146.jpeg"
-            alt="DUZZ Sports"
-            style={styles.sponsorImage}
-          />
-        </div>
-
-        <div style={styles.copyright}>
-          © 2026 Bristol City London Supporters FC
-        </div>
-      </footer>
     </main>
   );
 }

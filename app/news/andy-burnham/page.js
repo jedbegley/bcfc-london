@@ -112,14 +112,6 @@ export default function AndyBurnhamStory() {
         </a>
       </article>
 
-      <footer style={styles.footer}>
-        <div>
-          <strong>BCFC London Supporters FC</strong>
-          <p style={styles.footerText}>
-            Bristol City fans. London based. Representing the Robins.
-          </p>
-        </div>
-      </footer>
     </main>
   );
 }

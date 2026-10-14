@@ -15,6 +15,19 @@ export default function NewsShareBar() {
       return;
     }
 
+    // Preserve sharing on the pages that had a footer before consolidation.
+    const sharePages = [
+      "/", "/fixtures", "/league",
+      "/news/aberdeen-0-3-bristol-city", "/news/andy-burnham",
+      "/news/cup-draws-2026", "/news/london-cup-walkover-2026",
+      "/news/scott-murray-new-kit", "/news/september-player-of-the-month-2026",
+      "/news/shepherds-tuesday-2-2-bristol-city",
+    ];
+    if (!sharePages.includes(pathname) && !/^\/fixtures\/[^/]+$/.test(pathname)) {
+      setMountPoint(null);
+      return;
+    }
+
     const footer = document.querySelector("footer");
 
     if (!footer) return;

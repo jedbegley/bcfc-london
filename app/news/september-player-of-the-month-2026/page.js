@@ -104,11 +104,6 @@ export default async function SeptemberPlayerOfTheMonth() {
         <a href="/news" className="all-news">MORE NEWS →</a>
       </article>
 
-      <footer>
-        <div><strong>Bristol City London Supporters FC</strong><p>London-based Bristol City supporters football club.</p></div>
-        <div className="sponsor"><small>PROUDLY SPONSORED BY</small><img src="/IMG_1146.jpeg" alt="DUZZ Sports" /></div>
-        <span>© 2026 BCFC London</span>
-      </footer>
       <style>{`
         .potm-page { margin: 0; background: #f5f5f5; color: #111; font-family: Arial, Helvetica, sans-serif; }
         .potm-page * { box-sizing: border-box; }

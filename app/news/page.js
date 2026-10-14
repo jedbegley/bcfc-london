@@ -114,27 +114,6 @@ export default async function News() {
         </div>
       </section>
       {/* FOOTER */}
-      <footer style={styles.footer}>
-        <div>
-          <strong style={styles.footerClub}>
-            Bristol City London Supporters FC
-          </strong>
-          <p style={styles.footerText}>
-            London-based Bristol City supporters football club.
-          </p>
-        </div>
-
-        <div style={styles.sponsor}>
-          <span style={styles.sponsorLabel}>PROUDLY SPONSORED BY</span>
-          <img
-            src="/IMG_1146.jpeg"
-            alt="DUZZ Sports"
-            style={styles.sponsorLogo}
-          />
-        </div>
-
-        <div style={styles.copyright}>© 2026 BCFC London</div>
-      </footer>
     <style>{`
   @media (max-width: 768px) {
   header nav {

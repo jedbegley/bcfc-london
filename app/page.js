@@ -279,29 +279,6 @@ href={featuredStory.link}
         </a>
       </section>
 
-      <footer style={styles.footer}>
-        <div style={styles.footerTop}>
-          <div>
-            <strong>Bristol City London Supporters FC</strong>
-
-            <div style={styles.footerSmall}>
-              London-based Bristol City supporters football club.
-            </div>
-          </div>
-
-          <div style={styles.sponsorBlock}>
-            <div style={styles.sponsorLabel}>PROUDLY SPONSORED BY</div>
-
-            <img
-              src="/IMG_1146.jpeg"
-              alt="DUZZ Sports"
-              style={styles.sponsorLogo}
-            />
-          </div>
-
-          <div style={styles.footerSmall}>© 2026 BCFC London</div>
-        </div>
-      </footer>
 
       <style>{`
         @media (min-width: 769px) {
