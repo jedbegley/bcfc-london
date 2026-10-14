@@ -62,25 +62,6 @@ export default function LondonCupWalkover2026() {
         <a href="/news" style={styles.backLink}>← BACK TO NEWS</a>
       </article>
 
-      <footer style={styles.footer}>
-        <div>
-          <strong>Bristol City London Supporters FC</strong>
-          <p style={styles.footerText}>
-            London-based Bristol City supporters football club.
-          </p>
-        </div>
-
-        <div style={styles.sponsor}>
-          <span style={styles.sponsorLabel}>PROUDLY SPONSORED BY</span>
-          <img
-            src="/IMG_1146.jpeg"
-            alt="DUZZ Sports"
-            style={styles.sponsorLogo}
-          />
-        </div>
-
-        <div style={styles.copyright}>© 2026 BCFC London</div>
-      </footer>
 
       <style>{`
         @media (max-width: 768px) {
