@@ -152,7 +152,7 @@ begin
         or (d.state = 'sending' and d.leased_until < now()
           and d.first_attempt_at > now() - interval '23 hours'))
       and exists (select 1 from auth.users u where u.id = d.recipient_user_id and u.email is not null)
-    order by d.id for update skip locked limit least(greatest(p_limit, 1), 50)
+    order by d.id limit least(greatest(p_limit, 1), 50) for update skip locked
   ), leased as (
     update public.availability_alert_deliveries d
     set state = 'sending', attempts = d.attempts + 1,
