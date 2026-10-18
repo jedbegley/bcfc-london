@@ -12,7 +12,7 @@ const url = Deno.env.get("SUPABASE_URL")!;
 const secretKeys = JSON.parse(Deno.env.get("SUPABASE_SECRET_KEYS") || "{}");
 const serviceKey = secretKeys.default || Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!;
 const resendKey = Deno.env.get("RESEND_API_KEY")!;
-const from = Deno.env.get("ALERT_FROM_EMAIL") || "BCFC London <availability@alerts.bcfclondon.co.uk>";
+const from = Deno.env.get("ALERT_FROM_EMAIL") || "BCFC London <availability@bcfclondon.co.uk>";
 const supabase = createClient(url, serviceKey, { auth: { persistSession: false } });
 
 async function update(id: number, fields: Record<string, unknown>) {
