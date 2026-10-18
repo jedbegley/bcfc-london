@@ -64,6 +64,14 @@ export async function generateMetadata({ params }) {
   }
 
   const isCompleted = match.status === "Completed";
+  const socialImage = Number(matchId) === 8
+    ? {
+        url: "https://www.bcfclondon.co.uk/matches/8/larkhall-squad.jpg",
+        width: 1536,
+        height: 1152,
+        alt: "BCFC London squad before the Larkhall City match",
+      }
+    : null;
 
 const title = matchIsWalkover(match)
   ? `${teamsFor(match)} | Bristol City ${match.result_type === "walkover_win" ? "Awarded" : "Concede"} Walkover`
@@ -92,8 +100,11 @@ const description = matchIsWalkover(match)
       type: "article",
       url: `https://www.bcfclondon.co.uk/fixtures/${matchId}`,
       siteName: "Bristol City London Supporters FC",
+      ...(socialImage && { images: [socialImage] }),
     },
-    ...(!isCompleted && { twitter: { card: "summary", title, description } }),
+    ...(socialImage
+      ? { twitter: { card: "summary_large_image", title, description, images: [socialImage.url] } }
+      : !isCompleted && { twitter: { card: "summary", title, description } }),
   };
 }
 export default async function PublicMatchReport({ params }) {
