@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { createClient } from "@supabase/supabase-js";
+import AvailabilityAlerts from "./AvailabilityAlerts";
 
 const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL,
@@ -412,6 +413,8 @@ if (savedAvailabilityError) {
     </div>
   </div>
 )}
+
+  {isAdmin && <AvailabilityAlerts userId={user.id} players={allPlayers} fixture={currentMatch} />}
 
   {!isAdmin && canViewAvailability && currentMatch && (
     <div style={styles.adminCard}>
