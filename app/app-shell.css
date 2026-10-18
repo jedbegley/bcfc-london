@@ -1,0 +1,11 @@
+/* The website keeps its normal layout. Installed apps also respect screen cut-outs. */
+@media (display-mode: standalone) {
+  body {
+    margin: 0;
+    padding-top: env(safe-area-inset-top, 0px);
+    padding-right: env(safe-area-inset-right, 0px);
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+    padding-left: env(safe-area-inset-left, 0px);
+  }
+  .app-install-link { display: none; }
+}

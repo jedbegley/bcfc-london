@@ -8,6 +8,7 @@ export default function SiteFooter() {
           <strong>Bristol City London Supporters FC</strong>
           <p>Proudly representing the Robins in London.</p>
           <a className={styles.email} href="mailto:bcfclondon@hotmail.com">bcfclondon@hotmail.com</a>
+          <p className="app-install-link"><a href="/install" style={{ color: "inherit" }}>Install BCFC London</a></p>
         </div>
         <nav className={styles.social} aria-label="Club social media">
           <a href="https://www.instagram.com/bcfc_fans_fc/" target="_blank" rel="noopener noreferrer" aria-label="BCFC London on Instagram (opens in a new tab)">
