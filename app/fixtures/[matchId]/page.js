@@ -1,5 +1,6 @@
 import { createClient } from "@supabase/supabase-js";
 import Link from "next/link";
+import Image from "next/image";
 import MotmVote from "./MotmVote";
 import { isWalkover as matchIsWalkover, walkoverOutcome } from "../../fixtureDisplay";
 // Match report page
@@ -272,15 +273,43 @@ export default async function PublicMatchReport({ params }) {
 
       <section style={styles.content}>
         <div style={styles.report}>
+          {isCompleted && Number(matchId) === 8 && (
+            <>
+              <p style={styles.paragraph}>
+                {match.competition} · {date} · {match.venue} · Half-time: 0–0
+              </p>
+              <Image src="/matches/8/larkhall-action.jpg"
+                alt="Bristol City in action against Larkhall City at Clapham Common"
+                width={1600} height={1255} sizes="(max-width: 768px) 88vw, 850px"
+                priority style={{ width: "100%", height: "auto", borderRadius: "8px", marginBottom: "28px" }} />
+            </>
+          )}
           {isCompleted && (match.match_report ? (
             match.match_report
               .split("\n")
               .filter((paragraph) => paragraph.trim() !== "")
              .map((paragraph, index) => (
   <div key={index}>
-    <p style={styles.paragraph}>
-      {paragraph}
-    </p>
+    {Number(matchId) === 8 && index === 0 ? (
+      <h2 style={{ margin: "0 0 24px", lineHeight: 1.2 }}>{paragraph}</h2>
+    ) : (
+      <p style={styles.paragraph}>
+        {Number(matchId) === 8 && paragraph.includes("brand-new Bristol City kit for the first time") ? (
+          <>{paragraph.split("brand-new Bristol City kit")[0]}<Link href="/news/scott-murray-new-kit" style={{ color: "#e31b23" }}>brand-new Bristol City kit</Link>{paragraph.split("brand-new Bristol City kit")[1]}</>
+        ) : paragraph}
+      </p>
+    )}
+    {Number(matchId) === 8 && paragraph.includes("brand-new Bristol City kit for the first time") && (
+      <figure style={{ margin: "0 0 28px" }}>
+        <Image src="/matches/8/larkhall-squad.jpg"
+          alt="BCFC London line up in their new Bristol City kit before the Larkhall City match"
+          width={1536} height={1152} sizes="(max-width: 768px) 88vw, 850px"
+          style={{ width: "100%", height: "auto", borderRadius: "8px", display: "block" }} />
+        <figcaption style={{ color: "#666", fontSize: "14px", lineHeight: 1.5, marginTop: "10px" }}>
+          BCFC London line up in their brand-new Bristol City kit, arranged with the help of club legend Scott Murray and Downing Street.
+        </figcaption>
+      </figure>
+    )}
 
     {Number(matchId) === 5 &&
       paragraph.includes("Witse Konings was brought down inside the area") &&
@@ -425,6 +454,25 @@ export default async function PublicMatchReport({ params }) {
 
  <h2 style={{ marginTop: 0 }}>Pay your match fee</h2>
 
+{Number(matchId) === 8 ? (
+  <div style={{ display: "grid", gap: "18px" }}>
+    {[
+      { amount: 5, label: "Substitutes who played less than 45 minutes", url: "https://pay.sumup.com/b2c/QUNOY4QC" },
+      { amount: 10, label: "Starters and players who played more than 45 minutes", url: "https://pay.sumup.com/b2c/QY18AMZR" },
+    ].map(({ amount, label, url }) => (
+      <div key={amount}>
+        <p style={{ margin: "0 0 10px", lineHeight: 1.5 }}>£{amount} — {label}</p>
+        <a href={url} target="_blank" rel="noopener noreferrer" style={{
+          display: "inline-block", background: "#e31b23", color: "#fff",
+          padding: "13px 20px", borderRadius: "6px", fontWeight: "800", textDecoration: "none",
+        }}>PAY £{amount} →</a>
+      </div>
+    ))}
+    <p style={{ margin: 0, fontSize: "14px", color: "#666", lineHeight: 1.5 }}>
+      If you played exactly 45 minutes or are unsure which fee applies, please check with the manager.
+    </p>
+  </div>
+) : (<>
 <p style={{ marginBottom: "20px" }}>
   Match fee — £10
 </p>
@@ -447,6 +495,7 @@ export default async function PublicMatchReport({ params }) {
 >
   PAY £10 →
 </a>
+</>)}
 </div>
             </>)}
         {nextMatch && <div
@@ -490,6 +539,12 @@ export default async function PublicMatchReport({ params }) {
     CONFIRM AVAILABILITY →
   </Link>
 </div>}
+        {Number(matchId) === 8 && !nextMatch && (
+          <div style={{ marginTop: "30px", paddingTop: "30px", borderTop: "1px solid #ddd" }}>
+            <h2 style={{ color: "#e31b23", fontSize: "14px", letterSpacing: "2px" }}>NEXT MATCH</h2>
+            <p>Next fixture to be confirmed.</p>
+          </div>
+        )}
             </>)}
 
 <Link href="/fixtures" style={styles.backLink}>

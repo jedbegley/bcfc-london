@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useParams } from "next/navigation";
 import { createClient } from "@supabase/supabase-js";
 
@@ -27,6 +27,8 @@ const [startedPlayers, setStartedPlayers] = useState({});
   const [playerAssists, setPlayerAssists] = useState({});
   const [playerYellowCards, setPlayerYellowCards] = useState({});
   const [playerRedCards, setPlayerRedCards] = useState({});
+  const savingPlayerStats = useRef(false);
+  const [isSavingPlayerStats, setIsSavingPlayerStats] = useState(false);
   useEffect(() => {
     async function loadMatch() {
       const { data, error } = await supabase
@@ -95,6 +97,21 @@ if (!data || data.length === 0) {
 alert("Result saved!");
 };
   const savePlayerStats = async () => {
+  if (savingPlayerStats.current) return;
+  savingPlayerStats.current = true;
+  setIsSavingPlayerStats(true);
+  try {
+    const { data: existingStats, error: existingStatsError } = await supabase
+      .from("match_stats").select("id").eq("match_id", Number(matchId)).limit(1);
+    if (existingStatsError) {
+      console.error("Error checking existing match stats:", existingStatsError);
+      alert("Could not check existing statistics. Nothing was saved. Please try again.");
+      return;
+    }
+    if (existingStats?.length) {
+      alert("Player statistics have already been saved for this match. Nothing was added or changed.");
+      return;
+    }
   const selectedIds = Object.keys(selectedPlayers).filter(
     (id) => selectedPlayers[id]
   );
@@ -167,6 +184,13 @@ alert("Result saved!");
   }
 
   alert("Match squad and player stats saved!");
+  } catch (error) {
+    console.error("Error saving player stats:", error);
+    alert("There was a problem saving. Please check the saved records before retrying.");
+  } finally {
+    savingPlayerStats.current = false;
+    setIsSavingPlayerStats(false);
+  }
 };
 
   const saveMatchReport = async () => {
@@ -455,13 +479,14 @@ const winnerId = Number(winners[0]);
 ))}
   <button
   onClick={savePlayerStats}
+  disabled={isSavingPlayerStats}
   style={{
     marginTop: "20px",
     padding: "10px 18px",
     cursor: "pointer",
   }}
 >
-   Save Player Stats
+   {isSavingPlayerStats ? "Saving Player Stats…" : "Save Player Stats"}
 </button>
 
 <div style={{ marginTop: "40px" }}>

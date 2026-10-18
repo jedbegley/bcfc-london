@@ -60,12 +60,12 @@ export default function MotmVote({ matchId, votingClosed }) {
       }
 
       setPlayer(playerData);
-      const isJunctionMatch = Number(matchId) === 5;
-      const { data: eligibleRows, error: eligibleError } = isJunctionMatch
+      const usePlayedSquad = [5, 8].includes(Number(matchId));
+      const { data: eligibleRows, error: eligibleError } = usePlayedSquad
         ? await supabase
             .from("match_stats")
             .select("player_id")
-            .eq("match_id", 5)
+            .eq("match_id", Number(matchId))
         : await supabase
             .from("match_squad")
             .select("player_id")

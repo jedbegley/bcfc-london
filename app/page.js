@@ -235,6 +235,12 @@ href={featuredStory.link}
               )}
             </a>
           )}
+          {!nextMatch && (
+            <div style={styles.matchCard}>
+              <div style={styles.matchLabel}>NEXT MATCH</div>
+              <h2 style={{ margin: "20px 0 0", fontSize: "24px", lineHeight: 1.3 }}>Next fixture to be confirmed</h2>
+            </div>
+          )}
         </div>
       </section>
 
