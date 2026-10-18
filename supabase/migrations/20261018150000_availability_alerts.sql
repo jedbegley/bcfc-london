@@ -14,6 +14,7 @@ create table public.availability_change_history (
   alert_eligible boolean not null default false
 );
 create index on public.availability_change_history (match_id, changed_at desc);
+create index on public.availability_change_history (changed_at desc);
 
 create table public.availability_alert_preferences (
   user_id uuid primary key,
@@ -37,31 +38,27 @@ create table public.availability_alert_deliveries (
 );
 create index on public.availability_alert_deliveries (state, next_attempt_at);
 
-create function public.availability_is_admin(p_user_id uuid)
-returns boolean language sql stable security definer set search_path = '' as $$
-  select exists (select 1 from public."Players" where user_id = p_user_id and is_admin = true);
-$$;
-revoke all on function public.availability_is_admin(uuid) from public, anon;
-grant execute on function public.availability_is_admin(uuid) to authenticated, service_role;
-
 alter table public.availability_change_history enable row level security;
 alter table public.availability_alert_preferences enable row level security;
 alter table public.availability_alert_deliveries enable row level security;
 revoke all on public.availability_change_history, public.availability_alert_preferences,
   public.availability_alert_deliveries from anon, authenticated;
 grant select on public.availability_change_history to authenticated;
+grant select on public.availability_alert_deliveries to authenticated;
 grant select, insert, update on public.availability_alert_preferences to authenticated;
+grant select, update on public.availability_alert_deliveries to service_role;
+grant select on public.availability_change_history to service_role;
 create policy "admins read change history" on public.availability_change_history for select to authenticated
-  using (public.availability_is_admin(auth.uid()));
+  using ((select public.current_user_is_admin()));
 create policy "admins read own preference" on public.availability_alert_preferences for select to authenticated
-  using (user_id = auth.uid() and public.availability_is_admin(auth.uid()));
+  using (user_id = (select auth.uid()) and (select public.current_user_is_admin()));
 create policy "admins create own preference" on public.availability_alert_preferences for insert to authenticated
-  with check (user_id = auth.uid() and public.availability_is_admin(auth.uid()));
+  with check (user_id = (select auth.uid()) and (select public.current_user_is_admin()));
 create policy "admins update own preference" on public.availability_alert_preferences for update to authenticated
-  using (user_id = auth.uid() and public.availability_is_admin(auth.uid()))
-  with check (user_id = auth.uid() and public.availability_is_admin(auth.uid()));
--- Delivery records contain recipient information and are service-role only.
-revoke all on public.availability_alert_deliveries from anon, authenticated;
+  using (user_id = (select auth.uid()) and (select public.current_user_is_admin()))
+  with check (user_id = (select auth.uid()) and (select public.current_user_is_admin()));
+create policy "admins read alert delivery status" on public.availability_alert_deliveries for select to authenticated
+  using ((select public.current_user_is_admin()));
 
 create function public.record_availability_change()
 returns trigger language plpgsql security definer set search_path = '' as $$
@@ -88,17 +85,22 @@ begin
     v_old := old.status; v_new := new.status;
     v_match_id := new.match_id; v_player_id := new.player_id;
   end if;
+  v_old := coalesce(v_old,'no_response');
+  v_new := coalesce(v_new,'no_response');
+  if v_match_id is null or v_player_id is null then
+    return case when tg_op = 'DELETE' then old else new end;
+  end if;
   if v_old is not distinct from v_new then
     return case when tg_op = 'DELETE' then old else new end;
   end if;
 
   select m.match_date, m.kickoff_time, m.status into v_date, v_time, v_status
   from public.matches m where m.id = v_match_id;
-  if v_date is not null and v_time is not null and v_status is distinct from 'Completed' then
+  if v_date is not null and v_time is not null and v_status = 'Upcoming' then
     -- ISO weekdays: Friday=5; this chooses the most recent Friday on/before the fixture.
     v_start := ((v_date - ((extract(isodow from v_date)::int + 2) % 7))::timestamp
                 + interval '12 hours') at time zone 'Europe/London';
-    v_kickoff := (v_date::timestamp + v_time) at time zone 'Europe/London';
+    v_kickoff := (v_date + v_time) at time zone 'Europe/London';
   end if;
 
   insert into public.availability_change_history
@@ -129,13 +131,13 @@ returns table(delivery_id bigint, change_id bigint, recipient_email text,
   player_name text, opponent text, match_date date, kickoff_time text,
   previous_status text, new_status text, changed_at timestamptz)
 language plpgsql security definer set search_path = '' as $$
+declare v_capacity integer;
 begin
-  if auth.role() <> 'service_role' then
-    raise exception 'Service role required' using errcode = '42501';
-  end if;
+  -- Serialize quota reservations across concurrent webhook/cron invocations.
+  perform pg_advisory_xact_lock(hashtext('bcfc-availability-email-quota'));
   -- A manager may opt out or lose admin access after the change was queued.
   update public.availability_alert_deliveries d set state = 'cancelled'
-  where d.state in ('pending','failed') and
+  where (d.state in ('pending','failed') or (d.state='sending' and d.leased_until<now())) and
     (not exists (select 1 from public."Players" p
       where p.user_id = d.recipient_user_id and p.is_admin = true)
      or exists (select 1 from public.availability_alert_preferences pref
@@ -144,6 +146,16 @@ begin
     last_error = 'Unknown provider outcome after 24 hours; automatic retry withheld to avoid duplicate email'
   where d.state = 'sending' and d.leased_until < now()
     and d.first_attempt_at <= now() - interval '23 hours';
+  update public.availability_alert_deliveries d set state = 'needs_review'
+  where d.state in ('failed','sending') and d.attempts >= 6
+    and (d.leased_until is null or d.leased_until < now());
+  select least(greatest(p_limit,0),5,
+    80 - count(*) filter (where coalesce(d.sent_at,d.first_attempt_at)>now()-interval '24 hours'),
+    2400 - count(*))::integer into v_capacity
+  from public.availability_alert_deliveries d
+  where d.state in ('sent','sending','needs_review')
+    and coalesce(d.sent_at,d.first_attempt_at)>now()-interval '31 days';
+  if v_capacity <= 0 then return; end if;
   return query
   with claim as (
     select d.id from public.availability_alert_deliveries d
@@ -152,7 +164,7 @@ begin
         or (d.state = 'sending' and d.leased_until < now()
           and d.first_attempt_at > now() - interval '23 hours'))
       and exists (select 1 from auth.users u where u.id = d.recipient_user_id and u.email is not null)
-    order by d.id limit least(greatest(p_limit, 1), 50) for update skip locked
+    order by d.id limit v_capacity for update skip locked
   ), leased as (
     update public.availability_alert_deliveries d
     set state = 'sending', attempts = d.attempts + 1,
@@ -176,6 +188,17 @@ end;
 $$;
 revoke all on function public.claim_availability_alerts(integer) from public, anon, authenticated;
 grant execute on function public.claim_availability_alerts(integer) to service_role;
+
+-- The webhook token stays in Vault; the Edge Function validates it without exposing it.
+create function public.authorize_availability_alert_sender(p_secret text)
+returns boolean language sql stable security definer set search_path = '' as $$
+  select p_secret is not null and length(p_secret) = 64 and exists (
+    select 1 from vault.decrypted_secrets
+    where name = 'availability_alert_secret' and decrypted_secret = p_secret
+  );
+$$;
+revoke all on function public.authorize_availability_alert_sender(text) from public, anon, authenticated;
+grant execute on function public.authorize_availability_alert_sender(text) to service_role;
 
 -- A webhook on INSERT to availability_alert_deliveries wakes the sender promptly.
 -- A Supabase Cron retry job also invokes it, so transient webhook failures do not lose alerts.

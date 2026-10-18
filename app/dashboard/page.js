@@ -414,7 +414,7 @@ if (savedAvailabilityError) {
   </div>
 )}
 
-  {isAdmin && <AvailabilityAlerts userId={user.id} players={allPlayers} />}
+  {isAdmin && <AvailabilityAlerts userId={user.id} players={allPlayers} fixture={currentMatch} />}
 
   {!isAdmin && canViewAvailability && currentMatch && (
     <div style={styles.adminCard}>

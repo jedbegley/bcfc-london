@@ -33,6 +33,7 @@ export async function deliverOnce(row, { fetchImpl, mark, resendKey, from, now =
         "Idempotency-Key": `availability-delivery-${row.delivery_id}`,
       },
       body: JSON.stringify(emailFor(row, from)),
+      signal: AbortSignal.timeout(10_000),
     });
   } catch (error) {
     // Unknown outcome: provider may have accepted before the connection failed.

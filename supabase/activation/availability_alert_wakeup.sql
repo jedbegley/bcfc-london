@@ -1,6 +1,6 @@
 -- Apply after the sender is deployed and Vault contains:
 --   availability_alert_url: https://PROJECT.supabase.co/functions/v1/send-availability-alerts
---   availability_alert_secret: same random value as Edge Function ALERT_WEBHOOK_SECRET
+--   availability_alert_secret: a server-generated 64-character random token
 -- Never commit secret values. Without these secrets, this migration raises and changes nothing.
 begin;
 create extension if not exists pg_cron with schema pg_catalog;
