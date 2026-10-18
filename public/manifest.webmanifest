@@ -1,0 +1,18 @@
+{
+  "id": "/",
+  "name": "BCFC London",
+  "short_name": "BCFC London",
+  "description": "Fixtures, availability and club news for Bristol City London Supporters FC.",
+  "lang": "en-GB",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#e31b23",
+  "prefer_related_applications": false,
+  "icons": [
+    { "src": "/icons/bcfc-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "/icons/bcfc-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "/icons/bcfc-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}
