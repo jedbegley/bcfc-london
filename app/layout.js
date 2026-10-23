@@ -1,3 +1,4 @@
+import SiteHeader from "./SiteHeader";
 import AppNotifications from "./AppNotifications";
 import VisitTracker from "./VisitTracker";
 import NewsShareBar from "./NewsShareBar";
@@ -35,6 +36,7 @@ export default function RootLayout({ children }) {
   <VisitTracker />
   <AppNotifications />
     <NewsShareBar />
+  <SiteHeader />
   {children}
   <SiteFooter />
 </body>

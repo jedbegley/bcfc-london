@@ -26,20 +26,7 @@ export const metadata = {
 export default function ShepherdsTuesdayReport() {
   return (
     <main style={styles.page}>
-      <header style={styles.header}>
-        <div>
-          <div style={styles.clubName}>BRISTOL CITY</div>
-          <div style={styles.clubSub}>LONDON SUPPORTERS FC</div>
-        </div>
 
-        <nav style={styles.nav}>
-          <a href="/" style={styles.navLink}>Home</a>
-          <a href="/news" style={styles.activeNav}>News</a>
-          <a href="/fixtures" style={styles.navLink}>Fixtures</a>
-          <a href="/squad" style={styles.navLink}>Squad</a>
-          <a href="/stats" style={styles.navLink}>Stats</a>
-        </nav>
-      </header>
 
       <section style={styles.hero}>
         <p style={styles.eyebrow}>MATCH REPORT</p>

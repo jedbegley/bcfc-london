@@ -1,3 +1,4 @@
+body { margin: 0; }
 /* The website keeps its normal layout. Installed apps also respect screen cut-outs. */
 @media (display-mode: standalone) {
   body {
