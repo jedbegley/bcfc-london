@@ -3,6 +3,8 @@
 import { useEffect, useState } from "react";
 import { createClient } from "@supabase/supabase-js";
 import AvailabilityAlerts from "./AvailabilityAlerts";
+import FixtureAvailabilityControls from "./FixtureAvailabilityControls";
+import { londonToday } from "../fixtureDisplay";
 
 const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL,
@@ -60,9 +62,12 @@ setUser(user);
       const { data: nextMatchData, error: nextMatchError } = await supabase
   .from("matches")
   .select("*")
-.neq("status", "Completed")
-.gte("match_date", new Date().toISOString().split("T")[0])
+.eq("status", "Upcoming")
+.eq("availability_open", true)
+.gte("match_date", londonToday())
   .order("match_date", { ascending: true })
+  .order("kickoff_time", { ascending: true })
+  .order("id", { ascending: true })
   .limit(1)
   .maybeSingle();
 
@@ -133,8 +138,8 @@ if (savedAvailabilityError) {
   }, []);
 
   async function saveAvailability(status) {
-    if (!currentMatch) {
-  setAvailabilityMessage("Match is still loading. Please try again.");
+    if (!currentMatch || currentMatch.availability_open !== true) {
+  setAvailabilityMessage("Availability is not open for this fixture.");
   return;
 }
   if (!player) {
@@ -218,11 +223,11 @@ if (savedAvailabilityError) {
   Log Out
 </button>
 
-        <div style={styles.matchCard}>
+        {currentMatch ? <div style={styles.matchCard}>
           <div style={styles.matchLabel}>NEXT MATCH</div>
 
         <h2 style={styles.matchTitle}>
-  Bristol City v {currentMatch?.opponent}
+  {currentMatch.home_or_away === "Away" ? `${currentMatch.opponent} v Bristol City` : `Bristol City v ${currentMatch.opponent}`}
 </h2>
 
 <p style={styles.matchDetails}>
@@ -323,8 +328,12 @@ if (savedAvailabilityError) {
 )}
 </div>
         </div>
+ : <div style={styles.matchCard}><h2>Availability is currently closed</h2><p>We’ll let you know when the next availability request opens.</p><a href="/fixtures" style={{ color: "#e31b23" }}>View upcoming fixtures →</a></div>}
 
-  {isAdmin && (
+  {isAdmin && <FixtureAvailabilityControls />}
+  {isAdmin && !currentMatch && <p><a href="/dashboard/players" style={{ color: "#e31b23" }}>Squad admin →</a></p>}
+
+  {isAdmin && currentMatch && (
   <div style={styles.adminCard}>
     <div style={styles.matchLabel}>MANAGER VIEW</div>
     <h2 style={{ marginTop: "10px" }}>Squad Availability</h2>
