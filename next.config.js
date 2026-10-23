@@ -9,6 +9,9 @@ const nextConfig = {
       },
     ];
   },
+  async headers() {
+    return [{source: "/sw.js", headers: [{key: "Cache-Control", value: "no-cache, no-store, must-revalidate"}]}];
+  },
   images: {
     remotePatterns: [
       { protocol: "https", hostname: "qyvwpywlitnlbmzcxzlf.supabase.co", pathname: "/storage/v1/object/public/player-photos/**" },

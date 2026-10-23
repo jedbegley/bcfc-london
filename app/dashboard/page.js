@@ -3,6 +3,9 @@
 import { useEffect, useState } from "react";
 import { createClient } from "@supabase/supabase-js";
 import AvailabilityAlerts from "./AvailabilityAlerts";
+import PushPreferences from "./PushPreferences";
+import PushAdmin from "./PushAdmin";
+import {stopPushOnLogout} from "../pushClient";
 import FixtureAvailabilityControls from "./FixtureAvailabilityControls";
 import { londonToday } from "../fixtureDisplay";
 
@@ -46,6 +49,7 @@ const [allAvailability, setAllAvailability] = useState([]);
   }
   
 const handleLogout = async () => {
+  await stopPushOnLogout(supabase);
   await supabase.auth.signOut();
   window.location.href = "/login";
 };
@@ -330,6 +334,8 @@ if (savedAvailabilityError) {
         </div>
  : <div style={styles.matchCard}><h2>Availability is currently closed</h2><p>We’ll let you know when the next availability request opens.</p><a href="/fixtures" style={{ color: "#e31b23" }}>View upcoming fixtures →</a></div>}
 
+  <PushPreferences />
+  {isAdmin && <PushAdmin />}
   {isAdmin && <FixtureAvailabilityControls />}
   {isAdmin && !currentMatch && <p><a href="/dashboard/players" style={{ color: "#e31b23" }}>Squad admin →</a></p>}
 
