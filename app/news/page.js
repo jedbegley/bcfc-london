@@ -33,7 +33,7 @@ export default async function News() {
             <p style={styles.storyLead}>{featuredNews.summary}</p>
             <a href={featuredNews.link} style={{ ...styles.primaryButton, display: "inline-block", marginTop: "8px" }}>READ FULL STORY →</a>
           </div>
-          <div className="featured-image-wrap" style={{ position: "relative", height: "430px", background: "#151515", borderRadius: "10px", overflow: "hidden" }}>
+          <div className={`featured-image-wrap${featuredNews.image && !featuredNews.imagePlayerId ? " featured-image-natural" : ""}`} style={{ position: "relative", height: featuredNews.image && !featuredNews.imagePlayerId ? "auto" : "430px", background: "#151515", borderRadius: "10px", overflow: "hidden" }}>
             {featuredNews.image ? (
               featuredNews.imagePlayerId ? (
                 <Image src={featuredNews.image} alt={featuredNews.imageAlt}
@@ -41,7 +41,7 @@ export default async function News() {
                   style={{ objectFit: "cover", objectPosition: "center 22%" }} />
               ) : (
                 <img src={featuredNews.image} alt={featuredNews.imageAlt}
-                  style={{ width: "100%", height: "100%", objectFit: "contain" }} />
+                  style={{ display: "block", width: "100%", height: "auto" }} />
               )
             ) : (
               <img src="/374fadec-093f-4e7e-9f54-01c06a034caa.jpeg"
@@ -86,8 +86,10 @@ export default async function News() {
       padding: 24px !important;
     }
     .featured-image-wrap {
-      height: min(420px, 105vw) !important;
       margin-top: 24px;
+    }
+    .featured-image-wrap:not(.featured-image-natural) {
+      height: min(420px, 105vw) !important;
     }
 
     .record-box {
