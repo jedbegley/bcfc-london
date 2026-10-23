@@ -69,29 +69,7 @@ export default async function StatsPage() {
     );
   return (
     <main style={styles.page}>
-      <header style={styles.header}>
-  <div style={styles.headerBrand}>
-    <img
-      src="/374fadec-093f-4e7e-9f54-01c06a034caa.jpeg"
-      alt="BCFC London badge"
-      style={styles.headerBadge}
-    />
-    <div>
-      <div style={styles.clubName}>BRISTOL CITY</div>
-      <div style={styles.clubSub}>LONDON SUPPORTERS FC</div>
-    </div>
-  </div>
 
-  <nav style={styles.nav}>
-    <a href="/" style={styles.navLink}>Home</a>
-    <a href="/news" style={styles.navLink}>News</a>
-    <a href="/league" style={styles.navLink}>League</a>
-    <a href="/fixtures" style={styles.navLink}>Fixtures</a>
-    <a href="/squad" style={styles.navLink}>Squad</a>
-    <a href="/stats" style={styles.activeNav}>Stats</a>
-    <a href="/dashboard" style={styles.loginButton}>Player Portal</a>
-  </nav>
-</header>
 
       <section style={styles.hero}>
         <p style={styles.eyebrow}>BCFC LONDON</p>
@@ -178,28 +156,6 @@ export default async function StatsPage() {
       </section>
           <style>{`
   @media (max-width: 768px) {
-    header nav {
-      display: grid !important;
-      grid-template-columns: auto auto auto auto !important;
-      width: 100% !important;
-      justify-content: space-between !important;
-      column-gap: 0 !important;
-      row-gap: 22px !important;
-      align-items: center !important;
-    }
-
-    header nav a:nth-child(5) {
-      grid-column: 1;
-    }
-
-    header nav a:nth-child(6) {
-      grid-column: 2;
-    }
-
-    header nav a:nth-child(7) {
-      grid-column: 3 / 5;
-      justify-self: start;
-    }
   }
 `}</style>
     </main>

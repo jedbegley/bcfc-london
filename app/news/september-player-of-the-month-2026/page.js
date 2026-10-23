@@ -44,18 +44,7 @@ export default async function SeptemberPlayerOfTheMonth() {
 
   return (
     <main className="potm-page">
-      <header className="site-header">
-        <a href="/" className="brand">
-          <img src="/374fadec-093f-4e7e-9f54-01c06a034caa.jpeg" alt="BCFC London badge" />
-          <span><strong>BRISTOL CITY</strong><small>LONDON SUPPORTERS FC</small></span>
-        </a>
-        <nav aria-label="Main navigation">
-          <a href="/">Home</a><a href="/news" aria-current="page">News</a>
-          <a href="/league">League</a><a href="/fixtures">Fixtures</a>
-          <a href="/squad">Squad</a><a href="/stats">Stats</a>
-          <a className="portal" href="/dashboard">Player Portal</a>
-        </nav>
-      </header>
+
 
       <section className="article-hero">
         <div className="hero-inner">
@@ -107,15 +96,6 @@ export default async function SeptemberPlayerOfTheMonth() {
       <style>{`
         .potm-page { margin: 0; background: #f5f5f5; color: #111; font-family: Arial, Helvetica, sans-serif; }
         .potm-page * { box-sizing: border-box; }
-        .site-header { background: #fff; border-bottom: 4px solid #e31b23; padding: 22px 6%; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; }
-        .brand { display: flex; gap: 18px; align-items: center; text-decoration: none; color: #111; }
-        .brand img { width: 70px; height: 70px; object-fit: contain; }
-        .brand strong { display: block; color: #e31b23; font-size: 25px; font-weight: 900; letter-spacing: 3px; }
-        .brand small { display: block; font-size: 12px; font-weight: 800; letter-spacing: 2px; margin-top: 4px; }
-        .site-header nav { display: flex; align-items: center; gap: 24px; flex-wrap: wrap; }
-        .site-header nav a { color: #111; text-decoration: none; font-size: 14px; font-weight: 700; }
-        .site-header nav a[aria-current] { color: #e31b23; }
-        .site-header nav .portal { background: #e31b23; color: #fff; padding: 12px 18px; border-radius: 6px; font-weight: 800; }
         .article-hero { background: #151515; color: #fff; padding: 48px 6% 70px; }
         .hero-inner { max-width: 1060px; margin: auto; }
         .back { display: inline-block; color: #fff; text-decoration: none; font-size: 14px; font-weight: 800; margin-bottom: 46px; }
@@ -143,10 +123,6 @@ export default async function SeptemberPlayerOfTheMonth() {
         .sponsor small { font-weight: 900; letter-spacing: 1px; }
         .sponsor img { max-width: 110px; max-height: 55px; object-fit: contain; }
         @media (max-width: 768px) {
-          .site-header nav { display: grid; grid-template-columns: repeat(4, auto); width: 100%; justify-content: space-between; gap: 20px 8px; }
-          .site-header nav a:nth-child(5) { grid-column: 1; }
-          .site-header nav a:nth-child(6) { grid-column: 2; }
-          .site-header nav a:nth-child(7) { grid-column: 3 / 5; }
           .article-hero { padding-top: 34px; padding-bottom: 65px; }
           .back { margin-bottom: 35px; }
           .article-body { margin-top: 0; }

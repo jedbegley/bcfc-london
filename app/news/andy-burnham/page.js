@@ -19,18 +19,7 @@ export default function AndyBurnhamStory() {
 
   return (
     <main style={styles.page}>
-      <header style={styles.header}>
-        <a href="/" style={styles.brand}>
-          BCFC LONDON
-        </a>
 
-        <nav style={styles.nav}>
-          <a href="/" style={styles.navLink}>Home</a>
-          <a href="/fixtures" style={styles.navLink}>Fixtures</a>
-          <a href="/news" style={styles.navLink}>News</a>
-          <a href="/player-login" style={styles.navLink}>Player Portal</a>
-        </nav>
-      </header>
 
       <section style={styles.hero}>
         <div style={styles.tag}>CLUB NEWS</div>

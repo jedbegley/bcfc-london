@@ -181,30 +181,7 @@ export default async function PublicMatchReport({ params }) {
 
   return (
    <main style={styles.page}>
-  <header style={styles.header}>
-    <div style={styles.headerBrand}>
-      <img
-        src="/374fadec-093f-4e7e-9f54-01c06a034caa.jpeg"
-        alt="BCFC London badge"
-        style={styles.headerBadge}
-      />
 
-      <div>
-        <div style={styles.clubName}>BRISTOL CITY</div>
-        <div style={styles.clubSub}>LONDON SUPPORTERS FC</div>
-      </div>
-    </div>
-
-    <nav style={styles.nav}>
-      <a href="/" style={styles.navLink}>Home</a>
-      <a href="/news" style={styles.navLink}>News</a>
-      <a href="/league" style={styles.navLink}>League</a>
-      <a href="/fixtures" style={styles.navLink}>Fixtures</a>
-      <a href="/squad" style={styles.navLink}>Squad</a>
-      <a href="/stats" style={styles.navLink}>Stats</a>
-      <a href="/dashboard" style={styles.loginButton}>Player Portal</a>
-    </nav>
-  </header>
 
  {isCompleted ? <section style={styles.hero}>
   <div style={styles.heroInner}>
