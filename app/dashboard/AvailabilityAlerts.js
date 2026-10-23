@@ -1,12 +1,8 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { createClient } from "@supabase/supabase-js";
+import {supabase} from "../browserSupabase";
 
-const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL,
-  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
-);
 
 const label = (status) => status === "no_response" ? "No Response" :
   status?.replace(/^./, (letter) => letter.toUpperCase());

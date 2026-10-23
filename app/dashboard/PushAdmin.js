@@ -1,8 +1,7 @@
 "use client";
 import {useEffect,useState} from 'react';
-import {createClient} from '@supabase/supabase-js';
+import {supabase} from "../browserSupabase";
 import {formatMatchDate} from '../fixtureDisplay';
-const supabase=createClient(process.env.NEXT_PUBLIC_SUPABASE_URL,process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY);
 const button={background:'#e31b23',color:'#fff',border:0,borderRadius:6,padding:'12px 16px',fontWeight:700,cursor:'pointer'};
 const date=value=>value?new Intl.DateTimeFormat('en-GB',{timeZone:'Europe/London',dateStyle:'medium',timeStyle:'short'}).format(new Date(value)):'Not recorded yet';
 export default function PushAdmin(){

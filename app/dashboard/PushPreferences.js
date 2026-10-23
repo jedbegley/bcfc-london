@@ -1,8 +1,7 @@
 "use client";
 import {useEffect,useState} from 'react';
-import {createClient} from '@supabase/supabase-js';
+import {supabase} from "../browserSupabase";
 import {installationId,isInstalledApp,pushSupported,recordDevice} from '../pushClient';
-const supabase=createClient(process.env.NEXT_PUBLIC_SUPABASE_URL,process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY);
 const button={background:'#e31b23',color:'#fff',border:0,borderRadius:6,padding:'12px 16px',fontWeight:700,cursor:'pointer',margin:'6px'};
 function decodeKey(value){const raw=atob(value.replace(/-/g,'+').replace(/_/g,'/'));return Uint8Array.from(raw,c=>c.charCodeAt(0));}
 export default function PushPreferences(){
