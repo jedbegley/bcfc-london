@@ -4,6 +4,22 @@ import { createClient } from "@supabase/supabase-js";
 // publication dates live here; player photos remain in public_squad.
 const articles = [
   {
+  "date": "2026-10-23",
+  "displayDate": "23 October 2026",
+  "label": "CLUB NEWS",
+  "category": "FIXTURE NEWS",
+  "title": "London Cup Draw Confirmed as BCFC London Prepare for Downing Street Friendly",
+  "summary": "BCFC London face unbeaten League Five leaders Kew Antigua in the London Cup, with a special friendly against a Downing Street XI also confirmed.",
+  "link": "/news/london-cup-draw-downing-street-friendly",
+  "image": "/news/clapham-common-action.jpg",
+  "imageAlt": "BCFC London players in action on Clapham Common",
+  "imageFit": "contain",
+  "thumbnail": true,
+  "imageWidth": 1536,
+  "imageHeight": 991,
+  "button": "Read Story →"
+},
+  {
     "date": "2026-10-10",
     "displayDate": "10 October 2026",
     "label": "CLUB NEWS",

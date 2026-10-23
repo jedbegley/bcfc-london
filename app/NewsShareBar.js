@@ -20,6 +20,7 @@ export default function NewsShareBar() {
       "/", "/fixtures", "/league",
       "/news/aberdeen-0-3-bristol-city", "/news/andy-burnham",
       "/news/cup-draws-2026", "/news/london-cup-walkover-2026",
+      "/news/london-cup-draw-downing-street-friendly",
       "/news/scott-murray-new-kit", "/news/september-player-of-the-month-2026",
       "/news/shepherds-tuesday-2-2-bristol-city",
     ];

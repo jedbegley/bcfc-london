@@ -95,7 +95,7 @@ export default async function News() {
             <article key={article.link} style={styles.emptyNews}>
               {article.thumbnail && article.image && (
                 <a href={article.link} aria-label={`Read ${article.title}`}>
-                  <Image src={article.image} alt={article.imageAlt} width={1200} height={1600}
+                  <Image src={article.image} alt={article.imageAlt} width={article.imageWidth || 1200} height={article.imageHeight || 1600}
                     sizes="(max-width: 768px) 70vw, 280px"
                     style={{ width: "100%", maxWidth: "280px", height: "auto", borderRadius: "8px", display: "block", margin: "0 auto 24px" }} />
                 </a>

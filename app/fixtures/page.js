@@ -37,7 +37,7 @@ function MatchTeam({ name, isClub, side }) {
 }
 
 export default async function Fixtures() {
-  const [{ data: nextMatch, error: nextMatchError }, { data: completedMatches, error: resultsError }] =
+  const [{ data: upcomingMatches, error: nextMatchError }, { data: completedMatches, error: resultsError }] =
     await Promise.all([
       supabase.from("matches")
         .select("id, opponent, match_date, kickoff_time, venue, venue_details, competition, match_type, home_or_away")
@@ -45,8 +45,7 @@ export default async function Fixtures() {
         .gte("match_date", londonToday())
         .order("match_date", { ascending: true })
         .order("kickoff_time", { ascending: true })
-        .order("id", { ascending: true })
-        .limit(1).maybeSingle(),
+        .order("id", { ascending: true }),
       supabase.from("matches")
         .select("id, opponent, match_date, kickoff_time, venue, competition, match_type, home_or_away, our_score, opponent_score, result_type")
         .eq("status", "Completed")
@@ -100,11 +99,11 @@ export default async function Fixtures() {
   <h2 style={styles.heading}>Upcoming Fixtures</h2>
 
  <div style={styles.cardWrap}>
-  {nextMatch ? (
-    <Link href={`/fixtures/${nextMatch.id}`} style={{
-      ...styles.matchCard, display: "block", color: "#111", textDecoration: "none",
+  {upcomingMatches?.length ? upcomingMatches.map((nextMatch, index) => (
+    <Link key={nextMatch.id} href={`/fixtures/${nextMatch.id}`} style={{
+      ...styles.matchCard, marginBottom: "30px", display: "block", color: "#111", textDecoration: "none",
     }}>
-      <div style={styles.matchLabel}>NEXT MATCH</div>
+      <div style={styles.matchLabel}>{index === 0 ? "NEXT MATCH" : "UPCOMING MATCH"}</div>
       <div style={styles.competition}>{displayCompetition(nextMatch.competition)}</div>
       <div style={styles.teams}>
         <MatchTeam
@@ -128,7 +127,7 @@ export default async function Fixtures() {
         <div style={styles.friendlyTag}>{nextMatch.match_type.toUpperCase()}</div>
       )}
     </Link>
-  ) : (
+  )) : (
     <p>Next fixture to be confirmed.</p>
   )}
 </div>
