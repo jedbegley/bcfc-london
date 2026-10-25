@@ -330,11 +330,6 @@ if (savedAvailabilityError) {
         </div>
  : <div style={styles.matchCard}><h2>Availability is currently closed</h2><p>We’ll let you know when the next availability request opens.</p><a href="/fixtures" style={{ color: "#e31b23" }}>View upcoming fixtures →</a></div>}
 
-  <PushPreferences />
-  {isAdmin && <PushAdmin />}
-  {isAdmin && <FixtureAvailabilityControls />}
-  {isAdmin && !currentMatch && <p><a href="/dashboard/players" style={{ color: "#e31b23" }}>Squad admin →</a></p>}
-
   {isAdmin && currentMatch && (
   <div style={styles.adminCard}>
     <div style={styles.matchLabel}>MANAGER VIEW</div>
@@ -424,6 +419,11 @@ if (savedAvailabilityError) {
     </div>
   </div>
 )}
+
+  <PushPreferences />
+  {isAdmin && <PushAdmin />}
+  {isAdmin && <FixtureAvailabilityControls />}
+  {isAdmin && !currentMatch && <p><a href="/dashboard/players" style={{ color: "#e31b23" }}>Squad admin →</a></p>}
 
   {isAdmin && <AvailabilityAlerts userId={user.id} players={allPlayers} fixture={currentMatch} />}
 
