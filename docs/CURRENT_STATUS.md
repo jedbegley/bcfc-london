@@ -17,7 +17,7 @@ Checked 30 October 2026 (Europe/London). Verify again before acting. Keep unpubl
 
 ## Open work, bugs, approvals
 
-- Documentation branch `docs/permanent-project-handover` is for Jed's review. No production deployment/migration/publication/notification is authorised by this task. Approval is required before any merge triggering production.
+- Open PR [#19](https://github.com/jedbegley/bcfc-london/pull/19) from `docs/permanent-project-handover` is for Jed's review. No production deployment/migration/publication/notification is authorised by this task. Approval is required before any merge triggering production.
 - Other open PRs: none found at audit; recheck. No confirmed production bug in read-only checks.
 - Verification gaps: no signed-in manager browser test or phone receipt in this documentation task; Vercel configuration inaccessible; availability email cron/function exist but no recorded preferences/deliveries, so actual delivery is unverified. Existing staged availability email guide needs comparison with live activation. Payment processor end-to-end status needs a dedicated audit.
 - Next: on/after 31 October 10:00 GMT, read-only check transition, manager recipient/delivery and continued public 404 until Jed approves. Never auto-publish or use a squad push as a test. After Jed's approval, check featured ordering; send squad announcement only upon separate instruction.
