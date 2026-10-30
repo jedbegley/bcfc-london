@@ -1,4 +1,5 @@
 import { createClient } from "@supabase/supabase-js";
+import {newsClient,previewCard} from "./published";
 
 // One list supplies the homepage feature and News archive. Editorial copy and
 // publication dates live here; player photos remain in public_squad.
@@ -88,7 +89,9 @@ const articles = [
 ];
 
 export async function getNewsArticles() {
-  const sorted = [...articles].sort((a, b) => b.date.localeCompare(a.date));
+  const {data:published,error:publishedError}=await newsClient().rpc("published_news_previews");
+  if(publishedError) console.error("Published news could not be loaded");
+  const sorted = [...(published||[]).map(previewCard),...articles].sort((a,b)=>b.date.localeCompare(a.date));
   const playerIds = [...new Set(sorted.map(({ imagePlayerId }) => imagePlayerId).filter(Boolean))];
   if (!playerIds.length) return sorted;
 

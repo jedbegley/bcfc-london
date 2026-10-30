@@ -421,6 +421,7 @@ if (savedAvailabilityError) {
 )}
 
   <PushPreferences />
+  {isAdmin && <section style={{padding:24,marginTop:24,border:"1px solid #ddd",borderRadius:12}}><h2>News publishing</h2><p>Review, edit and approve scheduled articles privately.</p><a href="/dashboard/news">Open private news desk →</a></section>}
   {isAdmin && <PushAdmin />}
   {isAdmin && <FixtureAvailabilityControls />}
   {isAdmin && !currentMatch && <p><a href="/dashboard/players" style={{ color: "#e31b23" }}>Squad admin →</a></p>}
