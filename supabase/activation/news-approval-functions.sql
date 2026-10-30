@@ -106,7 +106,7 @@ declare v_uid uuid:=auth.uid(); v_id bigint; v_count integer; v_url text; v_matc
 begin
  if v_uid is null or not public.current_user_is_admin() then raise exception 'Manager access required' using errcode='42501'; end if;
  perform pg_advisory_xact_lock(hashtext('bcfc-push-announcements'));
- if p_kind not in('news','availability','report','fixture') or length(p_title) not between 1 and 120 or length(p_body) not between 1 and 300 then raise exception 'Invalid announcement'; end if;
+ if p_kind not in('news','availability','report','fixture') or length(p_title) not between 1 and 120 or p_body is null or length(p_body)>300 or (p_kind<>'news' and length(p_body)<1) then raise exception 'Invalid announcement'; end if;
  if not coalesce((select broadcasts_enabled from public.app_push_config where id),false) then raise exception 'Squad announcements are awaiting the phone test'; end if;
  if p_kind='news' then
   if exists(select 1 from public.news where slug=p_target and state<>'published') then raise exception 'Publish the article before notifying players'; end if;
@@ -187,7 +187,7 @@ begin
  or length(coalesce(p_article->>'summary','')) not between 1 and 300
  or length(coalesce(p_article->>'content','')) not between 1 and 50000
  or length(coalesce(p_article->>'notification_title','')) not between 1 and 120
- or length(coalesce(p_article->>'notification_body','')) not between 1 and 300
+ or length(coalesce(p_article->>'notification_body','')) > 300
  then raise exception 'Complete the article, preview and notification fields within their length limits'; end if;
  if coalesce(v_image,'') !~ '^/[a-zA-Z0-9/_-]+\.(png|jpg|jpeg|webp)$' then raise exception 'Use a local spoiler-free preview image'; end if;
  if v_photo is not null and not exists(select 1 from public."Players" where id=v_photo) then raise exception 'Player profile not found'; end if;
