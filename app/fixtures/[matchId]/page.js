@@ -247,6 +247,19 @@ export default async function PublicMatchReport({ params }) {
 
       {match.match_type && <div style={styles.previewType}>{match.match_type.toUpperCase()}</div>}
 
+      {Number(matchId) === 11 && (
+        <div style={styles.previewSquad}>
+          <h2 style={styles.previewSquadHeading}>MATCHDAY INFORMATION</h2>
+          <div style={{ display: "grid", gap: "10px", textAlign: "center", lineHeight: 1.5 }}>
+            <span>📍 Clapham Common - Pitch 9</span>
+            <span>🕤 Meet: 9:45am</span>
+            <span>⚽ Kick-off: 10:30am</span>
+            <span>🥅 Nets need to go up</span>
+            <span>👕 Bring your kit if you’ve already been given your playing shirt, shorts and socks</span>
+          </div>
+        </div>
+      )}
+
       {squad.length > 0 && (
         <div style={styles.previewSquad}>
           <h2 style={styles.previewSquadHeading}>MATCHDAY SQUAD</h2>
