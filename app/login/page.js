@@ -3,6 +3,10 @@
 import { useEffect, useState } from "react";
 import {supabase} from "../browserSupabase";
 
+function destination(){
+ const next=new URLSearchParams(window.location.search).get('next');
+ return next && /^\/dashboard\/news(?:\/(?:[0-9]+|new))?$/.test(next)?next:'/dashboard';
+}
 export default function LoginPage() {
   useEffect(() => {
   async function checkExistingSession() {
@@ -11,7 +15,7 @@ export default function LoginPage() {
     } = await supabase.auth.getSession();
 
     if (session) {
-      window.location.href = "/dashboard";
+      window.location.href = destination();
     }
   }
 
@@ -43,7 +47,7 @@ console.log("SUPABASE KEY EXISTS:", !!process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY)
     return;
   }
 
-  window.location.href = "/dashboard";
+  window.location.href = destination();
 }
 
   async function handleForgotPassword() {

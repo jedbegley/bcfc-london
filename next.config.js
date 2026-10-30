@@ -10,7 +10,7 @@ const nextConfig = {
     ];
   },
   async headers() {
-    return [{source: "/sw.js", headers: [{key: "Cache-Control", value: "no-cache, no-store, must-revalidate"}]}];
+    return [{source:"/dashboard/news/:path*",headers:[{key:"Cache-Control",value:"private, no-store, max-age=0"},{key:"X-Robots-Tag",value:"noindex, nofollow, noarchive"}]},{source: "/sw.js", headers: [{key: "Cache-Control", value: "no-cache, no-store, must-revalidate"}]}];
   },
   images: {
     remotePatterns: [

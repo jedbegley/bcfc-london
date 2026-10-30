@@ -5,7 +5,7 @@ self.addEventListener('activate',event=>event.waitUntil(self.clients.claim()));
 function safePath(value){
  try{
   const u=new URL(value,self.location.origin);
-  return u.origin===self.location.origin && (/^\/news\/[a-z0-9-]+$/.test(u.pathname)||/^\/fixtures\/\d+$/.test(u.pathname)||u.pathname==='/dashboard')?u.pathname:'/dashboard';
+  return u.origin===self.location.origin && (/^\/news\/[a-z0-9-]+$/.test(u.pathname)||/^\/fixtures\/\d+$/.test(u.pathname)||u.pathname==='/dashboard'||/^\/dashboard\/news\/\d+$/.test(u.pathname))?u.pathname:'/dashboard';
  }catch{return '/dashboard';}
 }
 function database(){
