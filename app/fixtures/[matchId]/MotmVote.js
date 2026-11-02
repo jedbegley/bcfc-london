@@ -56,7 +56,9 @@ export default function MotmVote({ matchId, votingClosed }) {
       }
 
       setPlayer(playerData);
-      const usePlayedSquad = [5, 8].includes(Number(matchId));
+      // These match reports record actual appearances in match_stats. The
+      // selected squad alone may include substitutes who never came on.
+      const usePlayedSquad = [5, 8, 11].includes(Number(matchId));
       const { data: eligibleRows, error: eligibleError } = usePlayedSquad
         ? await supabase
             .from("match_stats")
@@ -80,7 +82,10 @@ const { data: candidateData } = playerIds.length ? await supabase
   .in("id", playerIds)
   .order("full_name", { ascending: true }) : { data: [] };
 
-setCandidates(candidateData || []);
+// The database also rejects self-votes, including requests outside this UI.
+setCandidates((candidateData || []).filter(
+  (candidate) => Number(candidate.id) !== Number(playerData.id)
+));
       
 
       const { data: voteData } = await supabase
@@ -178,6 +183,10 @@ if (existingVote) {
         Your MOTM vote: {votedPlayer?.full_name || "Vote submitted"}
       </p>
     );
+  }
+
+  if (!candidates.length) {
+    return <p style={{ margin: 0 }}>No eligible players are available to vote for yet.</p>;
   }
 
   return (
