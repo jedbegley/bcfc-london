@@ -453,9 +453,19 @@ export default async function PublicMatchReport({ params }) {
   </div>
 
 
- <h2 style={{ marginTop: 0 }}>Pay your match fee</h2>
+ <h2 style={{ marginTop: 0 }}>{Number(matchId) === 11 ? "Match Subs 💷" : "Pay your match fee"}</h2>
 
-{Number(matchId) === 8 ? (
+{Number(matchId) === 11 ? (
+  <>
+    <p style={{ marginBottom: "20px" }}>Please remember to pay your match subs for the East Putney game.</p>
+    {match.sumup_link?.startsWith("https://pay.sumup.com/b2c/") ? (
+      <a href={match.sumup_link} target="_blank" rel="noopener noreferrer" style={{
+        display: "inline-block", background: "#e31b23", color: "#fff",
+        padding: "13px 20px", borderRadius: "6px", fontWeight: "800", textDecoration: "none",
+      }}>Pay Match Subs</a>
+    ) : <p>The payment link is currently unavailable.</p>}
+  </>
+) : Number(matchId) === 8 ? (
   <div style={{ display: "grid", gap: "18px" }}>
     {[
       { amount: 5, label: "Substitutes who played less than 45 minutes", url: "https://pay.sumup.com/b2c/QUNOY4QC" },
