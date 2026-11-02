@@ -11,7 +11,7 @@ Checked 2 November 2026 (Europe/London). Recheck GitHub, the live site and Supab
 
 ## Current PR and pending approval
 
-- Branch `fix/november-fixture-motm` proposes East Putney stat-row candidates, hiding self from the selection, database enforcement of no self-votes and East Putney eligibility/open state, and the match-specific payment section. Await Jed's explicit approval before merging/deploying or applying the production migration. After release and verification, reopen East Putney MOTM voting, confirm candidates under an authorised player session, and verify one-vote behavior. No player push is authorised.
+- Open PR [#20](https://github.com/jedbegley/bcfc-london/pull/20) on branch `fix/november-fixture-motm` proposes East Putney stat-row candidates, hiding self from the selection, database enforcement of no self-votes and East Putney eligibility/open state, and the match-specific payment section. Await Jed's explicit approval before merging/deploying or applying the production migration. After release and verification, reopen East Putney MOTM voting, confirm candidates under an authorised player session, and verify one-vote behavior. No player push is authorised.
 - Other open PRs: none at the start of this work; recheck. Historical payment links and match reports are unchanged.
 
 ## Verification gaps and next actions
