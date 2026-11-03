@@ -106,6 +106,7 @@ if (savedAvailabilityError) {
   const { data: playersData, error: playersError } = await supabase
     .from("Players")
     .select("*")
+    .eq("is_guest", false)
     .order("full_name");
 
   const { data: availabilityData, error: availabilityError } = await supabase
