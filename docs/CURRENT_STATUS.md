@@ -1,25 +1,24 @@
 # Current status and next-session handover
 
-Checked 2 November 2026 (Europe/London). Recheck GitHub, the live site and Supabase before acting. Keep credentials and unpublished player/article details out of Git.
+Checked 3 November 2026 (Europe/London). Recheck GitHub, the live site and Supabase before acting. Keep credentials and unpublished player/article details out of Git.
 
 ## Production and recently completed
 
-- Production repository `jedbegley/bcfc-london`, main commit at this audit: `fad143499ec0d3337a5a7e2f82291712e2501a5a`. Production URL: `https://www.bcfclondon.co.uk`. Vercel project settings and exact production alias/commit still need verification with the correct Vercel account scope.
-- October's scheduled approval workflow ran; the article is now `published` and its separate squad announcement was sent on 31 October. Do not republish or resend. The workflow remains documented in `PROJECT_GUIDE.md`.
-- On 2 November, a new home league fixture for Three Little Birds FC was created once as match ID 12, Sunday 8 November at 10:30, Clapham Common, with `availability_open=true`. The earlier 4 October away fixture (ID 6) remains a separate completed record. No availability announcement was queued by this work.
-- East Putney FC match ID 11 is `Completed`, Bristol City 0–7, Sunday 1 November, with its existing report. Its SumUp URL is stored in `matches.sumup_link` for this match alone. The public report page still needs the proposed code change to render that link. Thirteen match-stat rows exist (11 starters and two substitutes whom Jed confirmed played), all with the schema's default zero minutes; no minutes were invented. No East Putney MOTM votes existed at audit. Voting was temporarily closed to avoid an unverified list or self-votes before the proposed guard is released.
+- Main release commit `814b203b7e8bd4bff512630b0898af1efc191d5a` merged PR #20; GitHub's Vercel check is `success`. Production `/fixtures/11` HTML contains the new payment section and East Putney SumUp URL. The connected Vercel API could not independently inspect project configuration; verify team scope before the next release.
+- The separate 8 November Three Little Birds home league fixture is ID 12, Sunday 10:30 at Clapham Common, `Upcoming` with `availability_open=true`; it appears as Next Match. The completed October away fixture ID 6 remains separate. Player availability uses existing authenticated upsert/RLS. No availability announcement was queued.
+- East Putney ID 11 remains `Completed`, Bristol City 0–7, with its existing match report and SumUp link `https://pay.sumup.com/b2c/XS8WMVF0GJ`. The new button is rendered beneath the report; historical match links were not changed. Thirteen match-stat rows (11 starters and two substitutes Jed confirmed played) are the voting source; minutes stayed at their default zero. MOTM voting has since been closed by the manager. Do not reopen without an explicit instruction.
+- Production Supabase migration `east_putney_motm_eligibility` (live version `20261102083753`) adds a no-self-vote constraint and a policy requiring a recorded East Putney candidate while the completed match's voting is open. Existing voter ownership and one-vote-per-player constraints remain. Focused PGlite test passed. Next.js build passed with nonsecret public-variable placeholders.
+- Two duplicate legacy player profiles with no linked login were archived after manager approval; signed-in profiles remain active. Historical match references were consolidated onto the active profile, preserving existing statistics and voting records. Verify protected Supabase records for details; do not place player-level data in this handover.
+- October's scheduled news approval workflow completed separately; its article is published and its squad announcement was sent on 31 October. Do not republish or resend. No player notification was sent during this November fixture work.
 
-## Current PR and pending approval
+## Open work and verification limits
 
-- Open PR [#20](https://github.com/jedbegley/bcfc-london/pull/20) on branch `fix/november-fixture-motm` proposes East Putney stat-row candidates, hiding self from the selection, database enforcement of no self-votes and East Putney eligibility/open state, and the match-specific payment section. Await Jed's explicit approval before merging/deploying or applying the production migration. After release and verification, reopen East Putney MOTM voting, confirm candidates under an authorised player session, and verify one-vote behavior. No player push is authorised.
-- Other open PRs: none at the start of this work; recheck. Historical payment links and match reports are unchanged.
-
-## Verification gaps and next actions
-
-- Read-only public HTTP checks returned 200 for homepage, fixtures and fixtures 11/12. Database confirms the next-match ordering inputs and open availability. Signed-in player availability save and voting on a physical phone were not exercised without a player session; inspect those flows after approved release.
-- Confirm the external SumUp checkout destination in a browser; storing the provided URL is not proof that SumUp accepts payment. Do not submit a payment as a test.
-- After reviewed release, verify homepage/fixture ordering, mobile/desktop report layout, manager and player access, East Putney candidates and rejection of self/duplicate votes. Only then reopen voting and let Jed separately send MOTM and availability notifications using the existing dashboard controls.
+- PR #20 is merged. PR #21 is an unmerged documentation handover. This availability fix branch includes its handover update and proposes filtering archived guest profiles from the manager dashboard and `get_fixture_availability` viewer RPC. Obtain Jed's approval before merging/deploying this branch or applying its migration; PR #21 can then be closed as superseded.
+- Live fixture 12 currently has two archived guest profiles appearing as `No Response` because both current availability readers include all `Players` rows. The proposed filter excludes guests while preserving all availability responses and historical records. A read-only count showed 21 active profiles with no response and 16 active profiles with responses at preparation time; these counts can change as players respond.
+- Read-only production checks returned HTTP 200 for `/`, `/fixtures`, `/fixtures/11` and `/fixtures/12`. Database confirmed next-match inputs, availability open, result/report and eligible candidates at release, with no fixture announcements queued then. Voting is now closed.
+- A signed-in player save/vote and mobile/PWA rendering were not tested on a real device. The Vercel preview was protected and the connected Vercel API lacked access. The external SumUp checkout returned 403 to automated requests; Jed should open the button in a normal browser to confirm payment page details without submitting a test payment.
+- Jed can separately send `Notify players: availability open` for fixture 12 and `Notify players: match report live` for fixture 11 from the manager dashboard. Broadcasts were enabled at the last check. Sending either requires Jed's decision; do not send automatically.
 
 ## Continuity procedure
 
-Read `AGENTS.md`, this file, `PROJECT_GUIDE.md`, and the deployment checklist. Inspect actual main/PRs/live data. Update this dated record with production SHA, release/test evidence, decisions, open tasks, deadlines and approvals before handing over.
+Read `AGENTS.md`, this file, `PROJECT_GUIDE.md`, and the deployment checklist. Inspect current main/PRs/live data. Update this dated record with production SHA, release/test evidence, decisions, open tasks, deadlines and approvals before handing over.
