@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="91mm" height="61mm" viewBox="0 0 91 61" role="img" aria-label="BCFC London recruitment card front, including 3mm bleed">
+<rect width="91" height="61" fill="#101010"/><rect x="0" y="0" width="6" height="61" fill="#df1e2f"/>
+<circle cx="74" cy="31" r="26" fill="none" stroke="#ffffff" stroke-opacity=".08" stroke-width=".5"/>
+<path d="M66 10v42M83 10v42M66 10h17M66 52h17" fill="none" stroke="#ffffff" stroke-opacity=".08" stroke-width=".5"/>
+<path d="M12 13h39" stroke="#df1e2f" stroke-width="1.5"/>
+<text x="12" y="10.5" fill="#fff" font-family="Arial,Helvetica,sans-serif" font-size="5.8" font-weight="900" letter-spacing=".7">BCFC LONDON</text>
+<text x="12" y="23" fill="#fff" font-family="Arial,Helvetica,sans-serif" font-size="5.2" font-weight="900">LOOKING FOR AN</text>
+<text x="12" y="30" fill="#fff" font-family="Arial,Helvetica,sans-serif" font-size="5.2" font-weight="900">11-A-SIDE SUNDAY</text>
+<text x="12" y="37" fill="#fff" font-family="Arial,Helvetica,sans-serif" font-size="5.2" font-weight="900">LEAGUE TEAM?</text>
+<text x="12" y="45" fill="#f2d7d9" font-family="Arial,Helvetica,sans-serif" font-size="3.2" font-weight="700">Competitive football. Good lads.</text>
+<text x="12" y="50" fill="#f2d7d9" font-family="Arial,Helvetica,sans-serif" font-size="3.2" font-weight="700">Clapham Common.</text>
+<text x="12" y="56" fill="#fff" font-family="Arial,Helvetica,sans-serif" font-size="2.8" letter-spacing=".25">bcfclondon.co.uk/join</text>
+</svg>
