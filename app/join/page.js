@@ -1,14 +1,15 @@
 import styles from "./join.module.css";
 
 const url = "https://www.bcfclondon.co.uk/join";
+const socialImage = "https://www.bcfclondon.co.uk/join/squad-social.jpg";
 const title = "Join BCFC London | Sunday League Football in London";
 const description = "Looking for an 11-a-side Sunday League team? Competitive football, great socials and home games at Clapham Common. Get to know BCFC London.";
 
 export const metadata = {
   title, description,
   alternates: { canonical: url },
-  openGraph: { title, description, url, type: "website", images: [{ url: "/join/squad-2026.jpg", width: 1200, height: 630, alt: "BCFC London squad at Clapham Common" }] },
-  twitter: { card: "summary_large_image", title, description, images: ["/join/squad-2026.jpg"] },
+  openGraph: { title, description, url, type: "website", images: [{ url: socialImage, width: 1200, height: 630, alt: "BCFC London squad at Clapham Common" }] },
+  twitter: { card: "summary_large_image", title, description, images: [socialImage] },
 };
 
 const destinations = [
@@ -28,7 +29,7 @@ export default function JoinPage() {
         <a className={styles.button} href="#get-in-touch">Interested in Joining? <span aria-hidden="true">↗</span></a>
       </div>
       <figure className={styles.heroPhoto}>
-        <img src="/join/squad-2026.jpg" alt="BCFC London’s squad together at Clapham Common" width="1600" height="900" />
+        <img src="/join/squad-2026.jpg" alt="BCFC London’s squad together at Clapham Common" width="1536" height="1152" />
         <figcaption>Sunday mornings. Clapham Common. Up the City.</figcaption>
       </figure>
     </header>
@@ -53,7 +54,7 @@ export default function JoinPage() {
         <p>We’ve been around for approximately 60 years, and there’s been plenty to celebrate during that time.</p>
         <p>In recent seasons, we’ve enjoyed both league and cup success, including a memorable cup triumph literally outside West Ham’s stadium.</p>
         <figure className={styles.historyPhoto}>
-          <img src="/join/cup-winners-west-ham.jpg" alt="BCFC London’s cup-winning team outside West Ham’s stadium" width="1200" height="1600" />
+          <img src="/join/cup-winners-west-ham.jpg" alt="BCFC London’s cup-winning team outside West Ham’s stadium" width="1152" height="1536" />
           <figcaption>A cup win outside West Ham’s stadium.</figcaption>
         </figure>
         <h3>We’ve even managed to make the news!</h3>
