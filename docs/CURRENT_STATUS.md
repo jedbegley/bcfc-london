@@ -1,6 +1,15 @@
 # Current status and next-session handover
 
-Checked 3 November 2026 (Europe/London). Recheck GitHub, the live site and Supabase before acting. Keep credentials and unpublished player/article details out of Git.
+Checked 5 November 2026 (Europe/London). Recheck GitHub, the live site and Supabase before acting. Keep credentials and unpublished player/article details out of Git.
+
+## Pending recruitment page (5 November)
+
+- PR #23 on `feature/join-bcfc-london` is ready for review. It prepares permanent `/join` content, internal links, contact options, Open Graph/X metadata, canonical URL QR, and digital card assets. It is separate from the news feed. No production merge or deployment authorised yet.
+- The CSS-module build failure in the initial preview was reproduced locally: a bare `a:focus-visible` selector was rejected as non-pure. A scoped selector fixes it. The supplied real current-squad and West Ham cup photographs were recovered, exported and added, along with a 1200 × 630 squad social crop. Local `npm run build` passes with nonsecret public-variable placeholders and lists `/join` as a static page. Await the new Vercel preview check after pushing this branch.
+- Vercel check for PR #23 commit `6adeec2cbd6b49c1ef7acb3bade59637dc341f79` succeeded. The connected Vercel account is denied access to the protected preview (403), so external browser/mobile rendering remains to be checked by an authorised account.
+- The QR SVG's payload was independently decoded to `https://www.bcfclondon.co.uk/join`; `qr.png` (1480 square) remains unchanged. The first card design was replaced with a clean white one-sided card, 75 mm square sticker, 75 mm round sticker and 1080 × 1600 phone PNG. Print PDFs have 3 mm bleed and vector QR. All four final PNGs decode to the canonical URL. Physical camera scanning and production destination remain outstanding until the page is deployed.
+- Recruitment enquiry form and private manager notification are deferred until private storage, validation, rate limiting and notification delivery can be tested. Email, Instagram and X contacts work without a form. No player notification is part of recruitment work.
+- Main release status below predates PR #22; recheck main and live Supabase when this branch resumes. No player notification is part of recruitment work.
 
 ## Production and recently completed
 
