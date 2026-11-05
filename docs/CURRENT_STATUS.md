@@ -1,6 +1,13 @@
 # Current status and next-session handover
 
-Checked 3 November 2026 (Europe/London). Recheck GitHub, the live site and Supabase before acting. Keep credentials and unpublished player/article details out of Git.
+Checked 5 November 2026 (Europe/London). Recheck GitHub, the live site and Supabase before acting. Keep credentials and unpublished player/article details out of Git.
+
+## Pending recruitment page (5 November)
+
+- Branch `feature/join-bcfc-london` prepares permanent `/join` content, internal links, contact options, Open Graph/X metadata, a static QR SVG for the canonical URL and vector card designs. It is separate from the news feed.
+- User supplied real current-squad and West Ham cup photographs, but the task execution environment was unavailable while preparing the branch; the referenced `/join/squad-2026.jpg` and `/join/cup-winners-west-ham.jpg` assets still need uploading before deployment. Do not ship broken images or preview metadata. No production deployment authorised yet.
+- Recruitment enquiry form and private manager notification are deferred until private storage, validation, rate limiting and notification delivery can be tested. Email, Instagram and X contacts are present now. PNG/PDF exports and camera scanning QA remain outstanding; static vector assets are in `public/join/`.
+- Main release status below predates PR #22; recheck main and live Supabase when this branch resumes. No player notification is part of recruitment work.
 
 ## Production and recently completed
 
