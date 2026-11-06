@@ -64,7 +64,14 @@ export async function generateMetadata({ params }) {
   }
 
   const isCompleted = match.status === "Completed";
-  const socialImage = Number(matchId) === 8
+  const socialImage = Number(matchId) === 12 && !isCompleted
+    ? {
+        url: "https://www.bcfclondon.co.uk/matches/12/matchday.jpg",
+        width: 1600,
+        height: 900,
+        alt: "Bristol City versus Three Little Birds FC league matchday graphic",
+      }
+    : Number(matchId) === 8
     ? {
         url: "https://www.bcfclondon.co.uk/matches/8/larkhall-squad.jpg",
         width: 1536,
@@ -139,6 +146,7 @@ export default async function PublicMatchReport({ params }) {
   const kickoff = formatMatchTime(match.kickoff_time);
   const meet = formatMatchTime(match.meet_time);
   let squad = [];
+  let squadPhotos = {};
   let nextMatch = null;
 
   if (!isCompleted) {
@@ -152,6 +160,14 @@ export default async function PublicMatchReport({ params }) {
         .map((row) => row.full_name)
         .filter(Boolean)
         .sort((a, b) => a.localeCompare(b));
+      if (Number(matchId) === 12 && squad.length) {
+        const { data: profiles, error: photoError } = await supabase
+          .from("public_squad")
+          .select("full_name, photo_url")
+          .in("full_name", squad);
+        if (photoError) console.error("Error loading public squad photos:", photoError);
+        else squadPhotos = Object.fromEntries((profiles || []).map((player) => [player.full_name, player.photo_url]));
+      }
     }
   }
 
@@ -208,6 +224,9 @@ export default async function PublicMatchReport({ params }) {
       {match.competition && (
         <div style={styles.previewCompetition}>{previewCompetition(match.competition)}</div>
       )}
+      {Number(matchId) === 12 && (
+        <img src="/matches/12/matchday.jpg" alt="Bristol City versus Three Little Birds FC, Sunday 8 November at Clapham Common" style={styles.previewMatchdayGraphic} />
+      )}
 
       <div style={styles.previewTeams}>
         <div style={styles.previewTeam}>
@@ -216,7 +235,7 @@ export default async function PublicMatchReport({ params }) {
               {opponentInitials(opponent)}
             </span>
           ) : (
-            <img src="/374fadec-093f-4e7e-9f54-01c06a034caa.jpeg" alt="Bristol City badge" style={styles.previewClubBadge} />
+            <img src={Number(matchId) === 12 ? "/matches/12/bristol-city-badge.png" : "/374fadec-093f-4e7e-9f54-01c06a034caa.jpeg"} alt="Bristol City badge" style={styles.previewClubBadge} />
           )}
           <strong>{match.home_or_away === "Away" ? opponent : "Bristol City"}</strong>
           <span style={styles.previewHomeAway}>HOME</span>
@@ -224,11 +243,15 @@ export default async function PublicMatchReport({ params }) {
         <div style={styles.previewVersus}>VS</div>
         <div style={styles.previewTeam}>
           {match.home_or_away === "Away" ? (
-            <img src="/374fadec-093f-4e7e-9f54-01c06a034caa.jpeg" alt="Bristol City badge" style={styles.previewClubBadge} />
+            <img src={Number(matchId) === 12 ? "/matches/12/bristol-city-badge.png" : "/374fadec-093f-4e7e-9f54-01c06a034caa.jpeg"} alt="Bristol City badge" style={styles.previewClubBadge} />
           ) : (
+            Number(matchId) === 12 ? (
+              <img src="/matches/12/three-little-birds-badge.png" alt="Three Little Birds FC badge" style={styles.previewClubBadge} />
+            ) : (
             <span style={styles.previewOpponentBadge} aria-hidden="true">
               {opponentInitials(opponent)}
             </span>
+            )
           )}
           <strong>{match.home_or_away === "Away" ? "Bristol City" : opponent}</strong>
           <span style={styles.previewHomeAway}>AWAY</span>
@@ -247,6 +270,15 @@ export default async function PublicMatchReport({ params }) {
 
       {match.match_type && <div style={styles.previewType}>{match.match_type.toUpperCase()}</div>}
 
+      {Number(matchId) === 12 && (
+        <div style={styles.previewSquad}>
+          <h2 style={styles.previewSquadHeading}>BACK TO LEAGUE ACTION 🔴⚪</h2>
+          <p style={styles.previewIntroduction}>City return to league action this Sunday as Three Little Birds FC visit Clapham Common.</p>
+          <p style={styles.previewIntroduction}>After a difficult afternoon in the cup last weekend, the Reds will be looking to put that result behind them and get back on track in the league.</p>
+          <p style={styles.previewIntroduction}>Kick-off is at 10:30am, with players meeting at 9:45am. Nets need to go up, so please arrive on time!</p>
+        </div>
+      )}
+
       {Number(matchId) === 11 && (
         <div style={styles.previewSquad}>
           <h2 style={styles.previewSquadHeading}>MATCHDAY INFORMATION</h2>
@@ -264,7 +296,12 @@ export default async function PublicMatchReport({ params }) {
         <div style={styles.previewSquad}>
           <h2 style={styles.previewSquadHeading}>MATCHDAY SQUAD</h2>
           <div style={styles.previewSquadGrid}>
-            {squad.map((name, index) => <span key={`${name}-${index}`}>{name}</span>)}
+            {squad.map((name, index) => <span key={`${name}-${index}`} style={Number(matchId) === 12 ? styles.previewPlayer : undefined}>
+              {Number(matchId) === 12 && (squadPhotos[name]
+                ? <img src={squadPhotos[name]} alt="" style={styles.previewPlayerPhoto} />
+                : <span aria-hidden="true" style={styles.previewPlayerInitials}>{name.split(/\s+/).map((part) => part[0]).slice(0, 2).join("")}</span>)}
+              {name}
+            </span>)}
           </div>
         </div>
       )}
@@ -804,6 +841,47 @@ const styles = {
     gap: "9px 22px",
     fontSize: "clamp(13px, 2vw, 16px)",
     lineHeight: 1.5,
+  },
+
+  previewMatchdayGraphic: {
+    display: "block",
+    width: "100%",
+    height: "auto",
+    borderRadius: "8px",
+    marginTop: "20px",
+  },
+
+  previewIntroduction: {
+    textAlign: "left",
+    lineHeight: 1.65,
+    margin: "0 0 12px",
+  },
+
+  previewPlayer: {
+    display: "flex",
+    alignItems: "center",
+    gap: "9px",
+    minWidth: 0,
+  },
+
+  previewPlayerPhoto: {
+    width: "34px",
+    height: "34px",
+    borderRadius: "50%",
+    objectFit: "cover",
+    flexShrink: 0,
+  },
+
+  previewPlayerInitials: {
+    display: "grid",
+    placeItems: "center",
+    width: "34px",
+    height: "34px",
+    borderRadius: "50%",
+    background: "#eee",
+    fontSize: "11px",
+    fontWeight: "bold",
+    flexShrink: 0,
   },
 
   content: {

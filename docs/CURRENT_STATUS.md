@@ -2,6 +2,13 @@
 
 Checked 5 November 2026 (Europe/London). Recheck GitHub, the live site and Supabase before acting. Keep credentials and unpublished player/article details out of Git.
 
+## 8 November match preview preparation (6 November)
+
+- Main was at `15b74514e8af0abe9c55547d77de8e96936729f9` when the separate `feature/three-little-birds-preview` branch was started. PR #23 had already merged; the older recruitment section below is historical and needs a fresh production check.
+- Existing fixture 12 (Three Little Birds FC, 8 November home league match) was located without creating a duplicate. Its 09:45 meet time and “Nets need to go up” venue detail were saved in Supabase. Ten currently Available active squad records were selected in `match_squad`; no prior squad rows existed. Two Maybe responses were excluded. Recheck availability and any manager changes before announcing.
+- Branch prepares a fixture-specific introduction, the two supplied badge crops, an atmospheric matchday graphic, public profile photos where records have one, social metadata, and a manual manager squad-announcement button. A migration changes the public squad RPC to respect saved selections, with availability fallback where no selection exists. This migration is **pending**, and no branch code is in production until approval and merge.
+- The fixture announcement is **not sent**. A prior availability announcement for fixture 12 exists; the fixture announcement is a separate kind and currently has no queued row. Do not press the manager notification button until the manager approves the artwork, squad and send.
+
 ## Pending recruitment page (5 November)
 
 - PR #23 on `feature/join-bcfc-london` is ready for review. It prepares permanent `/join` content, internal links, contact options, Open Graph/X metadata, canonical URL QR, and digital card assets. It is separate from the news feed. No production merge or deployment authorised yet.
