@@ -1,6 +1,6 @@
 -- Public result data for the completed 8 November fixture only.
 create function public.get_three_little_birds_starting_lineup()
-returns table(id bigint, full_name text, position text, goals integer, assists integer)
+returns table(id bigint, full_name text, "position" text, goals integer, assists integer)
 language sql stable security definer
 set search_path = ''
 as $$
