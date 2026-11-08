@@ -173,6 +173,7 @@ export default async function PublicMatchReport({ params }) {
       .from("matches")
       .select("opponent, match_date, kickoff_time, venue, venue_details")
       .eq("status", "Upcoming")
+      .eq("availability_open", true)
       .gte("match_date", today)
       .order("match_date", { ascending: true })
       .order("kickoff_time", { ascending: true })
@@ -561,7 +562,7 @@ export default async function PublicMatchReport({ params }) {
         {Number(matchId) === 8 && !nextMatch && (
           <div style={{ marginTop: "30px", paddingTop: "30px", borderTop: "1px solid #ddd" }}>
             <h2 style={{ color: "#e31b23", fontSize: "14px", letterSpacing: "2px" }}>NEXT MATCH</h2>
-            <p>Next fixture to be confirmed.</p>
+            <p>No upcoming fixtures are open for availability.</p>
           </div>
         )}
             </>)}
