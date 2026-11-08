@@ -138,6 +138,13 @@ export default async function PublicMatchReport({ params }) {
   const date = formatMatchDate(match.match_date);
   const kickoff = formatMatchTime(match.kickoff_time);
   const meet = formatMatchTime(match.meet_time);
+  const isThreeLittleBirdsResult = isCompleted && !isWalkover && Number(matchId) === 12;
+  let startingLineup = [];
+  if (isThreeLittleBirdsResult) {
+    const { data, error: lineupError } = await supabase.rpc("get_three_little_birds_starting_lineup");
+    if (lineupError) console.error("Error loading starting lineup:", lineupError);
+    else startingLineup = data || [];
+  }
   let squad = [];
   let nextMatch = null;
 
@@ -406,7 +413,7 @@ export default async function PublicMatchReport({ params }) {
   </div>
 ))
           ) : (
-            <p>Match report coming soon.</p>
+            Number(matchId) === 12 ? null : <p>Match report coming soon.</p>
           ))}
         </div>
 
@@ -427,7 +434,21 @@ export default async function PublicMatchReport({ params }) {
 
   <h2 style={{ marginTop: 0 }}>Vote for your MOTM</h2>
 
+{startingLineup.length > 0 && (
+  <section aria-labelledby="starting-lineup-heading">
+    <h3 id="starting-lineup-heading">Recorded starters</h3>
+    <ul>
+      {startingLineup.map((player) => (
+        <li key={player.id}>
+          {player.full_name}{player.position && ` · ${player.position}`}
+          {` · ${player.goals ?? "–"} goals · ${player.assists ?? "–"} assists`}
+        </li>
+      ))}
+    </ul>
+  </section>
+)}
 <MotmVote
+  startingCandidates={isThreeLittleBirdsResult ? startingLineup : null}
   matchId={matchId}
   votingClosed={match.motm_voting_closed === true}
 />
@@ -453,11 +474,11 @@ export default async function PublicMatchReport({ params }) {
   </div>
 
 
- <h2 style={{ marginTop: 0 }}>{Number(matchId) === 11 ? "Match Subs 💷" : "Pay your match fee"}</h2>
+ <h2 style={{ marginTop: 0 }}>{[11, 12].includes(Number(matchId)) ? "Match Subs 💷" : "Pay your match fee"}</h2>
 
-{Number(matchId) === 11 ? (
+{[11, 12].includes(Number(matchId)) ? (
   <>
-    <p style={{ marginBottom: "20px" }}>Please remember to pay your match subs for the East Putney game.</p>
+    <p style={{ marginBottom: "20px" }}>Please remember to pay your match subs for the {Number(matchId) === 11 ? "East Putney" : "Three Little Birds"} game.</p>
     {match.sumup_link?.startsWith("https://pay.sumup.com/b2c/") ? (
       <a href={match.sumup_link} target="_blank" rel="noopener noreferrer" style={{
         display: "inline-block", background: "#e31b23", color: "#fff",
