@@ -2,6 +2,11 @@
 
 Checked 5 November 2026 (Europe/London). Recheck GitHub, the live site and Supabase before acting. Keep credentials and unpublished player/article details out of Git.
 
+## Three Little Birds result, 8 November
+
+- Fixture 12 is completed, 2–4. The new fixture-specific SumUp URL and the requested additional starter and zero goal/assist stat row are saved in Supabase. No report or push was created. Seven starters are recorded.
+- The results fix is pending approval. Apply its migration before deploying: it exposes the recorded starting lineup and limits fixture 12 votes to selected starters. The current live vote flag is open and its old page can still offer non-starters. Do not announce until the release is verified.
+
 ## Pending recruitment page (5 November)
 
 - PR #23 on `feature/join-bcfc-london` is ready for review. It prepares permanent `/join` content, internal links, contact options, Open Graph/X metadata, canonical URL QR, and digital card assets. It is separate from the news feed. No production merge or deployment authorised yet.

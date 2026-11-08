@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import {supabase} from "../../browserSupabase";
 
 
-export default function MotmVote({ matchId, votingClosed }) {
+export default function MotmVote({ matchId, votingClosed, startingCandidates = null }) {
   const [player, setPlayer] = useState(null);
   const [selectedPlayerId, setSelectedPlayerId] = useState("");
   const [message, setMessage] = useState("");
@@ -56,37 +56,40 @@ export default function MotmVote({ matchId, votingClosed }) {
       }
 
       setPlayer(playerData);
-      // These match reports record actual appearances in match_stats. The
-      // selected squad alone may include substitutes who never came on.
-      const usePlayedSquad = [5, 8, 11].includes(Number(matchId));
-      const { data: eligibleRows, error: eligibleError } = usePlayedSquad
-        ? await supabase
-            .from("match_stats")
-            .select("player_id")
-            .eq("match_id", Number(matchId))
-        : await supabase
-            .from("match_squad")
-            .select("player_id")
-            .eq("match_id", matchId)
-            .eq("selected", true);
+      if (startingCandidates !== null) {
+        setCandidates(startingCandidates.filter((candidate) => Number(candidate.id) !== Number(playerData.id)));
+      } else {
+        // These match reports record actual appearances in match_stats. The
+        // selected squad alone may include substitutes who never came on.
+        const usePlayedSquad = [5, 8, 11].includes(Number(matchId));
+        const { data: eligibleRows, error: eligibleError } = usePlayedSquad
+          ? await supabase
+              .from("match_stats")
+              .select("player_id")
+              .eq("match_id", Number(matchId))
+          : await supabase
+              .from("match_squad")
+              .select("player_id")
+              .eq("match_id", matchId)
+              .eq("selected", true);
 
-      if (eligibleError) {
-        console.error("Error loading MOTM candidates:", eligibleError);
+        if (eligibleError) {
+          console.error("Error loading MOTM candidates:", eligibleError);
+        }
+
+        const playerIds = [...new Set((eligibleRows || []).map((row) => row.player_id))];
+
+        const { data: candidateData } = playerIds.length ? await supabase
+          .from("Players")
+          .select("id, full_name")
+          .in("id", playerIds)
+          .order("full_name", { ascending: true }) : { data: [] };
+
+        // The database also rejects self-votes, including requests outside this UI.
+        setCandidates((candidateData || []).filter(
+          (candidate) => Number(candidate.id) !== Number(playerData.id)
+        ));
       }
-
-const playerIds = [...new Set((eligibleRows || []).map((row) => row.player_id))];
-
-const { data: candidateData } = playerIds.length ? await supabase
-  .from("Players")
-  .select("id, full_name")
-  .in("id", playerIds)
-  .order("full_name", { ascending: true }) : { data: [] };
-
-// The database also rejects self-votes, including requests outside this UI.
-setCandidates((candidateData || []).filter(
-  (candidate) => Number(candidate.id) !== Number(playerData.id)
-));
-      
 
       const { data: voteData } = await supabase
         .from("motm_votes")
@@ -103,7 +106,7 @@ setCandidates((candidateData || []).filter(
     }
 
     loadVotingUser();
-  }, [matchId, votingClosed]);
+  }, [matchId, votingClosed, startingCandidates]);
 
   async function submitVote() {
     if (!player || !selectedPlayerId) {
