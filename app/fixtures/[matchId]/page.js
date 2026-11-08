@@ -434,19 +434,6 @@ export default async function PublicMatchReport({ params }) {
 
   <h2 style={{ marginTop: 0 }}>Vote for your MOTM</h2>
 
-{startingLineup.length > 0 && (
-  <section aria-labelledby="starting-lineup-heading">
-    <h3 id="starting-lineup-heading">Recorded starters</h3>
-    <ul>
-      {startingLineup.map((player) => (
-        <li key={player.id}>
-          {player.full_name}{player.position && ` · ${player.position}`}
-          {` · ${player.goals ?? "–"} goals · ${player.assists ?? "–"} assists`}
-        </li>
-      ))}
-    </ul>
-  </section>
-)}
 <MotmVote
   startingCandidates={isThreeLittleBirdsResult ? startingLineup : null}
   matchId={matchId}
