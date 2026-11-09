@@ -28,6 +28,7 @@ const [responseMessages, setResponseMessages] = useState({});
   const currentMatch = openMatches[0];
   const managerMatch = openMatches.find((match) => String(match.id) === managerMatchId) ?? currentMatch;
   const allAvailability = squadResponses.filter((response) => response.match_id === managerMatch?.id);
+  const regularPlayers = allPlayers.filter((player) => player.is_guest === false);
   const formatMatchDate = (date) =>
   new Date(`${date}T12:00:00`).toLocaleDateString("en-GB", {
     weekday: "long",
@@ -111,8 +112,7 @@ if (user) {
     if (playerData.is_admin === true) {
   const { data: playersData, error: playersError } = await supabase
     .from("Players")
-    .select("*")
-    .eq("is_guest", false)
+    .select("id, full_name, is_guest, user_id")
     .order("full_name");
 
   const { data: availabilityData, error: availabilityError } = openMatchData?.length
@@ -422,7 +422,7 @@ if (user) {
           ) : (
             playersForStatus.map((p) => (
               <div key={p.id} style={{ marginBottom: "6px" }}>
-                {p.full_name}
+                {p.full_name}{p.is_guest ? " (Guest)" : ""}
               </div>
             ))
           )}
@@ -434,7 +434,7 @@ if (user) {
       <h3 style={{ marginBottom: "8px" }}>
         No Response (
         {
-          allPlayers.filter(
+          regularPlayers.filter(
             (p) =>
               !allAvailability.some((a) => a.player_id === p.id)
           ).length
@@ -442,7 +442,7 @@ if (user) {
         )
       </h3>
 
-      {allPlayers
+      {regularPlayers
         .filter(
           (p) =>
             !allAvailability.some((a) => a.player_id === p.id)
@@ -463,7 +463,7 @@ if (user) {
   {isAdmin && <FixtureAvailabilityControls />}
   {isAdmin && !currentMatch && <p><a href="/dashboard/players" style={{ color: "#e31b23" }}>Squad admin →</a></p>}
 
-  {isAdmin && <AvailabilityAlerts userId={user.id} players={allPlayers} fixture={currentMatch} />}
+  {isAdmin && <AvailabilityAlerts userId={user.id} players={regularPlayers} fixture={currentMatch} />}
 
   {!isAdmin && canViewAvailability && currentMatch && (
     <div style={styles.adminCard}>
