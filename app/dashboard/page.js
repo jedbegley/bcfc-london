@@ -14,15 +14,16 @@ export default function DashboardPage() {
   const [loading, setLoading] = useState(true);
   const [user, setUser] = useState(null);
   const [player, setPlayer] = useState(null);
-const [availability, setAvailability] = useState("");
-const [availabilityMessage, setAvailabilityMessage] = useState("");
+const [responses, setResponses] = useState({});
+const [responseMessages, setResponseMessages] = useState({});
   const [isAdmin, setIsAdmin] = useState(false);
   const [canViewAvailability, setCanViewAvailability] = useState(false);
   const [viewerAvailability, setViewerAvailability] = useState([]);
   const [viewerAvailabilityError, setViewerAvailabilityError] = useState(false);
   const [allPlayers, setAllPlayers] = useState([]);
 const [allAvailability, setAllAvailability] = useState([]);
-  const [currentMatch, setCurrentMatch] = useState(null);
+  const [openMatches, setOpenMatches] = useState([]);
+  const currentMatch = openMatches[0];
   const formatMatchDate = (date) =>
   new Date(`${date}T12:00:00`).toLocaleDateString("en-GB", {
     weekday: "long",
@@ -59,7 +60,7 @@ const handleLogout = async () => {
 const user = session?.user || null;
 
 setUser(user);
-      const { data: nextMatchData, error: nextMatchError } = await supabase
+      const { data: openMatchData, error: nextMatchError } = await supabase
   .from("matches")
   .select("*")
 .eq("status", "Upcoming")
@@ -67,14 +68,14 @@ setUser(user);
 .gte("match_date", londonToday())
   .order("match_date", { ascending: true })
   .order("kickoff_time", { ascending: true })
-  .order("id", { ascending: true })
-  .limit(1)
-  .maybeSingle();
+  .order("id", { ascending: true });
+
+const nextMatchData = openMatchData?.[0];
 
 if (nextMatchError) {
   console.log("MATCH ERROR:", nextMatchError);
 } else {
-  setCurrentMatch(nextMatchData);
+  setOpenMatches(openMatchData || []);
 }
 
 if (user) {
@@ -90,18 +91,19 @@ if (user) {
     setPlayer(playerData);
     setIsAdmin(playerData.is_admin === true);
     setCanViewAvailability(playerData.can_view_availability === true);
-    const { data: savedAvailability, error: savedAvailabilityError } = await supabase
-  .from("availability")
-  .select("status")
-  .eq("player_id", playerData.id)
-  .eq("match_id", nextMatchData?.id ?? -1)
-  .maybeSingle();
+    if (openMatchData?.length) {
+      const { data: savedResponses, error: savedAvailabilityError } = await supabase
+        .from("availability")
+        .select("match_id, status")
+        .eq("player_id", playerData.id)
+        .in("match_id", openMatchData.map((match) => match.id));
 
-if (savedAvailabilityError) {
-  console.log("SAVED AVAILABILITY ERROR:", savedAvailabilityError);
-} else if (savedAvailability) {
-  setAvailability(savedAvailability.status);
-}
+      if (savedAvailabilityError) {
+        console.error("SAVED AVAILABILITY ERROR:", savedAvailabilityError);
+      } else {
+        setResponses(Object.fromEntries((savedResponses || []).map((row) => [row.match_id, row.status])));
+      }
+    }
     if (playerData.is_admin === true) {
   const { data: playersData, error: playersError } = await supabase
     .from("Players")
@@ -138,8 +140,11 @@ if (savedAvailabilityError) {
     checkUser();
   }, []);
 
-  async function saveAvailability(status) {
-    if (!currentMatch || currentMatch.availability_open !== true) {
+  async function saveAvailability(match, status) {
+    const setAvailabilityMessage = (message) => {
+      setResponseMessages((previous) => ({ ...previous, [match.id]: message }));
+    };
+    if (match.availability_open !== true) {
   setAvailabilityMessage("Availability is not open for this fixture.");
   return;
 }
@@ -155,7 +160,7 @@ if (savedAvailabilityError) {
   .upsert(
     {
       player_id: player.id,
-      match_id: currentMatch.id,
+      match_id: match.id,
       status,
       responded_at: new Date().toISOString(),
     },
@@ -169,10 +174,10 @@ if (savedAvailabilityError) {
     return;
   }
 
-  setAvailability(status);
+  setResponses((previous) => ({ ...previous, [match.id]: status }));
   setAvailabilityMessage("Availability saved!");
-  if (canViewAvailability && !isAdmin) {
-    await loadViewerAvailability(currentMatch.id);
+  if (canViewAvailability && !isAdmin && match.id === currentMatch?.id) {
+    await loadViewerAvailability(match.id);
   }
 }
 
@@ -224,18 +229,21 @@ if (savedAvailabilityError) {
   Log Out
 </button>
 
-        {currentMatch ? <div style={styles.matchCard}>
-          <div style={styles.matchLabel}>NEXT MATCH</div>
+        {openMatches.length ? openMatches.map((match, index) => {
+          const availability = responses[match.id];
+          const availabilityMessage = responseMessages[match.id];
+          return <div key={match.id} style={styles.matchCard}>
+          <div style={styles.matchLabel}>{index === 0 ? "NEXT MATCH" : "UPCOMING MATCH"}</div>
 
         <h2 style={styles.matchTitle}>
-  {currentMatch.home_or_away === "Away" ? `${currentMatch.opponent} v Bristol City` : `Bristol City v ${currentMatch.opponent}`}
+  {match.home_or_away === "Away" ? `${match.opponent} v Bristol City` : `Bristol City v ${match.opponent}`}
 </h2>
 
 <p style={styles.matchDetails}>
-  {currentMatch?.match_date && formatMatchDate(currentMatch.match_date)} ·{" "}
-{currentMatch?.kickoff_time?.slice(0, 5)}
+  {match?.match_date && formatMatchDate(match.match_date)} ·{" "}
+{match?.kickoff_time?.slice(0, 5)}
   <br />
-  {currentMatch?.venue}
+  {match?.venue}
 </p>
 
           <div style={styles.availabilityBox}>
@@ -252,7 +260,7 @@ if (savedAvailabilityError) {
     }}
   >
  <button
-  onClick={() => saveAvailability("available")}
+  onClick={() => saveAvailability(match, "available")}
   style={{
     ...styles.availableButton,
     opacity: availability && availability !== "available" ? 0.45 : 1,
@@ -267,7 +275,7 @@ if (savedAvailabilityError) {
 </button>
 
 <button
-  onClick={() => saveAvailability("maybe")}
+  onClick={() => saveAvailability(match, "maybe")}
   style={{
     ...styles.maybeButton,
     opacity: availability && availability !== "maybe" ? 0.45 : 1,
@@ -282,7 +290,7 @@ if (savedAvailabilityError) {
 </button>
 
 <button
-  onClick={() => saveAvailability("unavailable")}
+  onClick={() => saveAvailability(match, "unavailable")}
   style={{
     ...styles.unavailableButton,
     opacity: availability && availability !== "unavailable" ? 0.45 : 1,
@@ -329,6 +337,7 @@ if (savedAvailabilityError) {
 )}
 </div>
         </div>
+        })
  : <div style={styles.matchCard}><h2>Availability is currently closed</h2><p>We’ll let you know when the next availability request opens.</p><a href="/fixtures" style={{ color: "#e31b23" }}>View upcoming fixtures →</a></div>}
 
   {isAdmin && currentMatch && (
