@@ -21,9 +21,13 @@ const [responseMessages, setResponseMessages] = useState({});
   const [viewerAvailability, setViewerAvailability] = useState([]);
   const [viewerAvailabilityError, setViewerAvailabilityError] = useState(false);
   const [allPlayers, setAllPlayers] = useState([]);
-const [allAvailability, setAllAvailability] = useState([]);
+  const [squadResponses, setSquadResponses] = useState([]);
+  const [squadResponsesError, setSquadResponsesError] = useState(false);
+  const [managerMatchId, setManagerMatchId] = useState("");
   const [openMatches, setOpenMatches] = useState([]);
   const currentMatch = openMatches[0];
+  const managerMatch = openMatches.find((match) => String(match.id) === managerMatchId) ?? currentMatch;
+  const allAvailability = squadResponses.filter((response) => response.match_id === managerMatch?.id);
   const formatMatchDate = (date) =>
   new Date(`${date}T12:00:00`).toLocaleDateString("en-GB", {
     weekday: "long",
@@ -111,10 +115,10 @@ if (user) {
     .eq("is_guest", false)
     .order("full_name");
 
-  const { data: availabilityData, error: availabilityError } = await supabase
-    .from("availability")
-    .select("*")
-    .eq("match_id", nextMatchData?.id ?? -1);
+  const { data: availabilityData, error: availabilityError } = openMatchData?.length
+    ? await supabase.from("availability").select("match_id, player_id, status")
+        .in("match_id", openMatchData.map((match) => match.id))
+    : { data: [] };
 
   if (playersError) {
     console.log("ADMIN PLAYERS ERROR:", playersError);
@@ -123,9 +127,10 @@ if (user) {
   }
 
   if (availabilityError) {
-    console.log("ADMIN AVAILABILITY ERROR:", availabilityError);
+    console.error("ADMIN AVAILABILITY ERROR:", availabilityError);
+    setSquadResponsesError(true);
   } else {
-    setAllAvailability(availabilityData || []);
+    setSquadResponses(availabilityData || []);
   }
 }
     if (playerData.is_admin !== true && playerData.can_view_availability === true && nextMatchData) {
@@ -176,6 +181,12 @@ if (user) {
 
   setResponses((previous) => ({ ...previous, [match.id]: status }));
   setAvailabilityMessage("Availability saved!");
+  if (isAdmin) {
+    setSquadResponses((previous) => [
+      ...previous.filter((row) => row.match_id !== match.id || row.player_id !== player.id),
+      { match_id: match.id, player_id: player.id, status },
+    ]);
+  }
   if (canViewAvailability && !isAdmin && match.id === currentMatch?.id) {
     await loadViewerAvailability(match.id);
   }
@@ -340,10 +351,24 @@ if (user) {
         })
  : <div style={styles.matchCard}><h2>Availability is currently closed</h2><p>We’ll let you know when the next availability request opens.</p><a href="/fixtures" style={{ color: "#e31b23" }}>View upcoming fixtures →</a></div>}
 
-  {isAdmin && currentMatch && (
+  {isAdmin && managerMatch && (
   <div style={styles.adminCard}>
     <div style={styles.matchLabel}>MANAGER VIEW</div>
     <h2 style={{ marginTop: "10px" }}>Squad Availability</h2>
+    <label style={{ display: "block", marginBottom: "16px" }}>
+      Fixture for squad responses
+      <select
+        value={String(managerMatch.id)}
+        onChange={(event) => setManagerMatchId(event.target.value)}
+        style={{ display: "block", maxWidth: "100%", marginTop: "6px", padding: "8px" }}
+      >
+        {openMatches.map((match) => (
+          <option key={match.id} value={String(match.id)}>
+            {match.opponent} · {formatMatchDate(match.match_date)}
+          </option>
+        ))}
+      </select>
+    </label>
 <a
   href="/dashboard/players"
   style={{
@@ -361,7 +386,7 @@ if (user) {
   SQUAD ADMIN
 </a>
 <a
-  href={`/dashboard/matches/${currentMatch?.id}/report`}
+  href={`/dashboard/matches/${managerMatch.id}/report`}
   style={{
     display: "inline-block",
     marginLeft: "10px",
@@ -378,6 +403,7 @@ if (user) {
   MATCH REPORT
 </a>
 
+    {squadResponsesError ? <p role="alert">Squad responses could not be loaded.</p> : <>
     {["available", "maybe", "unavailable"].map((status) => {
       const playersForStatus = allPlayers.filter((p) =>
         allAvailability.some(
@@ -427,6 +453,7 @@ if (user) {
           </div>
         ))}
     </div>
+    </>}
   </div>
 )}
 
