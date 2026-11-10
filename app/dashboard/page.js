@@ -65,17 +65,19 @@ const handleLogout = async () => {
 const user = session?.user || null;
 
 setUser(user);
-      const { data: openMatchData, error: nextMatchError } = await supabase
+      const { data: upcomingMatches, error: nextMatchError } = await supabase
   .from("matches")
   .select("*")
 .eq("status", "Upcoming")
-.eq("availability_open", true)
 .gte("match_date", londonToday())
   .order("match_date", { ascending: true })
   .order("kickoff_time", { ascending: true })
   .order("id", { ascending: true });
 
-const nextMatchData = openMatchData?.[0];
+const openMatchData = (upcomingMatches || []).filter((match) =>
+  match.availability_open || match.availability_withdrawals_open
+);
+const nextMatchData = openMatchData[0];
 
 if (nextMatchError) {
   console.log("MATCH ERROR:", nextMatchError);
@@ -149,7 +151,11 @@ if (user) {
     const setAvailabilityMessage = (message) => {
       setResponseMessages((previous) => ({ ...previous, [match.id]: message }));
     };
-    if (match.availability_open !== true) {
+    const withdrawal = !match.availability_open
+      && match.availability_withdrawals_open
+      && responses[match.id] === "available"
+      && status === "unavailable";
+    if (!match.availability_open && !withdrawal) {
   setAvailabilityMessage("Availability is not open for this fixture.");
   return;
 }
@@ -160,19 +166,15 @@ if (user) {
 
   setAvailabilityMessage("Saving...");
 
-  const { error } = await supabase
-  .from("availability")
-  .upsert(
-    {
-      player_id: player.id,
-      match_id: match.id,
-      status,
-      responded_at: new Date().toISOString(),
-    },
-    {
-      onConflict: "player_id,match_id",
-    }
-  );
+  const response = { status, responded_at: new Date().toISOString() };
+  const { error } = withdrawal
+    ? await supabase.from("availability").update(response)
+        .eq("player_id", player.id).eq("match_id", match.id).eq("status", "available")
+        .select("status").single()
+    : await supabase.from("availability").upsert(
+        { ...response, player_id: player.id, match_id: match.id },
+        { onConflict: "player_id,match_id" }
+      );
 
   if (error) {
     setAvailabilityMessage(error.message);
@@ -259,7 +261,7 @@ if (user) {
 
           <div style={styles.availabilityBox}>
   <p style={{ marginTop: "0", fontWeight: "900", fontSize: "18px" }}>
-    Are you available?
+    {match.availability_open ? "Are you available?" : "Availability closed · withdrawals only"}
   </p>
 
   <div
@@ -270,6 +272,7 @@ if (user) {
       flexWrap: "wrap",
     }}
   >
+{match.availability_open && <>
  <button
   onClick={() => saveAvailability(match, "available")}
   style={{
@@ -300,6 +303,9 @@ if (user) {
   {availability === "maybe" ? "? SELECTED — MAYBE" : "? Maybe"}
 </button>
 
+</>}
+
+{(match.availability_open || availability === "available") && (
 <button
   onClick={() => saveAvailability(match, "unavailable")}
   style={{
@@ -316,6 +322,7 @@ if (user) {
     ? "✕ SELECTED — UNAVAILABLE"
     : "✕ Unavailable"}
 </button>
+)}
   </div>
 
 {availability && (
@@ -364,7 +371,7 @@ if (user) {
       >
         {openMatches.map((match) => (
           <option key={match.id} value={String(match.id)}>
-            {match.opponent} · {formatMatchDate(match.match_date)}
+            {match.opponent} · {formatMatchDate(match.match_date)}{!match.availability_open && " · Withdrawals only"}
           </option>
         ))}
       </select>
