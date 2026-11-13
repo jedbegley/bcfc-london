@@ -64,7 +64,14 @@ export async function generateMetadata({ params }) {
   }
 
   const isCompleted = match.status === "Completed";
-  const socialImage = Number(matchId) === 8
+  const socialImage = Number(matchId) === 13 && match.status === "Upcoming"
+    ? {
+        url: "https://www.bcfclondon.co.uk/matches/13/haydons-park-matchday.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Haydons Park versus Bristol City, Sunday 15 November, 10:30am kick-off",
+      }
+    : Number(matchId) === 8
     ? {
         url: "https://www.bcfclondon.co.uk/matches/8/larkhall-squad.jpg",
         width: 1536,
@@ -219,7 +226,9 @@ export default async function PublicMatchReport({ params }) {
 
       <div style={styles.previewTeams}>
         <div style={styles.previewTeam}>
-          {match.home_or_away === "Away" ? (
+          {Number(matchId) === 13 ? (
+            <img src="/matches/13/haydons-park-badge.png" alt="Haydons Park FC badge" style={styles.previewClubBadge} />
+          ) : match.home_or_away === "Away" ? (
             <span style={styles.previewOpponentBadge} aria-hidden="true">
               {opponentInitials(opponent)}
             </span>
@@ -252,6 +261,21 @@ export default async function PublicMatchReport({ params }) {
           <span>{[match.venue, match.venue_details].filter(Boolean).join(" · ")}</span>
         )}
       </div>
+
+      {Number(matchId) === 13 && (
+        <div style={styles.previewSquad}>
+          <h2 style={styles.previewSquadHeading}>Back on the Road 🔴⚪</h2>
+          <p>City are back in league action this Sunday as we travel to face Haydons Park.</p>
+          <p>Kick-off is at 10:30am, with all players meeting at Nursery Road Playing Fields at 9:45am.</p>
+          <img
+            src="/matches/13/haydons-park-matchday.jpg"
+            alt="Haydons Park versus Bristol City matchday graphic"
+            width={1200}
+            height={630}
+            style={{ display: "block", width: "100%", height: "auto", borderRadius: "8px" }}
+          />
+        </div>
+      )}
 
       {match.match_type && <div style={styles.previewType}>{match.match_type.toUpperCase()}</div>}
 
