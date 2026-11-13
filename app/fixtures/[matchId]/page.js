@@ -219,7 +219,9 @@ export default async function PublicMatchReport({ params }) {
 
       <div style={styles.previewTeams}>
         <div style={styles.previewTeam}>
-          {match.home_or_away === "Away" ? (
+          {Number(matchId) === 13 ? (
+            <img src="/matches/13/haydons-park-badge.png" alt="Haydons Park FC badge" style={styles.previewClubBadge} />
+          ) : match.home_or_away === "Away" ? (
             <span style={styles.previewOpponentBadge} aria-hidden="true">
               {opponentInitials(opponent)}
             </span>
@@ -252,6 +254,14 @@ export default async function PublicMatchReport({ params }) {
           <span>{[match.venue, match.venue_details].filter(Boolean).join(" · ")}</span>
         )}
       </div>
+
+      {Number(matchId) === 13 && (
+        <div style={styles.previewSquad}>
+          <h2 style={styles.previewSquadHeading}>Back on the Road 🔴⚪</h2>
+          <p>City are back in league action this Sunday as we travel to face Haydons Park.</p>
+          <p>Kick-off is at 10:30am, with all players meeting at Nursery Road Playing Fields at 9:45am.</p>
+        </div>
+      )}
 
       {match.match_type && <div style={styles.previewType}>{match.match_type.toUpperCase()}</div>}
 
