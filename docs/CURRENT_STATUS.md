@@ -6,8 +6,8 @@ Checked 15 November 2026 (Europe/London). Recheck GitHub, the live site and Supa
 
 - Production commit `23f8ddc07a56520c1564964b292d4cd8dfebe428` (PR #32) passed Vercel and the live manager route served the new fixture guest picker. The manager subsequently saved the squad, stats and report.
 - Fixture 13 is Completed, 1–3 away. The report is public at `/fixtures/13`. Supabase contains 15 selected players, with 10 marked as starters and five as substitutes, and 15 corresponding stat rows. Preserve those rows and confirm with the manager before changing any starter flag.
-- The live vote flag was already open and fixture 13 still used all selected players as candidates. The branch `fix/haydons-park-match-result` prepares a fixture-specific starter-only database policy, public squad and stats display, and the match-specific SumUp button. It does not change the existing open flag, votes, awards or match statistics. Apply its migration before deploying the page. Production migration and deployment await approval. Check vote counts and eligibility again immediately before release.
-- No player notifications were sent. The external checkout returned HTTP 403 to an automated request. Verify the fixture button's destination after release, and have the manager check SumUp in their browser.
+- PR #33 deployed as `09e87c65d817f0374f3de10752288c54fde3160a`; the Vercel check passed. The live match report displays 10 recorded starters and five substitutes, goals, assists and fantasy points. The Match Subs button points to the fixture-specific SumUp URL.
+- Applied the `haydons_park_match_result` schema migration and set the fixture link separately. MOTM voting is open with a starter-only nomination rule, voter ownership, one vote per linked player and no self-voting. At verification there were zero votes and no award. Report, squad and stat row hashes matched before and after. No player notifications were sent. SumUp returned HTTP 403 to automated requests; the public button destination was verified.
 
 ## Three Little Birds result, 8 November
 
