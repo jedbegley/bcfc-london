@@ -4,9 +4,10 @@ Checked 15 November 2026 (Europe/London). Recheck GitHub, the live site and Supa
 
 ## Haydons Park match report, 15 November
 
-- Main commit `b4c03fe359aa481ca64a10850c1cf1a0623c50fd` has a successful Vercel check. The public Haydons Park fixture (`/fixtures/13`) returned HTTP 200.
-- An additional guest profile and an Available response were recorded for fixture 13. Both requested guests are recorded as Available. The new response generated no availability email delivery. The result, report and player statistics were not edited.
-- The match report picker excluded all guest profiles. Branch `fix/match-report-fixture-guests` proposes listing guests marked Available for the report's fixture alongside the usual roster. It requires approval before merge and production deployment. No database migration is required. After release, verify the picker in a signed-in manager session before saving player statistics.
+- Production commit `23f8ddc07a56520c1564964b292d4cd8dfebe428` (PR #32) passed Vercel and the live manager route served the new fixture guest picker. The manager subsequently saved the squad, stats and report.
+- Fixture 13 is Completed, 1–3 away. The report is public at `/fixtures/13`. Supabase contains 15 selected players, with 10 marked as starters and five as substitutes, and 15 corresponding stat rows. Preserve those rows and confirm with the manager before changing any starter flag.
+- The live vote flag was already open and fixture 13 still used all selected players as candidates. The branch `fix/haydons-park-match-result` prepares a fixture-specific starter-only database policy, public squad and stats display, and the match-specific SumUp button. It does not change the existing open flag, votes, awards or match statistics. Apply its migration before deploying the page. Production migration and deployment await approval. Check vote counts and eligibility again immediately before release.
+- No player notifications were sent. The external checkout returned HTTP 403 to an automated request. Verify the fixture button's destination after release, and have the manager check SumUp in their browser.
 
 ## Three Little Birds result, 8 November
 

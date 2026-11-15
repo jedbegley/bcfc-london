@@ -48,6 +48,38 @@ function previewCompetition(competition) {
   ).toUpperCase();
 }
 
+function ResultPlayers({ title, players }) {
+  return (
+    <section>
+      <h3>{title}</h3>
+      {players.length ? (
+        <div style={{ overflowX: "auto" }}>
+          <table aria-label={title} style={{ width: "100%", textAlign: "left", borderCollapse: "collapse" }}>
+            <thead>
+              <tr>
+                <th scope="col">Player</th>
+                <th scope="col">Goals</th>
+                <th scope="col">Assists</th>
+                <th scope="col">Fantasy points</th>
+              </tr>
+            </thead>
+            <tbody>
+              {players.map((player) => (
+                <tr key={player.id} style={{ borderTop: "1px solid #ddd" }}>
+                  <th scope="row" style={{ padding: "8px 8px 8px 0" }}>{player.full_name}</th>
+                  <td>{player.goals ?? "—"}</td>
+                  <td>{player.assists ?? "—"}</td>
+                  <td>{player.fantasy_points ?? "—"}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      ) : <p>No players recorded.</p>}
+    </section>
+  );
+}
+
 export async function generateMetadata({ params }) {
   const matchId = params.matchId;
 
@@ -139,11 +171,20 @@ export default async function PublicMatchReport({ params }) {
   const kickoff = formatMatchTime(match.kickoff_time);
   const meet = formatMatchTime(match.meet_time);
   const isThreeLittleBirdsResult = isCompleted && !isWalkover && Number(matchId) === 12;
+  const isHaydonsParkResult = isCompleted && !isWalkover && Number(matchId) === 13;
+  const fixturePaymentOpponent = { 11: "East Putney", 12: "Three Little Birds", 13: "Haydons Park" }[Number(matchId)];
   let startingLineup = [];
+  let haydonsPlayers = null;
   if (isThreeLittleBirdsResult) {
     const { data, error: lineupError } = await supabase.rpc("get_three_little_birds_starting_lineup");
     if (lineupError) console.error("Error loading starting lineup:", lineupError);
     else startingLineup = data || [];
+  }
+  if (isHaydonsParkResult) {
+    const { data, error: resultError } = await supabase.rpc("get_haydons_park_result_players");
+    if (resultError) console.error("Error loading Haydons Park result squad:", resultError);
+    else haydonsPlayers = data || [];
+    startingLineup = (haydonsPlayers ?? []).filter((player) => player.starting);
   }
   let squad = [];
   let nextMatch = null;
@@ -428,6 +469,18 @@ export default async function PublicMatchReport({ params }) {
           ))}
         </div>
 
+            {isHaydonsParkResult && (
+              <section style={{ marginTop: "45px", paddingTop: "30px", borderTop: "1px solid #ddd" }}>
+                <h2>Match squad and stats</h2>
+                {haydonsPlayers ? (
+                  <>
+                    <ResultPlayers title="Recorded starters" players={startingLineup} />
+                    <ResultPlayers title="Substitutes" players={haydonsPlayers.filter((player) => !player.starting)} />
+                  </>
+                ) : <p>Match squad and stats are currently unavailable.</p>}
+              </section>
+            )}
+
             {isCompleted && (<>
             {!isWalkover && (<>
             <div style={{ marginTop: "45px", paddingTop: "30px", borderTop: "1px solid #ddd" }}>
@@ -446,7 +499,7 @@ export default async function PublicMatchReport({ params }) {
   <h2 style={{ marginTop: 0 }}>Vote for your MOTM</h2>
 
 <MotmVote
-  startingCandidates={isThreeLittleBirdsResult ? startingLineup : null}
+  startingCandidates={isThreeLittleBirdsResult || isHaydonsParkResult ? startingLineup : null}
   matchId={matchId}
   votingClosed={match.motm_voting_closed === true}
 />
@@ -472,11 +525,11 @@ export default async function PublicMatchReport({ params }) {
   </div>
 
 
- <h2 style={{ marginTop: 0 }}>{[11, 12].includes(Number(matchId)) ? "Match Subs 💷" : "Pay your match fee"}</h2>
+ <h2 style={{ marginTop: 0 }}>{fixturePaymentOpponent ? "Match Subs 💷" : "Pay your match fee"}</h2>
 
-{[11, 12].includes(Number(matchId)) ? (
+{fixturePaymentOpponent ? (
   <>
-    <p style={{ marginBottom: "20px" }}>Please remember to pay your match subs for the {Number(matchId) === 11 ? "East Putney" : "Three Little Birds"} game.</p>
+    <p style={{ marginBottom: "20px" }}>Please remember to pay your match subs for the {fixturePaymentOpponent} game.</p>
     {match.sumup_link?.startsWith("https://pay.sumup.com/b2c/") ? (
       <a href={match.sumup_link} target="_blank" rel="noopener noreferrer" style={{
         display: "inline-block", background: "#e31b23", color: "#fff",
