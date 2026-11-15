@@ -16,6 +16,7 @@ const [opponentScore, setOpponentScore] = useState("");
   const [matchReport, setMatchReport] = useState("");
   const [motmVotingClosed, setMotmVotingClosed] = useState(false);
   const [players, setPlayers] = useState([]);
+  const [guestPlayersError, setGuestPlayersError] = useState(false);
   const [selectedPlayers, setSelectedPlayers] = useState({});
 const [startedPlayers, setStartedPlayers] = useState({});
   const [fantasyPositions, setFantasyPositions] = useState({});
@@ -47,20 +48,31 @@ const [startedPlayers, setStartedPlayers] = useState({});
     loadMatch();
 
     async function loadPlayers() {
-  const { data, error } = await supabase
-    .from("Players")
-    .select("id, full_name, squad_number, position")
-    .eq("is_guest", false)
-    .order("full_name", { ascending: true });
+      setGuestPlayersError(false);
+      const [roster, available] = await Promise.all([
+        supabase.from("Players").select("id, full_name, squad_number, is_guest")
+          .order("full_name", { ascending: true }),
+        supabase.from("availability").select("player_id")
+          .eq("match_id", matchId).eq("status", "available"),
+      ]);
 
-  if (error) {
-    console.error("Error loading players:", error);
-  } else {
-    setPlayers(data || []);
-  }
-}
+      if (roster.error) {
+        console.error("Error loading players:", roster.error);
+        return;
+      }
 
-loadPlayers();
+      if (available.error) {
+        console.error("Error loading fixture availability:", available.error);
+        setGuestPlayersError(true);
+      }
+
+      const availableIds = new Set((available.data ?? []).map(({ player_id }) => player_id));
+      setPlayers((roster.data ?? []).filter((player) =>
+        player.is_guest === false || (player.is_guest === true && availableIds.has(player.id))
+      ));
+    }
+
+    loadPlayers();
   }, [matchId]);
 
   const saveResult = async () => {
@@ -352,6 +364,7 @@ const winnerId = Number(winners[0]);
 </div>
     <div style={{ marginTop: "40px" }}>
   <h2>Players</h2>
+  {guestPlayersError && <p role="alert">Fixture guests could not be loaded. Refresh before saving guest statistics.</p>}
 
   {players.map((player) => (
   <div
@@ -376,6 +389,7 @@ const winnerId = Number(winners[0]);
 <span>
   {player.squad_number ? `#${player.squad_number} ` : ""}
   {player.full_name}
+  {player.is_guest ? " (Guest)" : ""}
 </span>
     {selectedPlayers[player.id] && (
   <>

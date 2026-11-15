@@ -1,6 +1,12 @@
 # Current status and next-session handover
 
-Checked 5 November 2026 (Europe/London). Recheck GitHub, the live site and Supabase before acting. Keep credentials and unpublished player/article details out of Git.
+Checked 15 November 2026 (Europe/London). Recheck GitHub, the live site and Supabase before acting. Keep credentials and unpublished player/article details out of Git.
+
+## Haydons Park match report, 15 November
+
+- Main commit `b4c03fe359aa481ca64a10850c1cf1a0623c50fd` has a successful Vercel check. The public Haydons Park fixture (`/fixtures/13`) returned HTTP 200.
+- An additional guest profile and an Available response were recorded for fixture 13. Both requested guests are recorded as Available. The new response generated no availability email delivery. The result, report and player statistics were not edited.
+- The match report picker excluded all guest profiles. Branch `fix/match-report-fixture-guests` proposes listing guests marked Available for the report's fixture alongside the usual roster. It requires approval before merge and production deployment. No database migration is required. After release, verify the picker in a signed-in manager session before saving player statistics.
 
 ## Three Little Birds result, 8 November
 
