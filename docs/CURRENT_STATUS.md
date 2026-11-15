@@ -4,10 +4,10 @@ Checked 15 November 2026 (Europe/London). Recheck GitHub, the live site and Supa
 
 ## Haydons Park match report, 15 November
 
-- Production commit `23f8ddc07a56520c1564964b292d4cd8dfebe428` (PR #32) passed Vercel and the live manager route served the new fixture guest picker. The manager subsequently saved the squad, stats and report.
-- Fixture 13 is Completed, 1–3 away. The report is public at `/fixtures/13`. Supabase contains 15 selected players, with 10 marked as starters and five as substitutes, and 15 corresponding stat rows. Preserve those rows and confirm with the manager before changing any starter flag.
-- The live vote flag was already open and fixture 13 still used all selected players as candidates. The branch `fix/haydons-park-match-result` prepares a fixture-specific starter-only database policy, public squad and stats display, and the match-specific SumUp button. It does not change the existing open flag, votes, awards or match statistics. Apply its migration before deploying the page. Production migration and deployment await approval. Check vote counts and eligibility again immediately before release.
-- No player notifications were sent. The external checkout returned HTTP 403 to an automated request. Verify the fixture button's destination after release, and have the manager check SumUp in their browser.
+- Fixture 13 is Completed, 1–3 away. The report is public at `/fixtures/13`. The saved squad has 10 players marked as starters and five as substitutes, and 15 matching stat rows. The manager confirmed all five substitutes played. Preserve the report, squad, stats and any cast votes.
+- Production commit `09e87c65d817f0374f3de10752288c54fde3160a` (PR #33) passed Vercel and added the match-specific SumUp button. Voting is open, and that release limits nominations to starters.
+- Branch `fix/haydons-park-played-subs-photo` adds the supplied match-action photo as the lead image, removes the public stats tables, and permits all 15 confirmed participants to be nominated. It keeps voter ownership, one vote per profile and the no-self-vote constraint. Apply the new Supabase migration before deploying, after approval.
+- After deployment, verify the lead photo loads, the stats tables are absent, and the MOTM picker and database both use the fixture-specific candidate list. Do not send player notifications as part of this release.
 
 ## Three Little Birds result, 8 November
 

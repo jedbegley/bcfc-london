@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import {supabase} from "../../browserSupabase";
 
 
-export default function MotmVote({ matchId, votingClosed, startingCandidates = null }) {
+export default function MotmVote({ matchId, votingClosed, votingCandidates = null }) {
   const [player, setPlayer] = useState(null);
   const [selectedPlayerId, setSelectedPlayerId] = useState("");
   const [message, setMessage] = useState("");
@@ -56,8 +56,8 @@ export default function MotmVote({ matchId, votingClosed, startingCandidates = n
       }
 
       setPlayer(playerData);
-      if (startingCandidates !== null) {
-        setCandidates(startingCandidates.filter((candidate) => Number(candidate.id) !== Number(playerData.id)));
+      if (votingCandidates !== null) {
+        setCandidates(votingCandidates.filter((candidate) => Number(candidate.id) !== Number(playerData.id)));
       } else {
         // These match reports record actual appearances in match_stats. The
         // selected squad alone may include substitutes who never came on.
@@ -106,7 +106,7 @@ export default function MotmVote({ matchId, votingClosed, startingCandidates = n
     }
 
     loadVotingUser();
-  }, [matchId, votingClosed, startingCandidates]);
+  }, [matchId, votingClosed, votingCandidates]);
 
   async function submitVote() {
     if (!player || !selectedPlayerId) {

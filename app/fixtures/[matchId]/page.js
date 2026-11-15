@@ -48,38 +48,6 @@ function previewCompetition(competition) {
   ).toUpperCase();
 }
 
-function ResultPlayers({ title, players }) {
-  return (
-    <section>
-      <h3>{title}</h3>
-      {players.length ? (
-        <div style={{ overflowX: "auto" }}>
-          <table aria-label={title} style={{ width: "100%", textAlign: "left", borderCollapse: "collapse" }}>
-            <thead>
-              <tr>
-                <th scope="col">Player</th>
-                <th scope="col">Goals</th>
-                <th scope="col">Assists</th>
-                <th scope="col">Fantasy points</th>
-              </tr>
-            </thead>
-            <tbody>
-              {players.map((player) => (
-                <tr key={player.id} style={{ borderTop: "1px solid #ddd" }}>
-                  <th scope="row" style={{ padding: "8px 8px 8px 0" }}>{player.full_name}</th>
-                  <td>{player.goals ?? "—"}</td>
-                  <td>{player.assists ?? "—"}</td>
-                  <td>{player.fantasy_points ?? "—"}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      ) : <p>No players recorded.</p>}
-    </section>
-  );
-}
-
 export async function generateMetadata({ params }) {
   const matchId = params.matchId;
 
@@ -173,18 +141,14 @@ export default async function PublicMatchReport({ params }) {
   const isThreeLittleBirdsResult = isCompleted && !isWalkover && Number(matchId) === 12;
   const isHaydonsParkResult = isCompleted && !isWalkover && Number(matchId) === 13;
   const fixturePaymentOpponent = { 11: "East Putney", 12: "Three Little Birds", 13: "Haydons Park" }[Number(matchId)];
-  let startingLineup = [];
-  let haydonsPlayers = null;
-  if (isThreeLittleBirdsResult) {
-    const { data, error: lineupError } = await supabase.rpc("get_three_little_birds_starting_lineup");
-    if (lineupError) console.error("Error loading starting lineup:", lineupError);
-    else startingLineup = data || [];
-  }
-  if (isHaydonsParkResult) {
-    const { data, error: resultError } = await supabase.rpc("get_haydons_park_result_players");
-    if (resultError) console.error("Error loading Haydons Park result squad:", resultError);
-    else haydonsPlayers = data || [];
-    startingLineup = (haydonsPlayers ?? []).filter((player) => player.starting);
+  let votingCandidates = null;
+  if (isThreeLittleBirdsResult || isHaydonsParkResult) {
+    const lineupFunction = isHaydonsParkResult
+      ? "get_haydons_park_motm_candidates"
+      : "get_three_little_birds_starting_lineup";
+    const { data, error: lineupError } = await supabase.rpc(lineupFunction);
+    if (lineupError) console.error("Error loading MOTM candidates:", lineupError);
+    votingCandidates = (data ?? []).map(({ id, full_name }) => ({ id, full_name }));
   }
   let squad = [];
   let nextMatch = null;
@@ -333,6 +297,17 @@ export default async function PublicMatchReport({ params }) {
 
       <section style={styles.content}>
         <div style={styles.report}>
+          {isHaydonsParkResult && (
+            <Image
+              src="/matches/13/haydons-park-match-action.jpg"
+              alt="A Bristol City player strikes the ball against Haydons Park"
+              width={1152}
+              height={1536}
+              sizes="(max-width: 768px) 88vw, 620px"
+              priority
+              style={{ width: "100%", maxWidth: "620px", height: "auto", borderRadius: "8px", margin: "0 auto 28px", display: "block" }}
+            />
+          )}
           {isCompleted && Number(matchId) === 8 && (
             <>
               <p style={styles.paragraph}>
@@ -469,18 +444,6 @@ export default async function PublicMatchReport({ params }) {
           ))}
         </div>
 
-            {isHaydonsParkResult && (
-              <section style={{ marginTop: "45px", paddingTop: "30px", borderTop: "1px solid #ddd" }}>
-                <h2>Match squad and stats</h2>
-                {haydonsPlayers ? (
-                  <>
-                    <ResultPlayers title="Recorded starters" players={startingLineup} />
-                    <ResultPlayers title="Substitutes" players={haydonsPlayers.filter((player) => !player.starting)} />
-                  </>
-                ) : <p>Match squad and stats are currently unavailable.</p>}
-              </section>
-            )}
-
             {isCompleted && (<>
             {!isWalkover && (<>
             <div style={{ marginTop: "45px", paddingTop: "30px", borderTop: "1px solid #ddd" }}>
@@ -499,7 +462,7 @@ export default async function PublicMatchReport({ params }) {
   <h2 style={{ marginTop: 0 }}>Vote for your MOTM</h2>
 
 <MotmVote
-  startingCandidates={isThreeLittleBirdsResult || isHaydonsParkResult ? startingLineup : null}
+  votingCandidates={votingCandidates}
   matchId={matchId}
   votingClosed={match.motm_voting_closed === true}
 />
