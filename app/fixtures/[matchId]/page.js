@@ -260,6 +260,15 @@ export default async function PublicMatchReport({ params }) {
         )}
       </div>
 
+      {Number(matchId) === 9 && (
+        <div style={styles.previewSquad}>
+          <h2 style={styles.previewSquadHeading}>MATCHDAY INFORMATION</h2>
+          <p><strong>Surface and format.</strong> We have 60 minutes on a 7-a-side AstroTurf pitch. We’ll aim to play 8 or 9-a-side if space allows.</p>
+          <p><strong>Kit.</strong> We’ll wear the new BCFC London kit. Please bring your own kit as a backup, as we don’t have enough for everyone.</p>
+          <p><strong>Venue updates.</strong> We’re still hoping for a late change if a suitable 11-a-side pitch becomes available. Please keep an eye out for updates.</p>
+        </div>
+      )}
+
       {Number(matchId) === 13 && (
         <div style={styles.previewSquad}>
           <h2 style={styles.previewSquadHeading}>Back on the Road 🔴⚪</h2>
@@ -290,6 +299,20 @@ export default async function PublicMatchReport({ params }) {
             {squad.map((name, index) => <span key={`${name}-${index}`}>{name}</span>)}
           </div>
         </div>
+      )}
+
+      {Number(matchId) === 9 && (
+        <>
+          <div style={styles.previewSquad}>
+            <h2 style={styles.previewSquadHeading}>PLAYING TIME</h2>
+            <p>Everyone is welcome. With a large squad and 60 minutes to play, we’ll share the minutes as fairly as we can and do our best to give everyone a run-out. Minutes will be limited.</p>
+            <p>Players with the most appearances for BCFC London this season will have priority for starting places and playing time.</p>
+          </div>
+          <div style={styles.previewSquad}>
+            <h2 style={styles.previewSquadHeading}>POST-MATCH DRINKS 🍻</h2>
+            <p>We’ll head to the pub after the match for a few drinks to celebrate the gaffer’s birthday, which is the next day. Everyone’s welcome.</p>
+          </div>
+        </>
       )}
     </div>
   </section>
