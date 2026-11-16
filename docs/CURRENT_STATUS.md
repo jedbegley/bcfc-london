@@ -1,6 +1,12 @@
 # Current status and next-session handover
 
-Checked 15 November 2026 (Europe/London). Recheck GitHub, the live site and Supabase before acting. Keep credentials and unpublished player/article details out of Git.
+Checked 16 November 2026 (Europe/London). Recheck GitHub, the live site and Supabase before acting. Keep credentials and unpublished player/article details out of Git.
+
+## Downing Street XI friendly, 18 November
+
+- Production commit `236f1e1d06811ff7630f04ef9dc7f36e907ae8f6` passed Vercel. Public fixture `/fixtures/9` is Upcoming and shows Harris Academy Bermondsey, SE16 3TZ. The current kickoff is 19:30.
+- Branch `preview/downing-street-friendly` adds the AstroTurf, duration, format, kit, playing-time, venue contingency and post-match details. After explicit approval, set fixture 9's `matches.kickoff_time` to `20:00` for 18 November 2026, scoped to the existing Upcoming Downing Street XI fixture. Keep the venue, postcode and all availability and squad records. Verify the public preview and fixture listing after deployment.
+- The existing public squad function reads players currently marked Available. There were 20 at review. New availability is closed and withdrawals are enabled. No player notification was sent.
 
 ## Haydons Park match report, 15 November
 
