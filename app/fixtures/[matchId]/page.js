@@ -263,7 +263,7 @@ export default async function PublicMatchReport({ params }) {
       {Number(matchId) === 9 && (
         <div style={styles.previewSquad}>
           <h2 style={styles.previewSquadHeading}>MATCHDAY INFORMATION</h2>
-          <p><strong>Surface and format.</strong> We have 60 minutes on a 7-a-side AstroTurf pitch. We’ll aim to play 8 or 9-a-side if space allows.</p>
+          <p><strong>Surface and format.</strong> We have 60 minutes on a 7-a-side AstroTurf pitch. We’ll aim to play 8 or 9-a-side if space allows. We’ll also look to play Downing Street XI in an 11-a-side match in the new year. The friendly is a chance to raise our profile and introduce more people to the club.</p>
           <p><strong>Kit.</strong> We’ll wear the new BCFC London kit. Please bring your own kit as a backup, as we don’t have enough for everyone.</p>
           <p><strong>Venue updates.</strong> We’re still hoping for a late change if a suitable 11-a-side pitch becomes available. Please keep an eye out for updates.</p>
         </div>
