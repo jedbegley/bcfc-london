@@ -5,6 +5,22 @@ import {newsClient,previewCard} from "./published";
 // publication dates live here; player photos remain in public_squad.
 const articles = [
   {
+  "date": "2026-11-18",
+  "displayDate": "18 November 2026",
+  "label": "CLUB NEWS",
+  "category": "CLUB NEWS",
+  "title": "City victorious against Downing Street! 🔴⚪",
+  "summary": "Two goals from Louis and one from Smithy secure a 3–2 win against Downing Street on a memorable evening for BCFC London.",
+  "link": "/news/city-victorious-against-downing-street",
+  "image": "/news/downing-street-victory-2026.jpg",
+  "imageAlt": "Both teams after the game holding the number 10 Bristol City shirt",
+  "imageFit": "contain",
+  "thumbnail": true,
+  "imageWidth": 1600,
+  "imageHeight": 1200,
+  "button": "Read Story →"
+},
+  {
   "date": "2026-10-23",
   "displayDate": "23 October 2026",
   "label": "CLUB NEWS",

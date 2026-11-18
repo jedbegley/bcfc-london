@@ -1,6 +1,11 @@
 # Current status and next-session handover
 
-Checked 16 November 2026 (Europe/London). Recheck GitHub, the live site and Supabase before acting. Keep credentials and unpublished player/article details out of Git.
+Checked 18 November 2026 (Europe/London). Recheck GitHub, the live site and Supabase before acting. Keep credentials and unpublished player/article details out of Git.
+
+## Downing Street victory news, 18 November
+
+- Jed explicitly authorised publication of the supplied victory article dated 18 November, with the original 1600 × 1200 image. The article uses the existing static news routes and shared homepage/archive list. Image bytes are copied unchanged and displayed at their natural aspect ratio.
+- Route `/news/city-victorious-against-downing-street`. Release branch `news/downing-street-victory`. Verify it is the homepage lead and visible on the News page after release. No push notification is authorised.
 
 ## Downing Street XI friendly, 18 November
 
