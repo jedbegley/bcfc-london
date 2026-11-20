@@ -1,6 +1,12 @@
 # Current status and next-session handover
 
-Checked 18 November 2026 (Europe/London). Recheck GitHub, the live site and Supabase before acting. Keep credentials and unpublished player/article details out of Git.
+Checked 20 November 2026 (Europe/London). Recheck GitHub, the live site and Supabase before acting. Keep credentials and unpublished player/article details out of Git.
+
+## Kew Antigua preview, 22 November
+
+- Existing fixture 10 is Upcoming, at home to Kew Antigua in the London Cup second round, 10:30 at Clapham Common. At review, 16 players including the manager-added availability response were Available. The public preview already reads the current Available list through the existing squad RPC.
+- Branch `preview/kew-antigua-matchday` adds the 09:45 meet, nets-up reminder and own-kit/black shorts/black socks instructions in the usual matchday section. After release approval, set `matches.meet_time` to `09:45` for existing fixture 10 on 22 November. Preserve all squad, stats and availability records.
+- No player announcement is authorised. Production merge and deployment await Jed's approval.
 
 ## Downing Street victory news, 18 November
 

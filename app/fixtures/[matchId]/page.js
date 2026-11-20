@@ -260,6 +260,17 @@ export default async function PublicMatchReport({ params }) {
         )}
       </div>
 
+      {Number(matchId) === 10 && (
+        <div style={styles.previewSquad}>
+          <h2 style={styles.previewSquadHeading}>MATCHDAY INFORMATION</h2>
+          <div style={{ display: "grid", gap: "10px", textAlign: "center", lineHeight: 1.5 }}>
+            <span>🕤 Meet: 9:45am</span>
+            <span>🥅 Nets need to go up — please arrive on time.</span>
+            <span>👕 Bring your own kit, black shorts and black socks.</span>
+          </div>
+        </div>
+      )}
+
       {Number(matchId) === 9 && (
         <div style={styles.previewSquad}>
           <h2 style={styles.previewSquadHeading}>MATCHDAY INFORMATION</h2>
