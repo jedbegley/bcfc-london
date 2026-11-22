@@ -61,7 +61,7 @@ export default function MotmVote({ matchId, votingClosed, votingCandidates = nul
       } else {
         // These match reports record actual appearances in match_stats. The
         // selected squad alone may include substitutes who never came on.
-        const usePlayedSquad = [5, 8, 11].includes(Number(matchId));
+        const usePlayedSquad = [5, 8, 10, 11].includes(Number(matchId));
         const { data: eligibleRows, error: eligibleError } = usePlayedSquad
           ? await supabase
               .from("match_stats")

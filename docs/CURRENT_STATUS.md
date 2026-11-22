@@ -1,6 +1,12 @@
 # Current status and next-session handover
 
-Checked 20 November 2026 (Europe/London). Recheck GitHub, the live site and Supabase before acting. Keep credentials and unpublished player/article details out of Git.
+Checked 22 November 2026 (Europe/London). Recheck GitHub, the live site and Supabase before acting. Keep credentials and unpublished player/article details out of Git.
+
+## Kew Antigua MOTM and payment, 22 November
+
+- Current main is `1a6787e267404fd29a83256159af3aef5ff990eb` (PR #39 merged). Live fixture 10 is Completed, 1–5, with no report text, 12 saved stat rows, voting already open and zero votes at audit. Preserve every saved statistic, result and squad row.
+- Branch `fix/kew-motm-payment` makes the existing picker read those saved appearances, including the recorded substitute. A restrictive insert policy checks the same source and requires completed/open voting. Existing voter ownership, one-vote and no-self-vote rules remain.
+- The migration sets only fixture 10's SumUp URL; the existing payment button reads it without changing the page layout. No other results page content changes. Production migration/merge/deployment await Jed's approval. No notifications authorised or sent. Local Next.js build and focused PGlite policy tests passed; production fixture returned HTTP 200 and main has a successful Vercel check. Tests cover recorded substitute nomination, exclusion, ownership, duplicates, self-votes, closed/upcoming denial, unchanged statistics and historical payment links.
 
 ## Kew Antigua preview, 22 November
 
