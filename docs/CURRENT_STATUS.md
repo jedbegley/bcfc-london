@@ -2,11 +2,12 @@
 
 Checked 22 November 2026 (Europe/London). Recheck GitHub, the live site and Supabase before acting. Keep credentials and unpublished player/article details out of Git.
 
-## Kew Antigua MOTM and payment, 22 November
+## Kew Antigua MOTM and payment, 22 November — released
 
-- Current main is `1a6787e267404fd29a83256159af3aef5ff990eb` (PR #39 merged). Live fixture 10 is Completed, 1–5, with no report text, 12 saved stat rows, voting already open and zero votes at audit. Preserve every saved statistic, result and squad row.
-- Branch `fix/kew-motm-payment` makes the existing picker read those saved appearances, including the recorded substitute. A restrictive insert policy checks the same source and requires completed/open voting. Existing voter ownership, one-vote and no-self-vote rules remain.
-- The migration sets only fixture 10's SumUp URL; the existing payment button reads it without changing the page layout. No other results page content changes. Production migration/merge/deployment await Jed's approval. No notifications authorised or sent. Local Next.js build and focused PGlite policy tests passed; production fixture returned HTTP 200 and main has a successful Vercel check. Tests cover recorded substitute nomination, exclusion, ownership, duplicates, self-votes, closed/upcoming denial, unchanged statistics and historical payment links.
+- Jed approved PR #40 for production. It is merged as `62fbb82764a4110fd85241b89573771a7ed30819`; Vercel production check succeeded. Live `/fixtures/10` returns HTTP 200, contains the requested SumUp URL, and serves the picker bundle that reads saved match_stats for fixture 10.
+- Supabase migration `kew_antigua_played_motm` is applied. It adds a restrictive nominee policy requiring a saved appearance while the completed fixture's voting is open and updates only fixture 10's payment URL. Existing voter ownership, one-vote and no-self-vote rules remain.
+- Fixture 10 remains Completed, 1–5, no report text. All 12 saved statistics records have an identical before/after checksum. The recorded substitute is eligible. No winner or MOTM points were assigned. Voting is open; zero votes at post-release audit. No notifications sent.
+- Local Next.js build and focused PGlite policy tests passed. Production home, fixtures, news and stats return HTTP 200. Signed-in mobile/PWA voting was not submitted or independently tested; no live test vote was cast. SumUp returns 403 to automated requests, so the exact supplied URL is verified in the live button but checkout contents require a normal browser.
 
 ## Kew Antigua preview, 22 November
 
