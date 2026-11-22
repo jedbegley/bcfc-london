@@ -558,7 +558,9 @@ export default async function PublicMatchReport({ params }) {
 </p>
 
 <a
-  href={Number(matchId) === 5
+  href={Number(matchId) === 10
+    ? match.sumup_link
+    : Number(matchId) === 5
     ? "https://pay.sumup.com/b2c/Q0MQ0YKS"
     : "https://pay.sumup.com/b2c/QVVL7SH7"}
   target="_blank"
